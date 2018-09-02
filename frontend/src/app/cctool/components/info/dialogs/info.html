@@ -1,0 +1,26 @@
+<!-- info.html -->
+<md-dialog aria-label="Graph Panel Compare">
+  <form>
+    <md-dialog-content>
+      <div class="documentation">
+        <iframe ng-repeat="src in infoPages" ng-src="{{src | toTrustAsResourceUrl}}" ng-show="$index == page"></iframe>
+      </div>
+      <md-divider></md-divider>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button aria-label="Prev page"
+        class="md-icon-button" ng-disabled="!hasPrevPage()" ng-click="prevPage()">
+        <md-icon>chevron_left</md-icon>
+      </md-button>
+      <md-button aria-label="Next page"
+        class="md-icon-button" ng-disabled="!hasNextPage()" ng-click="nextPage()">
+        <md-icon>chevron_right</md-icon>
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="cancel()" class="md-icon-button md-warn">
+        <md-icon>close</md-icon>
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

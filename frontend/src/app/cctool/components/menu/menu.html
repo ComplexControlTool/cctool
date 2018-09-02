@@ -1,0 +1,106 @@
+<!-- menu.html -->
+<md-toolbar>
+  <div class="md-toolbar-tools">
+      <h1 class="md-toolbar-tools">Menu</h1>
+      <md-button class="md-icon-button" ng-click="appCtrl.toggleSidenav('menu-sidenav')" aria-label="Close Sidenav">
+        <md-icon>close</md-icon>
+      </md-button>
+  </div>
+</md-toolbar>
+<md-divider></md-divider>
+<md-content>
+<section>
+  <md-subheader class="md-primary">Navigation</md-subheader>
+  <md-list>
+    <md-list-item
+    ng-repeat="navItem in menuCtrl.navItems"
+    ng-disabled="appCtrl.$state.is(navItem.link)"
+    ui-sref="{{navItem.link}}"
+    ng-click="appCtrl.toggleSidenav('menu-sidenav')">
+      <md-icon>{{navItem.icon}}</md-icon>
+      <p>{{navItem.label}}</p>
+    </md-list-item>
+  </md-list>
+</section>
+<section>
+  <md-subheader class="md-primary">Settings</md-subheader>
+  <md-list>
+    <md-subheader class="md-no-sticky">Sorting</md-subheader>
+    <md-list-item>
+      <div class="md-no-style">
+        <p>Sort graphs by</p>
+        <md-menu class="md-secondary">
+          <md-button ng-click="$mdMenu.open($event)" aria-label="Sort by Options">
+            <md-icon ng-style="!menuCtrl.activeSettings.graphsSorting.reversed ? {'transform':'scaleY(-1)'} : {}">{{menuCtrl.activeSettings.graphsSorting.icon}}</md-icon>
+            {{menuCtrl.activeSettings.graphsSorting.label}}
+          </md-button>
+          <md-menu-content>
+            <md-menu-item
+            ng-repeat="sortItem in menuCtrl.sortItems"
+            ng-if="!sortItem.reversed">
+              <md-button
+              ng-class="{'md-primary' : sortItem.active}"
+              ng-click="menuCtrl.setActiveSortingSetting(sortItem); appCtrl.toggleSidenav('menu-sidenav');"
+              aria-label="Change sorting to">
+                <md-icon style="transform:scaleY(-1)">{{sortItem.icon}}</md-icon>
+                {{sortItem.text}}
+              </md-button>
+            </md-menu-item>
+            <md-menu-divider></md-menu-divider>
+            <md-menu-item
+            ng-repeat="sortItem in menuCtrl.sortItems"
+            ng-if="sortItem.reversed">
+              <md-button
+              ng-class="{'md-primary' : sortItem.active}"
+              ng-click="menuCtrl.setActiveSortingSetting(sortItem); appCtrl.toggleSidenav('menu-sidenav');"
+              aria-label="Change sorting to">
+                <md-icon>{{sortItem.icon}}</md-icon>
+                {{sortItem.text}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+    </md-list-item>
+    <md-subheader class="md-no-sticky">Visualisation</md-subheader>
+    <md-list-item>
+      <div class="md-no-style">
+        <p>Display nodes as</p>
+        <md-menu class="md-secondary">
+          <md-button ng-click="$mdMenu.open($event)" aria-label="Sort by Options">
+            {{menuCtrl.activeSettings.graphVisualisation.label}}
+          </md-button>
+          <md-menu-content>
+            <md-menu-item
+            ng-repeat="visualItem in menuCtrl.visualItems">
+              <md-button
+              ng-class="{'md-primary' : visualItem.active}"
+              ng-click="menuCtrl.setActiveVisualisationSetting(visualItem); appCtrl.toggleSidenav('menu-sidenav');"
+              aria-label="Change node shape to">
+                {{visualItem.text}}
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+    </md-list-item>
+  </md-list>
+</section>
+<section>
+  <md-subheader class="md-primary">Account</md-subheader>
+  <md-list>
+    <md-list-item
+    href="/cctool/logout"
+    ng-click="appCtrl.toggleSidenav('menu-sidenav')"
+    class="md-2-line">
+        <md-icon>perm_identity</md-icon>
+        <div class="md-list-item-text">
+          <h3>Logout</h3>
+          <p>
+            {{appCtrl.cctoolUser}}
+          </p>
+        </div>
+    </md-list-item>
+  </md-list>
+</section>
+</md-content>

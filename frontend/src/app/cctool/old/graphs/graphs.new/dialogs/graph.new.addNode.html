@@ -1,0 +1,66 @@
+<md-dialog md-theme="graph_panel" aria-label="Graph Panel Compare">
+  <form name="nodeForm" novalidate ng-submit="nodeForm.$valid && submit()">
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2 class="md-title">Add Node</h2>
+        <div layout="column" layout-align="center top" flex="nogrow" style="width: 400px">
+          <p>Please enter some details about the node</p>
+          <md-input-container class="md-block">
+            <label>Label</label>
+            <input
+             type="text"
+             name="label"
+             ng-model="nodeData.nodeLabel"
+             md-maxlength="100"
+             md-autofocus=""
+             required>
+            <div ng-messages="nodeForm.label.$error"
+                 ng-show="nodeForm.$submitted || nodeForm.label.$touched"
+                 role="alert" multiple>
+                <div ng-message="required">
+                    <span>Node label is required.</span>
+                </div>
+                <div ng-message="md-maxlength">
+                    <span>Node label can't be longer than 100 characters.</span>
+                </div>
+            </div>
+          </md-input-container>
+          <p>Function</p>
+          <md-radio-group ng-model="nodeData.nodeFunction">
+            <md-radio-button
+             ng-repeat="nodeFunction in nodeFunctionList"
+             value="{{nodeFunction.abbrev | functionValue}}">
+              {{nodeFunction.abbrev}}
+            </md-radio-button>
+          </md-radio-group>
+          <p>Controllability</p>
+          <md-radio-group ng-model="nodeData.nodeControllability">
+            <md-radio-button 
+             ng-repeat="nodeControllability in nodeControllabilityList" 
+             value="{{nodeControllability.abbrev | controllabilityValue}}">
+              {{nodeControllability.abbrev}}
+            </md-radio-button>
+          </md-radio-group>
+          <p>Importance</p>
+          <md-radio-group ng-model="nodeData.nodeImportance">
+            <md-radio-button
+            ng-repeat="nodeImportance in nodeImportanceList"
+            value="{{nodeImportance.abbrev | importanceValue}}">
+              {{nodeImportance.abbrev}}
+            </md-radio-button>
+          </md-radio-group>
+        </div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()" class="md-warn">
+        Cancel
+      </md-button>
+      <md-button type="submit" class="md-primary" style="margin-right:20px;">
+        Add
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

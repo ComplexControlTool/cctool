@@ -1,0 +1,208 @@
+/* index.css */
+@import url(//fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,700,700italic,400italic);
+@import url(//fonts.googleapis.com/icon?family=Material+Icons);
+
+.material-icons
+{
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+.awesome-icons
+{
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+html
+{
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body .body-div,
+#app-content,
+#cctool-content
+{
+  width: 100%;
+  height: 100%;
+}
+
+
+[layout=row]
+{
+  flex-direction: row;
+}
+
+.no-outline
+{
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  -o-user-select: none !important;
+  user-select: none !important;
+  outline: none;
+  cursor: default !important;
+}
+
+.cursor-pointer
+{
+  cursor: pointer !important
+}
+
+.boxed
+{
+  max-width: 1400px;
+  margin: auto;
+}
+.boxed-md
+{
+  max-width: 944px;
+  margin: auto;
+}
+.boxed-sm
+{
+  max-width: 490px;
+  margin: auto;
+}
+
+/* Overrides of Material Design */
+md-tabs.no-radius
+{
+  border-radius: 0px;
+}
+
+/* Overrides of visjs */
+/* Navigation menu */
+div.vis-network div.vis-navigation div.vis-button {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+div.vis-network div.vis-navigation div.vis-button:hover {
+  background-color: rgba(158, 158, 158, 0.6);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+}
+div.vis-network div.vis-navigation div.vis-button:active {
+  background-color: rgba(158, 158, 158, 0.8);
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .26);
+}
+div.vis-network div.vis-navigation div.vis-button.vis-up {
+  background-image: url("../assets/images/visjs/network/upArrow.svg");
+  bottom:75px;
+  left:45px;
+}
+div.vis-network div.vis-navigation div.vis-button.vis-down {
+  background-image: url("../assets/images/visjs/network/downArrow.svg");
+  bottom:15px;
+  left:45px;
+}
+div.vis-network div.vis-navigation div.vis-button.vis-left {
+  background-image: url("../assets/images/visjs/network/leftArrow.svg");
+  bottom:45px;
+  left:15px;
+}
+div.vis-network div.vis-navigation div.vis-button.vis-right {
+  background-image: url("../assets/images/visjs/network/rightArrow.svg");
+  bottom:45px;
+  left:75px;
+}
+div.vis-network div.vis-navigation div.vis-button.vis-zoomIn {
+  background-image: url("../assets/images/visjs/network/plus.svg");
+}
+div.vis-network div.vis-navigation div.vis-button.vis-zoomOut {
+  background-image: url("../assets/images/visjs/network/minus.svg");
+}
+div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+  background-image: url("../assets/images/visjs/network/zoomExtends.svg");
+}
+
+/* Manipulation menu */
+div.vis-network div.vis-manipulation {
+  height: 30px;
+}
+
+div.vis-network div.vis-edit-mode div.vis-button.vis-edit.vis-edit-mode {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  border: none;
+}
+div.vis-network div.vis-edit-mode div.vis-button.vis-edit.vis-edit-mode:hover,
+div.vis-network div.vis-manipulation div.vis-button:hover {
+  background-color: rgba(158, 158, 158, 0.6);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  border: none;
+}
+div.vis-network div.vis-edit-mode div.vis-button.vis-edit.vis-edit-mode:active,
+div.vis-network div.vis-manipulation div.vis-button:active {
+  background-color: rgba(158, 158, 158, 0.8);
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, .26);
+  border: none;
+}
+div.vis-network div.vis-manipulation div.vis-button.vis-none:hover {
+  background-color: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+div.vis-network div.vis-manipulation div.vis-button.vis-none:active {
+  background-color: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+
+div.vis-network div.vis-close {
+  right: 10;
+  background-position: 3px 3px;
+  background-image: url("../assets/images/visjs/network/close.svg");
+}
+div.vis-network div.vis-manipulation div.vis-button.vis-back {
+  background-image: url("../assets/images/visjs/network/back.svg");
+}
+div.vis-network div.vis-manipulation div.vis-button.vis-edit,
+div.vis-network div.vis-edit-mode div.vis-button.vis-edit {
+  background-image: url("../assets/images/visjs/network/edit.svg");
+}
+div.vis-network div.vis-manipulation div.vis-button.vis-connect,
+div.vis-network div.vis-manipulation div.vis-button.vis-add {
+  background-image: url("../assets/images/visjs/network/add.svg");
+}
+div.vis-network div.vis-manipulation div.vis-button.vis-delete {
+  background-image: url("../assets/images/visjs/network/remove.svg");
+}

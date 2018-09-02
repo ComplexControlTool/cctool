@@ -1,0 +1,15 @@
+<!-- photo-graph-card.html -->
+<md-card ng-click="graphsCtrl.goToGraph(graph.id)" class="photo-graph-card no-outline cursor-pointer">
+  <!-- Card image -->
+  <div style="background-image: url('static/cctool/dashboard/assets/images/graph.png'); background-size:cover; background-position:center;background-repeat:no-repeat;" class="md-card-image" flex="grow"></div>
+  <!-- <div ng-style="{ 'background':'url({{ graph.imgUrl }})', 'background-size':'cover', 'background-position':'center', 'background-repeat':'no-repeat' }" class="md-card-image" flex="grow"></div> -->
+
+  <md-card-title flex="none">
+    <md-card-title-text>
+      <!-- Title -->
+      <span ng-if="graph.title" class="md-headline" ng-bind-html="graph.title"></span>
+      <!-- Owner -->
+      <span ng-if="graph.owner" class="owner" ng-bind-html="graph.owner"></span>
+    </md-card-title-text>
+  </md-card-title>
+</md-card>

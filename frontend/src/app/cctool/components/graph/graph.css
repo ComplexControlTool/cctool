@@ -1,0 +1,54 @@
+/* graph.css */
+
+#graph-content .normal-title
+{
+  padding-left:10px;
+  max-width: 860px;
+}
+
+#graph-content .wide-title
+{
+  padding-left:10px;
+  max-width: 100%;
+}
+
+#graph-content .normal-cards md-card
+{
+  width: 100%;
+  max-width: 860px;
+}
+
+#graph-content .wide-cards md-card
+{
+  width: 100%;
+  max-width: 100%;
+}
+
+#graph-content #title-card
+{
+  min-height: 230px;
+}
+
+#graph-content #title-card md-card-title-media
+{
+  height: 230px;
+  width: 230px;
+  margin-top: -32px;
+  margin-left: -24px;
+  margin-bottom: -32px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+#graph-content #title-card md-card-title-media .md-media-lg
+{
+  height: 100%;
+  width: 100%;
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  background-size:cover;
+  background-position: center;
+  background-repeat:no-repeat;
+}

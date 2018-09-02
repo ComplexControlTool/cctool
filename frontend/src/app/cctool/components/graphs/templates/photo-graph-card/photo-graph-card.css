@@ -1,0 +1,31 @@
+/* photo-graph-card.css */
+
+.photo-graph-card
+{
+  min-height: 400px;
+  max-height: 800px;
+  min-width: 400px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+md-card.photo-graph-card[md-ink-ripple] {
+  position: relative;
+}
+
+.photo-graph-card .md-card-image
+{
+  min-height: 400px;
+}
+
+.photo-graph-card video
+{
+  width: 100%;
+}
+
+.photo-graph-card .owner
+{
+  color: rgba(0, 0, 0, 0.54);
+  padding-top: 0;
+  font-size: 14px;
+}

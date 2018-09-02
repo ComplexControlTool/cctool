@@ -1,0 +1,29 @@
+name: cctool-dev
+root: <%= ENV["CCTOOL"] %>
+
+on_project_start:
+  - find ./docker/ -name "*.sh" -exec chmod +x {} \;
+  - ./docker/docker_run_development_mode.sh
+on_project_stop:
+  - ./docker/docker_stop_development_mode.sh
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim
+        - htop
+        - ./docker/docker_stats.sh
+        - cd "$CCTOOL"
+  - containers:
+      layout: even-horizontal
+      panes:
+        - docker exec -it cctool-dev-backend bash
+        - docker exec -it cctool-dev-frontend bash
+        - docker exec -it cctool-dev-db bash
+  - logs:
+      layout: even-horizontal
+      panes:
+        - docker logs -f cctool-dev-backend
+        - docker logs -f cctool-dev-frontend
+        - docker logs -f cctool-dev-db

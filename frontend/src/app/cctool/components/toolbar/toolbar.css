@@ -1,0 +1,14 @@
+/* toolbar.css */
+#toolbar-content .breadcrumb .md-button
+{
+  margin: 0px;
+  padding: 0px;
+  min-width: 68px;
+  line-height: 40px;
+}
+#toolbar-content .breadcrumb .md-icon-button.md-button
+{
+  margin: 0 6px;
+  min-width: 0;
+  padding: 8px;
+}

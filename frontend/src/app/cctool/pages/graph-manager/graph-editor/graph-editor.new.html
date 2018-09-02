@@ -1,0 +1,28 @@
+<!-- graph-editor.new.html -->
+<md-content layout="column" layout-fill="">
+  
+  <div ui-view="toolbar"></div>
+
+  <md-content id="graph-editor-content" layout="column" flex="">
+    <div ng-class="{ 'boxed':appCtrl.$mdMedia('gt-md'), 'boxed-md':appCtrl.$mdMedia('md'), 'boxed-sm':appCtrl.$mdMedia('sm')}" layout-padding="" layout="column" layout-fill="" flex="">
+      <h1 class="md-headline">Choose a method to add your graph</h1>
+      <ul class="buckets" layout="row" layout-align="center start" layout-wrap="" flex="">
+        <li flex="50" flex-gt-sm="25">
+          <a class="md-raised md-button" md-ink-ripple="" ui-sref="app.cctool_graphs_new_create">
+            <md-icon class="block">create</md-icon>
+            <span class="md-subhead" style="font-weight:bold">Create</span>
+            <div class="md-ripple-container"></div>
+          </a>
+        </li>
+        <li flex="50" flex-gt-sm="25">
+          <a class="md-raised md-button" md-ink-ripple="" ui-sref="app.cctool_graphs_new_import">
+            <md-icon class="block">import_export</md-icon>
+            <span class="md-subhead" style="font-weight:bold">Import from Gephi</span>
+            <div class="md-ripple-container"></div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </md-content>
+
+</md-content>

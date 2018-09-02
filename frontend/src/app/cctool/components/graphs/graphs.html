@@ -1,0 +1,32 @@
+<!-- graphs.html -->
+<div id="graphs-content" flex="">
+  <div layout="row" layout-align="start center" flex="">
+    <h3 class="md-headline">Graphs</h3>
+    <h5 style="line-height:36px; padding-left:10px" ng-bind="'('+(graphManagerCtrl.content.length)+')'"></h5>
+    <span flex=""></span>
+    <md-button ui-sref="app.cctool_graphs_new" class="md-icon-button" aria-label="Add new graph">
+      <md-tooltip md-direction="bottom">Add new graph</md-tooltip>
+      <md-icon>add_circle</md-icon>
+    </md-button>
+  </div>
+
+  <div ng-if="appCtrl.cctoolAdmin" ng-repeat="(owner,usergraphs) in graphManagerCtrl.content | orderBy: 'owner' | groupBy: 'owner'">
+    <p class="md-title" ng-bind-html="owner"></p>
+    <div layout="row" layout-wrap="" flex="">
+      <div
+       ng-repeat="graph in usergraphs"
+       ng-include="'app/cctool/components/graphs/templates/expandable-graph-card/expandable-graph-card.html'"
+       style="padding: 8px;">
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="!appCtrl.cctoolAdmin" layout="row" layout-wrap="" flex="">
+    <div
+     ng-repeat="graph in graphManagerCtrl.content"
+     ng-include="'app/cctool/components/graphs/templates/expandable-graph-card/expandable-graph-card.html'"
+     style="padding: 8px;">
+    </div>
+  </div>
+
+</div>

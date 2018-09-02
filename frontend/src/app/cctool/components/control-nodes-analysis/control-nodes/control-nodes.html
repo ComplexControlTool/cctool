@@ -1,0 +1,24 @@
+<!-- control-nodes.html -->
+<div id="control-nodes-content" ng-if="!controlNodesAnalysisCtrl.graphForAnalysis.graphanalysed" flex="">
+  <div style="height:720px" layout="row" layout-align="center center">
+    <md-button class="md-raised" ng-click="controlNodesAnalysisCtrl.requestAnalysis()">start analysing</md-button>
+  </div>
+</div>
+<div id="control-nodes-content" ng-if="controlNodesAnalysisCtrl.graphForAnalysis.graphanalysed" ng-controller="ControlNodesController as cncontroller" flex="">
+  <md-tabs md-selected="controlNodesAnalysisCtrl.selectedConfIndex" class="no-radius" md-enable-disconnect="" md-no-ink="" md-dynamic-height="" md-border-bottom="" flex="100">
+    <md-tab ng-repeat="conf in controlNodesAnalysisCtrl.graphForAnalysis.graphcontrolconf" label="Configuration {{$index+1}}">
+      <div style="height:650px" layout="row" layout-align="center center" layout-wrap="" layout-padding="">
+        <div 
+         id="cna-{{controlNodesAnalysisCtrl.graphForAnalysis.id}}-{{$index}}"
+         ng-if="controlNodesAnalysisCtrl.drawGraph($index)"
+         vis-network=""
+         ng-model="controlNodesAnalysisCtrl.graphForAnalysis"
+         network="controlNodesAnalysisCtrl.networks"
+         conf-index="controlNodesAnalysisCtrl.selectedConfIndex"
+         node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+         reload="controlNodesAnalysisCtrl.reloadGraph"
+         layout-fill=""></div>
+      </div>
+    </md-tab>
+  </md-tabs>
+</div>

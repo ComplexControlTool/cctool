@@ -1,0 +1,116 @@
+version: "3"
+services:
+  cctool-dev:
+    image: cctool-backend
+    container_name: cctool-dev-backend
+    command: /bin/bash -c "../docker/logo.sh && ../docker/startup_backend_dev.sh"
+    ports:
+      - "8004:8000"
+    volumes:
+      - ../docker:/Developer/cctool/docker
+      - ../backend:/Developer/cctool/backend
+      - ../frontend/src/app:/Developer/cctool/backend/cctool/static/cctool/dashboard/app
+      - ../frontend/src/assets:/Developer/cctool/backend/cctool/static/cctool/dashboard/assets
+      - cctoolfrontendindex:/Developer/cctool/backend/cctool/templates/cctool/dashboard
+      - cctoolfrontendvendor:/Developer/cctool/backend/cctool/static/cctool/dashboard/vendor
+    depends_on:
+      - cctool-dev-frontend
+      - cctool-dev-db
+    links:
+      - cctool-dev-frontend
+      - cctool-dev-db
+  cctool-dev-frontend:
+    image: cctool-frontend
+    container_name: cctool-dev-frontend
+    command: /bin/bash -c "../docker/logo.sh && ../docker/startup_frontend_dev.sh"
+    ports:
+      - "3004:3000"
+      - "3005:3001"
+    volumes:
+      - ../docker:/Developer/cctool/docker
+      - ../frontend/e2e:/Developer/cctool/frontend/e2e
+      - ../frontend/gulp:/Developer/cctool/frontend/gulp
+      - ../frontend/src:/Developer/cctool/frontend/src
+      - ../frontend/.bowerrc:/Developer/cctool/frontend/.bowerrc
+      - ../frontend/.editorconfig:/Developer/cctool/frontend/.editorconfig
+      - ../frontend/.eslintrc:/Developer/cctool/frontend/.eslintrc
+      - ../frontend/.yo-rc.json:/Developer/cctool/frontend/.yo-rc.json
+      - ../frontend/bower.json:/Developer/cctool/frontend/bower.json
+      - ../frontend/gulpfile.js:/Developer/cctool/frontend/gulpfile.js
+      - ../frontend/karma.conf.js:/Developer/cctool/frontend/karma.conf.js
+      - ../frontend/package.json:/Developer/cctool/frontend/package.json
+      - ../frontend/protractor.conf.js:/Developer/cctool/frontend/protractor.conf.js
+      - cctoolfrontendindex:/Developer/cctool/frontend/.tmp/serve
+      - cctoolfrontendvendor:/Developer/cctool/frontend/bower_components
+  cctool-dev-db:
+    image: postgres:9.4.17
+    container_name: cctool-dev-db
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "cctooldb"
+      POSTGRES_INITDB_ARGS: "--encoding='UTF-8'"
+    volumes:
+      - ../docker/database/backups:/backups
+      - cctooldbvolume:/var/lib/postgresql/data
+
+  cctool:
+    image: cctool-backend
+    container_name: cctool-backend
+    command: /bin/bash -c "../docker/logo.sh && ../docker/startup_backend_dev.sh"
+    ports:
+      - "8004:8000"
+    volumes:
+      - ../docker:/Developer/cctool/docker
+      - ../backend:/Developer/cctool/backend
+      - ../frontend/src/app:/Developer/cctool/backend/cctool/static/cctool/dashboard/app
+      - ../frontend/src/assets:/Developer/cctool/backend/cctool/static/cctool/dashboard/assets
+      - cctoolfrontendindex:/Developer/cctool/backend/cctool/templates/cctool/dashboard
+      - cctoolfrontendvendor:/Developer/cctool/backend/cctool/static/cctool/dashboard/vendor
+    depends_on:
+      - cctool-dev-frontend
+      - cctool-dev-db
+    links:
+      - cctool-dev-frontend
+      - cctool-dev-db
+  cctool-frontend:
+    image: cctool-frontend
+    container_name: cctool-dev-frontend
+    command: /bin/bash -c "../docker/logo.sh && ../docker/startup_frontend_dev.sh"
+    ports:
+      - "3004:3000"
+      - "3005:3001"
+    volumes:
+      - ../docker:/Developer/cctool/docker
+      - ../frontend/e2e:/Developer/cctool/frontend/e2e
+      - ../frontend/gulp:/Developer/cctool/frontend/gulp
+      - ../frontend/src:/Developer/cctool/frontend/src
+      - ../frontend/.bowerrc:/Developer/cctool/frontend/.bowerrc
+      - ../frontend/.editorconfig:/Developer/cctool/frontend/.editorconfig
+      - ../frontend/.eslintrc:/Developer/cctool/frontend/.eslintrc
+      - ../frontend/.yo-rc.json:/Developer/cctool/frontend/.yo-rc.json
+      - ../frontend/bower.json:/Developer/cctool/frontend/bower.json
+      - ../frontend/gulpfile.js:/Developer/cctool/frontend/gulpfile.js
+      - ../frontend/karma.conf.js:/Developer/cctool/frontend/karma.conf.js
+      - ../frontend/package.json:/Developer/cctool/frontend/package.json
+      - ../frontend/protractor.conf.js:/Developer/cctool/frontend/protractor.conf.js
+      - cctoolfrontendindex:/Developer/cctool/frontend/.tmp/serve
+      - cctoolfrontendvendor:/Developer/cctool/frontend/bower_components
+  cctool-db:
+    image: postgres:9.4.17
+    container_name: cctool-db
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "cctooldb"
+      POSTGRES_INITDB_ARGS: "--encoding='UTF-8'"
+    volumes:
+      - ../docker/database/backups:/backups
+      - cctooldbvolume:/var/lib/postgresql/data
+
+volumes:
+    cctooldbvolume:
+    cctoolfrontendindex:
+    cctoolfrontendvendor:
+    cctoolfrontendapp:
+    cctoolfrontendstatic:

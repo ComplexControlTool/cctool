@@ -1,0 +1,70 @@
+<!-- expandable-graph-card.html -->
+<md-card class="expandable-graph-card" scroll-reveal flex="100">
+  <!-- Card image/video -->
+  <img ng-click="graphsCtrl.goToGraph(graph.id)" src="static/cctool/dashboard/assets/images/graph.png" class="md-card-image no-outline cursor-pointer">
+  <!-- <img ng-click="graphs.oToGraph(graph.id)" ng-src="{{ graph.imgUrl }}" class="md-card-image cursor-pointer"> -->
+
+  <md-card-title>
+    <md-card-title-text ng-click="graphsCtrl.goToGraph(graph.id)" class="no-outline cursor-pointer">
+      <!-- Title -->
+      <span ng-if="graph.title" class="md-headline" ng-bind-html="graph.title"></span>
+      <!-- Owner -->
+      <span ng-if="graph.owner" class="owner" ng-bind-html="graph.owner"></span>
+    </md-card-title-text>
+  </md-card-title>
+
+  <md-card-actions layout="row" layout-align="start center">
+    <!-- Graph Actions -->
+    <div ui-view="actions" onload="graphToAction = graph"></div>
+    <!-- Show More / Show Less -->
+    <md-button ng-click="graph.showDetails=!graph.showDetails">
+      {{ graph.showDetails ? "Hide" : "Show" }} Details
+    </md-button>
+    <md-card-icon-actions>
+      <md-button ng-click="graph.showDetails=!graph.showDetails" ng-style="{color: graph.swatch.getHex()}" class="md-icon-button" aria-label="toggle">
+        <md-icon ng-class="(graph.showDetails) ? 'rotate-clockwise' : 'rotate-anticlockwise'">
+          chevron_left
+        </md-icon>
+    </md-button>
+    </md-card-icon-actions>
+  </md-card-actions>
+
+  <md-card-content class="animate-card-body" ng-show="graph.showDetails">
+    <!-- Title -->
+    <div ng-if="graph.title">
+      <p style="font-weight:bold">Title</p>
+      <p ng-bind-html="graph.title"></p>
+      <md-divider></md-divider>
+    </div>
+    <!-- Owner -->
+    <div ng-if="graph.owner">
+      <p style="font-weight:bold">Owner</p>
+      <p ng-bind-html="graph.owner"></p>
+      <md-divider></md-divider>
+    </div>
+    <!-- Description -->
+    <div ng-if="graph.description">
+      <p style="font-weight:bold">Description</p>
+      <p ng-bind-html="graph.description"></p>
+      <md-divider></md-divider>
+    </div>
+    <!-- More Description -->
+    <div ng-if="graph.moredescription">
+      <p style="font-weight:bold">More Description</p>
+      <p ng-bind-html="graph.moredescription"></p>
+      <md-divider></md-divider>
+    </div>
+    <!-- Last Updated -->
+    <div ng-if="graph.dateupdated">
+      <p style="font-weight:bold">Last Updated</p>
+      <p ng-bind-html="graph.dateupdated | dateString"></p>
+      <md-divider></md-divider>
+    </div>
+    <!-- Date Created -->
+    <div ng-if="graph.dateadded">
+      <p style="font-weight:bold">Date Created</p>
+      <p ng-bind-html="graph.dateadded | dateString"></p>
+    </div>
+  </md-card-content>
+
+</md-card>

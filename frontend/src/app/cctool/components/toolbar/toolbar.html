@@ -1,0 +1,26 @@
+<!-- toolbar.html -->
+<md-toolbar id="toolbar-content" md-theme="toolbar_panel" ng-class="{ 'md-whiteframe-z1': toolbarCtrl.shadow }">
+  <div class="md-toolbar-tools no-outline"">
+    <md-button
+    class="md-icon-button"
+    ng-click="appCtrl.toggleSidenav('menu-sidenav')"
+    title="Navigation Sidenav"
+    aria-label="Navigation Sidenav">
+      <md-icon>menu</md-icon>
+    </md-button>
+    <span class="breadcrumb" layout="row">
+      <span ng-if="toolbarCtrl.sites" ng-repeat="site in toolbarCtrl.sites" layout="row">
+        <md-icon ng-if="toolbarCtrl.sites.length > 1 && $index > 0">chevron_right</md-icon>
+        <md-button
+        ng-if="site.sref"
+        ui-sref="{{ site.sref }}">
+          <span>{{ site.label }}</span>
+        </md-button>
+        <md-button ng-if="!site.sref" md-no-ink>
+          <span>{{ site.label }}</span>
+        </md-button>
+      </span>
+    </span>
+    <span flex=""></span>
+  </div>
+</md-toolbar>

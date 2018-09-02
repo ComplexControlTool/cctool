@@ -1,0 +1,33 @@
+/* graphs.css */
+#graph-content .content
+{
+  /*background-color: red;*/
+}
+
+#graph-content .md-sidenav-custom
+{
+  z-index: 0;  
+}
+
+#graph-content .md-sidenav-custom md-toolbar,
+#graph-content md-toolbar.md-toolbar-custom {
+  min-height: 48px;
+  max-height: 48px;
+  font-size: 14px;
+}
+
+#graph-content .md-sidenav-custom .md-toolbar-tools,
+#graph-content .md-toolbar-custom .md-toolbar-tools {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#graph-content .md-sidenav-custom md-divider
+{
+  border-color: rgba(0, 0, 0, 0.085);
+}

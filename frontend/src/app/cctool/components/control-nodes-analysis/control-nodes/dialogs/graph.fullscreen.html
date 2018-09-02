@@ -1,0 +1,32 @@
+<md-dialog md-theme="graph_panel" class="no-padding" aria-label="Fullscreen Graph" flex="100" layout-fill="">
+  <form>
+
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{graph.title}} (Graph Visualisation)</h2>
+        <span flex=""></span>
+        <md-button ng-click="cancel()" class="md-icon-button" aria-label="Close fullscreen">
+          <md-tooltip md-direction="bottom">Close fullscreen</md-tooltip>
+          <md-icon>close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <md-tabs ng-if="graph.graphanalysed" md-selected="selectedConfIndex[graph.id]" class="md-primary no-radius" md-enable-disconnect="" md-dynamic-height="" md-no-ink="">
+        <md-tab ng-repeat="conf in graph.graphcontrolconf" label="Configuration {{$index+1}}">
+          <div ng-style="{'height':windowHeight+'px'}" layout="row" layout-align="center center" layout-wrap="" layout-padding="">
+            <div ng-if="selectedConfIndex[graph.id] === $index" vis-network="" ng-model="graph" network="network" conf-index="$index" node-shape="nodeShape" layout-fill=""></div>
+          </div>
+        </md-tab>
+      </md-tabs>
+
+      <div ng-if="!graph.graphanalysed" flex="100">
+        <div ng-style="{'height':windowHeight+'px'}" layout="row" layout-align="center center" layout-wrap="" layout-padding="">
+          <div vis-network="" ng-model="graph" network="network" conf-index="0" node-shape="nodeShape" layout-fill=""></div>
+        </div>
+      </div>
+    </md-dialog-content>
+
+  </form>
+</md-dialog>

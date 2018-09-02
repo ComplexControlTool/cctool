@@ -1,0 +1,25 @@
+<!-- graphs.new.html -->
+<md-content md-theme="new_graph_page" layout="column" layout-fill="">
+  
+  <div ui-view="toolbar"></div>
+
+  <md-content id="graph-new-content" layout="column" flex="">
+    <ul class="buckets" layout="row" layout-align="center center" layout-wrap="" flex="">
+      <li flex="50" flex-gt-sm="25">
+        <a class="md-raised md-button" md-ink-ripple="" ui-sref="app.cctool_graphs_new_create">
+          <md-icon class="block">create</md-icon>
+          <span class="md-subhead" style="font-weight:bold">Create</span>
+          <div class="md-ripple-container"></div>
+        </a>
+      </li>
+      <li flex="50" flex-gt-sm="25">
+        <a class="md-raised md-button" md-ink-ripple="" ui-sref="app.cctool_graphs_new_import">
+          <md-icon class="block">import_export</md-icon>
+          <span class="md-subhead" style="font-weight:bold">Import from Gephi</span>
+          <div class="md-ripple-container"></div>
+        </a>
+      </li>
+    </ul>
+  </md-content>
+
+</md-content>

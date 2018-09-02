@@ -1,0 +1,29 @@
+FROM node:6.12.0-alpine
+
+MAINTAINER Nicholas Elia <me@nichelia.com>
+
+# Environment variables
+ENV REFRESHED_AT 2018-05-27
+ENV DEV_DIR="/Developer"
+ENV CODE_DIR="${DEV_DIR}/cctool"
+ENV FRONTEND_CODE_DIR="${CODE_DIR}/frontend/"
+
+# Set working directory
+RUN mkdir -p $FRONTEND_CODE_DIR
+WORKDIR $FRONTEND_CODE_DIR
+
+# Copy needed files
+COPY frontend $FRONTEND_CODE_DIR
+
+# Install dependencies
+RUN apk add --no-cache bash \
+    git \
+    vim
+RUN npm install -g bower@1.8.0 gulp@3.9.1
+
+# Install node + bower packages
+RUN cd $FRONTEND_CODE_DIR && \
+    npm install && \
+    bower install --config.interactive=false --allow-root
+
+CMD ["/bin/bash"]

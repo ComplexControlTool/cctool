@@ -1,0 +1,17 @@
+<!-- fileUpload.template.html -->
+<div class="fileUpload" flex="">
+
+  <input id="fileInput" type="file" class="ng-hide">
+  <div layout="row" flex="">
+    <div id="uploadDrop" class="dropzone" flex="">
+      <span>Drop File Here</span>
+    </div>
+  </div>
+  <md-button id="uploadButton" class="md-raised md-primary" aria-label="attach_file">
+    Choose file
+  </md-button>
+  <md-input-container md-no-float="">
+    <input id="textInput" ng-model="vm.fileName" type="text" placeholder="No file chosen" ng-readonly="true">
+  </md-input-container>
+
+</div>

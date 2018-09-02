@@ -1,0 +1,3165 @@
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "controlconf": "16 1 18 3 5 7, 16 18 3 5 7 14, 1 18 3 4 5 7, 18 3 4 5 7 14, 16 1 3 5 7 14, 1 3 4 5 7 14",
+            "controlconfstems": "1:0 3:2 7:4 12:6 6:8 8:9 11:10 4:11 0:12 14:13 10:14 16:15 9:17, 1:0 10:1 3:2 7:4 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 9:17, 1:0 3:2 12:6 6:8 8:9 11:10 4:11 0:12 14:13 10:14 16:15 7:16 9:17, 1:0 10:1 3:2 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 7:16 9:17, 1:0 3:2 7:4 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 9:17 10:18, 1:0 3:2 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 7:16 9:17 10:18",
+            "controllability": "M H E M H H H H M M M M M M H M H M E",
+            "coordinates": "",
+            "dateadded": "2017-02-13T12:29:28.273796Z",
+            "dateupdated": "2017-02-13T13:46:47.930339Z",
+            "description": "Description of BBE1",
+            "frequencies": "6, 0 4 0 6 3 6 0 6 0 0 0 0 0 0 4 0 3 0 4",
+            "functions": "L L L L L L L L L L L L L L L L L L L",
+            "graphanalysed": true,
+            "graphconnections": {
+                "0": [
+                    12
+                ],
+                "1": [
+                    0,
+                    2,
+                    12
+                ],
+                "10": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    13,
+                    14,
+                    18
+                ],
+                "11": [
+                    10
+                ],
+                "12": [
+                    6
+                ],
+                "13": [
+                    12
+                ],
+                "14": [
+                    13,
+                    15
+                ],
+                "15": [
+                    10
+                ],
+                "16": [
+                    15
+                ],
+                "17": [
+                    15
+                ],
+                "18": [
+                    17
+                ],
+                "2": [
+                    0
+                ],
+                "3": [
+                    2
+                ],
+                "4": [
+                    11
+                ],
+                "5": [
+                    2
+                ],
+                "6": [
+                    8,
+                    9,
+                    2,
+                    10
+                ],
+                "7": [
+                    16,
+                    9,
+                    11,
+                    4,
+                    6
+                ],
+                "8": [
+                    9
+                ],
+                "9": [
+                    17,
+                    10
+                ]
+            },
+            "graphcontrolconf": {
+                "0": [
+                    1,
+                    3,
+                    5,
+                    7,
+                    16,
+                    18
+                ],
+                "1": [
+                    3,
+                    5,
+                    7,
+                    14,
+                    16,
+                    18
+                ],
+                "2": [
+                    1,
+                    3,
+                    4,
+                    5,
+                    7,
+                    18
+                ],
+                "3": [
+                    3,
+                    4,
+                    5,
+                    7,
+                    14,
+                    18
+                ],
+                "4": [
+                    1,
+                    3,
+                    5,
+                    7,
+                    14,
+                    16
+                ],
+                "5": [
+                    1,
+                    3,
+                    4,
+                    5,
+                    7,
+                    14
+                ]
+            },
+            "graphcontrolconfstems": {
+                "0": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "14",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "4",
+                    "8": "9",
+                    "9": "17"
+                },
+                "1": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "1",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "4",
+                    "8": "9",
+                    "9": "17"
+                },
+                "2": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "14",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "16",
+                    "8": "9",
+                    "9": "17"
+                },
+                "3": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "1",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "16",
+                    "8": "9",
+                    "9": "17"
+                },
+                "4": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "18",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "4",
+                    "8": "9",
+                    "9": "17"
+                },
+                "5": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "18",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "16",
+                    "8": "9",
+                    "9": "17"
+                }
+            },
+            "graphgephicsv": ";EcologicalSustainability;Infrastructure;LandAvailability-Development;FloodRisk;LandAvailability-Feedstock;Policy-HabitatRegulations;Policy-Positive;InternationalInstability;ExistingIndustries;Funding;BBEEnergy;Feedstock;CommunityAcceptance;Jobs;By-products;Competitiveness;FossilFuelPrice;Technology;Knowledge\nEcologicalSustainability;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0\nInfrastructure;1;0;1;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0\nLandAvailability-Development;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\nFloodRisk;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\nLandAvailability-Feedstock;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0\nPolicy-HabitatRegulations;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\nPolicy-Positive;0;0;1;0;0;0;0;0;1;1;1;0;0;0;0;0;0;0;0\nInternationalInstability;0;0;0;0;1;0;1;0;0;1;0;1;0;0;0;0;1;0;0\nExistingIndustries;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0\nFunding;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;1;0\nBBEEnergy;1;1;1;0;0;0;0;0;0;0;0;1;0;1;1;0;0;0;1\nFeedstock;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0\nCommunityAcceptance;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0\nJobs;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0\nBy-products;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0\nCompetitiveness;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0\nFossilFuelPrice;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0\nTechnology;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0\nKnowledge;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0\n",
+            "graphnodecontrollability": {
+                "0": "M",
+                "1": "H",
+                "10": "M",
+                "11": "M",
+                "12": "M",
+                "13": "M",
+                "14": "H",
+                "15": "M",
+                "16": "H",
+                "17": "M",
+                "18": "E",
+                "2": "E",
+                "3": "M",
+                "4": "H",
+                "5": "H",
+                "6": "H",
+                "7": "H",
+                "8": "M",
+                "9": "M"
+            },
+            "graphnodefrequencies": {
+                "0": [
+                    6
+                ],
+                "1": [
+                    0,
+                    4,
+                    0,
+                    6,
+                    3,
+                    6,
+                    0,
+                    6,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    4,
+                    0,
+                    3,
+                    0,
+                    4
+                ]
+            },
+            "graphnodefunctions": {
+                "0": "L",
+                "1": "L",
+                "10": "L",
+                "11": "L",
+                "12": "L",
+                "13": "L",
+                "14": "L",
+                "15": "L",
+                "16": "L",
+                "17": "L",
+                "18": "L",
+                "2": "L",
+                "3": "L",
+                "4": "L",
+                "5": "L",
+                "6": "L",
+                "7": "L",
+                "8": "L",
+                "9": "L"
+            },
+            "graphnodeimportance": {
+                "0": "0",
+                "1": "0",
+                "10": "0",
+                "11": "0",
+                "12": "0",
+                "13": "0",
+                "14": "0",
+                "15": "0",
+                "16": "0",
+                "17": "0",
+                "18": "0",
+                "2": "0",
+                "3": "0",
+                "4": "0",
+                "5": "0",
+                "6": "0",
+                "7": "0",
+                "8": "0",
+                "9": "0"
+            },
+            "graphnodelabels": {
+                "0": "Ecological Sustainability",
+                "1": "Infrastructure",
+                "10": "BBE Energy",
+                "11": "Feedstock",
+                "12": "Community Acceptance",
+                "13": "Jobs",
+                "14": "By-products",
+                "15": "Competitiveness",
+                "16": "Fossil Fuel Price",
+                "17": "Technology",
+                "18": "Knowledge",
+                "2": "Land Availability-Development",
+                "3": "Flood Risk",
+                "4": "Land Availability-Feedstock",
+                "5": "Policy - Habitat Regulations",
+                "6": "Policy - Positive",
+                "7": "International Instability",
+                "8": "Existing Industries",
+                "9": "Funding"
+            },
+            "graphnodes": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18
+            ],
+            "graphstructure": {
+                "0": [
+                    [
+                        12,
+                        "+W"
+                    ]
+                ],
+                "1": [
+                    [
+                        0,
+                        "-W"
+                    ],
+                    [
+                        2,
+                        "+S"
+                    ],
+                    [
+                        12,
+                        "-W"
+                    ]
+                ],
+                "10": [
+                    [
+                        0,
+                        "-W"
+                    ],
+                    [
+                        1,
+                        "+W"
+                    ],
+                    [
+                        2,
+                        "-W"
+                    ],
+                    [
+                        11,
+                        "+S"
+                    ],
+                    [
+                        13,
+                        "+M"
+                    ],
+                    [
+                        14,
+                        "+S"
+                    ],
+                    [
+                        18,
+                        "+W"
+                    ]
+                ],
+                "11": [
+                    [
+                        10,
+                        "+M"
+                    ]
+                ],
+                "12": [
+                    [
+                        6,
+                        "+W"
+                    ]
+                ],
+                "13": [
+                    [
+                        12,
+                        "+S"
+                    ]
+                ],
+                "14": [
+                    [
+                        13,
+                        "+W"
+                    ],
+                    [
+                        15,
+                        "+M"
+                    ]
+                ],
+                "15": [
+                    [
+                        10,
+                        "+S"
+                    ]
+                ],
+                "16": [
+                    [
+                        15,
+                        "+S"
+                    ]
+                ],
+                "17": [
+                    [
+                        15,
+                        "+S"
+                    ]
+                ],
+                "18": [
+                    [
+                        17,
+                        "+S"
+                    ]
+                ],
+                "2": [
+                    [
+                        0,
+                        "-W"
+                    ]
+                ],
+                "3": [
+                    [
+                        2,
+                        "-M"
+                    ]
+                ],
+                "4": [
+                    [
+                        11,
+                        "+M"
+                    ]
+                ],
+                "5": [
+                    [
+                        2,
+                        "-S"
+                    ]
+                ],
+                "6": [
+                    [
+                        2,
+                        "+W"
+                    ],
+                    [
+                        8,
+                        "-S"
+                    ],
+                    [
+                        9,
+                        "+S"
+                    ],
+                    [
+                        10,
+                        "+S"
+                    ]
+                ],
+                "7": [
+                    [
+                        4,
+                        "-W"
+                    ],
+                    [
+                        6,
+                        "+M"
+                    ],
+                    [
+                        9,
+                        "+M"
+                    ],
+                    [
+                        11,
+                        "-W"
+                    ],
+                    [
+                        16,
+                        "+S"
+                    ]
+                ],
+                "8": [
+                    [
+                        9,
+                        "+M"
+                    ]
+                ],
+                "9": [
+                    [
+                        10,
+                        "+S"
+                    ],
+                    [
+                        17,
+                        "+W"
+                    ]
+                ]
+            },
+            "graphvisdatasets": {
+                "edges": [
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 0,
+                        "id": "0-12",
+                        "title": "<p>From:</p><p><strong>Ecological Sustainability</strong></p><p>To:</p><p><strong>Community Acceptance</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 12
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 1,
+                        "id": "1-0",
+                        "title": "<p>From:</p><p><strong>Infrastructure</strong></p><p>To:</p><p><strong>Ecological Sustainability</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 0
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 1,
+                        "id": "1-2",
+                        "title": "<p>From:</p><p><strong>Infrastructure</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 1,
+                        "id": "1-12",
+                        "title": "<p>From:</p><p><strong>Infrastructure</strong></p><p>To:</p><p><strong>Community Acceptance</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 12
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 2,
+                        "id": "2-0",
+                        "title": "<p>From:</p><p><strong>Land Availability-Development</strong></p><p>To:</p><p><strong>Ecological Sustainability</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 0
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-M"
+                        },
+                        "color": {
+                            "color": "#fb6a4a",
+                            "highlight": "#fb6a4a"
+                        },
+                        "from": 3,
+                        "id": "3-2",
+                        "title": "<p>From:</p><p><strong>Flood Risk</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 4,
+                        "id": "4-11",
+                        "title": "<p>From:</p><p><strong>Land Availability-Feedstock</strong></p><p>To:</p><p><strong>Feedstock</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 11
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-S"
+                        },
+                        "color": {
+                            "color": "#cb181d",
+                            "highlight": "#cb181d"
+                        },
+                        "from": 5,
+                        "id": "5-2",
+                        "title": "<p>From:</p><p><strong>Policy - Habitat Regulations</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 6,
+                        "id": "6-2",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-S"
+                        },
+                        "color": {
+                            "color": "#cb181d",
+                            "highlight": "#cb181d"
+                        },
+                        "from": 6,
+                        "id": "6-8",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>Existing Industries</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 8
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 6,
+                        "id": "6-9",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>Funding</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 9
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 6,
+                        "id": "6-10",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 7,
+                        "id": "7-4",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Land Availability-Feedstock</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 4
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 7,
+                        "id": "7-6",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Policy - Positive</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 6
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 7,
+                        "id": "7-9",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Funding</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 9
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 7,
+                        "id": "7-11",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Feedstock</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 11
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 7,
+                        "id": "7-16",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Fossil Fuel Price</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 16
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 8,
+                        "id": "8-9",
+                        "title": "<p>From:</p><p><strong>Existing Industries</strong></p><p>To:</p><p><strong>Funding</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 9
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 9,
+                        "id": "9-10",
+                        "title": "<p>From:</p><p><strong>Funding</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 9,
+                        "id": "9-17",
+                        "title": "<p>From:</p><p><strong>Funding</strong></p><p>To:</p><p><strong>Technology</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 17
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 10,
+                        "id": "10-0",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Ecological Sustainability</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 0
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 10,
+                        "id": "10-1",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Infrastructure</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 1
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 10,
+                        "id": "10-2",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 10,
+                        "id": "10-11",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Feedstock</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 11
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 10,
+                        "id": "10-13",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Jobs</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 13
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 10,
+                        "id": "10-14",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>By-products</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 14
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 10,
+                        "id": "10-18",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Knowledge</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 18
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 11,
+                        "id": "11-10",
+                        "title": "<p>From:</p><p><strong>Feedstock</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 12,
+                        "id": "12-6",
+                        "title": "<p>From:</p><p><strong>Community Acceptance</strong></p><p>To:</p><p><strong>Policy - Positive</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 6
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 13,
+                        "id": "13-12",
+                        "title": "<p>From:</p><p><strong>Jobs</strong></p><p>To:</p><p><strong>Community Acceptance</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 12
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 14,
+                        "id": "14-13",
+                        "title": "<p>From:</p><p><strong>By-products</strong></p><p>To:</p><p><strong>Jobs</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 13
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 14,
+                        "id": "14-15",
+                        "title": "<p>From:</p><p><strong>By-products</strong></p><p>To:</p><p><strong>Competitiveness</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 15
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 15,
+                        "id": "15-10",
+                        "title": "<p>From:</p><p><strong>Competitiveness</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 16,
+                        "id": "16-15",
+                        "title": "<p>From:</p><p><strong>Fossil Fuel Price</strong></p><p>To:</p><p><strong>Competitiveness</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 15
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 17,
+                        "id": "17-15",
+                        "title": "<p>From:</p><p><strong>Technology</strong></p><p>To:</p><p><strong>Competitiveness</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 15
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 18,
+                        "id": "18-17",
+                        "title": "<p>From:</p><p><strong>Knowledge</strong></p><p>To:</p><p><strong>Technology</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 17
+                    }
+                ],
+                "nodes": [
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 0,
+                        "label": "Ecological Sustainability",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Ecological Sustainability</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 1,
+                        "label": "Infrastructure",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 23.0,
+                        "title": "<p><strong>Infrastructure</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>67%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "E",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#74c476",
+                            "border": "#238b45",
+                            "highlight": {
+                                "background": "#74c476",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 2,
+                        "label": "Land Availability-Development",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Land Availability-Development</strong></p><p>Controllability: <strong>Easy</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 3,
+                        "label": "Flood Risk",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 28.0,
+                        "title": "<p><strong>Flood Risk</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>100%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 4,
+                        "label": "Land Availability-Feedstock",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 20.5,
+                        "title": "<p><strong>Land Availability-Feedstock</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>50%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 5,
+                        "label": "Policy - Habitat Regulations",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 28.0,
+                        "title": "<p><strong>Policy - Habitat Regulations</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>100%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 6,
+                        "label": "Policy - Positive",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Policy - Positive</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 7,
+                        "label": "International Instability",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 28.0,
+                        "title": "<p><strong>International Instability</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>100%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 8,
+                        "label": "Existing Industries",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Existing Industries</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 9,
+                        "label": "Funding",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Funding</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 10,
+                        "label": "BBE Energy",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>BBE Energy</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 11,
+                        "label": "Feedstock",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Feedstock</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 12,
+                        "label": "Community Acceptance",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Community Acceptance</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 13,
+                        "label": "Jobs",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Jobs</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 14,
+                        "label": "By-products",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 23.0,
+                        "title": "<p><strong>By-products</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>67%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 15,
+                        "label": "Competitiveness",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Competitiveness</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 16,
+                        "label": "Fossil Fuel Price",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 20.5,
+                        "title": "<p><strong>Fossil Fuel Price</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>50%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 17,
+                        "label": "Technology",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Technology</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "E",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#74c476",
+                            "border": "#238b45",
+                            "highlight": {
+                                "background": "#74c476",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 18,
+                        "label": "Knowledge",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 23.0,
+                        "title": "<p><strong>Knowledge</strong></p><p>Controllability: <strong>Easy</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>67%</strong></p>"
+                    }
+                ]
+            },
+            "id": 1,
+            "importance": "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+            "labels": "Ecological Sustainability,Infrastructure,Land Availability-Development,Flood Risk,Land Availability-Feedstock,Policy - Habitat Regulations,Policy - Positive,International Instability,Existing Industries,Funding,BBE Energy,Feedstock,Community Acceptance,Jobs,By-products,Competitiveness,Fossil Fuel Price,Technology,Knowledge",
+            "moredescription": "",
+            "owner": "demo",
+            "structure": "0 0 0 0 0 0 0 0 0 0 0 0 +W 0 0 0 0 0 0,-W 0 +S 0 0 0 0 0 0 0 0 0 -W 0 0 0 0 0 0,-W 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0 -M 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 +M 0 0 0 0 0 0 0,0 0 -S 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0 +W 0 0 0 0 0 -S +S +S 0 0 0 0 0 0 0 0,0 0 0 0 -W 0 +M 0 0 +M 0 -W 0 0 0 0 +S 0 0,0 0 0 0 0 0 0 0 0 +M 0 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 +S 0 0 0 0 0 0 +W 0,-W +W -W 0 0 0 0 0 0 0 0 +S 0 +M +S 0 0 0 +W,0 0 0 0 0 0 0 0 0 0 +M 0 0 0 0 0 0 0 0,0 0 0 0 0 0 +W 0 0 0 0 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 +S 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 +W 0 +M 0 0 0,0 0 0 0 0 0 0 0 0 0 +S 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 +S 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 +S 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 +S 0",
+            "title": "BBE1-Local Authority",
+            "url": "http://localhost:8000/api-root/graphs/1/"
+        },
+        {
+            "controlconf": "1 3 4 5 7 14, 18 3 4 5 7 14, 16 1 3 5 7 14, 16 18 3 5 7 14, 1 18 3 4 5 7, 16 1 18 3 5 7",
+            "controlconfstems": "1:0 3:2 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 7:16 9:17 10:18, 1:0 10:1 3:2 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 7:16 9:17, 1:0 3:2 7:4 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 9:17 10:18, 1:0 10:1 3:2 7:4 12:6 6:8 8:9 11:10 4:11 0:12 14:13 16:15 9:17, 1:0 3:2 12:6 6:8 8:9 11:10 4:11 0:12 14:13 10:14 16:15 7:16 9:17, 1:0 3:2 7:4 12:6 6:8 8:9 11:10 4:11 0:12 14:13 10:14 16:15 9:17",
+            "controllability": "M M E H M H H H M M M M M M E M H M M",
+            "coordinates": "",
+            "dateadded": "2017-02-13T12:30:39.795485Z",
+            "dateupdated": "2017-02-13T13:46:42.245431Z",
+            "description": "Description of BBE1",
+            "frequencies": "6, 0 4 0 6 3 6 0 6 0 0 0 0 0 0 4 0 3 0 4",
+            "functions": "L L L L L L L L L L L L L L L L L L L",
+            "graphanalysed": true,
+            "graphconnections": {
+                "0": [
+                    12
+                ],
+                "1": [
+                    0,
+                    2,
+                    12
+                ],
+                "10": [
+                    0,
+                    1,
+                    2,
+                    11,
+                    13,
+                    14,
+                    18
+                ],
+                "11": [
+                    10
+                ],
+                "12": [
+                    6
+                ],
+                "13": [
+                    12
+                ],
+                "14": [
+                    13,
+                    15
+                ],
+                "15": [
+                    10
+                ],
+                "16": [
+                    15
+                ],
+                "17": [
+                    15
+                ],
+                "18": [
+                    17
+                ],
+                "2": [
+                    0
+                ],
+                "3": [
+                    2
+                ],
+                "4": [
+                    11
+                ],
+                "5": [
+                    2
+                ],
+                "6": [
+                    8,
+                    9,
+                    2,
+                    10
+                ],
+                "7": [
+                    16,
+                    9,
+                    11,
+                    4,
+                    6
+                ],
+                "8": [
+                    9
+                ],
+                "9": [
+                    17,
+                    10
+                ]
+            },
+            "graphcontrolconf": {
+                "0": [
+                    1,
+                    3,
+                    4,
+                    5,
+                    7,
+                    14
+                ],
+                "1": [
+                    3,
+                    4,
+                    5,
+                    7,
+                    14,
+                    18
+                ],
+                "2": [
+                    1,
+                    3,
+                    5,
+                    7,
+                    14,
+                    16
+                ],
+                "3": [
+                    3,
+                    5,
+                    7,
+                    14,
+                    16,
+                    18
+                ],
+                "4": [
+                    1,
+                    3,
+                    4,
+                    5,
+                    7,
+                    18
+                ],
+                "5": [
+                    1,
+                    3,
+                    5,
+                    7,
+                    16,
+                    18
+                ]
+            },
+            "graphcontrolconfstems": {
+                "0": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "18",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "16",
+                    "8": "9",
+                    "9": "17"
+                },
+                "1": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "1",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "16",
+                    "8": "9",
+                    "9": "17"
+                },
+                "2": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "18",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "4",
+                    "8": "9",
+                    "9": "17"
+                },
+                "3": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "1",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "4",
+                    "8": "9",
+                    "9": "17"
+                },
+                "4": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "14",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "16",
+                    "8": "9",
+                    "9": "17"
+                },
+                "5": {
+                    "0": "12",
+                    "1": "0",
+                    "10": "14",
+                    "11": "10",
+                    "12": "6",
+                    "14": "13",
+                    "16": "15",
+                    "3": "2",
+                    "4": "11",
+                    "6": "8",
+                    "7": "4",
+                    "8": "9",
+                    "9": "17"
+                }
+            },
+            "graphgephicsv": ";EcologicalSustainability;Infrastructure;LandAvailability-Development;FloodRisk;LandAvailability-Feedstock;Policy-HabitatRegulations;Policy-Positive;InternationalInstability;ExistingIndustries;Funding;BBEEnergy;Feedstock;CommunityAcceptance;Jobs;By-products;Competitiveness;FossilFuelPrice;Technology;Knowledge\nEcologicalSustainability;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0\nInfrastructure;1;0;1;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0\nLandAvailability-Development;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\nFloodRisk;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\nLandAvailability-Feedstock;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0\nPolicy-HabitatRegulations;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0\nPolicy-Positive;0;0;1;0;0;0;0;0;1;1;1;0;0;0;0;0;0;0;0\nInternationalInstability;0;0;0;0;1;0;1;0;0;1;0;1;0;0;0;0;1;0;0\nExistingIndustries;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0\nFunding;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;1;0\nBBEEnergy;1;1;1;0;0;0;0;0;0;0;0;1;0;1;1;0;0;0;1\nFeedstock;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0\nCommunityAcceptance;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0\nJobs;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0\nBy-products;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;1;0;0;0\nCompetitiveness;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0\nFossilFuelPrice;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0\nTechnology;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0\nKnowledge;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0\n",
+            "graphnodecontrollability": {
+                "0": "M",
+                "1": "M",
+                "10": "M",
+                "11": "M",
+                "12": "M",
+                "13": "M",
+                "14": "E",
+                "15": "M",
+                "16": "H",
+                "17": "M",
+                "18": "M",
+                "2": "E",
+                "3": "H",
+                "4": "M",
+                "5": "H",
+                "6": "H",
+                "7": "H",
+                "8": "M",
+                "9": "M"
+            },
+            "graphnodefrequencies": {
+                "0": [
+                    6
+                ],
+                "1": [
+                    0,
+                    4,
+                    0,
+                    6,
+                    3,
+                    6,
+                    0,
+                    6,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    4,
+                    0,
+                    3,
+                    0,
+                    4
+                ]
+            },
+            "graphnodefunctions": {
+                "0": "L",
+                "1": "L",
+                "10": "L",
+                "11": "L",
+                "12": "L",
+                "13": "L",
+                "14": "L",
+                "15": "L",
+                "16": "L",
+                "17": "L",
+                "18": "L",
+                "2": "L",
+                "3": "L",
+                "4": "L",
+                "5": "L",
+                "6": "L",
+                "7": "L",
+                "8": "L",
+                "9": "L"
+            },
+            "graphnodeimportance": {
+                "0": "0",
+                "1": "0",
+                "10": "0",
+                "11": "0",
+                "12": "0",
+                "13": "0",
+                "14": "0",
+                "15": "0",
+                "16": "0",
+                "17": "0",
+                "18": "0",
+                "2": "0",
+                "3": "0",
+                "4": "0",
+                "5": "0",
+                "6": "0",
+                "7": "0",
+                "8": "0",
+                "9": "0"
+            },
+            "graphnodelabels": {
+                "0": "Ecological Sustainability",
+                "1": "Infrastructure",
+                "10": "BBE Energy",
+                "11": "Feedstock",
+                "12": "Community Acceptance",
+                "13": "Jobs",
+                "14": "By-products",
+                "15": "Competitiveness",
+                "16": "Fossil Fuel Price",
+                "17": "Technology",
+                "18": "Knowledge",
+                "2": "Land Availability-Development",
+                "3": "Flood Risk",
+                "4": "Land Availability-Feedstock",
+                "5": "Policy - Habitat Regulations",
+                "6": "Policy - Positive",
+                "7": "International Instability",
+                "8": "Existing Industries",
+                "9": "Funding"
+            },
+            "graphnodes": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18
+            ],
+            "graphstructure": {
+                "0": [
+                    [
+                        12,
+                        "+W"
+                    ]
+                ],
+                "1": [
+                    [
+                        0,
+                        "-W"
+                    ],
+                    [
+                        2,
+                        "+S"
+                    ],
+                    [
+                        12,
+                        "-W"
+                    ]
+                ],
+                "10": [
+                    [
+                        0,
+                        "-W"
+                    ],
+                    [
+                        1,
+                        "+W"
+                    ],
+                    [
+                        2,
+                        "-W"
+                    ],
+                    [
+                        11,
+                        "+S"
+                    ],
+                    [
+                        13,
+                        "+M"
+                    ],
+                    [
+                        14,
+                        "+S"
+                    ],
+                    [
+                        18,
+                        "+W"
+                    ]
+                ],
+                "11": [
+                    [
+                        10,
+                        "+M"
+                    ]
+                ],
+                "12": [
+                    [
+                        6,
+                        "+W"
+                    ]
+                ],
+                "13": [
+                    [
+                        12,
+                        "+S"
+                    ]
+                ],
+                "14": [
+                    [
+                        13,
+                        "+W"
+                    ],
+                    [
+                        15,
+                        "+M"
+                    ]
+                ],
+                "15": [
+                    [
+                        10,
+                        "+S"
+                    ]
+                ],
+                "16": [
+                    [
+                        15,
+                        "+S"
+                    ]
+                ],
+                "17": [
+                    [
+                        15,
+                        "+S"
+                    ]
+                ],
+                "18": [
+                    [
+                        17,
+                        "+S"
+                    ]
+                ],
+                "2": [
+                    [
+                        0,
+                        "-W"
+                    ]
+                ],
+                "3": [
+                    [
+                        2,
+                        "-M"
+                    ]
+                ],
+                "4": [
+                    [
+                        11,
+                        "+M"
+                    ]
+                ],
+                "5": [
+                    [
+                        2,
+                        "-S"
+                    ]
+                ],
+                "6": [
+                    [
+                        2,
+                        "+W"
+                    ],
+                    [
+                        8,
+                        "-S"
+                    ],
+                    [
+                        9,
+                        "+S"
+                    ],
+                    [
+                        10,
+                        "+S"
+                    ]
+                ],
+                "7": [
+                    [
+                        4,
+                        "-W"
+                    ],
+                    [
+                        6,
+                        "+M"
+                    ],
+                    [
+                        9,
+                        "+M"
+                    ],
+                    [
+                        11,
+                        "-W"
+                    ],
+                    [
+                        16,
+                        "+S"
+                    ]
+                ],
+                "8": [
+                    [
+                        9,
+                        "+M"
+                    ]
+                ],
+                "9": [
+                    [
+                        10,
+                        "+S"
+                    ],
+                    [
+                        17,
+                        "+W"
+                    ]
+                ]
+            },
+            "graphvisdatasets": {
+                "edges": [
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 0,
+                        "id": "0-12",
+                        "title": "<p>From:</p><p><strong>Ecological Sustainability</strong></p><p>To:</p><p><strong>Community Acceptance</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 12
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 1,
+                        "id": "1-0",
+                        "title": "<p>From:</p><p><strong>Infrastructure</strong></p><p>To:</p><p><strong>Ecological Sustainability</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 0
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 1,
+                        "id": "1-2",
+                        "title": "<p>From:</p><p><strong>Infrastructure</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 1,
+                        "id": "1-12",
+                        "title": "<p>From:</p><p><strong>Infrastructure</strong></p><p>To:</p><p><strong>Community Acceptance</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 12
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 2,
+                        "id": "2-0",
+                        "title": "<p>From:</p><p><strong>Land Availability-Development</strong></p><p>To:</p><p><strong>Ecological Sustainability</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 0
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-M"
+                        },
+                        "color": {
+                            "color": "#fb6a4a",
+                            "highlight": "#fb6a4a"
+                        },
+                        "from": 3,
+                        "id": "3-2",
+                        "title": "<p>From:</p><p><strong>Flood Risk</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 4,
+                        "id": "4-11",
+                        "title": "<p>From:</p><p><strong>Land Availability-Feedstock</strong></p><p>To:</p><p><strong>Feedstock</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 11
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-S"
+                        },
+                        "color": {
+                            "color": "#cb181d",
+                            "highlight": "#cb181d"
+                        },
+                        "from": 5,
+                        "id": "5-2",
+                        "title": "<p>From:</p><p><strong>Policy - Habitat Regulations</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 6,
+                        "id": "6-2",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-S"
+                        },
+                        "color": {
+                            "color": "#cb181d",
+                            "highlight": "#cb181d"
+                        },
+                        "from": 6,
+                        "id": "6-8",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>Existing Industries</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 8
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 6,
+                        "id": "6-9",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>Funding</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 9
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 6,
+                        "id": "6-10",
+                        "title": "<p>From:</p><p><strong>Policy - Positive</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 7,
+                        "id": "7-4",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Land Availability-Feedstock</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 4
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 7,
+                        "id": "7-6",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Policy - Positive</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 6
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 7,
+                        "id": "7-9",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Funding</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 9
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 7,
+                        "id": "7-11",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Feedstock</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 11
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 7,
+                        "id": "7-16",
+                        "title": "<p>From:</p><p><strong>International Instability</strong></p><p>To:</p><p><strong>Fossil Fuel Price</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 16
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 8,
+                        "id": "8-9",
+                        "title": "<p>From:</p><p><strong>Existing Industries</strong></p><p>To:</p><p><strong>Funding</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 9
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 9,
+                        "id": "9-10",
+                        "title": "<p>From:</p><p><strong>Funding</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 9,
+                        "id": "9-17",
+                        "title": "<p>From:</p><p><strong>Funding</strong></p><p>To:</p><p><strong>Technology</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 17
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 10,
+                        "id": "10-0",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Ecological Sustainability</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 0
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 10,
+                        "id": "10-1",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Infrastructure</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 1
+                    },
+                    {
+                        "cctool": {
+                            "weight": "-W"
+                        },
+                        "color": {
+                            "color": "#fcbba1",
+                            "highlight": "#fcbba1"
+                        },
+                        "from": 10,
+                        "id": "10-2",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Land Availability-Development</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Negative</strong></p>",
+                        "to": 2
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 10,
+                        "id": "10-11",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Feedstock</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 11
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 10,
+                        "id": "10-13",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Jobs</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 13
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 10,
+                        "id": "10-14",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>By-products</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 14
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 10,
+                        "id": "10-18",
+                        "title": "<p>From:</p><p><strong>BBE Energy</strong></p><p>To:</p><p><strong>Knowledge</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 18
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 11,
+                        "id": "11-10",
+                        "title": "<p>From:</p><p><strong>Feedstock</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 12,
+                        "id": "12-6",
+                        "title": "<p>From:</p><p><strong>Community Acceptance</strong></p><p>To:</p><p><strong>Policy - Positive</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 6
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 13,
+                        "id": "13-12",
+                        "title": "<p>From:</p><p><strong>Jobs</strong></p><p>To:</p><p><strong>Community Acceptance</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 12
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+W"
+                        },
+                        "color": {
+                            "color": "#c7e9c0",
+                            "highlight": "#c7e9c0"
+                        },
+                        "from": 14,
+                        "id": "14-13",
+                        "title": "<p>From:</p><p><strong>By-products</strong></p><p>To:</p><p><strong>Jobs</strong></p><p>Connection Weight: <strong>Weak</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 13
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+M"
+                        },
+                        "color": {
+                            "color": "#41ab5d",
+                            "highlight": "#41ab5d"
+                        },
+                        "from": 14,
+                        "id": "14-15",
+                        "title": "<p>From:</p><p><strong>By-products</strong></p><p>To:</p><p><strong>Competitiveness</strong></p><p>Connection Weight: <strong>Medium</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 15
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 15,
+                        "id": "15-10",
+                        "title": "<p>From:</p><p><strong>Competitiveness</strong></p><p>To:</p><p><strong>BBE Energy</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 10
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 16,
+                        "id": "16-15",
+                        "title": "<p>From:</p><p><strong>Fossil Fuel Price</strong></p><p>To:</p><p><strong>Competitiveness</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 15
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 17,
+                        "id": "17-15",
+                        "title": "<p>From:</p><p><strong>Technology</strong></p><p>To:</p><p><strong>Competitiveness</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 15
+                    },
+                    {
+                        "cctool": {
+                            "weight": "+S"
+                        },
+                        "color": {
+                            "color": "#00441b",
+                            "highlight": "#00441b"
+                        },
+                        "from": 18,
+                        "id": "18-17",
+                        "title": "<p>From:</p><p><strong>Knowledge</strong></p><p>To:</p><p><strong>Technology</strong></p><p>Connection Weight: <strong>Strong</strong></p><p>Connection Influence: <strong>Positive</strong></p>",
+                        "to": 17
+                    }
+                ],
+                "nodes": [
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 0,
+                        "label": "Ecological Sustainability",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Ecological Sustainability</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 1,
+                        "label": "Infrastructure",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 23.0,
+                        "title": "<p><strong>Infrastructure</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>67%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "E",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#74c476",
+                            "border": "#238b45",
+                            "highlight": {
+                                "background": "#74c476",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 2,
+                        "label": "Land Availability-Development",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Land Availability-Development</strong></p><p>Controllability: <strong>Easy</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 3,
+                        "label": "Flood Risk",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 28.0,
+                        "title": "<p><strong>Flood Risk</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>100%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 4,
+                        "label": "Land Availability-Feedstock",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 20.5,
+                        "title": "<p><strong>Land Availability-Feedstock</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>50%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 5,
+                        "label": "Policy - Habitat Regulations",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 28.0,
+                        "title": "<p><strong>Policy - Habitat Regulations</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>100%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 6,
+                        "label": "Policy - Positive",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Policy - Positive</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 7,
+                        "label": "International Instability",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 28.0,
+                        "title": "<p><strong>International Instability</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>100%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 8,
+                        "label": "Existing Industries",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Existing Industries</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 9,
+                        "label": "Funding",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Funding</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 10,
+                        "label": "BBE Energy",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>BBE Energy</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 11,
+                        "label": "Feedstock",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Feedstock</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 12,
+                        "label": "Community Acceptance",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Community Acceptance</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 13,
+                        "label": "Jobs",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Jobs</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "E",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#74c476",
+                            "border": "#238b45",
+                            "highlight": {
+                                "background": "#74c476",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 14,
+                        "label": "By-products",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 23.0,
+                        "title": "<p><strong>By-products</strong></p><p>Controllability: <strong>Easy</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>67%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 15,
+                        "label": "Competitiveness",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Competitiveness</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "H",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fb6a4a",
+                            "border": "#cb181d",
+                            "highlight": {
+                                "background": "#fb6a4a",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 16,
+                        "label": "Fossil Fuel Price",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 20.5,
+                        "title": "<p><strong>Fossil Fuel Price</strong></p><p>Controllability: <strong>Hard</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>50%</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 17,
+                        "label": "Technology",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 13,
+                        "title": "<p><strong>Technology</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>-</strong></p>"
+                    },
+                    {
+                        "borderWidth": 2,
+                        "borderWidthSelected": 2,
+                        "cctool": {
+                            "controllability": "M",
+                            "function": "L",
+                            "importance": "0"
+                        },
+                        "color": {
+                            "background": "#fdae6b",
+                            "border": "#fd8d3c",
+                            "highlight": {
+                                "background": "#fdae6b",
+                                "border": "#FF3399"
+                            },
+                            "hover": {
+                                "background": "#D2E5FF",
+                                "border": "#2B7CE9"
+                            }
+                        },
+                        "id": 18,
+                        "label": "Knowledge",
+                        "shape": "ellipse",
+                        "shapeProperties": {
+                            "borderDashes": false
+                        },
+                        "size": 23.0,
+                        "title": "<p><strong>Knowledge</strong></p><p>Controllability: <strong>Medium</strong></p><p>Importance: <strong>Neutral</strong></p><p>Function: <strong>Linear</strong></p><p>Control Node: <strong>No</strong></p><p>Frequency: <strong>67%</strong></p>"
+                    }
+                ]
+            },
+            "id": 2,
+            "importance": "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0",
+            "labels": "Ecological Sustainability,Infrastructure,Land Availability-Development,Flood Risk,Land Availability-Feedstock,Policy - Habitat Regulations,Policy - Positive,International Instability,Existing Industries,Funding,BBE Energy,Feedstock,Community Acceptance,Jobs,By-products,Competitiveness,Fossil Fuel Price,Technology,Knowledge",
+            "moredescription": "",
+            "owner": "demo",
+            "structure": "0 0 0 0 0 0 0 0 0 0 0 0 +W 0 0 0 0 0 0,-W 0 +S 0 0 0 0 0 0 0 0 0 -W 0 0 0 0 0 0,-W 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0 -M 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 +M 0 0 0 0 0 0 0,0 0 -S 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0,0 0 +W 0 0 0 0 0 -S +S +S 0 0 0 0 0 0 0 0,0 0 0 0 -W 0 +M 0 0 +M 0 -W 0 0 0 0 +S 0 0,0 0 0 0 0 0 0 0 0 +M 0 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 +S 0 0 0 0 0 0 +W 0,-W +W -W 0 0 0 0 0 0 0 0 +S 0 +M +S 0 0 0 +W,0 0 0 0 0 0 0 0 0 0 +M 0 0 0 0 0 0 0 0,0 0 0 0 0 0 +W 0 0 0 0 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 +S 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 +W 0 +M 0 0 0,0 0 0 0 0 0 0 0 0 0 +S 0 0 0 0 0 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 +S 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 +S 0 0 0,0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 +S 0",
+            "title": "BBE1-Industry",
+            "url": "http://localhost:8000/api-root/graphs/2/"
+        }
+    ]
+}

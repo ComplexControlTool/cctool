@@ -1,0 +1,139 @@
+/* expandable-graph-card.css */
+.expandable-graph-card
+{
+  max-width: 391px;
+}
+
+.expandable-graph-card video
+{
+  width: 100%;
+}
+
+.expandable-graph-card .owner
+{
+  color: rgba(0, 0, 0, 0.54);
+  padding-top: 0;
+  font-size: 14px;
+}
+
+.expandable-graph-card .text-icon-button
+{
+  font-size:17px;
+  line-height:22px;
+}
+
+.expandable-graph-card .fa
+{
+  font-size:16px;
+  line-height:20px;
+  margin-right:0px;
+}
+
+.expandable-graph-card md-list
+{
+  padding: 0px;
+}
+
+.expandable-graph-card md-list-item,
+.expandable-graph-card md-list-item .md-button
+{
+  padding: 0px;
+}
+.expandable-graph-card md-list-item.md-2-line,
+.expandable-graph-card md-list-item.md-2-line > .md-no-style,
+.expandable-graph-card md-list-item.md-2-line::before,
+.expandable-graph-card md-list-item.md-2-line > .md-no-style::before
+{
+  min-height: 0px;
+}
+
+/* Tags */
+.expandable-graph-card .tags
+{
+  font-size: 12px;
+  list-style: none;
+  margin: 0;
+  overflow: hidden; 
+  padding: 0;
+}
+
+.expandable-graph-card .tags li
+{
+  float: left; 
+}
+
+.expandable-graph-card .tag
+{
+  background: #eee;
+  border-radius: 3px 0 0 3px;
+  color: #555;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+}
+
+.expandable-graph-card .tag::before
+{
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+
+.expandable-graph-card .tag::after
+{
+  background: #fff;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #eee;
+  border-top: 13px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/*.expandable-graph-card .tag:hover
+{
+  background-color: crimson;
+  color: white;
+}
+
+.expandable-graph-card .tag:hover::after
+{
+   border-left-color: crimson; 
+}*/
+
+/* Animations */
+.expandable-graph-card .rotate-anticlockwise
+{
+    transition: 250ms ease all;
+    -ms-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.expandable-graph-card .rotate-clockwise
+{
+    transition: 250ms ease all;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.expandable-graph-card .animate-card-body.ng-hide
+{
+  opacity: 0;
+}
+.expandable-graph-card .animate-card-body.ng-hide-add,
+.expandable-graph-card .animate-card-body.ng-hide-remove
+{
+  transition: all linear 200ms;
+}

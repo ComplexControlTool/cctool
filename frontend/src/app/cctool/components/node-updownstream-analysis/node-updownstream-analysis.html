@@ -1,0 +1,58 @@
+<div id="node-updownstream-analysis-content" ng-if="!nodeAnalysisCtrl.data" flex="">
+  <div style="height:988px" layout="row" layout-align="center center">
+    <md-button class="md-raised" ng-click="nodeAnalysisCtrl.initAnalysis(graph.content)">start analysing</md-button>
+  </div>
+</div>
+<div id="node-updownstream-analysis-content" ng-if="nodeAnalysisCtrl.data" layout="row" flex="">
+  <div layout="column" layout-padding="" flex="">
+    <div>
+      <md-input-container>
+        <label>Select Node for Analysis</label>
+        <md-select
+         ng-model="nodeAnalysisCtrl.data.leftGraph.selectedNodeLabel"
+         ng-change="nodeAnalysisCtrl.data.leftGraph.nodesToRemove = nodeAnalysisCtrl.computeStream(nodeAnalysisCtrl.data.leftGraph.selectedNodeLabel, nodeAnalysisCtrl.data.leftGraph.streamMode)">
+          <md-option ng-repeat="node in nodeAnalysisCtrl.nodeLabels track by $index" value="{{ node }}">
+            {{ node }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-radio-group
+       ng-disabled="!nodeAnalysisCtrl.data.leftGraph.selectedNodeLabel"
+       ng-model="nodeAnalysisCtrl.data.leftGraph.streamMode"
+       ng-change="nodeAnalysisCtrl.data.leftGraph.nodesToRemove = nodeAnalysisCtrl.computeStream(nodeAnalysisCtrl.data.leftGraph.selectedNodeLabel, nodeAnalysisCtrl.data.leftGraph.streamMode)">
+        <md-radio-button value="UpStream">Up stream</md-radio-button>
+        <md-radio-button value="DownStream">Down stream </md-radio-button>
+      </md-radio-group>
+    </div>
+    <div style="height:800px">
+      <div id="left-tab-{{nodeAnalysisCtrl.graphForAnalysis.id}}" vis-network="" ng-model="nodeAnalysisCtrl.graphForAnalysis" network="nodeAnalysisCtrl.data.leftGraph.network" nodes-to-hide="nodeAnalysisCtrl.data.leftGraph.nodesToRemove" node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value" layout-fill=""></div>
+    </div>
+  </div>
+
+  <md-divider style="height:988px" hide-sm="" hide-xs=""></md-divider>
+
+  <div layout="column" layout-padding="" flex="" hide-sm="" hide-xs="">
+    <div>
+      <md-input-container>
+        <label>Select Node for Analysis</label>
+        <md-select
+         ng-model="nodeAnalysisCtrl.data.rightGraph.selectedNodeLabel"
+         ng-change="nodeAnalysisCtrl.data.rightGraph.nodesToRemove = nodeAnalysisCtrl.computeStream(nodeAnalysisCtrl.data.rightGraph.selectedNodeLabel, nodeAnalysisCtrl.data.rightGraph.streamMode)">
+          <md-option ng-repeat="node in nodeAnalysisCtrl.nodeLabels track by $index" value="{{ node }}">
+            {{ node }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-radio-group
+       ng-disabled="!nodeAnalysisCtrl.data.rightGraph.selectedNodeLabel"
+       ng-model="nodeAnalysisCtrl.data.rightGraph.streamMode"
+       ng-change="nodeAnalysisCtrl.data.rightGraph.nodesToRemove = nodeAnalysisCtrl.computeStream(nodeAnalysisCtrl.data.rightGraph.selectedNodeLabel, nodeAnalysisCtrl.data.rightGraph.streamMode)">
+        <md-radio-button value="UpStream">Up stream</md-radio-button>
+        <md-radio-button value="DownStream">Down stream </md-radio-button>
+      </md-radio-group>
+    </div>
+    <div style="height:800px">
+      <div id="right-tab-{{nodeAnalysisCtrl.graphForAnalysis.id}}" vis-network="" ng-model="nodeAnalysisCtrl.graphForAnalysis" network="nodeAnalysisCtrl.data.rightGraph.network" nodes-to-hide="nodeAnalysisCtrl.data.rightGraph.nodesToRemove" node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value" layout-fill=""></div>
+    </div>
+  </div>
+</div>

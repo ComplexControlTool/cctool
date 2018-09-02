@@ -1,0 +1,34 @@
+<md-dialog md-theme="stems_panel" class="no-padding" aria-label="Fullscreen Stems" flex="100" layout-fill="">
+  <form>
+
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{graph.title}} (Stems)</h2>
+        <span flex=""></span>
+        <md-button ng-click="cancel()" class="md-icon-button" aria-label="Close fullscreen">
+          <md-tooltip md-direction="bottom">Close fullscreen</md-tooltip>
+          <md-icon>close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>      
+      <md-tabs ng-if="graph.graphanalysed" md-selected="selectedConfIndex[graph.id]" class="md-primary no-radius" md-dynamic-height="" md-no-ink="">
+        <md-tab ng-repeat="conf in graph.graphcontrolconf" label="Configuration {{$index+1}}">
+          <div class="simple-table-container">
+            <table class="simple">
+              <tbody>
+                <tr ng-repeat="stemRoot in graph.graphcontrolconf[$index]">
+                  <td>
+                    <div jsnx-stem ng-model="graph" stem-root="stemRoot" conf-index="selectedConfIndex[graph.id]" node-shape="nodeShape" flex=""></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </md-tab>
+      </md-tabs>
+    </md-dialog-content>
+
+  </form>
+</md-dialog>

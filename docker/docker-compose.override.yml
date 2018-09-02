@@ -1,0 +1,5 @@
+version: "3"
+services:
+  cctool-dev:
+    ports:
+      - "80:8000"

@@ -1,0 +1,128 @@
+<!-- graph.info.html -->
+<md-toolbar
+ng-class="{ 'md-toolbar-custom, md-accent': app.$mdMedia('gt-md') }">
+  <div class="md-toolbar-tools">
+      <h1 class="md-toolbar-tools">Information</h1>
+      <md-button class="md-icon-button" ng-click="app.toggleSidenav('graph-info-sidenav')" hide-gt-md aria-label="Close Sidenav">
+        <md-icon>close</md-icon>
+      </md-button>
+  </div>
+</md-toolbar>
+<md-divider></md-divider>
+<md-content style="background-color: transparent;">
+<!-- Options -->
+<section ng-if="app.$mdMedia('gt-md')" style="padding-top:16px">
+  <md-menu>
+    <md-button class="md-primary" ng-click="$mdMenu.open($event)" aria-label="Actions" layout-fill="">
+      Actions
+    </md-button>
+    <md-menu-content width="5">
+      <md-menu-item ng-if="!vm.graphs[vm.selectedGraphIndex].graphanalysed">
+        <md-button ng-click="vm.onGraphAnalyse(vm.graphs[vm.selectedGraphIndex])" aria-label="">Analyse Graph</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button ng-click="vm.onGraphEdit(vm.graphs[vm.selectedGraphIndex])" aria-label="">Edit Graph</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button ng-click="vm.onGraphDuplicate(vm.graphs[vm.selectedGraphIndex])" aria-label="">Duplicate Graph</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button ng-click="vm.onGraphLayout(vm.graphs[vm.selectedGraphIndex])" aria-label="">Save Graph Layout</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button ng-click="vm.exportCSV(vm.graphs[vm.selectedGraphIndex])" aria-label="">Export as CSV</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button ng-click="vm.exportJSON(vm.graphs[vm.selectedGraphIndex])" aria-label="">Export as JSON</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button ng-click="vm.onGraphReset(vm.graphs[vm.selectedGraphIndex])" aria-label="">Reset Graph</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button class="md-warn" ng-click="vm.onGraphRemove(vm.graphs[vm.selectedGraphIndex])" aria-label="">Remove Graph</md-button>
+      </md-menu-item>
+      <md-divider ng-if="vm.enableOption()"></md-divider>
+      <md-menu-item ng-if="vm.graphs.length>1 && $mdMedia('gt-md') && vm.enableOption()">
+        <md-button ng-click="vm.showGraphCompare($event)" aria-label="">Compare Graph</md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="vm.enableOption()">
+        <md-button ng-click="vm.onNewGraph()" aria-label="">New Graph</md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</section>
+<md-divider ng-if="app.$mdMedia('gt-md')"></md-divider>
+<!-- Title -->
+<section ng-if="vm.graphs[vm.selectedGraphIndex].title">
+  <md-subheader class="md-primary">Title</md-subheader>
+  <md-list layout-padding>
+    <md-list-item class="md-2-line">
+        <div class="md-list-item-text">
+          <h3>{{vm.graphs[vm.selectedGraphIndex].title}}</h3>
+          <p>
+            {{vm.graphs[vm.selectedGraphIndex].owner}}
+          </p>
+        </div>
+    </md-list-item>
+  </md-list>
+</section>
+<!-- Description -->
+<section ng-if="vm.graphs[vm.selectedGraphIndex].description">
+  <md-subheader class="md-primary">Description</md-subheader>
+  <md-list layout-padding>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <h3>{{ vm.graphs[vm.selectedGraphIndex].description }}</h3>
+        <p ng-if="vm.graphs[vm.selectedGraphIndex].moredescription">
+          {{ vm.graphs[vm.selectedGraphIndex].moredescription }}
+        </p>
+      </div>
+    </md-list-item>
+  </md-list>
+</section>
+<!-- Graph Analysis -->
+<section>
+  <md-subheader class="md-primary">Brief Analysis</md-subheader>
+  <md-list layout-padding>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <h3 ng-if="vm.graphs[vm.selectedGraphIndex].graphanalysed">
+          {{ vm.graphs[vm.selectedGraphIndex].graphcontrolconf[vm.selectedConfIndex[vm.graphs[vm.selectedGraphIndex].id]].length }} control node(s)
+        </h3>
+        <h3 ng-if="!vm.graphs[vm.selectedGraphIndex].graphanalysed">Graph is not analysed yet!</h3>
+        <p ng-if="vm.graphs[vm.selectedGraphIndex].graphanalysed"
+        ng-repeat="controlconf in vm.graphs[vm.selectedGraphIndex].graphcontrolconf[vm.selectedConfIndex[vm.graphs[vm.selectedGraphIndex].id]]">
+          {{controlconf}}: {{ vm.graphs[vm.selectedGraphIndex].labels.split(',')[controlconf] }}
+        </p>
+      </div>
+    </md-list-item>
+  </md-list>
+</section>
+<!-- Graph Nodes -->
+<section>
+  <md-subheader class="md-primary">Nodes</md-subheader>
+  <div ui-view="nodes"></div>
+</section>
+<!-- Date Added -->
+<section ng-if="vm.graphs[vm.selectedGraphIndex].dateadded">
+  <md-subheader class="md-primary">Date Added</md-subheader>
+  <md-list layout-padding>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <h3>{{ vm.graphs[vm.selectedGraphIndex].dateadded | dateString }}</h3>
+      </div>
+    </md-list-item>
+  </md-list>
+</section>
+<!-- Date Updated -->
+<section ng-if="vm.graphs[vm.selectedGraphIndex].dateupdated">
+  <md-subheader class="md-primary">Last Updated</md-subheader>
+  <md-list layout-padding>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text">
+        <h3>{{ vm.graphs[vm.selectedGraphIndex].dateupdated | dateString }}</h3>
+      </div>
+    </md-list-item>
+  </md-list>
+</section>
+</md-content>

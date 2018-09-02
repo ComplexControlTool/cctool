@@ -1,0 +1,74 @@
+#dashboard-content ul.buckets
+{
+  margin: 24px 0 24px -8px;
+  padding: 0;
+  position: relative;
+}
+
+#dashboard-content ul.buckets li
+{
+  list-style: none;
+  margin: 0;
+  text-align: center;
+}
+
+#dashboard-content ul.buckets li md-card md-card-content
+{
+  padding: 0;
+}
+
+#dashboard-content ul.buckets li a
+{
+  display: block;
+  font-weight: 500;
+  padding: 16px 0;
+  text-decoration: none;
+  -webkit-transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
+  background-color: #f6f6f6 !important;
+  box-shadow: none !important;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+#dashboard-content ul.buckets li a,
+#dashboard-content ul.buckets li a md-icon
+{
+  color: #666 !important;
+  transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+#dashboard-content ul.buckets li a:hover,
+#dashboard-content ul.buckets li a:focus,
+#dashboard-content ul.buckets li a:hover md-icon,
+#dashboard-content ul.buckets li a:focus md-icon
+{
+  color: #3F51B5 !important;
+  background-color: #ebebeb !important;
+}
+#dashboard-content ul.buckets.info li a:hover,
+#dashboard-content ul.buckets.info li a:focus,
+#dashboard-content ul.buckets.info li a:hover md-icon,
+#dashboard-content ul.buckets.info li a:focus md-icon
+{
+  color: #3F51B5 !important;
+  background-color: #ebebeb !important;
+}
+
+#dashboard-content md-icon.block
+{
+  color: #3F51B5;
+  display: block;
+  font-size: 50px !important;
+  width: 50px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+}
+#dashboard-content md-icon.inline
+{
+  color: #3F51B5;
+  display: inline-block;
+  font-size: 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  line-height: 20px !important;
+}

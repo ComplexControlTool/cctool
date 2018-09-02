@@ -1,0 +1,35 @@
+<!-- graph-editor.update.html -->
+<md-content layout="column" layout-fill="">
+  
+  <div ui-view="toolbar"></div>
+
+  <md-content id="graph-editor-content" layout="column" flex="">
+    <div ng-class="{ 'boxed':appCtrl.$mdMedia('gt-md'), 'boxed-md':appCtrl.$mdMedia('md'), 'boxed-sm':appCtrl.$mdMedia('sm')}" layout-padding="" layout="column" layout-fill="" flex="">
+      <h1 class="md-headline">Search and select below the graph you want to edit</h1>
+      <!-- <div layout="row" layout-align="center start" flex=""> -->
+      <form ng-submit="$event.preventDefault(); graphEditorCtrl.submitForm();" layout="row" layout-align="center start" flex="">
+        <md-autocomplete
+          md-selected-item="graphEditorCtrl.selectedItem"
+          md-search-text-change="graphEditorCtrl.searchTextChange(graphEditorCtrl.searchText)"
+          md-search-text="graphEditorCtrl.searchText"
+          md-selected-item-change="graphEditorCtrl.selectedItemChange(item)"
+          md-items="item in graphEditorCtrl.querySearch(graphEditorCtrl.searchText)"
+          md-item-text="item.display"
+          md-min-length="0"
+          placeholder="Search for a graph to edit"
+          flex="90">
+          <md-item-template>
+            <span md-highlight-text="graphEditorCtrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+          </md-item-template>
+          <md-not-found>
+            <div ui-sref="app.cctool_graphs_new">
+              No graphs matching "{{graphEditorCtrl.searchText}}" were found. Click here to create a new graph!
+            </div>
+          </md-not-found>
+        </md-autocomplete>
+      </form>
+      <!-- </div> -->
+    </div>
+  </md-content>
+
+</md-content>

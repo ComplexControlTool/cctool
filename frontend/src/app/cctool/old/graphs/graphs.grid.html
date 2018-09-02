@@ -1,0 +1,33 @@
+<!-- graphs.grid.html -->
+<md-content id="graph-content" md-theme="graphs_page" layout="column" layout-fill="">
+
+  <div ui-view="toolbar"></div>
+
+  <div ng-if="vm.hasNoGraphs" layout="column" layout-align="center center" flex="">
+    <h1 class="md-display-1">Let's fill this empty space!</h1>
+    <md-button class="md-raised" ui-sref="app.cctool_graphs_new">start exploring</md-button>
+  </div>
+
+  <div ng-if="!vm.hasNoGraphs" layout="row" flex="">
+    <!-- Grid View -->
+    <md-card ng-repeat="graph in vm.graphs">
+      {{ graph.id }}
+<!--           <md-progress-linear ng-if="vm.graphProgressLinear.active" md-mode="{{vm.graphProgressLinear.mode}}" value="{{vm.graphProgressLinear.value}}" md-buffer-value="{{vm.graphProgressLinear.bufferValue}}"></md-progress-linear>
+          <div class="content" layout-gt-md="row" layout-align="center center" layout-wrap="" layout-padding="" flex="">
+            <div ui-view="graph" style="height: 800px" flex="100"></div>
+            <div ui-view="node-updownstream-analysis" style="height:1100px" flex="100"></div>
+            <div ng-if="graph.graphanalysed" ui-view="stems" style="height: 800px" flex="100"></div>
+          </div> -->
+    </md-card>
+    <!-- SideNav -->
+<!--     <md-sidenav
+        class="md-sidenav-right"
+        ng-style="{ 'background-color': mdThemeColors.getThemeColorFactory('graphs_page','background')[100] }"
+        ng-class="{ 'md-sidenav-custom': app.$mdMedia('gt-md') }"
+        md-component-id="graph-info-sidenav"
+        md-swipe-right="app.toggleSidenav('graph-info-sidenav')"
+        md-is-locked-open="app.$mdMedia('gt-md')">
+      <div ui-view="right-sidenav" layout="column"></div>
+    </md-sidenav> -->
+  </div>
+</md-content>

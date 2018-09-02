@@ -1,0 +1,34 @@
+<!-- dashboard.html -->
+<div id="dashboard-content" md-theme="dashboard_page" layout="column" layout-fill="">
+
+  <div ui-view="toolbar"></div>
+
+  <md-content id="dashboard-content" flex="">
+    <section
+     ng-class="{ 'boxed':appCtrl.$mdMedia('gt-md'), 'boxed-md':appCtrl.$mdMedia('md'), 'boxed-sm':appCtrl.$mdMedia('sm')}" layout-padding=""
+     flex="">
+      <ul class="buckets" layout="row" layout-align="center center" layout-wrap="" flex="">
+        <li ng-repeat="navItem in dashboardCtrl.navItems" flex="50" flex-gt-sm="25">
+          <a class="md-raised md-button" md-ink-ripple="" ui-sref="{{navItem.link}}">
+            <md-icon class="block">{{navItem.icon}}</md-icon>
+            <span class="md-subhead" style="font-weight:bold">{{navItem.label}}</span>
+            <div class="md-ripple-container"></div>
+          </a>
+        </li>
+      </ul>
+  </section>
+  </md-content>
+  <div>
+    <md-divider></md-divider>
+    <ul class="buckets info" layout="row" layout-align="center center" layout-wrap="" flex="">
+      <li flex="50" flex-gt-sm="25">
+        <a class="md-raised md-button" md-ink-ripple="" ng-click="dashboardCtrl.showInfo($event)">
+          <md-icon class="inline">info_outline</md-icon>
+          <span class="md-title" style="font-weight:bold">Info</span>
+          <div class="md-ripple-container"></div>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</div>

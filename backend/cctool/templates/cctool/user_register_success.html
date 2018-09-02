@@ -1,0 +1,11 @@
+{% extends "cctool/base.html" %}
+
+{% block meta_title %}
+CCTool > Login
+{% endblock %}
+
+{% block all_content %}
+</br></br></br>
+<h1> You have registered!</h1>
+<p>Click <a href="{% url "cctool:login" %}">here</a> to login again</p>
+{% endblock %}

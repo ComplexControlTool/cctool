@@ -1,0 +1,128 @@
+<!-- graph-editor.create.html -->
+<md-content id="graph-create-content" layout="column" layout-fill="">
+  
+  <div ui-view="toolbar"></div>
+
+  <md-content layout="column" flex="">
+    <md-card>
+      <md-toolbar>
+          <div class="md-toolbar-tools">
+              <h2>
+                  <md-icon>pencil</md-icon>
+                  <span>Edit Graph</span>
+              </h2>
+          </div>
+      </md-toolbar>
+      <md-stepper-card-content class="md-no-padding">
+          <md-steppers md-dynamic-height="" md-stretch-steppers="always" md-selected="updateGraphCtrl.selectedStep" md-busy-text="'Processing...'" md-busy="updateGraphCtrl.processing">
+              <md-step label="Enter Graph Details" md-complete="updateGraphCtrl.stepData[0].completed" ng-disabled="updateGraphCtrl.stepProgress < 1">
+                  <md-step-body>
+                      <form name="step1">
+                          <md-content class="md-padding">
+                              <div layout="row" layout-align="center top">
+                                  <div flex="nogrow" style="width: 400px">
+                                      <h4>Please enter some details about yout graph.</h4>
+                                      <md-input-container class="md-block">
+                                        <label>Title</label>
+                                        <input
+                                         type="text"
+                                         name="title"
+                                         ng-model="updateGraphCtrl.stepData[0].data.title"
+                                         md-maxlength="250"
+                                         md-autofocus=""
+                                         required>
+                                        <div ng-messages="step1.title.$error"
+                                             ng-show="step1.title.$touched"
+                                             role="alert" multiple>
+                                            <div ng-message="required">
+                                                <span>Title field is required.</span>
+                                            </div>
+                                            <div ng-message="md-maxlength">
+                                                <span>Title can't be longer than 250 characters.</span>
+                                            </div>
+                                        </div>
+                                      </md-input-container>
+                                      <md-input-container class="md-block">
+                                        <label>Description</label>
+                                        <input
+                                         type="text"
+                                         name="description"
+                                         ng-model="updateGraphCtrl.stepData[0].data.description"
+                                         md-maxlength="500"
+                                         required>
+                                        <div ng-messages="step1.description.$error"
+                                             ng-show="step1.description.$touched"
+                                             role="alert" multiple>
+                                            <div ng-message="required">
+                                                <span>Description field is required.</span>
+                                            </div>
+                                            <div ng-message="md-maxlength">
+                                                <span>Description can't be longer than 500 characters.</span>
+                                            </div>
+                                        </div>
+                                      </md-input-container>
+                                      <md-input-container class="md-block">
+                                        <label>More Description</label>
+                                        <textarea
+                                         ng-model="updateGraphCtrl.stepData[0].data.moredescription"
+                                         columns="1"
+                                         md-maxlength="1500"
+                                         rows="10"></textarea>
+                                        <div ng-messages="step1.moredescription.$error"
+                                             ng-show="step1.moredescription.$touched"
+                                             role="alert">
+                                            <div ng-message="md-maxlength">
+                                                <span>More Description can't be longer than 1500 characters.</span>
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+                                  </div>
+                              </div>
+                          </md-content>
+                          <md-step-actions layout="row">
+                              <div flex layout="row" layout-align="end top">
+                                  <md-button class="md-warn" ui-sref="app.cctool_dashboard">CANCEL</md-button>
+                                  <md-button ng-disabled="updateGraphCtrl.processing || step1.$invalid" class="md-primary md-raised" ng-click="updateGraphCtrl.processStep(0)">NEXT</md-button>
+                              </div>
+                          </md-step-actions>
+                      </form>
+                  </md-step-body>
+              </md-step>
+              <md-step label="Draw & Submit Graph" md-complete="updateGraphCtrl.stepData[1].completed" ng-disabled="updateGraphCtrl.stepProgress < 2">
+                  <md-step-body>
+                      <form name="step2" ng-submit="updateGraphCtrl.submitGraph(1)">
+                          <md-content class="md-padding">
+                              <div style="height: 800px">
+                                <div vis-network="" ng-model="updateGraphCtrl.stepData[1].data.graph" network="updateGraphCtrl.stepData[1].data.network" edit-graph="true" node-shape="updateGraphCtrl.activeSettings.graphVisualisation.value" layout-fill=""></div>
+                              </div>
+                          </md-content>
+                          <md-step-actions layout="row">
+                              <div flex>
+                                  <md-button ng-click="updateGraphCtrl.moveToPreviousStep()">PREVIOUS</md-button>
+                              </div>
+                              <div flex layout="row" layout-align="end top">
+                                  <md-button class="md-warn" ui-sref="app.cctool_dashboard">CANCEL</md-button>
+                                  <md-button type="submit" ng-disabled="!updateGraphCtrl.stepData[1].data.graph || updateGraphCtrl.processing" class="md-primary md-raised">SUBMIT GRAPH</md-button>
+                              </div>
+                          </md-step-actions>
+                      </form>
+                  </md-step-body>
+              </md-step>
+              <md-step label="Finish" md-complete="updateGraphCtrl.stepData[2].completed" ng-disabled="updateGraphCtrl.stepProgress < 3">
+                  <md-step-body>
+                      <form name="step3">
+                          <md-content class="md-padding">
+                              <div layout="column" layout-align="center center" style="min-height: 200px">
+                                  <h4>Graph submitted!</h4>
+                                  <md-button class="md-primary md-raised" ui-sref="app.cctool_graphs">GO TO GRAPHS</md-button>
+                              </div>
+                          </md-content>
+                      </form>
+                  </md-step-body>
+              </md-step>
+          </md-steppers>
+      </md-stepper-card-content>
+  </md-card>
+  </md-content>
+
+</md-content>

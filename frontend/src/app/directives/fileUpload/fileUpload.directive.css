@@ -1,0 +1,9 @@
+/* fileUpload.directive.css */
+.fileUpload .dropzone
+{
+  border-radius: 7px;
+  border: 2px dashed #DDD;
+  text-align: center;
+  padding: 30px;
+  margin: 20px;
+}

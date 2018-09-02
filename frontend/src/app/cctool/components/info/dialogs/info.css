@@ -1,0 +1,9 @@
+/* info.css */
+.documentation iframe
+{
+  display:block;
+  margin: 0 auto;
+  border: none;
+  min-width: 794px;
+  min-height: 1133px;
+}

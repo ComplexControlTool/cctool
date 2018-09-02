@@ -1,0 +1,107 @@
+<!-- graph.overview.html -->
+<section class="boxed normal-cards">
+
+  <div layout-margin="" layout-padding=""></div>
+
+
+  <div layout="column" layout-align="center center" flex="">
+    
+    <!-- Title -->
+    <div class="normal-title" layout="row" layout-align="start center" layout-fill="">
+      <h1 class="md-headline">{{ graphCtrl.content.title }}</h1>
+      <span flex=""></span>
+      <div ui-view="actions" onload="graphToAction = graphCtrl.content"></div>
+    </div>
+
+    <div layout-margin="" layout-padding=""></div>
+
+    <!-- Map Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Map</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout-margin="">
+        <div style="height:800px">
+          <div
+            id="graph-map"
+            vis-network=""
+            network="graphCtrl.network"
+            ng-model="graphCtrl.content"
+            node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+            layout-fill="">
+          </div>
+        </div>
+      </md-card-content>
+    </md-card>
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+    <!-- Details Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Details</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout-margin="">
+        <!-- Title -->
+        <div ng-if="graphCtrl.content.title">
+          <p style="font-weight:bold">Title</p>
+          <p ng-bind-html="graphCtrl.content.title"></p>
+          <md-divider></md-divider>
+        </div>
+        <!-- Owner -->
+        <div ng-if="graphCtrl.content.owner">
+          <p style="font-weight:bold">Owner</p>
+          <p ng-bind-html="graphCtrl.content.owner"></p>
+          <md-divider></md-divider>
+        </div>
+        <!-- Description -->
+        <div ng-if="graphCtrl.content.description">
+          <p style="font-weight:bold">Description</p>
+          <p ng-bind-html="graphCtrl.content.description"></p>
+          <md-divider></md-divider>
+        </div>
+        <!-- More Description -->
+        <div ng-if="graphCtrl.content.moredescription">
+          <p style="font-weight:bold">More Description</p>
+          <p ng-bind-html="graphCtrl.content.moredescription"></p>
+          <md-divider></md-divider>
+        </div>
+        <!-- Last Updated -->
+        <div ng-if="graphCtrl.content.dateupdated">
+          <p style="font-weight:bold">Last Updated</p>
+          <p ng-bind-html="graphCtrl.content.dateupdated | dateString"></p>
+          <md-divider></md-divider>
+        </div>
+        <!-- Date Created -->
+        <div ng-if="graphCtrl.content.dateadded">
+          <p style="font-weight:bold">Date Created</p>
+          <p ng-bind-html="graphCtrl.content.dateadded | dateString"></p>
+        </div>
+      </md-card-content>
+    </md-card>
+
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+    <!-- Comments Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Comments</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout-margin="">
+      </md-card-content>
+    </md-card>
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+  </div>
+</section>

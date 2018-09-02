@@ -1,0 +1,19 @@
+<!-- cctool-layout.html -->
+<div id="app-content" md-theme="default" class="cctool-layout">
+  <!-- Backdrop -->
+  <md-backdrop ng-if="appCtrl.isOffline" class="md-opaque" style="z-index: 1000; position: fixed;" layout="column" layout-align="center center">
+    YOU ARE OFFLINE
+  </md-backdrop>
+  <md-backdrop ng-if="appCtrl.isLoading && !appCtrl.isOffline" style="z-index: 1000; background-color: rgba(33, 33, 33, .48); position: fixed;" layout="column" layout-align="center center">
+    <md-progress-circular md-mode="indeterminate" value="" md-diameter="115" style="opacity: .8"></md-progress-circular>
+  </md-backdrop>
+  <!-- SideNav -->
+  <md-sidenav
+  class="md-sidenav-left"
+  md-component-id="menu-sidenav"
+  md-swipe-left="appCtrl.toggleSidenav('menu-sidenav')">
+    <div ui-view="menu" layout="column"></div>
+  </md-sidenav>
+  <!-- Main content -->
+  <div id="cctool-content" ui-view="content"></div>
+</div>

@@ -1,0 +1,33 @@
+{% extends "cctool/base.html" %}
+{% load staticfiles %}
+
+{% block meta_title %}
+CCTool > Login
+{% endblock %}
+
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="{% static "cctool/css/other.css" %}">
+{% endblock %}
+
+{% block all_content %}
+<div id="formwrap">
+	{% if form.errors %}
+	<p>Your username and password didn't match. Please try again.</p>
+	{% endif %}
+	<form class="form-block" role="form" method="post" action="{% url "cctool:loginauth" %}">
+		{% csrf_token %}
+		<h2 id="brandLogo" class="form-block-heading">CCTool.</h2>
+		<h5>Please log in with your details below.</h5>
+		<input type="text" class="form-control topinput" name="username" value="" id="username" placeholder="User Name" required autofocus>
+		<input type="password" class="form-control bottominput" name="password" value="" id="password" placeholder="Password" required>
+<!-- 		<label class="checkbox">
+			<input type="checkbox" value="remember-me"> Remember me
+		</label> -->
+		<button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Log in</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static "cctool/js/other.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,297 @@
+<!-- graphs.new.html -->
+<md-content id="graph-content" layout="column" layout-fill="">
+  
+  <div ui-view="toolbar"></div>
+
+  <md-toolbar md-theme="toolbar_panel" style="box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ui-sref="app.cctool_graphs" aria-label="Back">
+        <md-tooltip md-direction="bottom">Back to graphs</md-tooltip>
+        <md-icon>chevron_left</md-icon>
+      </md-button>
+      <h2>
+        <span>{{vm.pageTitle}}</span>
+      </h2>
+      <span flex=""></span>
+    </div>
+  </md-toolbar>
+
+  <md-content layout="column" flex="">
+
+    <div layout="row" layout-align="center none" layout-padding="">
+
+      <ms-form-wizard flex-gt-md="70" flex="">
+        <md-tabs md-dynamic-height="" md-selected="msWizard.selectedIndex" md-center-tabs="true" md-no-ink="">
+          <md-tab>
+            <md-tab-label>
+              <span class="ms-form-wizard-step-label">
+                  <span
+                  class="ms-form-wizard-step-number md-accent"
+                  ng-if="wizardStep1.$invalid">
+                    1
+                  </span>
+                  <span
+                  class="ms-form-wizard-step-number md-accent"
+                  ng-if="wizardStep1.$valid">
+                    <i class="icon-check s16"></i>
+                  </span>
+                  <span class="ms-form-wizard-step-text">Graph Information</span>
+              </span>
+            </md-tab-label>
+
+            <md-tab-body>
+              <form name="wizardStep1" class="md-inline-form" ms-form-wizard-form novalidate>
+                  <div layout="column" layout-gt-xs="row">
+                      <md-input-container flex>
+                          <input type="text" name="title" ng-model="vm.formWizard.title"
+                                 placeholder="Title"
+                                 md-maxlength="250"
+                                 required>
+                          <div ng-messages="wizardStep1.title.$error"
+                               ng-show="wizardStep1.title.$touched"
+                               role="alert" multiple>
+                              <div ng-message="required">
+                                  <span>Title field is required.</span>
+                              </div>
+                              <div ng-message="md-maxlength">
+                                  <span>Title can't be longer than 250 characters.</span>
+                              </div>
+                          </div>
+                      </md-input-container>
+
+                      <md-input-container flex>
+                          <input type="text" name="description" ng-model="vm.formWizard.description"
+                                 placeholder="Description"
+                                 md-maxlength="500"
+                                 required>
+                          <div ng-messages="wizardStep1.description.$error"
+                               ng-show="wizardStep1.description.$touched"
+                               role="alert" multiple>
+                              <div ng-message="required">
+                                  <span>Description field is required.</span>
+                              </div>
+                              <div ng-message="md-maxlength">
+                                  <span>Description can't be longer than 500 characters.</span>
+                              </div>
+                          </div>
+                      </md-input-container>
+                  </div>
+
+                  <md-input-container class="md-block">
+                      <label>More Description</label>
+                      <textarea ng-model="vm.formWizard.moredescription" columns="1" md-maxlength="1500"
+                                rows="10"></textarea>
+                      <div ng-messages="wizardStep1.moredescription.$error"
+                           ng-show="wizardStep1.moredescription.$touched"
+                           role="alert">
+                          <div ng-message="md-maxlength">
+                              <span>More Description can't be longer than 1500 characters.</span>
+                          </div>
+                      </div>
+                  </md-input-container>
+
+                  <div ng-repeat="node in vm.nodes track by $index" flex>
+                    <div layout="column" layout-gt-xs="row">
+                      <md-input-container flex>
+                          <input type="text" name="{{'node'+$index}}"
+                                 ng-model="vm.nodes[$index]"
+                                 placeholder="Node Label"
+                                 md-maxlength="100"
+                                 required>
+                          <div ng-messages="wizardStep1['node'+$index].$error"
+                               ng-show="wizardStep1['node'+$index].$touched"
+                               role="alert" multiple>
+                              <div ng-message="required">
+                                  <span>Node Label field is required.</span>
+                              </div>
+                              <div ng-message="md-maxlength">
+                                  <span>Node Label can't be longer than 500 characters.</span>
+                              </div>
+                          </div>
+                      </md-input-container>
+                      <md-input-container flex>
+                          <label>Function</label>
+                          <md-select ng-model="vm.nodeFunctions[$index]">
+                              <md-option ng-repeat="nodeFunction in vm.nodeFunctionList" value="{{nodeFunction.abbrev | functionValue}}">
+                                  {{nodeFunction.abbrev}}
+                              </md-option>
+                          </md-select>
+                      </md-input-container>
+                      <md-input-container flex>
+                          <label>Controllability</label>
+                          <md-select ng-model="vm.nodeControllabilities[$index]">
+                              <md-option ng-repeat="nodeControllability in vm.nodeControllabilityList" value="{{nodeControllability.abbrev | controllabilityValue}}">
+                                  {{nodeControllability.abbrev}}
+                              </md-option>
+                          </md-select>
+                      </md-input-container>
+                      <md-input-container flex>
+                          <label>Importance</label>
+                          <md-select ng-model="vm.nodeImportances[$index]">
+                              <md-option ng-repeat="nodeImportance in vm.nodeImportanceList" value="{{nodeImportance.abbrev | importanceValue}}">
+                                  {{nodeImportance.abbrev}}
+                              </md-option>
+                          </md-select>
+                      </md-input-container>
+                      <md-button class="md-icon-button md-warn" ng-disabled="vm.nodes.length <= 1" ng-click="vm.removeNode($index)" aria-label="Remove connection">
+                        <md-tooltip md-direction="bottom">Remove</md-tooltip>
+                        <md-icon>remove_circle_outline</md-icon>
+                      </md-button>
+                    </div>
+                  </div>
+
+                  <md-button class="md-fab md-mini md-primary" ng-click="vm.addNode()" aria-label="Add node">
+                    <md-tooltip md-direction="bottom">Add node</md-tooltip>
+                    <md-icon>add</md-icon>
+                  </md-button>
+                  <md-button class="md-fab md-mini md-primary" ng-if="vm.nodes.length>1" ng-click="vm.removeNode()" aria-label="Remove node">
+                    <md-tooltip md-direction="bottom">Remove node</md-tooltip>
+                    <md-icon>remove</md-icon>
+                  </md-button>
+
+                  <div layout="column" layout-gt-sm="row" flex>
+                  </div>
+              </form>
+            </md-tab-body>
+          </md-tab>
+
+          <md-tab ng-disabled="wizardStep1.$invalid" ng-click="vm.findUnconnectedNodes(); vm.structureData()">
+            <md-tab-label>
+                <span class="ms-form-wizard-step-label">
+                    <span class="ms-form-wizard-step-number md-accent-bg"
+                          ng-if="wizardStep2.$invalid">2</span>
+                    <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep2.$valid">
+                        <i class="icon-check s16"></i>
+                    </span>
+                    <span class="ms-form-wizard-step-text">Connections</span>
+                </span>
+            </md-tab-label>
+
+            <md-tab-body>
+                <form name="wizardStep2" ms-form-wizard-form novalidate>
+                  <div layout="row" layout-align="end center">
+                    <md-switch ng-model="vm.livegraph">Show graph</md-switch>
+                  </div>
+                  <div layout="column" layout-gt-md="row" flex>
+                    <div flex>
+                      <div ng-if="vm.unconnectedNodes.length > 0" layout-padding>
+                        Unconnected nodes:<br>
+                        <span ng-repeat="unconnectedNode in vm.unconnectedNodes track by $index">
+                          {{unconnectedNode}}
+                        </span>
+                      </div>
+                      <div ng-repeat="connection in vm.nodeFrom track by $index" flex>
+                        <div layout="column" layout-gt-xs="row">
+                          <md-input-container flex>
+                              <label>Node From</label>
+                              <md-select ng-model="vm.nodeFrom[$index]" ng-change="vm.livegraph ? vm.structureDataAndFindUnconnectedNodes() : vm.findUnconnectedNodes()">
+                                  <md-option ng-repeat="node in vm.nodes track by $index" value="{{$index}}">
+                                      {{node}}
+                                  </md-option>
+                              </md-select>
+                          </md-input-container>
+                          <md-input-container flex>
+                              <label>Node To</label>
+                              <md-select ng-model="vm.nodeTo[$index]" ng-change="vm.livegraph ? vm.structureDataAndFindUnconnectedNodes() : vm.findUnconnectedNodes()">
+                                  <md-option ng-repeat="node in vm.nodes track by $index" value="{{$index}}">
+                                      {{node}}
+                                  </md-option>
+                              </md-select>
+                          </md-input-container>
+                          <md-input-container flex>
+                              <label>Connection Weight</label>
+                              <md-select ng-model="vm.connectionWeight[$index]" ng-change="vm.livegraph ? vm.structureData() : ''">
+                                  <md-option ng-repeat="connectionWeight in vm.connectionWeightList" value="{{connectionWeight.abbrev | weightValue}}">
+                                      {{connectionWeight.abbrev}}
+                                  </md-option>
+                              </md-select>
+                          </md-input-container>
+                          <md-button class="md-icon-button md-warn" ng-disabled="vm.nodeFrom.length <= 1 || vm.nodeTo.length <= 1" ng-click="vm.removeConnection($index)" aria-label="Remove connection">
+                            <md-tooltip md-direction="bottom">Remove</md-tooltip>
+                            <md-icon>remove_circle_outline</md-icon>
+                          </md-button>
+                        </div>
+                      </div>
+
+                      <md-button class="md-fab md-mini md-primary" ng-click="vm.addConnection()" aria-label="Add connection">
+                        <md-tooltip md-direction="bottom">Add connection</md-tooltip>
+                        <md-icon>add</md-icon>
+                      </md-button>
+                      <md-button class="md-fab md-mini md-primary" ng-if="vm.nodeFrom.length>1" ng-click="vm.removeConnection()" aria-label="Remove connection">
+                        <md-tooltip md-direction="bottom">Remove connection</md-tooltip>
+                        <md-icon>remove</md-icon>
+                      </md-button>
+                    </div>
+                    <div ng-if="vm.livegraph" flex>
+                      <div layout="row" layout-align="start center" layout-wrap>
+                          <div vis-network="" ng-model="vm.formWizard" network="vm.network" conf-index="0" node-shape="true" style="height:600px" flex></div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+            </md-tab-body>
+          </md-tab>
+
+          <md-tab ng-disabled="wizardStep1.$invalid || wizardStep2.$invalid" ng-click="vm.structureData()">
+            <md-tab-label>
+                <span class="ms-form-wizard-step-label">
+                    <span class="ms-form-wizard-step-number md-accent-bg"
+                          ng-if="wizardStep3.$invalid">3</span>
+                    <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$valid">
+                        <i class="icon-check s16"></i>
+                    </span>
+                    <span class="ms-form-wizard-step-text">Review</span>
+                </span>
+            </md-tab-label>
+            <md-tab-body>
+              <form name="wizardStep3" ms-form-wizard-form novalidate>
+                  <div layout="row" layout-align="start center" layout-wrap>
+                    <div ng-if="msWizard.isLastStep()" vis-network="" ng-model="vm.formWizard" network="vm.network" conf-index="0" node-shape="true" style="height:600px" flex></div>
+                </div>
+              </form>
+            </md-tab-body>
+          </md-tab>
+        </md-tabs>
+
+        <div class="navigation" layout="column" layout-align="center center" flex="">
+        <div layout="row">
+          <md-button
+          class="md-raised md-accent"
+          ng-click="msWizard.previousStep()"
+          ng-disabled="msWizard.isFirstStep()">
+            Previous
+          </md-button>
+          <div class="steps">
+            <span
+            ng-repeat="form in msWizard.forms"
+            ng-class="{'selected md-accent':msWizard.selectedIndex === $index}">
+            </span>
+          </div>
+          <md-button
+          class="md-raised md-accent"
+          ng-click="msWizard.nextStep(); vm.structureData()"
+          ng-if="!msWizard.isLastStep()"
+          ng-disabled="msWizard.currentStepInvalid()">
+            Next
+          </md-button>
+          <md-button
+          class="md-raised md-primary"
+          ng-click="vm.sendForm(); msWizard.resetForm();"
+          ng-if="msWizard.isLastStep()"
+          ng-disabled="msWizard.formsIncomplete()">
+            Save
+          </md-button>
+          </div>
+          <md-button
+          class="md-raised md-warn"
+          ui-sref="app.cctool_graphs"
+          flex="">
+            Cancel
+          </md-button>
+        </div>
+      </ms-form-wizard>
+
+    </div>
+  </md-content>
+
+</md-content>

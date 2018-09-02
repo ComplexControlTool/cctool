@@ -1,0 +1,24 @@
+<md-menu>
+  <md-button ng-click="$mdMenu.open($event)" class="md-icon-button" aria-label="Actions">
+    <md-tooltip md-direction="bottom">Actions</md-tooltip>
+    <md-icon>more_vert</md-icon>
+  </md-button>
+  <md-menu-content>
+    <md-menu-item>
+      <md-button ng-click="graphManagerCtrl.exportCSV(graphToAction)" aria-label="">Export as CSV</md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="graphManagerCtrl.exportJSON(graphToAction)" aria-label="">Export as JSON</md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button ng-click="graphManagerCtrl.graphEdit(graphToAction)" aria-label="">Edit</md-button>
+    </md-menu-item>
+    <md-menu-item>
+      <md-button disabled="disabled" ng-click="graphManagerCtrl.onGraphDuplicate(graphToAction)" aria-label="">Duplicate</md-button>
+    </md-menu-item>
+    <md-divider></md-divider>
+    <md-menu-item>
+      <md-button disabled="disabled" class="md-warn" ng-click="graphManagerCtrl.onGraphRemove(graphToAction)" aria-label="">Delete</md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>
