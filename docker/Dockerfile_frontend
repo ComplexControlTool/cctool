@@ -19,7 +19,7 @@ COPY frontend $FRONTEND_CODE_DIR
 RUN apk add --no-cache bash \
     git \
     vim
-RUN npm install -g bower@1.8.0 gulp@3.9.1
+RUN npm install -g bower@1.8.4 gulp@3.9.1
 
 # Install node + bower packages
 RUN cd $FRONTEND_CODE_DIR && \
