@@ -20,6 +20,7 @@ cctool/
 ├── AUTHORS
 ├── LICENSE
 ├── MANIFEST.in
+├── README.md
 ├── backend
 │   ├── app.yaml
 │   ├── appengine_config.py
@@ -394,7 +395,8 @@ cctool/
 │       └── index.html
 └── tree.txt
 
-88 directories, 288 files
+88 directories, 289 files
+
 ```
 
 ## <a name="prerequisites"></a> Prerequisites
