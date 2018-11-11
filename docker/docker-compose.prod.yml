@@ -1,0 +1,71 @@
+version: '3'
+
+volumes:
+  cctool_prod_db_data: {}
+  cctool_prod_db_data_backups: {}
+  cctool_prod_caddy: {}
+
+services:
+
+  # --- Backend ---
+
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    image: cctool_production_django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: cctool_production_postgres
+    volumes:
+      - cctool_prod_db_data:/var/lib/postgresql/data
+      - cctool_prod_db_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
+
+  caddy:
+    build:
+      context: .
+      dockerfile: ./compose/production/caddy/Dockerfile
+    image: cctool_production_caddy
+    depends_on:
+      - django
+    volumes:
+      - cctool_prod_caddy:/root/.caddy
+    env_file:
+      - ./.envs/.production/.caddy
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+
+  redis:
+    image: redis:3.2
+
+  celeryworker:
+    <<: *django
+    image: cctool_production_celeryworker
+    command: /start-celeryworker
+
+  celerybeat:
+    <<: *django
+    image: cctool_production_celerybeat
+    command: /start-celerybeat
+
+  flower:
+    <<: *django
+    image: cctool_production_flower
+    ports:
+      - "5555:5555"
+    command: /start-flower
+
+  # --- Frontend ---

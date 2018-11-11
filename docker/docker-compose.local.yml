@@ -1,0 +1,119 @@
+version: '3'
+
+volumes:
+  cctool_local_db_data: {}
+  cctool_local_db_data_backups: {}
+  cctool_local_frontend_index: {}
+  cctool_local_frontend_vendor: {}
+
+services:
+
+  # --- Backend ---
+
+  django: &django
+    build:
+      context: "$CCTOOL"
+      dockerfile: ./docker/compose/local/django/Dockerfile
+    image: cctool_local_django
+    container_name: cctool_local_django
+    depends_on:
+      - postgres
+      - mailhog
+      - angularjs
+    volumes:
+      - ../backend:/Developer/cctool/backend
+      - ../frontend/src/app:/Developer/cctool/backend/cctool/static/cctool/dashboard/app
+      - ../frontend/src/assets:/Developer/cctool/backend/cctool/static/cctool/dashboard/assets
+      - cctool_local_frontend_index:/Developer/cctool/backend/cctool/templates/cctool/dashboard
+      - cctool_local_frontend_vendor:/Developer/cctool/backend/cctool/static/cctool/dashboard/vendor
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start"
+
+  postgres:
+    build:
+      context: "$CCTOOL"
+      dockerfile: ./docker/compose/production/postgres/Dockerfile
+    image: cctool_local_postgres
+    container_name: cctool_local_postgres
+    volumes:
+      - cctool_local_db_data:/var/lib/postgresql/data
+      - cctool_local_db_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.0
+    container_name: cctool_local_mailhog
+    ports:
+      - "8025:8025"
+
+  redis:
+    image: redis:3.2
+    container_name: cctool_local_redis
+
+  celeryworker:
+    <<: *django
+    image: cctool_local_celeryworker
+    container_name: cctool_local_celeryworker
+    depends_on:
+      - redis
+      - postgres
+      - mailhog
+    volumes:
+      - ./celery:/Developer/cctool/celery
+      - ../backend:/Developer/cctool/backend
+    ports: []
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start-celeryworker"
+
+  celerybeat:
+    <<: *django
+    image: cctool_local_celerybeat
+    container_name: cctool_local_celerybeat
+    depends_on:
+      - redis
+      - postgres
+      - mailhog
+    volumes:
+      - ./celery:/Developer/cctool/celery
+      - ../backend:/Developer/cctool/backend
+    ports: []
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start-celerybeat"
+
+  flower:
+    <<: *django
+    image: cctool_local_flower
+    container_name: cctool_local_flower
+    ports:
+      - "5555:5555"
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start-flower"
+
+  # --- Frontend ---
+
+  angularjs:
+    build:
+      context: "$CCTOOL"
+      dockerfile: ./docker/compose/local/angularjs/Dockerfile
+    image: cctool_local_angularjs
+    container_name: cctool_local_angularjs
+    volumes:
+      - ../frontend/e2e:/Developer/cctool/frontend/e2e
+      - ../frontend/gulp:/Developer/cctool/frontend/gulp
+      - ../frontend/src:/Developer/cctool/frontend/src
+      - ../frontend/.bowerrc:/Developer/cctool/frontend/.bowerrc
+      - ../frontend/.editorconfig:/Developer/cctool/frontend/.editorconfig
+      - ../frontend/.eslintrc:/Developer/cctool/frontend/.eslintrc
+      - ../frontend/.yo-rc.json:/Developer/cctool/frontend/.yo-rc.json
+      - ../frontend/bower.json:/Developer/cctool/frontend/bower.json
+      - ../frontend/gulpfile.js:/Developer/cctool/frontend/gulpfile.js
+      - ../frontend/karma.conf.js:/Developer/cctool/frontend/karma.conf.js
+      - ../frontend/package.json:/Developer/cctool/frontend/package.json
+      - ../frontend/protractor.conf.js:/Developer/cctool/frontend/protractor.conf.js
+      - cctool_local_frontend_index:/Developer/cctool/frontend/.tmp/serve
+      - cctool_local_frontend_vendor:/Developer/cctool/frontend/bower_components
+    env_file:
+      - ./.envs/.local/.angularjs
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start"
