@@ -59,8 +59,7 @@
 {% endblock %}
 
 
-{% block javascript %}
-{{ block.super }}
+{% block extra_js %}
 <script type="text/javascript">
 (function() {
   var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
@@ -76,5 +75,5 @@
 
 $('.form-group').removeClass('row');
 </script>
-{% endblock %}
+{% endblock extra_js %}
 
