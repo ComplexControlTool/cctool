@@ -5,7 +5,7 @@ echo $'\n\t>> Retrieving required Docker images...\n'
 run_dev()
 {
   echo $'\n\t>> Running cctool as local...\n'
-  docker-compose -f "${CCTOOL}/docker/docker-compose.local.yml" up -d
+  docker-compose -f "${CCTOOL}/docker/docker-compose.local.yml" -f "${CCTOOL}/docker/docker-compose.local.override.yml" up -d
 }
 
 cctool_set=$(docker images -a | awk '{ print $1,$3 }' | grep cctool_local | awk '{ print $2 }' | wc -l)

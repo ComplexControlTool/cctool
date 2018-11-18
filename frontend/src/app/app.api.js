@@ -174,7 +174,7 @@
    var api = {};
 
    // Base Url
-   api.baseUrl = '/static/cctool/dashboard/app/data/';
+   api.baseUrl = '/static/dashboard/app/data/';
 
    api.cctool =
    {

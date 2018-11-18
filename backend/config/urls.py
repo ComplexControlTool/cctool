@@ -1,8 +1,8 @@
 from django.conf import settings
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from django.views import defaults as default_views
 
 urlpatterns = [
@@ -41,6 +41,15 @@ if settings.DEBUG:
             kwargs={"exception": Exception("Page not Found")},
         ),
         path("500/", default_views.server_error),
+        re_path(
+            r'^app/(?P<path>.*)$',
+            RedirectView.as_view(url='/static/dashboard/app/%(path)s')),
+        re_path(
+            r'^assets/(?P<path>.*)$',
+            RedirectView.as_view(url='/static/dashboard/assets/%(path)s')),
+        re_path(
+            r'^bower_components/(?P<path>.*)$',
+            RedirectView.as_view(url='/static/dashboard/vendor/%(path)s')),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar

@@ -8,7 +8,7 @@ set -o nounset
 echo $'\n\t C C T O O L  L O C A L  D J A N G O \n'
 sleep 5
 echo $'\n\t>> Removing any python cache...\n'
-find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
+# find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
 echo $'\n\t>> Setting up django web app...\n'
 python manage.py migrate
 python manage.py makemigrations

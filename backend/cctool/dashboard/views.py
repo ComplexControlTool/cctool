@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 class DashboardPageView(LoginRequiredMixin, TemplateView):
 
-    template_name = 'index.html'
+    template_name = 'dashboard/index.html'
 
 
 dashboard_page_view = DashboardPageView.as_view()
