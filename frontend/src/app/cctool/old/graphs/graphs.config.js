@@ -15,7 +15,7 @@
         $stateProvider
             .state('app.cctool_admin_graphs',
             {
-                url  : '/cctool/admin/graphs',
+                url  : '/dashboard/admin/graphs',
                 views:
                 {
                     'content@app':
@@ -69,7 +69,7 @@
             })
             .state('app.cctool_graphs',
             {
-                url  : '/cctool/graphs',
+                url  : '/dashboard/graphs',
                 views:
                 {
                     'content@app':
@@ -129,7 +129,7 @@
             })
             .state('app.cctool_graphs_demo',
             {
-                url  : '/cctool/graphs/demo',
+                url  : '/dashboard/graphs/demo',
                 views:
                 {
                     'content@app':
@@ -183,7 +183,7 @@
             })
             .state('app.cctool_graphs_compare',
             {
-                url  : '/cctool/compare_graphs',
+                url  : '/dashboard/compare_graphs',
                 views:
                 {
                     'content@app':

@@ -13,7 +13,7 @@
     $stateProvider
       .state('app.cctool_graphs_demo',
       {
-        url: '/cctool/graphs/demo',
+        url: '/dashboard/graphs/demo',
         views:
         {
           'content@app':
@@ -55,7 +55,7 @@
       })
       .state('app.cctool_graph_demo',
       {
-        url: '/cctool/graphs/demo/:id',
+        url: '/dashboard/graphs/demo/:id',
         views:
         {
           'content@app':
@@ -117,7 +117,7 @@
       })
       .state('app.cctool_graphs',
       {
-        url: '/cctool/graphs',
+        url: '/dashboard/graphs',
         views:
         {
           'content@app':
@@ -163,7 +163,7 @@
       })
       .state('app.cctool_graph',
       {
-        url: '/cctool/graphs/:id',
+        url: '/dashboard/graphs/:id',
         views:
         {
           'content@app':

@@ -16,7 +16,7 @@ urlpatterns = [
     ),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path("cctool/", include("cctool.dashboard.urls", namespace="cctool")),
+    path("dashboard/", include("cctool.dashboard.urls", namespace="dashboard")),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )

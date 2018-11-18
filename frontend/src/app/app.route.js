@@ -23,7 +23,7 @@
       });
     }
 
-    $urlRouterProvider.otherwise('/cctool');
+    $urlRouterProvider.otherwise('/dashboard');
 
     // Inject $cookies
     var $cookies;
