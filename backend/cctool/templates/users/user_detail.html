@@ -1,5 +1,5 @@
 {% extends "users/base.html" %}
-{% load static %}
+{% load static i18n %}
 
 {% block head_title %}User: {{ object.username }}{% endblock head_title %}
 
@@ -24,6 +24,13 @@
       <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
       <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
       <!-- Your Stuff: Custom user template urls -->
+      <form method="post" action="{% url 'account_logout' %}" style="display: inline;">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button class="btn btn-danger" type="submit">{% trans 'Sign Out' %}</button>
+      </form>
     </div>
 
   </div>

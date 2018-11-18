@@ -22,10 +22,10 @@ services:
       - angularjs
     volumes:
       - ../backend:/Developer/cctool/backend
-      - ../frontend/src/app:/Developer/cctool/backend/cctool/static/cctool/dashboard/app
-      - ../frontend/src/assets:/Developer/cctool/backend/cctool/static/cctool/dashboard/assets
-      - cctool_local_frontend_index:/Developer/cctool/backend/cctool/templates/cctool/dashboard
-      - cctool_local_frontend_vendor:/Developer/cctool/backend/cctool/static/cctool/dashboard/vendor
+      - ../frontend/src/app:/Developer/cctool/backend/cctool/static/dashboard/app
+      - ../frontend/src/assets:/Developer/cctool/backend/cctool/static/dashboard/assets
+      - cctool_local_frontend_vendor:/Developer/cctool/backend/cctool/static/dashboard/vendor
+      - cctool_local_frontend_index:/Developer/cctool/backend/cctool/templates/dashboard
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres

@@ -19,7 +19,7 @@ windows:
       layout: even-horizontal
       panes:
         - docker exec -it cctool_local_django bash
-        - docker exec -it ccctool_local_angularjs bash
+        - docker exec -it cctool_local_angularjs bash
         - docker exec -it cctool_local_postgres bash
   - celery-containers:
       layout: even-horizontal
