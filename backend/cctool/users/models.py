@@ -5,10 +5,17 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractUser):
+    name = CharField(
+        blank=True,
+        max_length=255,
+        verbose_name='Name of User')
+    
+    class Meta:
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
 
-    # First Name and Last Name do not cover name patterns
-    # around the globe.
-    name = CharField(_("Name of User"), blank=True, max_length=255)
+    def __str__(self):
+        return self.username
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
