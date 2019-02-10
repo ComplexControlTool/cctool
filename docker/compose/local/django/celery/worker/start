@@ -10,4 +10,4 @@ echo $'\n\t>> Running celery worker...\n'
 mkdir -p "${CELERY_CODE_DIR}/logs"
 mkdir -p "${CELERY_CODE_DIR}/celeryworker"
 rm -rf "${CELERY_CODE_DIR}/celeryworker/worker*"
-celery worker -A cctool.taskapp -l DEBUG --pidfile="${CELERY_CODE_DIR}/celeryworker/%n.pid" --logfile="${CELERY_CODE_DIR}/logs/%n%I.log"
+celery worker -A cctool.taskapp -Ofair -l DEBUG --pidfile="${CELERY_CODE_DIR}/celeryworker/%n.pid" --logfile="${CELERY_CODE_DIR}/logs/%n%I.log"

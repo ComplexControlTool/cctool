@@ -1,12 +1,14 @@
 import json
 from collections import OrderedDict
 from django.db.models import CharField
+from django.contrib.postgres.fields import JSONField
 from model_utils.managers import InheritanceManager
 from rest_framework.utils.encoders import JSONEncoder
 from .graph import AbstractGraph
 from .node import AbstractNode
 from .edge import AbstractEdge
 from .analysis import AbstractAnalysis
+from .visualization import AbstractVisualization
 
 
 class Graph(AbstractGraph):
@@ -34,8 +36,19 @@ class Analysis(AbstractAnalysis):
     class Meta(AbstractAnalysis.Meta):
         abstract = False
 
+    def save(self, *args, **kwargs):
+        if not hasattr(self, 'visualization'):
+            self.visualization = Visualization.objects.create()
+        super(Analysis, self).save(*args, **kwargs)
 
-class NodeCN(Node):
+
+class Visualization(AbstractVisualization):
+
+    class Meta(AbstractVisualization.Meta):
+        abstract = False
+
+
+class NodePlus(Node):
     LINEAR_FUNCTION = 'L'
     FUNCTION_SET = (
         (LINEAR_FUNCTION, 'Linear'),
@@ -52,6 +65,17 @@ class NodeCN(Node):
         (HARD_CONTROLLABILITY, 'Hard'),
     )
 
+    NO_VULNERABILITY = 'N'
+    LOW_VULNERABILITY = 'E'
+    MEDIUM_VULNERABILITY = 'M'
+    HIGH_VULNERABILITY = 'H'    
+    VULNERABILITY_SET = (
+        (NO_VULNERABILITY, 'None'),
+        (LOW_VULNERABILITY, 'Low'),
+        (MEDIUM_VULNERABILITY, 'Medium'),
+        (HIGH_VULNERABILITY, 'High'),
+    )
+
     NO_IMPORTANCE = 'N'
     LOW_IMPORTANCE = 'L'
     HIGH_IMPORTANCE = 'H'
@@ -66,7 +90,7 @@ class NodeCN(Node):
         blank=False,
         default=LINEAR_FUNCTION,
         max_length=1,
-        verbose_name='type of analysis'
+        verbose_name='node function'
     )
 
     controllability = CharField(
@@ -74,7 +98,15 @@ class NodeCN(Node):
         blank=False,
         default=NEUTRAL_CONTROLLABILITY,
         max_length=1,
-        verbose_name='type of analysis'
+        verbose_name='node controllability'
+    )
+
+    vulnerability = CharField(
+        choices=VULNERABILITY_SET,
+        blank=False,
+        default=NO_VULNERABILITY,
+        max_length=1,
+        verbose_name='node vulnerability'
     )
 
     importance = CharField(
@@ -82,28 +114,45 @@ class NodeCN(Node):
         blank=False,
         default=NO_IMPORTANCE,
         max_length=1,
-        verbose_name='type of analysis'
+        verbose_name='node importance'
     )
 
-    def to_json(self, dict=False, **kwargs):
+    custom = JSONField(
+        default=dict,
+        null=True,
+        db_index=True
+    )
+
+    tags = JSONField(
+        default=list,
+        null=True,
+        db_index=True
+    )
+
+    def to_json(self, use_dict=False, **kwargs):
         """
             Representation of Node object in Json format
         """
-        output = super(NodeCN, self).to_json(dict=True)
+        output = super(Node, self).to_json(use_dict=True, **kwargs)
         properties = OrderedDict((
             ('function', self.function),
             ('controllability', self.controllability),
+            ('vulnerability', self.vulnerability),
             ('importance', self.importance),
         ))
+        if self.custom:
+            properties['custom'] = self.custom
+        if self.tags:
+            properties['tags'] = self.tags
         output['properties'] = properties
 
-        if dict:
+        if use_dict:
             return output
 
         return json.dumps(output, cls=JSONEncoder, **kwargs)
 
 
-class EdgeCN(Edge):
+class EdgePlus(Edge):
     NEUTRAL_WEIGHT = 'N'
     POSITIVE_WEAK_WEIGHT = '+W'
     POSITIVE_MEDIUM_WEIGHT = '+M'
@@ -126,21 +175,36 @@ class EdgeCN(Edge):
         blank=False,
         default='N',
         max_length=2,
-        verbose_name='type of analysis'
+        verbose_name='edge weight'
     )
 
-    def to_json(self, dict=False, **kwargs):
+    custom = JSONField(
+        default=dict,
+        null=True,
+        db_index=True
+    )
+
+    tag = JSONField(
+        default=list,
+        null=True,
+        db_index=True
+    )
+
+    def to_json(self, use_dict=False, **kwargs):
         """
             Representation of Node object in Json format
         """
-        output = super(EdgeCN, self).to_json(dict=True)
+        output = super(Edge, self).to_json(use_dict=True, **kwargs)
         properties = OrderedDict((
             ('weight', self.weight),
         ))
+        if self.custom:
+            properties['custom'] = self.custom
+        if self.tags:
+            properties['tags'] = self.tags
         output['properties'] = properties
 
-        if dict:
+        if use_dict:
             return output
 
         return json.dumps(output, cls=JSONEncoder, **kwargs)
-

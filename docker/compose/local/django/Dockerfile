@@ -30,6 +30,8 @@ RUN apk update \
   && apk add gettext \
   # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
   && apk add postgresql-client \
+  # Graph dependencies
+  && apk add graphviz \
   # Admin tools
   && apk add bash git vim
 

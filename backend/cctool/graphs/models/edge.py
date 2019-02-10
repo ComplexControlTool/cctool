@@ -46,7 +46,7 @@ class AbstractEdge(TimeStampedModel):
         verbose_name_plural = 'edges'
 
     def __str__(self):
-        graph_string = ''.join(['(', self.graph.__class__.__name__, ') ', self.graph.title])
+        graph_string = self.graph.__str__()
         edge_string = ''.join(['(', self.__class__.__name__, ') ', self.label])
         connection_string = ''.join([self.source.label, ' -> ', self.target.label])
         return ' '.join([graph_string, edge_string, connection_string])
@@ -55,7 +55,7 @@ class AbstractEdge(TimeStampedModel):
         super(AbstractEdge, self).save(*args, **kwargs)
         self.identifier = ''.join([str(self.source.identifier), '-', str(self.target.identifier)])
 
-    def to_json(self, dict=False, **kwargs):
+    def to_json(self, use_dict=False, **kwargs):
         """
             Representation of Edge object in Json format
         """
@@ -66,7 +66,7 @@ class AbstractEdge(TimeStampedModel):
             ('target', self.target.identifier),
         ))
 
-        if dict:
+        if use_dict:
             return output
 
         return json.dumps(output, cls=JSONEncoder, **kwargs)

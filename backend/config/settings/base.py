@@ -71,9 +71,11 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'cctool.users.apps.UsersAppConfig',
     # Your stuff: custom apps go here
+    'cctool.analysers.apps.AnalysersAppConfig',
     'cctool.common.apps.CommonAppConfig',
     'cctool.dashboard.apps.DashboardAppConfig',
     'cctool.graphs.apps.GraphsAppConfig',
+    'api.apps',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -261,3 +263,8 @@ SOCIALACCOUNT_ADAPTER = 'cctool.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}

@@ -32,7 +32,7 @@ class AbstractNode(TimeStampedModel):
         verbose_name_plural = 'nodes'
 
     def __str__(self):
-        graph_string = ''.join(['(', self.graph.__class__.__name__, ') ', self.graph.title])
+        graph_string = self.graph.__str__()
         node_string = ''.join(['(', self.__class__.__name__, ') ', self.label])
         return ' '.join([graph_string, node_string])
 
@@ -42,7 +42,7 @@ class AbstractNode(TimeStampedModel):
             self.identifier = number_of_existing_nodes
         super(AbstractNode, self).save(*args, **kwargs)
 
-    def to_json(self, dict=False, **kwargs):
+    def to_json(self, use_dict=False, **kwargs):
         """
             Representation of Node object in Json format
         """
@@ -51,7 +51,7 @@ class AbstractNode(TimeStampedModel):
             ('label', self.label),
         ))
 
-        if dict:
+        if use_dict:
             return output
 
         return json.dumps(output, cls=JSONEncoder, **kwargs)
