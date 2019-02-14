@@ -8,7 +8,8 @@ from cctool.taskapp.celery import app as cctoolapp
 def find_graph_controllability(self, graph_id, analysis_id):
     graph = Graph.objects.get(pk=graph_id)
     analysis = Analysis.objects.get(pk=analysis_id)
-    nodes = graph.nodes.all()
+    nodes = graph.nodes.all().select_subclasses()
+    edges = graph.edges.all().select_subclasses()
     number_of_nodes = len(nodes)
 
     connections = dict()
@@ -17,6 +18,7 @@ def find_graph_controllability(self, graph_id, analysis_id):
         for edge in sources:
             connections.setdefault(node.identifier, set()).add(edge.target.identifier)
 
+    # TODO: Need to calculate frequencies + best configurations - ordered
     (control_configurations, stems) = CA_Analysis.computeControlConf(connections, number_of_nodes)
     analysis_data = dict()
     analysis_data['controlConfigurations'] = control_configurations
@@ -24,8 +26,27 @@ def find_graph_controllability(self, graph_id, analysis_id):
     analysis.analysis_data = analysis_data
     analysis.save()
 
-    network_visualization = CA_Visualization.generate_graph_options()
-    analysis.visualization.options = network_visualization
+    graph_options = CA_Visualization.generate_graph_options()
+    graph_data = dict()
+    nodes_data = list()
+    for node in nodes:
+        data = node.to_json(use_dict=True)
+        data['cctool'] = data.pop('properties')
+        vis = CA_Visualization.generate_node_options(node, analysis)
+        nodes_data.append(dict(**data, **vis))
+    edges_data = list()
+    for edge in edges:
+        data = edge.to_json(use_dict=True)
+        data['cctool'] = data.pop('properties')
+        vis = CA_Visualization.generate_edge_options(edge, analysis)
+        edges_data.append(dict(**data, **vis))
+    graph_data['nodes'] = nodes_data
+    graph_data['edges'] = edges_data
+
+    visualization_options = dict()
+    visualization_options['graphOptions'] = graph_options
+    visualization_options['graphData'] = graph_data
+    analysis.visualization.options = visualization_options
     analysis.visualization.save()
 
     return

@@ -117,14 +117,14 @@ class NodePlus(Node):
         verbose_name='node importance'
     )
 
-    custom = JSONField(
-        default=dict,
+    tags = JSONField(
+        default=list,
         null=True,
         db_index=True
     )
 
-    tags = JSONField(
-        default=list,
+    custom = JSONField(
+        default=dict,
         null=True,
         db_index=True
     )
@@ -140,10 +140,10 @@ class NodePlus(Node):
             ('vulnerability', self.vulnerability),
             ('importance', self.importance),
         ))
-        if self.custom:
-            properties['custom'] = self.custom
         if self.tags:
             properties['tags'] = self.tags
+        if self.custom:
+            properties['custom'] = self.custom
         output['properties'] = properties
 
         if use_dict:
@@ -178,14 +178,14 @@ class EdgePlus(Edge):
         verbose_name='edge weight'
     )
 
-    custom = JSONField(
-        default=dict,
+    tags = JSONField(
+        default=list,
         null=True,
         db_index=True
     )
 
-    tag = JSONField(
-        default=list,
+    custom = JSONField(
+        default=dict,
         null=True,
         db_index=True
     )
@@ -198,10 +198,10 @@ class EdgePlus(Edge):
         properties = OrderedDict((
             ('weight', self.weight),
         ))
-        if self.custom:
-            properties['custom'] = self.custom
         if self.tags:
             properties['tags'] = self.tags
+        if self.custom:
+            properties['custom'] = self.custom
         output['properties'] = properties
 
         if use_dict:
