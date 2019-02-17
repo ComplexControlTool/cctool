@@ -19,6 +19,20 @@ class AbstractNode(TimeStampedModel):
         verbose_name='label of node'
     )
 
+    position_x = IntegerField(
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='position on x-axis of node'
+    )
+
+    position_y = IntegerField(
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='position on y-axis of node'
+    )
+
     graph = ForeignKey(
         'graphs.Graph',
         on_delete=CASCADE,
@@ -32,9 +46,7 @@ class AbstractNode(TimeStampedModel):
         verbose_name_plural = 'nodes'
 
     def __str__(self):
-        graph_string = self.graph.__str__()
-        node_string = ''.join(['(', self.__class__.__name__, ') ', self.label])
-        return ' '.join([graph_string, node_string])
+        return self.label
 
     def save(self, *args, **kwargs):
         if self.identifier == -1:
@@ -46,10 +58,9 @@ class AbstractNode(TimeStampedModel):
         """
             Representation of Node object in Json format
         """
-        output = OrderedDict((
-            ('id', self.identifier),
-            ('label', self.label),
-        ))
+        output = dict()
+        output['id'] = self.identifier
+        output['label'] = self.label
 
         if use_dict:
             return output

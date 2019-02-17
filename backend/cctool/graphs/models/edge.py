@@ -46,25 +46,22 @@ class AbstractEdge(TimeStampedModel):
         verbose_name_plural = 'edges'
 
     def __str__(self):
-        graph_string = self.graph.__str__()
-        edge_string = ''.join(['(', self.__class__.__name__, ') ', self.label])
         connection_string = ''.join([self.source.label, ' -> ', self.target.label])
-        return ' '.join([graph_string, edge_string, connection_string])
+        return ' '.join([self.label, connection_string])
 
     def save(self, *args, **kwargs):
-        super(AbstractEdge, self).save(*args, **kwargs)
         self.identifier = ''.join([str(self.source.identifier), '-', str(self.target.identifier)])
+        super(AbstractEdge, self).save(*args, **kwargs)
 
     def to_json(self, use_dict=False, **kwargs):
         """
             Representation of Edge object in Json format
         """
-        output = OrderedDict((
-            ('id', self.identifier),
-            ('label', self.label),
-            ('source', self.source.identifier),
-            ('target', self.target.identifier),
-        ))
+        output = dict()
+        output['id'] = self.identifier
+        output['label'] = self.label
+        output['source'] = self.source.identifier
+        output['target'] = self.target.identifier
 
         if use_dict:
             return output

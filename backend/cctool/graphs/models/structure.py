@@ -4,15 +4,8 @@ from rest_framework.utils.encoders import JSONEncoder
 from cctool.common.models import TimeStampedModel
 
 
-class AbstractVisualization(TimeStampedModel):
-    options = JSONField(
-      default=dict,
-      null=True,
-      blank=True,
-      db_index=True
-    )
-
-    structure = JSONField(
+class AbstractStructure(TimeStampedModel):
+    data = JSONField(
       default=dict,
       null=True,
       blank=True,
@@ -21,16 +14,14 @@ class AbstractVisualization(TimeStampedModel):
 
     class Meta:
         abstract = True
-        verbose_name = 'visualization'
-        verbose_name_plural = 'visualizations'
+        verbose_name = 'structure'
+        verbose_name_plural = 'structures'
 
     def to_json(self, use_dict=False, **kwargs):
         """
-            Representation of Visualization object in Json format
+            Representation of Structure object in Json format
         """
-        output = dict()
-        output['options'] = self.options
-        output['structure'] = self.structure
+        output = self.data
 
         if use_dict:
             return output

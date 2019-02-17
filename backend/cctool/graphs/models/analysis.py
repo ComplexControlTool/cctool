@@ -27,16 +27,17 @@ class AbstractAnalysis(TimeStampedModel):
         verbose_name='type of analysis'
     )
 
-    analysis_data = JSONField(
+    data = JSONField(
         default=dict,
         null=True,
+        blank=True,
         db_index=True
     )
 
     visualization = OneToOneField(
         'graphs.Visualization',
         on_delete=CASCADE,
-        primary_key=True
+        primary_key=False
     )
 
     graph = ForeignKey(
@@ -80,11 +81,11 @@ class AbstractAnalysis(TimeStampedModel):
         """
         analysis = dict()
         analysis['typeOfAnalysis'] = self.get_analysis_type_display()
-        analysis['data'] = self.analysis_data
+        analysis['data'] = self.data
         
         output = dict()
-        output['visualization'] = self.visualization.to_json(use_dict=True, **kwargs)
         output['analysis'] = analysis
+        output['visualization'] = self.visualization.to_json(use_dict=use_dict, **kwargs)
 
         if use_dict:
             return output

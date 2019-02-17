@@ -1,4 +1,4 @@
-<!-- graph.control-nodes.html -->
+<!-- graph.controllability-analysis.html -->
 <md-progress-linear ng-show="controlNodesAnalysisCtrl.progressLinear.active" md-mode="{{controlNodesAnalysisCtrl.progressLinear.mode}}" value="{{controlNodesAnalysisCtrl.progressLinear.value}}" md-buffer-value="{{controlNodesAnalysisCtrl.progressLinear.bufferValue}}"></md-progress-linear>
 
 <section class="boxed wide-cards">
@@ -7,27 +7,40 @@
 
   <div layout="column" layout-align="center center">
 
-    <!-- Control Nodes Analysis Card -->
+    <!-- Controllability Map Card -->
     <md-card>
       <md-card-title layout-margin="">
         <md-card-title-text>
-          <span class="md-headline">Control Nodes Analysis</span>
+          <span class="md-headline">Controllability Map</span>
         </md-card-title-text>
       </md-card-title>
-      <div ng-include="'app/cctool/components/control-nodes-analysis/control-nodes/control-nodes.html'"></div>
+      <div ng-include="'app/cctool/components/controllability-analysis/control-nodes/control-nodes.html'"></div>
     </md-card>
 
     <div layout-margin="" layout-padding=""></div>
     <div layout-margin="" layout-padding=""></div>
 
-    <!-- Control Nodes Stems Analysis Card -->
+    <!-- Controllability Stems Card -->
     <md-card>
       <md-card-title layout-margin="">
         <md-card-title-text>
-          <span class="md-headline">Control Nodes Stems Analysis</span>
+          <span class="md-headline">Controllability Stems</span>
         </md-card-title-text>
       </md-card-title>
-      <div ng-include="'app/cctool/components/control-nodes-analysis/stems/stems.html'" style="margin-bottom:8px; padding-bottom: 16px"></div>
+      <div ng-include="'app/cctool/components/controllability-analysis/stems/stems.html'" style="margin-bottom:8px; padding-bottom: 16px"></div>
+    </md-card>
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+    <!-- Explore Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Explore Map</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div ng-include="'app/cctool/components/node-updownstream-analysis/node-updownstream-analysis.html'"></div>
     </md-card>
 
     <div layout-margin="" layout-padding=""></div>

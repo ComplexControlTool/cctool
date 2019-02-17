@@ -1,0 +1,20 @@
+<!-- stems.html -->
+<div id="control-nodes-stems-content" ng-if="!controllabilityAnalysisCtrl.isAnalysed" flex="">
+  <div style="height:120px" layout="row" layout-align="center center">
+    ANALYSIS STILL IN PROGRESS...
+  </div>
+</div>
+<div id="control-nodes-stems-content" ng-if="controllabilityAnalysisCtrl.isAnalysed" ng-controller="StemsController as scontroller">
+  <h1 class="md-title">Configuration {{controllabilityAnalysisCtrl.selectedConfIndex + 1}}</h1>
+  <div class="simple-table-container">
+    <table class="simple">
+      <tbody>
+        <tr ng-repeat="stemRoot in controllabilityAnalysisCtrl.data.analysis.data.graphcontrolconf[controllabilityAnalysisCtrl.selectedConfIndex]">
+          <td>
+            <div jsnx-stem ng-model="controllabilityAnalysisCtrl.data.visualization.structure" stem-root="stemRoot" conf-index="controllabilityAnalysisCtrl.selectedConfIndex" node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value" flex=""></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

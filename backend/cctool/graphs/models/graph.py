@@ -1,6 +1,6 @@
 import json
 from collections import OrderedDict
-from django.db.models import ForeignKey, CharField, TextField, CASCADE
+from django.db.models import ForeignKey, OneToOneField, CharField, TextField, CASCADE
 from rest_framework.utils.encoders import JSONEncoder
 from cctool.common.models import TimeStampedModel
 
@@ -19,23 +19,35 @@ class AbstractGraph(TimeStampedModel):
         verbose_name='description of graph'
     )
 
+    structure = OneToOneField(
+        'graphs.Structure',
+        on_delete=CASCADE,
+        primary_key=False
+    )
+
+    visualization = OneToOneField(
+        'graphs.Visualization',
+        on_delete=CASCADE,
+        primary_key=False
+    )
+
     class Meta:
         abstract = True
         verbose_name = 'graph'
         verbose_name_plural = 'graphs'
 
     def __str__(self):
-        graph_string = ''.join(['(', self.__class__.__name__, ') ', self.title])
-        return graph_string
+        return self.title
 
     def to_json(self, use_dict=False, **kwargs):
         """
             Representation of Graph object in Json format
         """
-        output = OrderedDict((
-            ('nodes', [node.to_json(use_dict=use_dict, **kwargs) for node in self.nodes.all().select_subclasses()]),
-            ('edges', [edge.to_json(use_dict=use_dict, **kwargs) for edge in self.edges.all().select_subclasses()]),
-        ))
+        output = dict()
+        output['title'] = self.title
+        output['description'] = self.description
+        output['structure'] = self.structure.to_json(use_dict=use_dict, **kwargs)
+        output['visualization'] = self.visualization.to_json(use_dict=use_dict, **kwargs)
 
         if use_dict:
             return output

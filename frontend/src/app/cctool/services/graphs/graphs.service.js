@@ -67,7 +67,7 @@
     function requestAndNotify(ignoredFields)
     {
       $log.debug(vm.title+'/requestAndNotify');
-      apiResolver.resolve('cctool.graphs.basicoptions@get').then(
+      apiResolver.resolve('cctool.graphs.basic@get').then(
         function(data)
         {
           $log.debug(vm.title+'/requestAndNotify api call success with data',data);

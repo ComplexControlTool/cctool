@@ -7,6 +7,7 @@ from rest_framework.utils.encoders import JSONEncoder
 from .graph import AbstractGraph
 from .node import AbstractNode
 from .edge import AbstractEdge
+from .structure import AbstractStructure
 from .analysis import AbstractAnalysis
 from .visualization import AbstractVisualization
 
@@ -15,6 +16,13 @@ class Graph(AbstractGraph):
 
     class Meta(AbstractGraph.Meta):
         abstract = False
+
+    def save(self, *args, **kwargs):
+        if not hasattr(self, 'structure'):
+            self.structure = Structure.objects.create()
+        if not hasattr(self, 'visualization'):
+            self.visualization = Visualization.objects.create()
+        super(Graph, self).save(*args, **kwargs)
 
 
 class Node(AbstractNode):
@@ -40,6 +48,12 @@ class Analysis(AbstractAnalysis):
         if not hasattr(self, 'visualization'):
             self.visualization = Visualization.objects.create()
         super(Analysis, self).save(*args, **kwargs)
+
+
+class Structure(AbstractStructure):
+
+    class Meta(AbstractStructure.Meta):
+        abstract = False
 
 
 class Visualization(AbstractVisualization):
@@ -120,12 +134,14 @@ class NodePlus(Node):
     tags = JSONField(
         default=list,
         null=True,
+        blank=True,
         db_index=True
     )
 
     custom = JSONField(
         default=dict,
         null=True,
+        blank=True,
         db_index=True
     )
 
@@ -133,17 +149,18 @@ class NodePlus(Node):
         """
             Representation of Node object in Json format
         """
-        output = super(Node, self).to_json(use_dict=True, **kwargs)
-        properties = OrderedDict((
-            ('function', self.function),
-            ('controllability', self.controllability),
-            ('vulnerability', self.vulnerability),
-            ('importance', self.importance),
-        ))
+        properties = dict()
+        properties['function'] = self.function
+        properties['controllability'] = self.controllability
+        properties['vulnerability'] = self.vulnerability
+        properties['importance'] = self.importance
+
         if self.tags:
             properties['tags'] = self.tags
         if self.custom:
             properties['custom'] = self.custom
+
+        output = super(Node, self).to_json(use_dict=use_dict, **kwargs)
         output['properties'] = properties
 
         if use_dict:
@@ -181,12 +198,14 @@ class EdgePlus(Edge):
     tags = JSONField(
         default=list,
         null=True,
+        blank=True,
         db_index=True
     )
 
     custom = JSONField(
         default=dict,
         null=True,
+        blank=True,
         db_index=True
     )
 
@@ -194,14 +213,15 @@ class EdgePlus(Edge):
         """
             Representation of Node object in Json format
         """
-        output = super(Edge, self).to_json(use_dict=True, **kwargs)
-        properties = OrderedDict((
-            ('weight', self.weight),
-        ))
+        properties = dict()
+        properties['weight'] = self.weight
+        
         if self.tags:
             properties['tags'] = self.tags
         if self.custom:
             properties['custom'] = self.custom
+        
+        output = super(Edge, self).to_json(use_dict=use_dict, **kwargs)
         output['properties'] = properties
 
         if use_dict:

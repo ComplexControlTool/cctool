@@ -53,6 +53,7 @@
         {
           isAdmin: function (apiResolver)
           {
+            return false;
             return apiResolver.resolve('cctool.user@get').then(
               function(data)
               {

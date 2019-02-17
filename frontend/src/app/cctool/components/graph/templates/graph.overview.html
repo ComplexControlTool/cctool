@@ -28,7 +28,8 @@
             id="graph-map"
             vis-network=""
             network="graphCtrl.network"
-            ng-model="graphCtrl.content"
+            options="graphCtrl.content.visualization.options"
+            structure="graphCtrl.content.visualization.structure"
             node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
             layout-fill="">
           </div>
@@ -65,40 +66,20 @@
           <p ng-bind-html="graphCtrl.content.description"></p>
           <md-divider></md-divider>
         </div>
-        <!-- More Description -->
-        <div ng-if="graphCtrl.content.moredescription">
-          <p style="font-weight:bold">More Description</p>
-          <p ng-bind-html="graphCtrl.content.moredescription"></p>
-          <md-divider></md-divider>
-        </div>
         <!-- Last Updated -->
-        <div ng-if="graphCtrl.content.dateupdated">
+        <div ng-if="graphCtrl.content.updatedAt">
           <p style="font-weight:bold">Last Updated</p>
-          <p ng-bind-html="graphCtrl.content.dateupdated | dateString"></p>
+          <p ng-bind-html="graphCtrl.content.updatedAt | dateString"></p>
           <md-divider></md-divider>
         </div>
         <!-- Date Created -->
-        <div ng-if="graphCtrl.content.dateadded">
+        <div ng-if="graphCtrl.content.createdAt">
           <p style="font-weight:bold">Date Created</p>
-          <p ng-bind-html="graphCtrl.content.dateadded | dateString"></p>
+          <p ng-bind-html="graphCtrl.content.createdAt | dateString"></p>
         </div>
       </md-card-content>
     </md-card>
 
-
-    <div layout-margin="" layout-padding=""></div>
-    <div layout-margin="" layout-padding=""></div>
-
-    <!-- Comments Card -->
-    <md-card>
-      <md-card-title layout-margin="">
-        <md-card-title-text>
-          <span class="md-headline">Comments</span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content layout-margin="">
-      </md-card-content>
-    </md-card>
 
     <div layout-margin="" layout-padding=""></div>
     <div layout-margin="" layout-padding=""></div>

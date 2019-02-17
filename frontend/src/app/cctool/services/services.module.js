@@ -7,6 +7,7 @@
         .module('app.cctool.services',
         [
             'app.cctool.services.colours',
+            'app.cctool.services.controllability-analysis',
             'app.cctool.services.jsnx',
             'app.cctool.services.graph',
             'app.cctool.services.graphs',

@@ -21,9 +21,10 @@
       link: link,
       restrict: 'A',
       scope: {
-        'graph':'=ngModel',
         'network':'=network',
-        'confIndex':'=confIndex',
+        'options':'=options',
+        'structure':'=structure',
+        'analysis_data':'=analysis_data',
         'nodesToHide' : '=nodesToHide',
         'nodeShape':'=nodeShape',
         'editGraph':'=editGraph',
@@ -39,97 +40,50 @@
       var nodeData = new vis.DataSet();
       var edgeData = new vis.DataSet();
       var data = { nodes: nodeData, edges: edgeData };
-      var options = {
-        clickToUse: true,
-        edges:
-        {
-          arrows:
-          {
-            to: {enabled: true, scaleFactor:1, type:'arrow'}
-          },
-          color:
-          {
-            hover: '#2B7CE9',
-            opacity:1.0
-          },
-          selectionWidth: 2,
-          smooth:
-          {
-            enabled: true,
-            type: "continuous",
-            roundness: 0.5
-          },
+      var options = {};
+      var manipulation_options = {
+        enabled: editGraph,
+        addNode: function (data, callback) {
+          manipulationAddNode(scope, data, callback);
         },
-        interaction:
-        {
-          hover: true,
-          navigationButtons: true,
+        editNode: function (data, callback) {
+          manipulationEditNode(scope, data, callback);
         },
-        layout:
-        {
-          randomSeed: 2
+        addEdge: function (data, callback) {
+          manipulationAddEdge(scope, data, callback);
         },
-        manipulation:
-        {
-          enabled: editGraph,
-          addNode: function (data, callback) {
-            manipulationAddNode(scope, data, callback);
-          },
-          editNode: function (data, callback) {
-            manipulationEditNode(scope, data, callback);
-          },
-          addEdge: function (data, callback) {
-            manipulationAddEdge(scope, data, callback);
-          },
-          // editEdge: function (data, callback) {
-          //   manipulationEditEdge(scope, data, callback);
-          // }
-        },
-        physics:
-        {
-          enabled: false
-        }
+        // editEdge: function (data, callback) {
+        //   manipulationEditEdge(scope, data, callback);
+        // }
       };
+      options['manipulation'] = manipulation_options;
       var colors = cctoolColorsService.cctoolColors;
       var color = colors[5]; // (default to grey)
 
       var structureData = function()
       {
         // Set scope variables.
-        scope.id = scope.vm.graph.id ? scope.vm.graph.id : '0';
-        scope.isAnalysed = scope.vm.graph.graphanalysed ? scope.vm.graph.graphanalysed : false;
-        scope.connections = scope.vm.graph.graphconnections ? scope.vm.graph.graphconnections : {};
-        scope.structure = scope.vm.graph.graphstructure ? scope.vm.graph.graphstructure : {};
-        scope.nodes = scope.vm.graph.graphnodes ? scope.vm.graph.graphnodes : [];
-        scope.labels = scope.vm.graph.graphnodelabels ? scope.vm.graph.graphnodelabels : {};
-        scope.functions = scope.vm.graph.graphnodefunctions ? scope.vm.graph.graphnodefunctions : {};
-        scope.controllability = scope.vm.graph.graphnodecontrollability ? scope.vm.graph.graphnodecontrollability : {};
-        scope.importance = scope.vm.graph.graphnodeimportance ? scope.vm.graph.graphnodeimportance : {};
-        scope.controlConf = scope.vm.graph.graphcontrolconf ? scope.vm.graph.graphcontrolconf[scope.vm.confIndex] : {};
-        scope.controlConfStems = scope.vm.graph.graphcontrolconfstems ? scope.vm.graph.graphcontrolconfstems[scope.vm.confIndex] : {};
-        scope.nodeFrequency = scope.vm.graph.graphnodefrequencies ? scope.vm.graph.graphnodefrequencies : {};
-        scope.coordinates = scope.vm.graph.graphnodecoordinates ? scope.vm.graph.graphnodecoordinates : {};
-        scope.visDataSets = scope.vm.graph.graphvisdatasets ? scope.vm.graph.graphvisdatasets : {};
-        scope.gephiCSV = scope.vm.graph.graphgephicsv ? scope.vm.graph.graphgephicsv : {};
+        scope.options = scope.vm.options ? Object.assign({}, scope.vm.options, options) : options
+        scope.structure = scope.vm.structure ? scope.vm.structure : {}
         scope.element = element[0];
       }
 
       // Re-draw on data change.
-      scope.$watch('vm.graph',
+      scope.$watch('vm.options',
         function()
         {
-          $log.debug("watch: vm.graph");
-          if(!angular.equals({}, scope.vm.graph))
+          $log.debug("watch: vm.options");
+          if(!angular.equals({}, scope.vm.options))
           {
-            $log.debug("inside watch: vm.graph / init");
+            $log.debug("inside watch: vm.options / init");
             isDrawable = true;
             structureData();
             try
             {
               if (nodeData.length == 0 && edgeData.length == 0)
               {
-                initData($log, nodeData, edgeData, scope.visDataSets, scope.isAnalysed, scope.vm.nodeShape, scope.controlConf);
-                scope.vm.network = initNetwork($log, scope.element, data, options);
+                initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+                scope.vm.network = initNetwork($log, scope.element, data, scope.options);
                 if (!scope.vm.editGraph)
                 {
                   initOnClick(scope.vm.network, data.nodes, data.edges);
@@ -137,7 +91,7 @@
               }
               else
               {
-                updateData($log, nodeData, edgeData, scope.visDataSets, scope.isAnalysed, scope.vm.nodeShape, scope.controlConf);
+                updateData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
                 if (!scope.vm.editGraph)
                 {
                   initOnClick(scope.vm.network, data.nodes, data.edges);
@@ -153,7 +107,46 @@
         true
       );
 
-      // Hide nodes according to upstream/downstream analysis.
+      // Re-draw on data change.
+      scope.$watch('vm.structure',
+        function()
+        {
+          $log.debug("watch: vm.structure");
+          if(!angular.equals({}, scope.vm.structure))
+          {
+            $log.debug("inside watch: vm.structure / init");
+            isDrawable = true;
+            structureData();
+            try
+            {
+              if (nodeData.length == 0 && edgeData.length == 0)
+              {
+                initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+                scope.vm.network = initNetwork($log, scope.element, data, scope.options);
+                if (!scope.vm.editGraph)
+                {
+                  initOnClick(scope.vm.network, data.nodes, data.edges);
+                }
+              }
+              else
+              {
+                updateData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+                if (!scope.vm.editGraph)
+                {
+                  initOnClick(scope.vm.network, data.nodes, data.edges);
+                }
+              }
+            }
+            catch(error)
+            {
+              $log.error("Failed to init/update graph with error",error)
+            }
+          }
+        },
+        true
+      );
+
+      // Hide nodes according to explore card.
       scope.$watch('vm.nodesToHide',
         function()
         {
@@ -163,12 +156,12 @@
             $log.debug("inside watch: vm.nodesToHide");
             try
             {
-              initData($log, nodeData, edgeData, scope.visDataSets, scope.isAnalysed, scope.vm.nodeShape, scope.controlConf);
-              scope.vm.network = initNetwork($log, scope.element, data, options);
+              initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+              scope.vm.network = initNetwork($log, scope.element, data, scope.options);
               if (scope.vm.nodesToHide.removeNodesIds && scope.vm.nodesToHide.removeNodesIds.length > 0)
               {
                 hideGivenNodes(nodeData, scope.vm.nodesToHide.removeNodesIds);
-                scope.vm.network = initNetwork($log, scope.element, data, options);
+                scope.vm.network = initNetwork($log, scope.element, data, scope.options);
                 repositionRootNode(scope.vm.network, nodeData, scope.vm.nodesToHide.selectedNodeId, scope.vm.nodesToHide.mode)
               }
             }
@@ -190,7 +183,7 @@
             $log.debug("inside watch: vm.nodeShape");
             try
             {
-              changeNodeShape(nodeData, edgeData, scope.vm.nodeShape, scope.controlConf);
+              changeNodeShape(nodeData, edgeData, scope.vm.nodeShape);
               if (!scope.vm.editGraph)
               {
                 initOnClick(scope.vm.network, data.nodes, data.edges);
@@ -215,7 +208,7 @@
             try
             {
               options.manipulation.enabled = scope.vm.editGraph || false;
-              scope.vm.network = initNetwork($log, scope.element, data, options);
+              scope.vm.network = initNetwork($log, scope.element, data, scope.options);
             }
             catch(error)
             {
@@ -235,12 +228,12 @@
             $log.debug("inside watch: vm.reload");
             try
             {
-              initData($log, nodeData, edgeData, scope.visDataSets, scope.isAnalysed, scope.vm.nodeShape, scope.controlConf);
+              initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
               if (scope.vm.network)
               {
                 destroyNetwork(scope.vm.network);
               }
-              scope.vm.network = initNetwork($log, scope.element, data, options);
+              scope.vm.network = initNetwork($log, scope.element, data, scope.options);
               if (!scope.vm.editGraph)
               {
                 initOnClick(scope.vm.network, data.nodes, data.edges);
@@ -350,7 +343,7 @@
 
   }
 
-  function changeNodeShape(nodeData, edgeData, nodeShape, controlConfiguration)
+  function changeNodeShape(nodeData, edgeData, nodeShape)
   {
     var data = nodeData.get();
 
@@ -363,7 +356,7 @@
   }
 
   // Update data for use with the network.
-  function updateData($log, nodeData, edgeData, DataSets, isAnalysed, nodeShape, controlConfiguration)
+  function updateData($log, nodeData, edgeData, DataSets, nodeShape)
   {
     $log.debug("Update Data Called");
     if( angular.equals({}, DataSets) )
@@ -374,20 +367,20 @@
     nodeData.update(DataSets.nodes);
     edgeData.update(DataSets.edges);
 
-    if(isAnalysed)
-    {
-      updateAnalysedGraph(nodeData, edgeData, isAnalysed, nodeShape, controlConfiguration);
-    }
+    // if(isAnalysed)
+    // {
+    //   updateAnalysedGraph(nodeData, edgeData, isAnalysed, nodeShape, controlConfiguration);
+    // }
   }
 
   // Initialise data for use with the network.
-  function initData($log, nodeData, edgeData, DataSets, isAnalysed, nodeShape, controlConfiguration)
+  function initData($log, nodeData, edgeData, DataSets, nodeShape)
   {
     $log.debug("Init Data Called");
     nodeData.clear();
     edgeData.clear();
     
-    updateData($log, nodeData, edgeData, DataSets, isAnalysed, nodeShape, controlConfiguration);
+    updateData($log, nodeData, edgeData, DataSets, nodeShape);
   }
 
   // Function to render the network's structure.

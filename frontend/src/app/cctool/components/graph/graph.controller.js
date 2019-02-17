@@ -16,8 +16,8 @@
     // Data
     vm.title = 'GraphController';
     vm.content = Graph ? Graph : undefined;
-    vm.tabs = ['Overview','Control Nodes Analysis','Node Up/Down Stream Analysis'];
-    vm.tabs_view = ['graph-overview','graph-control-nodes','graph-up-down-stream'];
+    vm.tabs = ['Overview'];
+    vm.tabs_view = ['graph-overview'];
     vm.network = undefined;
 
     // Functions
@@ -42,6 +42,13 @@
       else
       {
         $log.debug(vm.title+'/ Graph object initialised: '+JSON.stringify(vm.content));
+        var analyses_tabs = [];
+        for (var i in vm.content.analysers)
+        {
+          var analyser = vm.content.analysers[i]
+          vm.tabs.push(analyser);
+          vm.tabs_view.push('graph-'+analyser.toLowerCase()+'-analysis');
+        }
       }
 
       if ($state.is('app.cctool_graph'))

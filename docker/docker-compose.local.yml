@@ -3,8 +3,8 @@ version: '3'
 volumes:
   cctool_local_db_data: {}
   cctool_local_db_data_backups: {}
-  cctool_local_frontend_index: {}
   cctool_local_frontend_vendor: {}
+  cctool_local_frontend_index: {}
 
 services:
 
@@ -21,10 +21,52 @@ services:
       - mailhog
       - angularjs
     volumes:
-      - ../backend:/Developer/cctool/backend
+      # Backend
+      - ../backend/.coveragerc:/Developer/cctool/backend/.coveragerc
+      - ../backend/.dockerignore:/Developer/cctool/backend/.dockerignore
+      - ../backend/.editorconfig:/Developer/cctool/backend/.editorconfig
+      - ../backend/.gitattributes:/Developer/cctool/backend/.gitattributes
+      - ../backend/.pylintrc:/Developer/cctool/backend/.pylintrc
+      - ../backend/.travis.yml:/Developer/cctool/backend/.travis.yml
+      - ../backend/README.rst:/Developer/cctool/backend/README.rst
+      - ../backend/api:/Developer/cctool/backend/api
+      - ../backend/celerybeat-schedule:/Developer/cctool/backend/celerybeat-schedule
+      - ../backend/config:/Developer/cctool/backend/config
+      - ../backend/docs:/Developer/cctool/backend/docs
+      - ../backend/locale:/Developer/cctool/backend/locale
+      - ../backend/logs:/Developer/cctool/backend/logs
+      - ../backend/manage.py:/Developer/cctool/backend/manage.py
+      - ../backend/merge_production_dotenvs_in_dotenv.py:/Developer/cctool/backend/merge_production_dotenvs_in_dotenv.py
+      - ../backend/pytest.ini:/Developer/cctool/backend/pytest.ini
+      - ../backend/requirements:/Developer/cctool/backend/requirements
+      - ../backend/setup.cfg:/Developer/cctool/backend/setup.cfg
+      - ../backend/cctool/__init__.py:/Developer/cctool/backend/cctool/__init__.py
+      - ../backend/cctool/analysers:/Developer/cctool/backend/cctool/analysers
+      - ../backend/cctool/common:/Developer/cctool/backend/cctool/common
+      - ../backend/cctool/conftest.py:/Developer/cctool/backend/cctool/conftest.py
+      - ../backend/cctool/contrib:/Developer/cctool/backend/cctool/contrib
+      - ../backend/cctool/dashboard:/Developer/cctool/backend/cctool/dashboard
+      - ../backend/cctool/graphs:/Developer/cctool/backend/cctool/graphs
+      - ../backend/cctool/taskapp:/Developer/cctool/backend/cctool/taskapp
+      - ../backend/cctool/users:/Developer/cctool/backend/cctool/users
+      # cctool/static
+      - ../backend/cctool/static/css:/Developer/cctool/backend/cctool/static/css
+      - ../backend/cctool/static/fancybox:/Developer/cctool/backend/cctool/static/fancybox
+      - ../backend/cctool/static/fonts:/Developer/cctool/backend/cctool/static/fonts
+      - ../backend/cctool/static/images:/Developer/cctool/backend/cctool/static/images
+      - ../backend/cctool/static/js:/Developer/cctool/backend/cctool/static/js
+      - ../backend/cctool/static/sass:/Developer/cctool/backend/cctool/static/sass
       - ../frontend/src/app:/Developer/cctool/backend/cctool/static/dashboard/app
       - ../frontend/src/assets:/Developer/cctool/backend/cctool/static/dashboard/assets
       - cctool_local_frontend_vendor:/Developer/cctool/backend/cctool/static/dashboard/vendor
+      # cctool/templates
+      - ../backend/cctool/templates/403_csrf.html:/Developer/cctool/backend/cctool/templates/403_csrf.html
+      - ../backend/cctool/templates/404.html:/Developer/cctool/backend/cctool/templates/404.html
+      - ../backend/cctool/templates/500.html:/Developer/cctool/backend/cctool/templates/500.html
+      - ../backend/cctool/templates/account:/Developer/cctool/backend/cctool/templates/account
+      - ../backend/cctool/templates/base.html:/Developer/cctool/backend/cctool/templates/base.html
+      - ../backend/cctool/templates/pages:/Developer/cctool/backend/cctool/templates/pages
+      - ../backend/cctool/templates/users:/Developer/cctool/backend/cctool/templates/users
       - cctool_local_frontend_index:/Developer/cctool/backend/cctool/templates/dashboard
     env_file:
       - ./.envs/.local/.django
@@ -112,8 +154,8 @@ services:
       - ../frontend/karma.conf.js:/Developer/cctool/frontend/karma.conf.js
       - ../frontend/package.json:/Developer/cctool/frontend/package.json
       - ../frontend/protractor.conf.js:/Developer/cctool/frontend/protractor.conf.js
-      - cctool_local_frontend_index:/Developer/cctool/frontend/.tmp/serve
       - cctool_local_frontend_vendor:/Developer/cctool/frontend/bower_components
+      - cctool_local_frontend_index:/Developer/cctool/frontend/.tmp/serve
     env_file:
       - ./.envs/.local/.angularjs
     command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start"

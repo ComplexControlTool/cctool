@@ -4,7 +4,7 @@
   'use strict';
 
   angular
-    .module('app.cctool.components.control-nodes-analysis')
+    .module('app.cctool.components.controllability-analysis')
     .controller('StemsController', StemsController);
 
   /** @ngInject */

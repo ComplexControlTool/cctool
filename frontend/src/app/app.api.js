@@ -178,24 +178,31 @@
 
    api.cctool =
    {
-    user: $resource('/api-root/users/:id/',{id: '@id','fields':'id', 'format': 'json'}),
-    admingraphs: $resource('/api-root/admingraphs/',{'format': 'json'}),
-    admingraph: $resource('/api-root/admingraphs/:id/',{id: '@id','format': 'json'}),
+    // user: $resource('/api-root/users/:id/',{id: '@id','fields':'id', 'format': 'json'}),
+    // admingraphs: $resource('/api-root/admingraphs/',{'format': 'json'}),
+    // admingraph: $resource('/api-root/admingraphs/:id/',{id: '@id','format': 'json'}),
     graphs: {
-        'full': $resource('/api-root/graphs/',{'format': 'json'}),
-        'simple': $resource('/api-root/graphs/',{'fields':'id,title', 'format': 'json'}),
-        'basic': $resource('/api-root/graphs/',{'fields':'id,url,owner,title,description,dateadded,dateupdated', 'format': 'json'}),
-        'basicoptions': $resource('/api-root/graphs/',{'fields':'id,url,owner,title,description,dateadded,dateupdated,graphgephicsv,graphgephijson', 'format': 'json'}),
+        'full': $resource('/api/v1/graph/',{'format': 'json'}),
+        'dateupdated': $resource('/api/v1/graph/',{'fields':'id,updatedAt', 'format': 'json'}),
+        'compact': $resource('/api/v1/graph/',{'fields':'id,title', 'format': 'json'}),
+        'basic': $resource('/api/v1/graph/',{'fields':'id,title,description,createdAt,updatedAt', 'format': 'json'}),
         'empty': $resource(api.baseUrl + 'empty/empty.json'),
         'demo': $resource(api.baseUrl + 'demo/demo.json')
     },
     graph: {
-        'full': $resource('/api-root/graphs/:id/',{id: '@id', 'format': 'json'}),
-        'dateupdated': $resource('/api-root/graphs/:id/',{id: '@id', 'fields':'id,dateupdated', 'format': 'json'}),
+        'full': $resource('/api/v1/graph/:id/',{id: '@id', 'format': 'json'}),
+        'dateupdated': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,updatedAt', 'format': 'json'}),
+        'compact': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,title', 'format': 'json'}),
+        'basic': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,title,description,createdAt,updatedAt,structure,visualization,analysers', 'format': 'json'}),
+        'map': $resource('/api/v1/graph/:id/map/',{id: '@id', 'format': 'json'}),
+        'visualize': $resource('/api/v1/graph/:id/visualize/',{id: '@id', 'format': 'json'}),
+        'analyse': $resource('/api/v1/graph/:id/analyse/',{id: '@id', 'format': 'json'}),
         'demo': $resource(api.baseUrl + 'demo/demo:id.json',{id: '@id'}),
-        'update': $resource('/api-root/graphs/:id/',{id: '@id', 'format': 'json'},{update:{method:'PUT'}})
     },
-    graphImplications: $resource('/api-root/implications/:id/',{id: '@id', 'format': 'json'}),
+    analysis: {
+        'full': $resource('/api/v1/analysis/?graphId=:graphId&analysisType=:analysisType',{graphId: '@graphId', analysisType: '@analysisType', 'format': 'json'}),
+        'analysed': $resource('/api/v1/analysis/?graphId=:graphId&analysisType=:analysisType',{graphId: '@graphId', analysisType: '@analysisType', 'fields':'isAnalysed', 'format': 'json'}),
+    },
    };
 
     return api;

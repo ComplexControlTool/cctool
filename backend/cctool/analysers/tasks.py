@@ -12,6 +12,7 @@ def find_graph_controllability(self, graph_id, analysis_id):
     edges = graph.edges.all().select_subclasses()
     number_of_nodes = len(nodes)
 
+    # Analysis
     connections = dict()
     for node in nodes:
         sources = node.sources.all()
@@ -23,30 +24,34 @@ def find_graph_controllability(self, graph_id, analysis_id):
     analysis_data = dict()
     analysis_data['controlConfigurations'] = control_configurations
     analysis_data['stems'] = stems
-    analysis.analysis_data = analysis_data
+    analysis.data = analysis_data
     analysis.save()
 
+    # Visualization
     graph_options = CA_Visualization.generate_graph_options()
-    graph_data = dict()
+    graph_structure = dict()
     nodes_data = list()
     for node in nodes:
         data = node.to_json(use_dict=True)
-        data['cctool'] = data.pop('properties')
+        if 'properties' in data:
+            data['cctool'] = data.pop('properties')
         vis = CA_Visualization.generate_node_options(node, analysis)
         nodes_data.append(dict(**data, **vis))
     edges_data = list()
     for edge in edges:
         data = edge.to_json(use_dict=True)
-        data['cctool'] = data.pop('properties')
+        if 'source' in data:
+            data['from'] = data.pop('source')
+        if 'target' in data:
+            data['to'] = data.pop('target')
+        if 'properties' in data:
+            data['cctool'] = data.pop('properties')
         vis = CA_Visualization.generate_edge_options(edge, analysis)
         edges_data.append(dict(**data, **vis))
-    graph_data['nodes'] = nodes_data
-    graph_data['edges'] = edges_data
-
-    visualization_options = dict()
-    visualization_options['graphOptions'] = graph_options
-    visualization_options['graphData'] = graph_data
-    analysis.visualization.options = visualization_options
+    graph_structure['nodes'] = nodes_data
+    graph_structure['edges'] = edges_data
+    analysis.visualization.options = graph_options
+    analysis.visualization.structure = graph_structure
     analysis.visualization.save()
 
     return

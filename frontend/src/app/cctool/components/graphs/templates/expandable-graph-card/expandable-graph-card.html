@@ -48,22 +48,16 @@
       <p ng-bind-html="graph.description"></p>
       <md-divider></md-divider>
     </div>
-    <!-- More Description -->
-    <div ng-if="graph.moredescription">
-      <p style="font-weight:bold">More Description</p>
-      <p ng-bind-html="graph.moredescription"></p>
-      <md-divider></md-divider>
-    </div>
     <!-- Last Updated -->
-    <div ng-if="graph.dateupdated">
+    <div ng-if="graph.updatedAt">
       <p style="font-weight:bold">Last Updated</p>
-      <p ng-bind-html="graph.dateupdated | dateString"></p>
+      <p ng-bind-html="graph.updatedAt | dateString"></p>
       <md-divider></md-divider>
     </div>
     <!-- Date Created -->
-    <div ng-if="graph.dateadded">
+    <div ng-if="graph.createdAt">
       <p style="font-weight:bold">Date Created</p>
-      <p ng-bind-html="graph.dateadded | dateString"></p>
+      <p ng-bind-html="graph.createdAt | dateString"></p>
     </div>
   </md-card-content>
 

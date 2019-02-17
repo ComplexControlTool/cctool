@@ -71,14 +71,14 @@
     function requestAndNotify(graphId)
     {
       $log.debug(vm.title+'/requestAndNotify with graphId',graphId);
-      var currentUpdatedDate = monitoredGraph.dateupdated;
+      var currentUpdatedDate = monitoredGraph.updatedAt;
       apiResolver.resolve('cctool.graph.dateupdated@get', {'id': graphId}).then(
         function(data)
         {
           $log.debug(vm.title+'/requestAndNotify api call success with data',data);
-          if (data && data.dateupdated)
+          if (data && data.updatedAt)
           {
-            lastUpdatedDate = data.dateupdated;
+            lastUpdatedDate = data.updatedAt;
             if (currentUpdatedDate !== lastUpdatedDate && ignoredUpdateDates.indexOf(lastUpdatedDate) == -1)
             {
               apiResolver.resolve('cctool.graph.full@get', {'id': graphId}).then(
