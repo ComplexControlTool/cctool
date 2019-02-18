@@ -15,7 +15,7 @@
 
     // Data
     vm.title = 'ControllabilityAnalysisController';
-    vm.data = undefined;
+    vm.content = undefined;
     vm.graphForAnalysis = undefined;
     vm.network = undefined;
     vm.selectedConfIndex = 0;
@@ -61,13 +61,13 @@
       vm.graphForAnalysis = graph ? graph : $scope.graphCtrl.content;
       // Request analysis from server.
       showProgressLinear();
-      controllabilityAnalysisService.initMonitorUpdates(vm.graphForAnalysis.id, analysisServerRefreshInMs, serverRefreshInMs);
+      controllabilityAnalysisService.initMonitorUpdates(vm.graphForAnalysis.id, vm.content, analysisServerRefreshInMs, serverRefreshInMs);
     }
 
     function analysisHasUpdates(data)
     {
       $log.debug(vm.title+'/ analysisHasUpdates: arguments:\ndata:',JSON.stringify(data));
-      vm.data = data;
+      vm.content = data;
       if (data.isAnalysed)
       {
         clearProgressLinear();
@@ -96,7 +96,7 @@
     function drawGraph(confTabIndex)
     {
       $log.debug(vm.title+'/ drawGraph: arguments:\nconfTabIndex:',confTabIndex);
-      if (!_.isEmpty(vm.data) && vm.selectedConfIndex === confTabIndex)
+      if (!_.isEmpty(vm.content) && vm.selectedConfIndex === confTabIndex)
       {
         return true;
       }
@@ -108,12 +108,12 @@
       $log.debug(vm.title+'/ isControlNode: arguments:\nnodeIndex:',nodeIndex);
       var index = isNaN( parseInt(nodeIndex) ) ? -1 : parseInt(nodeIndex);
 
-      if (_.isEmpty(vm.data) || _.isEmpty(vm.data.analysis.data.controlConfigurations))
+      if (_.isEmpty(vm.content) || _.isEmpty(vm.content.analysis.data.controlConfigurations))
       {
         return false;
       }
 
-      if (vm.data.analysis.data.controlConfigurations[vm.selectedConfIndex].indexOf(index) == -1)
+      if (vm.content.analysis.data.controlConfigurations[vm.selectedConfIndex].indexOf(index) == -1)
       {
         return false;
       }

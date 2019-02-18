@@ -81,6 +81,7 @@ class GraphSerializer(DynamicFieldsModelSerializer):
 
 
 class AnalyserSerializer(DynamicFieldsModelSerializer):
+    updatedAt = serializers.DateTimeField(source='updated_at')
     isAnalysed = serializers.SerializerMethodField()
     analysis = serializers.SerializerMethodField()
     visualization = serializers.SerializerMethodField()
@@ -88,6 +89,7 @@ class AnalyserSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = models.Graph
         fields = (
+            'updatedAt',
             'isAnalysed',
             'analysis',
             'visualization',

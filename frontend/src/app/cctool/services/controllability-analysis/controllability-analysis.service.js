@@ -16,11 +16,12 @@
     // Data
     vm.title = 'controllabilityAnalysisService';
     var intervalObj = undefined;
-    var monitoredAnalysis = undefined;
     var monitoredGraphId = undefined;
+    var monitoredAnalysis = undefined;
     var monitoredAnalysisIsAnalysed = false;
     var monitoredAnalysisTaskInterval = 500;
     var monitoredAnalysisUpdatesInterval = 60000;
+    var lastUpdatedDate = undefined;
 
     // Functions
     activate();
@@ -33,7 +34,7 @@
       $log.debug(vm.title+'/ Activated ' + vm.title + ' service!');
     }
 
-    function initMonitorUpdates(graphId, taskInterval, updatesInterval)
+    function initMonitorUpdates(graphId, analysis, taskInterval, updatesInterval)
     {
       $log.debug(vm.title+'/initMonitorUpdates');
       stopMonitorUpdates();
@@ -41,6 +42,11 @@
       if (graphId && !monitoredGraphId)
       {
         monitoredGraphId = graphId;
+      }
+
+      if (analysis && !monitoredAnalysis)
+      {
+        monitoredAnalysis = analysis;
       }
 
       if (taskInterval)
@@ -75,8 +81,9 @@
       {
         $interval.cancel(intervalObj);
         intervalObj = undefined;
-        monitoredAnalysis = undefined;
         monitoredGraphId = undefined;
+        monitoredAnalysis = undefined;
+        monitoredAnalysisIsAnalysed = undefined;
       }
     }
 
@@ -84,6 +91,7 @@
     {
       $log.debug(vm.title+'/requestAndNotify with graph id: '+graphId);
       var analysisType = 'Controllability';
+      var currentUpdatedDate = monitoredAnalysis ? monitoredAnalysis.updatedAt : '';
 
       apiResolver.resolve('cctool.analysis.analysed@query', {'graphId': graphId, 'analysisType': analysisType}).then(
         function(data)
@@ -94,25 +102,28 @@
             monitoredAnalysisIsAnalysed = data[0].isAnalysed;
             if (monitoredAnalysisIsAnalysed)
             {
-              // Analysis is already alanysed on backend, only fetch data from server.
-              apiResolver.resolve('cctool.analysis.full@query', {'graphId': graphId, 'analysisType': analysisType}).then(
-                function(data)
-                {
-                  $log.debug(vm.title+'/requestAndNotify api call success with data',data);
-                  if (data && data[0])
+              if (currentUpdatedDate !== lastUpdatedDate)
+              {
+                apiResolver.resolve('cctool.analysis.full@query', {'graphId': graphId, 'analysisType': analysisType}).then(
+                  function(data)
                   {
-                    $log.debug(vm.title+'/requestAndNotify updates available for graph id: '+graphId);
-                    monitoredAnalysis = data[0];
-                    $rootScope.$broadcast('controllabilityAnalysis:hasUpdates',monitoredAnalysis);
-                    $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
-                    initMonitorUpdates(graphId);
-                  }
-                },
-                function(err)
-                {
-                  $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
-                  return false; 
-                });
+                    $log.debug(vm.title+'/requestAndNotify api call success with data',data);
+                    if (data && data[0])
+                    {
+                      $log.debug(vm.title+'/requestAndNotify updates available for graph id: '+graphId);
+                      monitoredAnalysis = data[0];
+                      lastUpdatedDate = data[0].updatedAt;
+                      $rootScope.$broadcast('controllabilityAnalysis:hasUpdates',monitoredAnalysis);
+                      $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
+                      initMonitorUpdates(graphId, monitoredAnalysis);
+                    }
+                  },
+                  function(err)
+                  {
+                    $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
+                    return false; 
+                  });
+              }
             }
             else
             {
@@ -121,7 +132,7 @@
                 {
                   $log.debug(vm.title+'/requestAndNotify api call success with data',data);
                   $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
-                  initMonitorUpdates(graphId);
+                  initMonitorUpdates(graphId, monitoredAnalysis);
                 },
                 function(err)
                 {

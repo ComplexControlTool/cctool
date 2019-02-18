@@ -1,20 +1,20 @@
 <!-- control-nodes.html -->
-<div id="control-nodes-content" ng-if="!controllabilityAnalysisCtrl.data.isAnalysed" flex="">
+<div id="control-nodes-content" ng-if="!controllabilityAnalysisCtrl.content.isAnalysed" flex="">
   <div style="height:720px" layout="row" layout-align="center center">
     LOADING...
   </div>
 </div>
-<div id="control-nodes-content" ng-if="controllabilityAnalysisCtrl.data.isAnalysed" ng-controller="ControlNodesController as cncontroller" flex="">
+<div id="control-nodes-content" ng-if="controllabilityAnalysisCtrl.content.isAnalysed" ng-controller="ControlNodesController as cncontroller" flex="">
   <md-tabs md-selected="controllabilityAnalysisCtrl.selectedConfIndex" class="no-radius" md-enable-disconnect="" md-no-ink="" md-dynamic-height="" md-border-bottom="" flex="100">
-    <md-tab ng-repeat="conf in controllabilityAnalysisCtrl.data.analysis.data.controlConfigurations" label="Configuration {{$index+1}}">
+    <md-tab ng-repeat="conf in controllabilityAnalysisCtrl.content.analysis.data.controlConfigurations" label="Configuration {{$index+1}}">
       <div style="height:650px" layout="row" layout-align="center center" layout-wrap="" layout-padding="">
         <div 
          id="cna-{{controllabilityAnalysisCtrl.graphForAnalysis.id}}-{{$index}}"
          ng-if="controllabilityAnalysisCtrl.drawGraph($index)"
          vis-network=""
          network="controllabilityAnalysisCtrl.network"
-         options="controllabilityAnalysisCtrl.data.visualization.options"
-         structure="controllabilityAnalysisCtrl.data.visualization.structure"
+         options="controllabilityAnalysisCtrl.content.visualization.options"
+         structure="controllabilityAnalysisCtrl.content.visualization.structure"
          node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
          reload="controllabilityAnalysisCtrl.reloadGraph"
          layout-fill=""></div>

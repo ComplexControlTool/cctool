@@ -202,7 +202,7 @@
     },
     analysis: {
         'full': $resource('/api/v1/analysis/?graphId=:graphId&analysisType=:analysisType',{graphId: '@graphId', analysisType: '@analysisType', 'format': 'json'}),
-        'analysed': $resource('/api/v1/analysis/?graphId=:graphId&analysisType=:analysisType',{graphId: '@graphId', analysisType: '@analysisType', 'fields':'isAnalysed', 'format': 'json'}),
+        'analysed': $resource('/api/v1/analysis/?graphId=:graphId&analysisType=:analysisType',{graphId: '@graphId', analysisType: '@analysisType', 'fields':'updatedAt,isAnalysed', 'format': 'json'}),
     },
    };
 
