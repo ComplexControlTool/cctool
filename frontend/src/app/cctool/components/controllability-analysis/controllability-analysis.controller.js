@@ -15,13 +15,14 @@
 
     // Data
     vm.title = 'ControllabilityAnalysisController';
+    vm.data = undefined;
     vm.graphForAnalysis = undefined;
     vm.network = undefined;
     vm.selectedConfIndex = 0;
     vm.reloadGraph = false;
-    vm.progressLinear = {active:false, mode:'', value:'', bufferValue:''};
-    vm.isAnalysed = false;
-    vm.data = undefined;
+    vm.progressLinear = {active:true, mode:'', value:'', bufferValue:''};
+    var analysisServerRefreshInMs = 500 //every 0.5 second
+    var serverRefreshInMs = 300000 // every 5 minutes
 
     // Functions
     vm.initAnalysis = initAnalysis;
@@ -36,13 +37,7 @@
     });
 
     $scope.$on('controllabilityAnalysis:hasUpdates', function(event,data) {
-      vm.data = data;
-      if (data.isAnalysed)
-      {
-        vm.isAnalysed = data.isAnalysed;
-        controllabilityAnalysisService.stopMonitorUpdates();
-        // clearProgressLinear();
-      }
+      analysisHasUpdates(data);
     });
 
     function activate()
@@ -54,6 +49,33 @@
     function deactivate()
     {
       $log.debug(vm.title+'/ Deactivated ' + vm.title + ' controller!');
+      $log.debug(vm.title+'/ Cleanup analysis monitor');
+      controllabilityAnalysisService.stopMonitorUpdates();
+    }
+
+    // Setting up variables before allowing user to start analysing.
+    function initAnalysis(graph)
+    {
+      $log.debug(vm.title+'/ initAnalysis: Setting initial values with arguments:',JSON.stringify(graph));
+      // Get the graph from the ng-repeat of the page.
+      vm.graphForAnalysis = graph ? graph : $scope.graphCtrl.content;
+      // Request analysis from server.
+      showProgressLinear();
+      controllabilityAnalysisService.initMonitorUpdates(vm.graphForAnalysis.id, analysisServerRefreshInMs, serverRefreshInMs);
+    }
+
+    function analysisHasUpdates(data)
+    {
+      $log.debug(vm.title+'/ analysisHasUpdates: arguments:\ndata:',JSON.stringify(data));
+      vm.data = data;
+      if (data.isAnalysed)
+      {
+        clearProgressLinear();
+      }
+      else
+      {
+        showProgressLinear();
+      }
     }
 
     // Display any progress bar.
@@ -67,22 +89,13 @@
     // Remove any progress bar.
     function clearProgressLinear()
     {
+      $log.debug(vm.title+'/ clearProgressLinear');
       vm.progressLinear = {active:false, mode:'', value:'', bufferValue:''};
-    }
-
-    // Setting up variables before allowing user to start analysing.
-    function initAnalysis(graph)
-    {
-      $log.debug(vm.title+'/ initAnalysis: Setting initial values with arguments: '+JSON.stringify(graph));
-      // Get the graph from the ng-repeat of the page.
-      vm.graphForAnalysis = graph ? graph : $scope.graphCtrl.content;
-      // Request analysis from server.
-      showProgressLinear();
-      controllabilityAnalysisService.initMonitorUpdates(vm.graphForAnalysis.id,10000);
     }
 
     function drawGraph(confTabIndex)
     {
+      $log.debug(vm.title+'/ drawGraph: arguments:\nconfTabIndex:',confTabIndex);
       if (!_.isEmpty(vm.data) && vm.selectedConfIndex === confTabIndex)
       {
         return true;
@@ -92,7 +105,7 @@
 
     function isControlNode(nodeIndex)
     {
-      $log.debug(vm.title+'/ isControlNode: arguments:\nnodeIndex:'+JSON.stringify(nodeIndex));
+      $log.debug(vm.title+'/ isControlNode: arguments:\nnodeIndex:',nodeIndex);
       var index = isNaN( parseInt(nodeIndex) ) ? -1 : parseInt(nodeIndex);
 
       if (_.isEmpty(vm.data) || _.isEmpty(vm.data.analysis.data.controlConfigurations))

@@ -54,6 +54,7 @@ class GraphSerializer(DynamicFieldsModelSerializer):
     def get_isProcessed(self, obj):
         hasStructure = False
         hasVisualization = False
+        isUpToDate = False
 
         if obj.structure.data:
             hasStructure = True
@@ -61,7 +62,10 @@ class GraphSerializer(DynamicFieldsModelSerializer):
         if obj.visualization.options and obj.visualization.structure:
             hasVisualization = True
 
-        return (hasStructure and hasVisualization)
+        if obj.structure.updated_at >= obj.updated_at and obj.visualization.updated_at >= obj.updated_at:
+            isUpToDate = True
+
+        return (hasStructure and hasVisualization and isUpToDate)
 
     def get_structure(self, obj):
         return obj.structure.to_json(use_dict=True)
@@ -100,7 +104,7 @@ class AnalyserSerializer(DynamicFieldsModelSerializer):
         if obj.visualization.options and obj.visualization.structure:
             hasVisualization = True
 
-        if obj.updated_at > obj.graph.updated_at:
+        if obj.updated_at >= obj.graph.updated_at:
             isUpToDate = True
 
         return (hasData and hasVisualization and isUpToDate)

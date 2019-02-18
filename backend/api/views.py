@@ -35,11 +35,19 @@ class GraphViewSet(viewsets.ModelViewSet):
     @action(detail=True)
     def analyse(self, request, pk=None):
         helper = AnalyserHelper()
+        analysis_type = self.request.query_params.get('analysisType', None)
         try:
             graph = Graph.objects.get(pk=pk)
         except ObjectDoesNotExist:
             raise Exception(f'Graph object with pk: {pk}, does not exist!')
-        result = helper.analyse_graph(graph)
+        if analysis_type:
+            try:
+                reverse_search = dict(map(reversed, Analysis.ANALYSIS_SET))
+                analysis_type = reverse_search[analysis_type]
+            except KeyError:
+                pass
+                analysis_type = None
+        result = helper.analyse_graph(graph, analysis_type)
         return JsonResponse(result)
 
 class GraphAnalysisList(generics.ListAPIView):

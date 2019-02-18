@@ -16,6 +16,7 @@
     // Data
     vm.title = 'GraphsController';
     vm.goToGraph = goToGraph;
+    var serverRefreshInMs = 300000 // every 5 minutes
 
     // Functions
     activate();
@@ -35,7 +36,7 @@
       if ($state.is('app.cctool_graphs'))
       {
         $log.debug(vm.title+'/ Init graphs monitor');
-        graphsService.initMonitorUpdates($scope.graphManagerCtrl.content, ['showDetails','graphgephicsv','graphgephijson'], 150000);
+        graphsService.initMonitorUpdates($scope.graphManagerCtrl.content, ['showDetails','graphgephicsv','graphgephijson'], serverRefreshInMs);
       }
     }
 

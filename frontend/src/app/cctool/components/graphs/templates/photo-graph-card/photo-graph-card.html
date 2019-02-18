@@ -6,6 +6,9 @@
 
   <md-card-title flex="none">
     <md-card-title-text>
+      <div flex="100" ng-if="graph.createdAt|recentDate">
+        <span class="tag">NEW</span>
+      </div>
       <!-- Title -->
       <span ng-if="graph.title" class="md-headline" ng-bind-html="graph.title"></span>
       <!-- Owner -->

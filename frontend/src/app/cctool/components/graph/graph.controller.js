@@ -19,6 +19,8 @@
     vm.tabs = ['Overview'];
     vm.tabs_view = ['graph-overview'];
     vm.network = undefined;
+    var graphServerRefreshInMs = 500 //every 0.5 second
+    var serverRefreshInMs = 60000 // every minute
 
     // Functions
     activate();
@@ -28,7 +30,14 @@
       deactivate();
     });
     $scope.$on('graph:hasUpdates', function(event,data) {
-      showCustomToast()
+      if (data == vm.content.updatedAt)
+      {
+        vm.content = graphService.getLatestUpdate();;
+      }
+      else
+      {
+        showCustomToast()
+      }
     });
 
     function activate()
@@ -54,7 +63,7 @@
       if ($state.is('app.cctool_graph'))
       {
         $log.debug(vm.title+'/ Init graph monitor');
-        graphService.initMonitorUpdates(vm.content,10000);
+        graphService.initMonitorUpdates(vm.content, graphServerRefreshInMs, serverRefreshInMs);
       }
     }
 

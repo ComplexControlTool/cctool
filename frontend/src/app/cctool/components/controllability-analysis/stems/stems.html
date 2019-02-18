@@ -1,10 +1,10 @@
 <!-- stems.html -->
-<div id="control-nodes-stems-content" ng-if="!controllabilityAnalysisCtrl.isAnalysed" flex="">
+<div id="control-nodes-stems-content" ng-if="!controllabilityAnalysisCtrl.data.isAnalysed" flex="">
   <div style="height:120px" layout="row" layout-align="center center">
-    ANALYSIS STILL IN PROGRESS...
+    LOADING...
   </div>
 </div>
-<div id="control-nodes-stems-content" ng-if="controllabilityAnalysisCtrl.isAnalysed" ng-controller="StemsController as scontroller">
+<div id="control-nodes-stems-content" ng-if="controllabilityAnalysisCtrl.data.isAnalysed" ng-controller="StemsController as scontroller">
   <h1 class="md-title">Configuration {{controllabilityAnalysisCtrl.selectedConfIndex + 1}}</h1>
   <div class="simple-table-container">
     <table class="simple">

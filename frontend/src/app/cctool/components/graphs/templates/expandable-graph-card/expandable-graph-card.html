@@ -6,6 +6,9 @@
 
   <md-card-title>
     <md-card-title-text ng-click="graphsCtrl.goToGraph(graph.id)" class="no-outline cursor-pointer">
+      <div flex="100" ng-if="graph.createdAt|recentDate">
+        <span class="tag">NEW</span>
+      </div>
       <!-- Title -->
       <span ng-if="graph.title" class="md-headline" ng-bind-html="graph.title"></span>
       <!-- Owner -->

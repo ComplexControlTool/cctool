@@ -18,6 +18,9 @@
     var intervalObj = undefined;
     var monitoredAnalysis = undefined;
     var monitoredGraphId = undefined;
+    var monitoredAnalysisIsAnalysed = false;
+    var monitoredAnalysisTaskInterval = 500;
+    var monitoredAnalysisUpdatesInterval = 60000;
 
     // Functions
     activate();
@@ -30,26 +33,38 @@
       $log.debug(vm.title+'/ Activated ' + vm.title + ' service!');
     }
 
-    function initMonitorUpdates(graphId, interval)
+    function initMonitorUpdates(graphId, taskInterval, updatesInterval)
     {
-      $log.debug(vm.title+'/initMonitorUpdates for Controllability analysis with graph id',graphId,' and interval',interval);
+      $log.debug(vm.title+'/initMonitorUpdates');
       stopMonitorUpdates();
 
-      if (graphId)
+      if (graphId && !monitoredGraphId)
       {
         monitoredGraphId = graphId;
       }
 
-      if (!interval)
+      if (taskInterval)
       {
-        interval = 2000;
+        monitoredAnalysisTaskInterval = taskInterval;
+      }
+
+      if (updatesInterval)
+      {
+        monitoredAnalysisUpdatesInterval = updatesInterval;
       }
 
       if (monitoredGraphId)
       {
-        $log.debug(vm.title+'/initMonitorUpdates for Controllability analysis with graph',monitoredGraphId);
-        intervalObj = $interval(function(){requestAndNotify(monitoredGraphId)},
-                                interval);
+        monitoredAnalysisIsAnalysed = monitoredAnalysis ? monitoredAnalysis.isAnalysed : monitoredAnalysisIsAnalysed;
+        var interval = monitoredAnalysisIsAnalysed ? monitoredAnalysisUpdatesInterval : monitoredAnalysisTaskInterval;
+        $log.debug(vm.title+'/initMonitorUpdates with graph id: '+monitoredGraphId+' every '+interval+' milliseconds');
+        intervalObj = $interval(
+          function()
+          {
+            requestAndNotify(monitoredGraphId)
+          },
+          interval
+         );
       }
     }
 
@@ -67,44 +82,58 @@
 
     function requestAndNotify(graphId)
     {
-      $log.debug(vm.title+'/requestAndNotify with graphId',graphId);
-      var isAnalysed = false;
+      $log.debug(vm.title+'/requestAndNotify with graph id: '+graphId);
       var analysisType = 'Controllability';
+
       apiResolver.resolve('cctool.analysis.analysed@query', {'graphId': graphId, 'analysisType': analysisType}).then(
         function(data)
         {
           $log.debug(vm.title+'/requestAndNotify api call success with data',data);
           if (data && data[0])
           {
-            isAnalysed = data[0].isAnalysed;
-            if (isAnalysed)
+            monitoredAnalysisIsAnalysed = data[0].isAnalysed;
+            if (monitoredAnalysisIsAnalysed)
             {
+              // Analysis is already alanysed on backend, only fetch data from server.
               apiResolver.resolve('cctool.analysis.full@query', {'graphId': graphId, 'analysisType': analysisType}).then(
                 function(data)
                 {
                   $log.debug(vm.title+'/requestAndNotify api call success with data',data);
                   if (data && data[0])
                   {
-                    $log.debug(vm.title+'/requestAndNotify updates available for Controllability analysis with graph id',graphId);
+                    $log.debug(vm.title+'/requestAndNotify updates available for graph id: '+graphId);
                     monitoredAnalysis = data[0];
                     $rootScope.$broadcast('controllabilityAnalysis:hasUpdates',monitoredAnalysis);
+                    $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
+                    initMonitorUpdates(graphId);
                   }
                 },
                 function(err)
                 {
-                  $log.debug(vm.title+'/requestAndNotify api call unsuccessful.');
+                  $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
                   return false; 
                 });
             }
             else
             {
-              console.log('** HERE **');
+              apiResolver.resolve('cctool.graph.analyse@get', {'id': graphId, 'analysisType': analysisType}).then(
+                function(data)
+                {
+                  $log.debug(vm.title+'/requestAndNotify api call success with data',data);
+                  $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
+                  initMonitorUpdates(graphId);
+                },
+                function(err)
+                {
+                  $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
+                  return false;
+                });
             }
           }
         },
         function(err)
         {
-          $log.debug(vm.title+'/requestAndNotify api call unsuccessful.');
+          $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
           return false; 
         });
     }
@@ -112,11 +141,7 @@
     function getLatestUpdate()
     {
       $log.debug(vm.title+'/getLatestUpdate');
-      if (monitoredAnalysis.isAnalysed)
-      {
-        return monitoredAnalysis;
-      }
-      return false;
+      return monitoredAnalysis;
     }
 
   }

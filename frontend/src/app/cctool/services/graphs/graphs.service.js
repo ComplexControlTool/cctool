@@ -67,11 +67,11 @@
     function requestAndNotify(ignoredFields)
     {
       $log.debug(vm.title+'/requestAndNotify');
-      apiResolver.resolve('cctool.graphs.basic@get').then(
+      apiResolver.resolve('cctool.graphs.basic@query').then(
         function(data)
         {
           $log.debug(vm.title+'/requestAndNotify api call success with data',data);
-          if (data && data.results)
+          if (data)
           {
             var compareDict = angular.copy(monitoredGraphs)
             for (var i in compareDict)
@@ -81,10 +81,10 @@
                 delete compareDict[i][ignoredFields[j]];
               }
             }
-            if (angular.toJson(compareDict) !== angular.toJson(data.results))
+            if (angular.toJson(compareDict) !== angular.toJson(data))
             {
               $log.debug(vm.title+'/requestAndNotify updates available');
-              monitoredGraphs = lastUpdatedGraphs = data.results;
+              monitoredGraphs = lastUpdatedGraphs = data;
               $rootScope.$broadcast('graphs:hasUpdates',lastUpdatedGraphs);
             }
           }

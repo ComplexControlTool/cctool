@@ -23,7 +23,12 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content layout-margin="">
-        <div style="height:800px">
+        <div ng-if="!graphCtrl.content.isProcessed" flex="">
+          <div style="height:800px" layout="row" layout-align="center center">
+            LOADING...
+          </div>
+        </div>
+        <div ng-if="graphCtrl.content.isProcessed" style="height:800px">
           <div
             id="graph-map"
             vis-network=""

@@ -1,10 +1,10 @@
 <!-- control-nodes.html -->
-<div id="control-nodes-content" ng-if="!controllabilityAnalysisCtrl.isAnalysed" flex="">
+<div id="control-nodes-content" ng-if="!controllabilityAnalysisCtrl.data.isAnalysed" flex="">
   <div style="height:720px" layout="row" layout-align="center center">
-    ANALYSIS STILL IN PROGRESS...
+    LOADING...
   </div>
 </div>
-<div id="control-nodes-content" ng-if="controllabilityAnalysisCtrl.isAnalysed" ng-controller="ControlNodesController as cncontroller" flex="">
+<div id="control-nodes-content" ng-if="controllabilityAnalysisCtrl.data.isAnalysed" ng-controller="ControlNodesController as cncontroller" flex="">
   <md-tabs md-selected="controllabilityAnalysisCtrl.selectedConfIndex" class="no-radius" md-enable-disconnect="" md-no-ink="" md-dynamic-height="" md-border-bottom="" flex="100">
     <md-tab ng-repeat="conf in controllabilityAnalysisCtrl.data.analysis.data.controlConfigurations" label="Configuration {{$index+1}}">
       <div style="height:650px" layout="row" layout-align="center center" layout-wrap="" layout-padding="">
