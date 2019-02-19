@@ -21,9 +21,9 @@
       link: link,
       restrict: 'A',
       scope: {
-        'stemRoot':'=stemRoot',
-        'structure':'=structure',
         'analysis':'=analysis',
+        'visualization':'=visualization',
+        'stemRoot':'=stemRoot',
         'confIndex':'=confIndex',
         'nodeShape':'=nodeShape'
       }
@@ -39,52 +39,45 @@
       var structureData = function()
       {
         // Set the variables.
-        scope.stemRoot = scope.vm.stemRoot;
-        scope.structure = scope.vm.structure;
+        scope.structure = scope.vm.visualization && scope.vm.visualization.structure ? scope.vm.visualization.structure : {};
         scope.stems = scope.vm.analysis && scope.vm.analysis.data.stems && scope.vm.analysis.typeOfAnalysis == 'Controllability' ? scope.vm.analysis.data.stems[scope.vm.confIndex] : {};
         scope.controlConfiguration = scope.vm.analysis && scope.vm.analysis.data.controlConfigurations && scope.vm.analysis.typeOfAnalysis == 'Controllability' ? scope.vm.analysis.data.controlConfigurations[scope.vm.confIndex] : {};
-        scope.nodeShape = scope.vm.nodeShape;
         scope.element = element;
       }
-
-      // Re-draw on data change.
-      scope.$watch('vm.structure',
-        function()
-        {
-          $log.debug('watch: vm.structure');
-          if(!_.isEmpty(scope.vm.structure))
-          {
-            isDrawable = true;
-            structureData();
-            try
-            {
-              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
-            }
-            catch(error)
-            {
-              $log.error('Failed to init/update stems with error',error);
-            }
-          }
-          else
-          {
-            isDrawable = false;
-          }
-        },
-        true
-      );
 
       // Re-draw on data change.
       scope.$watch('vm.analysis',
         function()
         {
           $log.debug('watch: vm.analysis');
-          if(!_.isEmpty(scope.vm.analysis))
+          if(isDrawable && !_.isEmpty(scope.vm.analysis))
+          {
+            structureData();
+            try
+            {
+              drawStems(scope.vm.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.vm.nodeShape, scope.element, color);
+            }
+            catch(error)
+            {
+              $log.error('Failed to init/update stems with error',error);
+            }
+          }
+        },
+        true
+      );
+
+      // Re-draw on data change.
+      scope.$watch('vm.visualization',
+        function()
+        {
+          $log.debug('watch: vm.visualization');
+          if(!_.isEmpty(scope.vm.visualization))
           {
             isDrawable = true;
             structureData();
             try
             {
-              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
+              drawStems(scope.vm.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.vm.nodeShape, scope.element, color);
             }
             catch(error)
             {
@@ -108,7 +101,7 @@
             structureData();
             try
             {
-              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
+              drawStems(scope.vm.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.vm.nodeShape, scope.element, color);
             }
             catch(error)
             {
@@ -124,10 +117,9 @@
           $log.debug('watch: vm.nodeShape');
           if(isDrawable && oldVal != newVal)
           {
-            structureData();
             try
             {
-              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
+              drawStems(scope.vm.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.vm.nodeShape, scope.element, color);
             }
             catch(error)
             {

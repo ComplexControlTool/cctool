@@ -22,9 +22,8 @@
       restrict: 'A',
       scope: {
         'network':'=network',
-        'options':'=options',
-        'structure':'=structure',
         'analysis':'=analysis',
+        'visualization':'=visualization',
         'confIndex':'=confIndex',
         'nodesToHide' : '=nodesToHide',
         'nodeShape':'=nodeShape',
@@ -64,39 +63,28 @@
       var structureData = function()
       {
         // Set scope variables.
-        scope.options = scope.vm.options ? Object.assign({}, scope.vm.options, options) : options
-        scope.structure = scope.vm.structure ? scope.vm.structure : {}
+        scope.options = scope.vm.visualization && scope.vm.visualization.options ? Object.assign({}, scope.vm.visualization.options, options) : options
+        scope.structure = scope.vm.visualization && scope.vm.visualization.structure ? scope.vm.visualization.structure : {}
+        scope.controlConfiguration = scope.vm.analysis && scope.vm.analysis.data.controlConfigurations && scope.vm.analysis.typeOfAnalysis == 'Controllability' ? scope.vm.analysis.data.controlConfigurations[scope.vm.confIndex] : {};
         scope.element = element[0];
       }
 
       // Re-draw on data change.
-      scope.$watch('vm.options',
+      scope.$watch('vm.analysis',
         function()
         {
-          $log.debug("watch: vm.options");
-          if(!angular.equals({}, scope.vm.options))
+          $log.debug("watch: vm.analysis");
+          if(!_.isEmpty(scope.vm.analysis))
           {
-            $log.debug("inside watch: vm.options / init");
-            isDrawable = true;
+            $log.debug("inside watch: vm.analysis / init");
             structureData();
             try
             {
-              if (nodeData.length == 0 && edgeData.length == 0)
+              initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape, scope.controlConfiguration);
+              scope.vm.network = initNetwork($log, scope.element, data, scope.options);
+              if (!scope.vm.editGraph)
               {
-                initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
-                scope.vm.network = initNetwork($log, scope.element, data, scope.options);
-                if (!scope.vm.editGraph)
-                {
-                  initOnClick(scope.vm.network, data.nodes, data.edges);
-                }
-              }
-              else
-              {
-                updateData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
-                if (!scope.vm.editGraph)
-                {
-                  initOnClick(scope.vm.network, data.nodes, data.edges);
-                }
+                initOnClick(scope.vm.network, data.nodes, data.edges);
               }
             }
             catch(error)
@@ -109,20 +97,20 @@
       );
 
       // Re-draw on data change.
-      scope.$watch('vm.structure',
+      scope.$watch('vm.visualization',
         function()
         {
-          $log.debug("watch: vm.structure");
-          if(!angular.equals({}, scope.vm.structure))
+          $log.debug("watch: vm.visualization");
+          if(!_.isEmpty(scope.vm.visualization))
           {
-            $log.debug("inside watch: vm.structure / init");
+            $log.debug("inside watch: vm.visualization / init");
             isDrawable = true;
             structureData();
             try
             {
               if (nodeData.length == 0 && edgeData.length == 0)
               {
-                initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+                initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape, scope.controlConfiguration);
                 scope.vm.network = initNetwork($log, scope.element, data, scope.options);
                 if (!scope.vm.editGraph)
                 {
@@ -131,7 +119,7 @@
               }
               else
               {
-                updateData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+                updateData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape, scope.controlConfiguration);
                 if (!scope.vm.editGraph)
                 {
                   initOnClick(scope.vm.network, data.nodes, data.edges);
@@ -142,6 +130,10 @@
             {
               $log.error("Failed to init/update graph with error",error)
             }
+          }
+          else
+          {
+            isDrawable = false;
           }
         },
         true
@@ -154,12 +146,12 @@
         function()
         {
           $log.debug("watch vm.nodesToHide");
-          if(isDrawable && scope.vm.nodesToHide && !angular.equals({}, scope.vm.nodesToHide))
+          if(isDrawable && scope.vm.nodesToHide && !_.isEmpty(scope.vm.nodesToHide))
           {
             $log.debug("inside watch: vm.nodesToHide");
             try
             {
-              initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+              initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape, scope.controlConfiguration);
               scope.vm.network = initNetwork($log, scope.element, data, scope.options);
               if (scope.vm.nodesToHide.removeNodesIds && scope.vm.nodesToHide.removeNodesIds.length > 0)
               {
@@ -178,10 +170,10 @@
 
       // Re-draw on nodeShape attribute change.
       scope.$watch('vm.nodeShape',
-        function()
+        function(oldVal,newVal)
         {
           $log.debug("watch vm.nodeShape");
-          if(isDrawable)
+          if(isDrawable && oldVal != newVal)
           {
             $log.debug("inside watch: vm.nodeShape");
             try
@@ -231,7 +223,7 @@
             $log.debug("inside watch: vm.reload");
             try
             {
-              initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape);
+              initData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape, scope.controlConfiguration);
               if (scope.vm.network)
               {
                 destroyNetwork(scope.vm.network);
@@ -323,9 +315,9 @@
     );
   }
 
-  function updateAnalysedGraph(nodeData, edgeData, isAnalysed, nodeShape, controlConfiguration)
+  function updateControlNodes(nodeData, controlConfiguration)
   {
-    
+    var nodesToUpdate = [];
     // Update control nodes of current set
     for (var i in controlConfiguration)
     {
@@ -339,11 +331,11 @@
       // Update border width
       data["borderWidth"] = 3;
       // Update title
-      data["title"] = data["title"].replace("<p>Control Node: <strong>No</strong></p>","<p>Control Node: <strong>Yes</strong></p>");
+      data["title"] += "<p>Control Node: <strong>Yes</strong></p>";
 
-      nodeData.update(data)
+      nodesToUpdate.push(data);
     }
-
+    nodeData.update(nodesToUpdate);
   }
 
   function changeNodeShape(nodeData, edgeData, nodeShape)
@@ -359,10 +351,10 @@
   }
 
   // Update data for use with the network.
-  function updateData($log, nodeData, edgeData, DataSets, nodeShape)
+  function updateData($log, nodeData, edgeData, DataSets, nodeShape, controlConfiguration)
   {
     $log.debug("Update Data Called");
-    if( angular.equals({}, DataSets) )
+    if(_.isEmpty(DataSets))
     {
       return;
     }
@@ -370,20 +362,20 @@
     nodeData.update(DataSets.nodes);
     edgeData.update(DataSets.edges);
 
-    // if(isAnalysed)
-    // {
-    //   updateAnalysedGraph(nodeData, edgeData, isAnalysed, nodeShape, controlConfiguration);
-    // }
+    if(controlConfiguration)
+    {
+      updateControlNodes(nodeData, controlConfiguration);
+    }
   }
 
   // Initialise data for use with the network.
-  function initData($log, nodeData, edgeData, DataSets, nodeShape)
+  function initData($log, nodeData, edgeData, DataSets, nodeShape, controlConfiguration)
   {
     $log.debug("Init Data Called");
     nodeData.clear();
     edgeData.clear();
     
-    updateData($log, nodeData, edgeData, DataSets, nodeShape);
+    updateData($log, nodeData, edgeData, DataSets, nodeShape, controlConfiguration);
   }
 
   // Function to render the network's structure.
@@ -412,7 +404,7 @@
   {
     var positions = network.getPositions();
 
-    if (angular.equals({}, positions))
+    if (_.isEmpty(positions))
     {
       return;
     }
