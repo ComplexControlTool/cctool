@@ -9,9 +9,16 @@
   <div class="simple-table-container">
     <table class="simple">
       <tbody>
-        <tr ng-repeat="stemRoot in controllabilityAnalysisCtrl.content.analysis.data.graphcontrolconf[controllabilityAnalysisCtrl.selectedConfIndex]">
+        <tr ng-repeat="stemRoot in controllabilityAnalysisCtrl.content.analysis.data.controlConfigurations[controllabilityAnalysisCtrl.selectedConfIndex]">
           <td>
-            <div jsnx-stem ng-model="controllabilityAnalysisCtrl.content.visualization.structure" stem-root="stemRoot" conf-index="controllabilityAnalysisCtrl.selectedConfIndex" node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value" flex=""></div>
+            <div
+            jsnx-stem=""
+            stem-root="stemRoot"
+            structure="controllabilityAnalysisCtrl.content.visualization.structure"
+            analysis="controllabilityAnalysisCtrl.content.analysis"
+            conf-index="controllabilityAnalysisCtrl.selectedConfIndex"
+            node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+            flex=""></div>
           </td>
         </tr>
       </tbody>

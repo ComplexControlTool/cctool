@@ -23,7 +23,7 @@ def find_graph_controllability(self, graph_id, analysis_id):
     (control_configurations, stems) = CA_Analysis.computeControlConf(connections, number_of_nodes)
     analysis_data = dict()
     analysis_data['controlConfigurations'] = control_configurations
-    analysis_data['stems'] = stems
+    analysis_data['stems'] = {key:(dict(map(reversed,value.items()))) for (key,value) in stems.items()}
     analysis.data = analysis_data
     analysis.save()
 

@@ -24,7 +24,8 @@
         'network':'=network',
         'options':'=options',
         'structure':'=structure',
-        'analysis_data':'=analysis_data',
+        'analysis':'=analysis',
+        'confIndex':'=confIndex',
         'nodesToHide' : '=nodesToHide',
         'nodeShape':'=nodeShape',
         'editGraph':'=editGraph',
@@ -100,7 +101,7 @@
             }
             catch(error)
             {
-              $log.error("Failed to init/update graph with error",error)
+              $log.error("Failed to init/update graph with error",error);
             }
           }
         },
@@ -145,6 +146,8 @@
         },
         true
       );
+
+      // TODO: add one more (from above) for analysis object
 
       // Hide nodes according to explore card.
       scope.$watch('vm.nodesToHide',

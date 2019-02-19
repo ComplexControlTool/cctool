@@ -7,10 +7,8 @@
     .module('app.cctool.directives.jsnxStems')
     .directive('jsnxStem', jsnxStem);
 
-  jsnxStem.$inject = ['$window', 'jsnxService', 'cctoolColorsService'];
-
   /* @ngInject */
-  function jsnxStem($window, jsnxService, cctoolColorsService)
+  function jsnxStem($log, $window, jsnxService, cctoolColorsService)
   {
     // Usage:
     //
@@ -23,8 +21,9 @@
       link: link,
       restrict: 'A',
       scope: {
-        'graph':'=ngModel',
         'stemRoot':'=stemRoot',
+        'structure':'=structure',
+        'analysis':'=analysis',
         'confIndex':'=confIndex',
         'nodeShape':'=nodeShape'
       }
@@ -34,153 +33,141 @@
     function link(scope, element, attrs)
     {
       var isDrawable = false;
-      var labels = '';
       var colors = cctoolColorsService.cctoolColors;
       var color = colors[5]; // (default to grey)
 
       var structureData = function()
       {
-      // Set the variables.
-      scope.id = scope.vm.graph.id;
-      scope.stemRoot = scope.vm.stemRoot;
-      scope.stems = scope.vm.graph.graphcontrolconfstems ? scope.vm.graph.graphcontrolconfstems[scope.vm.confIndex] : {};
-      scope.structure = scope.vm.graph.graphstructure;
-      scope.labels = scope.vm.graph.labels ? scope.vm.graph.labels.split(",") : '';
-      scope.controllability = scope.vm.graph.controllability ? scope.vm.graph.controllability.split(" ") : '';
-      scope.functions = scope.vm.graph.functions ? scope.vm.graph.functions.split(" ") : '';
-      scope.controlNodes = scope.vm.graph.graphcontrolconf ? scope.vm.graph.graphcontrolconf[scope.vm.confIndex] : {};
-      scope.nodeFrequency = scope.vm.graph.graphnodefrequencies ? scope.vm.graph.graphnodefrequencies : {};
-      scope.element = element;
-
-      if(scope.vm.nodeShape === 'ellipse')
-      {
-        labels = scope.labels;
-      }
+        // Set the variables.
+        scope.stemRoot = scope.vm.stemRoot;
+        scope.structure = scope.vm.structure;
+        scope.stems = scope.vm.analysis && scope.vm.analysis.data.stems && scope.vm.analysis.typeOfAnalysis == 'Controllability' ? scope.vm.analysis.data.stems[scope.vm.confIndex] : {};
+        scope.controlConfiguration = scope.vm.analysis && scope.vm.analysis.data.controlConfigurations && scope.vm.analysis.typeOfAnalysis == 'Controllability' ? scope.vm.analysis.data.controlConfigurations[scope.vm.confIndex] : {};
+        scope.nodeShape = scope.vm.nodeShape;
+        scope.element = element;
       }
 
       // Re-draw on data change.
-      scope.$watch('vm.graph',
-      function()
-      {
-        if(!angular.equals({}, scope.vm.graph))
+      scope.$watch('vm.structure',
+        function()
         {
-        isDrawable = true;
-        structureData();
-        try
-        {
-          drawStems(scope.id, scope.stemRoot, scope.stems, scope.structure, labels, scope.controllability, scope.functions, scope.controlNodes, scope.nodeFrequency, scope.element, color);
-        }
-        catch(error)
-        {
+          $log.debug("watch: vm.structure");
+          if(!_.isEmpty(scope.vm.structure))
+          {
+            isDrawable = true;
+            structureData();
+            try
+            {
+              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
+            }
+            catch(error)
+            {
+              $log.error("Failed to init/update stems with error",error);
+            }
+          }
+          else
+          {
+            isDrawable = false;
+          }
+        },
+        true
+      );
 
-        }
-        }
-      },
-      true
+      // Re-draw on data change.
+      scope.$watch('vm.analysis',
+        function()
+        {
+          $log.debug("watch: vm.analysis");
+          if(!_.isEmpty(scope.vm.analysis))
+          {
+            isDrawable = true;
+            structureData();
+            try
+            {
+              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
+            }
+            catch(error)
+            {
+              $log.error("Failed to init/update stems with error",error);
+            }
+          }
+          else
+          {
+            isDrawable = false;
+          }
+        },
+        true
       );
 
       scope.$watch('vm.confIndex',
-      function(oldVal,newVal)
-      {
-        if(isDrawable && oldVal != newVal)
+        function(oldVal,newVal)
         {
-        structureData();
-        try
-        {
-          drawStems(scope.id, scope.stemRoot, scope.stems, scope.structure, labels, scope.controllability, scope.functions, scope.controlNodes, scope.nodeFrequency, scope.element, color);
+          $log.debug("watch: vm.confIndex");
+          if(isDrawable && oldVal != newVal)
+          {
+            structureData();
+            try
+            {
+              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
+            }
+            catch(error)
+            {
+              $log.error("Failed to init/update stems with error",error);
+            }
+          }
         }
-        catch(error)
-        {
-
-        }
-        }
-      }
       );
 
       scope.$watch('vm.nodeShape',
-      function()
-      {
-        if(scope.vm.nodeShape === 'ellipse')
+        function(oldVal,newVal)
         {
-        labels = scope.labels;
+          $log.debug("watch: vm.nodeShape");
+          if(isDrawable && oldVal != newVal)
+          {
+            structureData();
+            try
+            {
+              drawStems(scope.stemRoot, scope.structure, scope.stems, scope.controlConfiguration, scope.nodeShape, scope.element, color);
+            }
+            catch(error)
+            {
+              $log.error("Failed to init/update stems with error",error);
+            }
+          }
         }
-        else
-        {
-        labels = '';
-        }
-        if(isDrawable)
-        {
-        try
-        {
-          drawStems(scope.id, scope.stemRoot, scope.stems, scope.structure, labels, scope.controllability, scope.functions, scope.controlNodes, scope.nodeFrequency, scope.element, color);
-        }
-        catch(error)
-        {
-          
-        }
-        }
-      }
       );
 
     }
   }
 
-  function drawStems(graphId, stemRoot, stemStructure, graphStructure, graphLabels, graphControllability, graphFunctions, graphControlNodes, graphNodeFrequency, stemStructureDOM, color)
+  // graphId, graphFunctions to delete
+  function drawStems(stemRoot, structure, stems, controlConfiguration, nodeShape, stemStructureDOM, color)
   {
     // Function to construct data related to the node of the graph.
     function constructDrawNodeData(node)
     {
       var nodeData = {};
-
-      // nodeAttr
-      var defaultR = 13;
-      var value = 0;
-      if (graphNodeFrequency[1] && graphNodeFrequency[0][0]) {
-      value = ( graphNodeFrequency[1][node] / graphNodeFrequency[0][0] ) * 15;
-      }
-      var radius = defaultR + value;
-      nodeData.nodeAttr = radius;
       
       // nodeStyle
-      var fillColor = color.nodeColor; // node circle color.
-      var strokeColor = color.nodeStroke; // node circle outline color.
-      var strokeWidth = 1;
-
-      // choose green (easy) - orange (medium) - red (hard) according to controllability
-      for (var i in graphControllability)
-      {
-      if (node == i)
-      {
-        switch(graphControllability[i])
-        {
-        case "E":
-          fillColor = color.easynodeColor;
-          strokeColor = color.easynodeStrokeColor;
-          break;
-        case "M":
-          fillColor = color.mednodeColor;
-          strokeColor = color.mednodeStrokeColor;
-          break;
-        case "H":
-          fillColor = color.hardnodeColor;
-          strokeColor = color.hardnodeStrokeColor;
-          break;
-        }
-        break;
-      }
-      }
+      var id = node.id;
+      var label = node.label;
+      var fillColor = node.color.background; // node circle color.
+      var strokeColor = node.color.border; // node circle outline color.
+      var strokeWidth = node.borderWidth;
 
       // choose a lighter fill color for control nodes.
-      for (var i in graphControlNodes)
+      for (var i in controlConfiguration)
       {
-      if (node == graphControlNodes[i])
-      {
-        fillColor = color.ctrlnodeColor;
-        strokeWidth = 2;
-        break;
-      }
+        if (node.id == controlConfiguration[i])
+        {
+          fillColor = color.ctrlnodeColor;
+          strokeWidth = 2;
+          break;
+        }
       }
 
+      nodeData.nodeId = id;
+      nodeData.nodeLabel = label;
       nodeData.nodeStyleFill = fillColor;
       nodeData.nodeStyleStroke = strokeColor;
       nodeData.nodeStyleStrokeWidth = strokeWidth;
@@ -189,127 +176,93 @@
     };
 
     // Function to construct data related to the edge of the graph.
-    function constructDrawEdgeData(edge)
+    function constructDrawEdgeData(nodeIdFrom, nodeIdTo)
     {
       var edgeData = {};
-
-      var label = '';
-      var sign = '>';
-      var fillColor = color.nodeStroke; // node link color.
-      var strokeWidth = 7;
-      var linkDistance = 140;
       
-      // Current node.
-      var edgeFrom = graphStructure[edge[0]];
-      // In the weights dictionary, get the connections.
-      for (var edgeTo in edgeFrom)
+      // Find edge
+      var edge = undefined;
+      for (var i in structure.edges)
       {
-      if ( edgeFrom[edgeTo][0] === (+edge[1]) )
-      {
-        label = edgeFrom[edgeTo][1];
-        // Get the value of the weight and return a color.
-        switch ( edgeFrom[edgeTo][1] )
+        edge = structure.edges[i];
+        if (edge.from == nodeIdFrom && edge.to == nodeIdTo)
         {
-        case "+W":
-          sign = '+';
-          fillColor = color.weakplus;
-          strokeWidth = 6;
-          linkDistance = 180;
-          break;
-        case "+M":
-          sign = '+';
-          fillColor = color.mediumplus;
-          strokeWidth = 7;
-          linkDistance = 140;
-          break;
-        case "+S":
-          sign = '+';
-          fillColor = color.strongplus;
-          strokeWidth = 8;
-          linkDistance = 100;
-          break;
-        case "-W":
-          sign = '-';
-          fillColor = color.weakminus;
-          strokeWidth = 6;
-          linkDistance = 180;
-          break;
-        case "-M":
-          sign = '-';
-          fillColor = color.mediumminus;
-          strokeWidth = 7;
-          linkDistance = 140;
-          break;
-        case "-S":
-          sign = '-';
-          fillColor = color.strongminus;
-          strokeWidth = 8;
-          linkDistance = 100;
           break;
         }
-        break;
       }
+
+      if (edge == undefined)
+      {
+        return;
       }
-      edgeData.edgeLabel = label;
+
+      var fillColor = edge.color.color;
+      var sign = '>';
+      if (edge.cctool.weight.indexOf("+"))
+      {
+        sign = '+';
+      }
+      else if (edge.cctool.weight.indexOf("+"))
+      {
+        sign = '-';
+      }
+
       edgeData.edgeSign = sign;
       edgeData.edgeStyleFill = fillColor;
-      edgeData.edgeStyleStroke = strokeWidth;
-      edgeData.edgeLinkDistance = linkDistance;
 
       return edgeData;
     };
 
-    var stemFillColor = color.nodeColor; // node circle color.;
-    var stemStrokeColor = color.nodeStroke; // node circle outline color.;
-    var stemStrokeWidth = 1;
-    var linkFillColor = color.nodeStroke; // node link color.
-
-    var stem = stemRoot;
-    var drawNodeData = constructDrawNodeData(stem);
+    var drawNodeData = constructDrawNodeData(structure.nodes[stemRoot]);
     var drawEdgeData = {};
 
-    if(graphLabels)
+    if(nodeShape === 'ellipse')
     {
-      var stems = getStemLabelTemplate(graphLabels[stem],drawNodeData.nodeStyleFill,drawNodeData.nodeStyleStroke,drawNodeData.nodeStyleStrokeWidth);
+      var stemChain = getStemLabelTemplate(drawNodeData.nodeLabel, drawNodeData.nodeStyleFill, drawNodeData.nodeStyleStroke, drawNodeData.nodeStyleStrokeWidth);
     }
     else
     {
-      var stems = getStemGraphicTemplate(stem,drawNodeData.nodeStyleFill,drawNodeData.nodeStyleStroke,drawNodeData.nodeStyleStrokeWidth);
+      var stemChain = getStemGraphicTemplate(drawNodeData.nodeId, drawNodeData.nodeStyleFill, drawNodeData.nodeStyleStroke, drawNodeData.nodeStyleStrokeWidth);
     }
+
     while(true)
     {
-      var potentialStem = stemStructure[stem];
-      // Check if undefined.
-      if (!potentialStem)
-      {
-      break;
-      }
-      // Check if the node points to the same node.
-      if (stem === potentialStem)
-      {
-      break;
-      }
-      // Check if the node (a) points to node (b) and node (b) points to node (a). 
-      if (stem === stemStructure[potentialStem])
-      {
-      break;
-      }
-      drawEdgeData = constructDrawEdgeData([stem,potentialStem]);
-      stem = parseInt(potentialStem);
-      drawNodeData = constructDrawNodeData(stem);
+      var potentialStem = stems[stemRoot];
 
-      if(graphLabels)
+      // Check if undefined.
+      if (potentialStem == undefined)
       {
-      stems += getLinkLabelTemplate(drawEdgeData.edgeStyleFill,drawEdgeData.edgeSign);
-      stems += getStemLabelTemplate(graphLabels[stem],drawNodeData.nodeStyleFill,drawNodeData.nodeStyleStroke,drawNodeData.nodeStyleStrokeWidth);
+        break;
+      }
+
+      // Check if the node points to the same node.
+      if (stemRoot === potentialStem)
+      {
+        break;
+      }
+
+      // Check if the node (a) points to node (b) and node (b) points to node (a). 
+      if (stemRoot === stems[potentialStem])
+      {
+        break;
+      }
+
+      drawEdgeData = constructDrawEdgeData(stemRoot,potentialStem);
+      stemRoot = parseInt(potentialStem);
+      drawNodeData = constructDrawNodeData(structure.nodes[stemRoot]);
+
+      if(nodeShape === 'ellipse')
+      {
+        stemChain += getLinkLabelTemplate(drawEdgeData.edgeStyleFill, drawEdgeData.edgeSign);
+        stemChain += getStemLabelTemplate(drawNodeData.nodeLabel, drawNodeData.nodeStyleFill, drawNodeData.nodeStyleStroke, drawNodeData.nodeStyleStrokeWidth);
       }
       else
       {
-      stems += getLinkGraphicTemplate(drawEdgeData.edgeStyleFill);
-      stems += getStemGraphicTemplate(stem,drawNodeData.nodeStyleFill,drawNodeData.nodeStyleStroke,drawNodeData.nodeStyleStrokeWidth);              
+        stemChain += getLinkGraphicTemplate(drawEdgeData.edgeStyleFill);
+        stemChain += getStemGraphicTemplate(drawNodeData.nodeId, drawNodeData.nodeStyleFill, drawNodeData.nodeStyleStroke, drawNodeData.nodeStyleStrokeWidth);              
       }
     }
-    stemStructureDOM.html(stems);
+    stemStructureDOM.html(stemChain);
   }
 
   function getStemGraphicTemplate(label, fillColor, strokeColor, strokeWidth)
