@@ -51,7 +51,7 @@
       scope.$watch('vm.structure',
         function()
         {
-          $log.debug("watch: vm.structure");
+          $log.debug('watch: vm.structure');
           if(!_.isEmpty(scope.vm.structure))
           {
             isDrawable = true;
@@ -62,7 +62,7 @@
             }
             catch(error)
             {
-              $log.error("Failed to init/update stems with error",error);
+              $log.error('Failed to init/update stems with error',error);
             }
           }
           else
@@ -77,7 +77,7 @@
       scope.$watch('vm.analysis',
         function()
         {
-          $log.debug("watch: vm.analysis");
+          $log.debug('watch: vm.analysis');
           if(!_.isEmpty(scope.vm.analysis))
           {
             isDrawable = true;
@@ -88,7 +88,7 @@
             }
             catch(error)
             {
-              $log.error("Failed to init/update stems with error",error);
+              $log.error('Failed to init/update stems with error',error);
             }
           }
           else
@@ -102,7 +102,7 @@
       scope.$watch('vm.confIndex',
         function(oldVal,newVal)
         {
-          $log.debug("watch: vm.confIndex");
+          $log.debug('watch: vm.confIndex');
           if(isDrawable && oldVal != newVal)
           {
             structureData();
@@ -112,7 +112,7 @@
             }
             catch(error)
             {
-              $log.error("Failed to init/update stems with error",error);
+              $log.error('Failed to init/update stems with error',error);
             }
           }
         }
@@ -121,7 +121,7 @@
       scope.$watch('vm.nodeShape',
         function(oldVal,newVal)
         {
-          $log.debug("watch: vm.nodeShape");
+          $log.debug('watch: vm.nodeShape');
           if(isDrawable && oldVal != newVal)
           {
             structureData();
@@ -131,7 +131,7 @@
             }
             catch(error)
             {
-              $log.error("Failed to init/update stems with error",error);
+              $log.error('Failed to init/update stems with error',error);
             }
           }
         }
@@ -198,11 +198,11 @@
 
       var fillColor = edge.color.color;
       var sign = '>';
-      if (edge.cctool.weight.indexOf("+"))
+      if (edge.cctool.weight.indexOf('+') != -1)
       {
         sign = '+';
       }
-      else if (edge.cctool.weight.indexOf("+"))
+      else if (edge.cctool.weight.indexOf('-') != -1)
       {
         sign = '-';
       }
