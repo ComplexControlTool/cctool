@@ -287,7 +287,7 @@ def rank_by_node_controllability(control_configurations, stems, node_controllabi
         weighted_configuration = sum([weighted_nodes[nodeId] for nodeId in configuration])
         weighted_control_configurations[id] = weighted_configuration
 
-    sorted_by_value = sorted(weighted_control_configurations.items(), key=operator.itemgetter(1), reverse=True)
+    sorted_by_value = sorted(weighted_control_configurations.items(), key=operator.itemgetter(1))
     ranked_control_configurations = dict()
     ranked_stems = dict()
     for i, (id,_) in enumerate(sorted_by_value):
