@@ -19,8 +19,8 @@
     vm.tabs = ['Overview'];
     vm.tabs_view = ['graph-overview'];
     vm.network = undefined;
-    var graphServerRefreshInMs = 500 //every 0.5 second
-    var serverRefreshInMs = 60000 // every minute
+    var graphServerRefreshInMs = 30000 //every .5 minute
+    var serverRefreshInMs = 90000 // every 1.5 minutes
 
     // Functions
     activate();

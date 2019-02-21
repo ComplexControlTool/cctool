@@ -18,8 +18,8 @@
     var intervalObj = undefined;
     var monitoredGraph = undefined;
     var monitoredGraphIsProgressed = false;
-    var monitoredGraphTaskInterval = 500;
-    var monitoredGraphUpdatesInterval = 60000;
+    var monitoredGraphTaskInterval = 30000;
+    var monitoredGraphUpdatesInterval = 90000;
     var lastUpdatedDate = undefined;
     var lastUpdatedGraph = undefined;
     var ignoredUpdateDates = [];

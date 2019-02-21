@@ -19,8 +19,8 @@
     var monitoredGraphId = undefined;
     var monitoredAnalysis = undefined;
     var monitoredAnalysisIsAnalysed = false;
-    var monitoredAnalysisTaskInterval = 500;
-    var monitoredAnalysisUpdatesInterval = 60000;
+    var monitoredAnalysisTaskInterval = 30000;
+    var monitoredAnalysisUpdatesInterval = 90000;
     var lastUpdatedDate = undefined;
 
     // Functions

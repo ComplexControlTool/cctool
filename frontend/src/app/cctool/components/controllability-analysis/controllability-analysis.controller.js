@@ -21,7 +21,7 @@
     vm.selectedConfIndex = 0;
     vm.reloadGraph = false;
     vm.progressLinear = {active:true, mode:'', value:'', bufferValue:''};
-    var analysisServerRefreshInMs = 500 //every 0.5 second
+    var analysisServerRefreshInMs = 1000 //every second
     var serverRefreshInMs = 300000 // every 5 minutes
 
     // Functions

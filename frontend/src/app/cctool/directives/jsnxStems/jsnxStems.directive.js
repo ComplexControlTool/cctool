@@ -40,8 +40,30 @@
       {
         // Set the variables.
         scope.structure = scope.vm.visualization && scope.vm.visualization.structure ? scope.vm.visualization.structure : {};
-        scope.stems = scope.vm.analysis && scope.vm.analysis.data.stems && scope.vm.analysis.typeOfAnalysis == 'Controllability' ? scope.vm.analysis.data.stems[scope.vm.confIndex] : {};
-        scope.controlConfiguration = scope.vm.analysis && scope.vm.analysis.data.controlConfigurations && scope.vm.analysis.typeOfAnalysis == 'Controllability' ? scope.vm.analysis.data.controlConfigurations[scope.vm.confIndex] : {};
+        scope.stems = {}
+        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability' && scope.vm.analysis.data)
+        {
+          if (scope.vm.analysis.data.rankedByNodeControllability)
+          {
+            scope.stems = scope.vm.analysis.data.rankedByNodeControllability.stems[scope.vm.confIndex];
+          }
+          else if(scope.vm.analysis.data.stems)
+          {
+            scope.stems = scope.vm.analysis.data.stems[scope.vm.confIndex];
+          }
+        }
+        scope.controlConfiguration = {}
+        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability' && scope.vm.analysis.data)
+        {
+          if (scope.vm.analysis.data.rankedByNodeControllability)
+          {
+            scope.controlConfiguration = scope.vm.analysis.data.rankedByNodeControllability.controlConfigurations[scope.vm.confIndex];
+          }
+          else if(scope.vm.analysis.data.controlConfigurations)
+          {
+            scope.controlConfiguration = scope.vm.analysis.data.controlConfigurations[scope.vm.confIndex];
+          }
+        }
         scope.element = element;
       }
 

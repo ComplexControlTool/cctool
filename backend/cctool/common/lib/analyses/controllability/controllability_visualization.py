@@ -54,6 +54,8 @@ def generate_node_options(node, analysis):
 
     borderWidth = 2
 
+    borderWidthSelected = 2
+
     highlight = dict()
     highlight['border'] = '#FF3399'
     highlight['background'] = '#f1f1f1'
@@ -68,8 +70,12 @@ def generate_node_options(node, analysis):
     color['highlight'] = highlight
     color['hover'] = hover
 
+    shape = "ellipse"
+
     shape_properties = dict()
     shape_properties['borderDashes'] = False
+
+    size = 13
 
     title = list()
     try:
@@ -106,6 +112,7 @@ def generate_node_options(node, analysis):
     except AttributeError:
         pass
 
+    # Override for Controllability
     try:
         if node.controllability == NodePlus.EASY_CONTROLLABILITY:
             highlight['background'] = '#74c476'
@@ -122,6 +129,7 @@ def generate_node_options(node, analysis):
     except AttributeError:
         pass
 
+    # Override for Importance
     try:
         if node.importance == NodePlus.LOW_IMPORTANCE:
             shape_properties['borderDashes'] = [2,4]
@@ -131,12 +139,21 @@ def generate_node_options(node, analysis):
     except AttributeError:
         pass
 
+    # Override for Frequency
+    frequencies = analysis.data.get('frequencies', {})
+    if node.identifier in frequencies:
+        freq_value = frequencies[node.identifier]
+        defaultRadius = 13
+        added_radius = freq_value / 100 * 15
+        size = defaultRadius + added_radius
+        title.append(f'<p>Frequency: <strong>{str(freq_value)}%</strong></p>')
+
     node_options['borderWidth'] = borderWidth
-    node_options['borderWidthSelected'] = 2
+    node_options['borderWidthSelected'] = borderWidthSelected
     node_options['color'] = color
-    node_options['shape'] = "ellipse"
+    node_options['shape'] = shape
     node_options['shapeProperties'] = shape_properties
-    node_options['size'] = 13
+    node_options['size'] = size
     node_options['title'] = ''.join(title)
     try:
         if node.position_x:

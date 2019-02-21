@@ -30,8 +30,7 @@ class AbstractAnalysis(TimeStampedModel):
     data = JSONField(
         default=dict,
         null=True,
-        blank=True,
-        db_index=True
+        blank=True
     )
 
     visualization = OneToOneField(

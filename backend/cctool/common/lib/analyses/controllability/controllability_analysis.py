@@ -1,6 +1,9 @@
-# Import packages.
 import itertools
+import operator
+from collections import Counter
+from cctool.graphs.models.models import NodePlus
 
+MIN_NODES_FOR_APPROXIMATION = 100;
 
 def bipartiteMatch(graph):
     """
@@ -177,6 +180,7 @@ def computeControlConf(graphSet, nodesNo):
     """
     output = {}
     matching = {}
+    frequencies = {}
     (controlSize, controlMatching) = bipartiteMatch(graphSet)
     matchingSize = nodesNo - controlSize
 
@@ -209,8 +213,16 @@ def computeControlConf(graphSet, nodesNo):
             matching[counter] = subMatching
             counter += 1
 
+    # Compute node frequencies
+    number_of_configurations = len(output)
+    if number_of_configurations == 0:
+        return (output, matching, frequencies)
+
+    counter = dict(Counter(list(itertools.chain.from_iterable(output.values()))))
+    frequencies = {key:(value/number_of_configurations*100) for (key,value) in counter.items()}
+
     # End of methodology.
-    return (output, matching)
+    return (output, matching, frequencies)
 
 
 def computeAproxControlConf(graphSet, nodesNo):
@@ -239,43 +251,47 @@ def computeAproxControlConf(graphSet, nodesNo):
     output[1] = nodesInConf
     output[2] = nodesInConf
 
+    # Compute node frequencies
+    number_of_configurations = len(output)
+    if number_of_configurations == 0:
+        return (output, matching, frequencies)
+
+    counter = dict(Counter(list(itertools.chain.from_iterable(output.values()))))
+    frequencies = {key:(value/number_of_configurations*100) for (key,value) in counter.items()}
+
     # End of methodology.
-    return (output, matching)
+    return (output, matching, frequencies)
 
 
-def findBestControlConf(controlConfs, controlConfStems, controllability):
+def find_controllability(graphSet, nodesNo):
+    if nodesNo < MIN_NODES_FOR_APPROXIMATION:
+        return computeControlConf(graphSet, nodesNo)
+
+    return computeAproxControlConf(graphSet, nodesNo)
+
+def rank_by_node_controllability(control_configurations, stems, node_controllabilities):
     """
     Find the best (easiest) control configuration based
     on the stakeholder's input - controllability of the nodes.
     """
-    values = [1, 2, 3]
-    controllabilityValue = []
-    rankedControlConfs = dict()
-    rankedControlConfStems = dict()
+    weight_values = {
+        NodePlus.NEUTRAL_CONTROLLABILITY: 0,
+        NodePlus.EASY_CONTROLLABILITY: 1,
+        NodePlus.MEDIUM_CONTROLLABILITY: 2,
+        NodePlus.HARD_CONTROLLABILITY: 3
+    }
 
-    # Replace easy-medium-hard values with 1-2-3.
-    for i in controllability:
-        if controllability[i] == 'e' or controllability[i] == 'E' or controllability[i] == '0':
-            controllabilityValue.append(values[0])
-        elif controllability[i] == 'm' or controllability[i] == 'M':
-            controllabilityValue.append(values[1])
-        elif controllability[i] == 'h' or controllability[i] == 'H':
-            controllabilityValue.append(values[2])
-        else:
-            try:
-                controllabilityValue.append(float(i))
-            except:
-                print('input ' + str(i) + ' is not valid')
-                return -1
+    weighted_nodes = {nodeId:weight_values[controllability] for (nodeId, controllability) in node_controllabilities.items()}
+    weighted_control_configurations = dict()
+    for (id, configuration) in control_configurations.items():
+        weighted_configuration = sum([weighted_nodes[nodeId] for nodeId in configuration])
+        weighted_control_configurations[id] = weighted_configuration
 
-    # Find rank for each configuration
-    for i in controlConfs:
-        tTotal = 0
-        for index in controlConfs[i]:
-            tTotal += controllabilityValue[int(index)]
-        rankedControlConfs.setdefault(tTotal, []).append(controlConfs[i])
-        rankedControlConfStems.setdefault(
-            tTotal, []).append(controlConfStems[i])
-        i += 1
+    sorted_by_value = sorted(weighted_control_configurations.items(), key=operator.itemgetter(1), reverse=True)
+    ranked_control_configurations = dict()
+    ranked_stems = dict()
+    for i, (id,_) in enumerate(sorted_by_value):
+        ranked_control_configurations[i] = control_configurations[id]
+        ranked_stems[i] = stems[id]
 
-    return (rankedControlConfs, rankedControlConfStems)
+    return (ranked_control_configurations, ranked_stems)

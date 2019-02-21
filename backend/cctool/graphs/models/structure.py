@@ -8,8 +8,7 @@ class AbstractStructure(TimeStampedModel):
     data = JSONField(
       default=dict,
       null=True,
-      blank=True,
-      db_index=True
+      blank=True
     )
 
     class Meta:

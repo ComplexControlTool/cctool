@@ -134,15 +134,13 @@ class NodePlus(Node):
     tags = JSONField(
         default=list,
         null=True,
-        blank=True,
-        db_index=True
+        blank=True
     )
 
     custom = JSONField(
         default=dict,
         null=True,
-        blank=True,
-        db_index=True
+        blank=True
     )
 
     def to_json(self, use_dict=False, **kwargs):
@@ -198,15 +196,13 @@ class EdgePlus(Edge):
     tags = JSONField(
         default=list,
         null=True,
-        blank=True,
-        db_index=True
+        blank=True
     )
 
     custom = JSONField(
         default=dict,
         null=True,
-        blank=True,
-        db_index=True
+        blank=True
     )
 
     def to_json(self, use_dict=False, **kwargs):

@@ -8,15 +8,13 @@ class AbstractVisualization(TimeStampedModel):
     options = JSONField(
       default=dict,
       null=True,
-      blank=True,
-      db_index=True
+      blank=True
     )
 
     structure = JSONField(
       default=dict,
       null=True,
-      blank=True,
-      db_index=True
+      blank=True
     )
 
     class Meta:

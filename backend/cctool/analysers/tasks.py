@@ -1,6 +1,6 @@
 from cctool.common.lib.analyses.controllability import controllability_analysis as CA_Analysis
 from cctool.common.lib.analyses.controllability import controllability_visualization as CA_Visualization
-from cctool.graphs.models.models import Graph, Analysis
+from cctool.graphs.models.models import Graph, Analysis, NodePlus
 from cctool.taskapp.celery import app as cctoolapp
 
 
@@ -14,21 +14,34 @@ def find_graph_controllability(self, graph_id, analysis_id):
 
     # Analysis
     connections = dict()
+    node_controllabilities = dict()
     for node in nodes:
+        node_controllabilities[node.identifier] = node.controllability
         sources = node.sources.all()
         for edge in sources:
             connections.setdefault(node.identifier, set()).add(edge.target.identifier)
 
     # TODO: Need to calculate frequencies + best configurations - ordered
-    (control_configurations, stems) = CA_Analysis.computeControlConf(connections, number_of_nodes)
     analysis_data = dict()
+    ranked_by_node_controllability = dict()
+    
+    (control_configurations, stems, frequencies) = CA_Analysis.find_controllability(connections, number_of_nodes)
+    stems = {key:(dict(map(reversed,value.items()))) for (key,value) in stems.items()}
     analysis_data['controlConfigurations'] = control_configurations
-    analysis_data['stems'] = {key:(dict(map(reversed,value.items()))) for (key,value) in stems.items()}
+    analysis_data['stems'] = stems
+    analysis_data['frequencies'] = frequencies
+    
+    (ranked_control_configurations, ranked_stems) = CA_Analysis.rank_by_node_controllability(control_configurations, stems, node_controllabilities)
+    ranked_by_node_controllability['controlConfigurations'] = ranked_control_configurations
+    ranked_by_node_controllability['stems'] = ranked_stems
+    analysis_data['rankedByNodeControllability'] = ranked_by_node_controllability
+
     analysis.data = analysis_data
     analysis.save()
 
     # Visualization
     graph_options = CA_Visualization.generate_graph_options()
+    
     graph_structure = dict()
     nodes_data = list()
     for node in nodes:
@@ -50,6 +63,7 @@ def find_graph_controllability(self, graph_id, analysis_id):
         edges_data.append(dict(**data, **vis))
     graph_structure['nodes'] = nodes_data
     graph_structure['edges'] = edges_data
+
     analysis.visualization.options = graph_options
     analysis.visualization.structure = graph_structure
     analysis.visualization.save()
