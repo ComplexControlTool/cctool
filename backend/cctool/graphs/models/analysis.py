@@ -84,7 +84,7 @@ class AbstractAnalysis(TimeStampedModel):
         
         output = dict()
         output['analysis'] = analysis
-        output['visualization'] = self.visualization.to_json(use_dict=use_dict, **kwargs)
+        output['visualization'] = self.visualization.to_json(use_dict=True, **kwargs)
 
         if use_dict:
             return output

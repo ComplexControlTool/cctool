@@ -192,6 +192,18 @@
             controller: 'ControllabilityAnalysisController',
             controllerAs: 'controllabilityAnalysisCtrl'
           },
+          'graph-downstream-analysis@app.cctool_graph':
+          {
+            templateUrl: 'app/cctool/components/graph/templates/graph.downstream-analysis.html',
+            controller: 'DownstreamAnalysisController',
+            controllerAs: 'downstreamAnalysisCtrl'
+          },
+          'graph-upstream-analysis@app.cctool_graph':
+          {
+            templateUrl: 'app/cctool/components/graph/templates/graph.upstream-analysis.html',
+            controller: 'UpstreamAnalysisController',
+            controllerAs: 'upstreamAnalysisCtrl'
+          },
           'actions@app.cctool_graph':
           {
             templateUrl: 'app/cctool/components/graph/templates/graph-actions.html'

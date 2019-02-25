@@ -46,8 +46,8 @@ class AbstractGraph(TimeStampedModel):
         output = dict()
         output['title'] = self.title
         output['description'] = self.description
-        output['structure'] = self.structure.to_json(use_dict=use_dict, **kwargs)
-        output['visualization'] = self.visualization.to_json(use_dict=use_dict, **kwargs)
+        output['structure'] = self.structure.to_json(use_dict=True, **kwargs)
+        output['visualization'] = self.visualization.to_json(use_dict=True, **kwargs)
 
         if use_dict:
             return output

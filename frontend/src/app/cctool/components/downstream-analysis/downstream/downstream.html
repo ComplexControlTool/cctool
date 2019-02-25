@@ -1,0 +1,18 @@
+<!-- downstream.html -->
+<div id="downstream-content" ng-if="!downstreamAnalysisCtrl.content.isAnalysed" flex="">
+  <div style="height:720px" layout="row" layout-align="center center">
+    LOADING...
+  </div>
+</div>
+<div id="downstream-content" ng-if="downstreamAnalysisCtrl.content.isAnalysed" ng-controller="DownstreamController as dscontroller" style="height:720px">
+  <div
+    id="dsa-graph-map"
+    vis-network=""
+    network="downstreamAnalysisCtrl.network"
+    analysis="downstreamAnalysisCtrl.content.analysis"
+    visualization="downstreamAnalysisCtrl.content.visualization"
+    node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+    reload="downstreamAnalysisCtrl.reloadGraph"
+    layout-fill="">
+  </div>
+</div>

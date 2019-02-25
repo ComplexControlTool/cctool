@@ -56,7 +56,8 @@
         {
           var analyser = vm.content.analysers[i]
           vm.tabs.push(analyser);
-          vm.tabs_view.push('graph-'+analyser.toLowerCase()+'-analysis');
+          vm.tabs_view.push('graph-'+analyser.toLowerCase().replace(/\s+/g, '')+'-analysis');
+          console.log(vm.tabs_view)
         }
       }
 

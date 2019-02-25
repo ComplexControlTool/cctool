@@ -158,7 +158,7 @@ class NodePlus(Node):
         if self.custom:
             properties['custom'] = self.custom
 
-        output = super(Node, self).to_json(use_dict=use_dict, **kwargs)
+        output = super(Node, self).to_json(use_dict=True, **kwargs)
         output['properties'] = properties
 
         if use_dict:
@@ -217,7 +217,7 @@ class EdgePlus(Edge):
         if self.custom:
             properties['custom'] = self.custom
         
-        output = super(Edge, self).to_json(use_dict=use_dict, **kwargs)
+        output = super(Edge, self).to_json(use_dict=True, **kwargs)
         output['properties'] = properties
 
         if use_dict:

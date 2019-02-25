@@ -3,6 +3,7 @@ import operator
 from collections import Counter
 from cctool.graphs.models.models import NodePlus
 
+
 MIN_NODES_FOR_APPROXIMATION = 100;
 
 def bipartiteMatch(graph):

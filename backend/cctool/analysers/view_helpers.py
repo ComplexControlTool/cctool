@@ -1,4 +1,4 @@
-from .tasks import find_graph_controllability
+from .tasks import find_graph_controllability, find_downstream, find_upstream
 from cctool.graphs.models.models import Analysis
 
 
@@ -12,6 +12,14 @@ class AnalyserHelper:
         for analysis in analyses:
             if analysis.analysis_type == Analysis.CONTROLLABILITY_ANALYSIS:
                 func = find_graph_controllability.s(graph_id=graph.pk, analysis_id=analysis.pk)
+                res = func.apply_async()
+                ret['task_id'] = res.id
+            if analysis.analysis_type == Analysis.DOWN_STREAM_ANALYSIS:
+                func = find_downstream.s(graph_id=graph.pk, analysis_id=analysis.pk)
+                res = func.apply_async()
+                ret['task_id'] = res.id
+            if analysis.analysis_type == Analysis.UP_STREAM_ANALYSIS:
+                func = find_upstream.s(graph_id=graph.pk, analysis_id=analysis.pk)
                 res = func.apply_async()
                 ret['task_id'] = res.id
         return ret

@@ -1,0 +1,24 @@
+<!-- graph.downstream-analysis.html -->
+<md-progress-linear ng-show="downstreamAnalysisCtrl.progressLinear.active" md-mode="{{downstreamAnalysisCtrl.progressLinear.mode}}" value="{{downstreamAnalysisCtrl.progressLinear.value}}" md-buffer-value="{{downstreamAnalysisCtrl.progressLinear.bufferValue}}"></md-progress-linear>
+
+<section class="boxed wide-cards">
+
+  <div layout-margin="" layout-padding=""></div>
+
+  <div layout="column" layout-align="center center">
+
+    <!-- Down Stream Map Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Down Stream Map</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout-margin="" ng-include="'app/cctool/components/downstream-analysis/downstream/downstream.html'"></md-card-content>
+    </md-card>
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+  </div>
+</section>

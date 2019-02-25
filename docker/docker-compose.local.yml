@@ -68,6 +68,8 @@ services:
       - ../backend/cctool/templates/pages:/Developer/cctool/backend/cctool/templates/pages
       - ../backend/cctool/templates/users:/Developer/cctool/backend/cctool/templates/users
       - cctool_local_frontend_index:/Developer/cctool/backend/cctool/templates/dashboard
+      # other
+      - ../other://Developer/cctool/other
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres

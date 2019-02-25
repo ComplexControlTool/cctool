@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import JsonResponse
 from rest_framework import generics, viewsets
 from rest_framework.decorators import action
@@ -40,14 +41,14 @@ class GraphViewSet(viewsets.ModelViewSet):
             graph = Graph.objects.get(pk=pk)
         except ObjectDoesNotExist:
             raise Exception(f'Graph object with pk: {pk}, does not exist!')
+        analysis_type_code = None
         if analysis_type:
             try:
-                reverse_search = dict(map(reversed, Analysis.ANALYSIS_SET))
-                analysis_type = reverse_search[analysis_type]
+                reverse_search = {v.lower(): k for k, v in Analysis.ANALYSIS_SET}
+                analysis_type_code = reverse_search[analysis_type.lower()]
             except KeyError:
                 pass
-                analysis_type = None
-        result = helper.analyse_graph(graph, analysis_type)
+        result = helper.analyse_graph(graph, analysis_type_code)
         return JsonResponse(result)
 
 class GraphAnalysisList(generics.ListAPIView):
@@ -58,6 +59,11 @@ class GraphAnalysisList(generics.ListAPIView):
         analysis_type = self.request.query_params.get('analysisType', None)
         if graph_pk == None or analysis_type == None:
             return {}
-        reverse_search = dict(map(reversed, Analysis.ANALYSIS_SET))
-        analysis_type_code = reverse_search[analysis_type]
-        return Analysis.objects.filter(graph__id=graph_pk, analysis_type=analysis_type_code)
+        try:
+            reverse_search = {v.lower(): k for k, v in Analysis.ANALYSIS_SET}
+            analysis_type_code = reverse_search[analysis_type.lower()]
+            return Analysis.objects.filter(graph__id=graph_pk, analysis_type=analysis_type_code)
+        except KeyError:
+            pass
+            analysis_type_code = None
+            return {}
