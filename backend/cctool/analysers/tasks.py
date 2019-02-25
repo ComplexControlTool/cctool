@@ -96,7 +96,7 @@ def find_upstream(self, graph_id, analysis_id):
 
     analysis_data = dict()
 
-    root_nodes = NodePlus.objects.filter(custom__contains={'Policy': 'Outcome'})
+    root_nodes = NodePlus.objects.filter(graph=graph, custom__contains={'Policy': 'Outcome'})
     upstream_nodes_and_levels = USA_Analysis.find_upstream_nodes(graph, root_nodes)
     upstream_nodes = [entry['node'] for entry in upstream_nodes_and_levels.values()]
     subgraph = USA_Analysis.form_upstream_subgraph(graph, upstream_nodes)
@@ -150,7 +150,7 @@ def find_downstream(self, graph_id, analysis_id):
 
     analysis_data = dict()
 
-    root_nodes = NodePlus.objects.filter(custom__contains={'Policy': 'Intervention'})
+    root_nodes = NodePlus.objects.filter(graph=graph, custom__contains={'Policy': 'Intervention'})
     downstream_nodes_and_levels = DSA_Analysis.find_downstream_nodes(graph, root_nodes)
     downstream_nodes = [entry['node'] for entry in downstream_nodes_and_levels.values()]
     subgraph = DSA_Analysis.form_downstream_subgraph(graph, downstream_nodes)

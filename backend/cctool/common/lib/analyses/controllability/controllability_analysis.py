@@ -232,6 +232,7 @@ def computeAproxControlConf(graphSet, nodesNo):
     """
     output = {}
     matching = {}
+    frequencies = {}
     (controlSize, controlMatching) = bipartiteMatch(graphSet)
     matchingSize = nodesNo - controlSize
 
