@@ -186,7 +186,7 @@ def computeControlConf(graphSet, nodesNo):
     matchingSize = nodesNo - controlSize
 
     if matchingSize == 0:
-        return (output, matching)
+        return (output, matching, frequencies)
 
     # Start methodology.
 
@@ -237,7 +237,7 @@ def computeAproxControlConf(graphSet, nodesNo):
     matchingSize = nodesNo - controlSize
 
     if matchingSize == 0:
-        return output
+        return (output, matching, frequencies)
 
     # Start methodology.
 
@@ -276,6 +276,11 @@ def rank_by_node_controllability(control_configurations, stems, node_controllabi
     Find the best (easiest) control configuration based
     on the stakeholder's input - controllability of the nodes.
     """
+    ranked_control_configurations = dict()
+    ranked_stems = dict()
+    if not control_configurations and not stems:
+        return (ranked_control_configurations, ranked_stems)
+
     weight_values = {
         NodePlus.NEUTRAL_CONTROLLABILITY: 0,
         NodePlus.EASY_CONTROLLABILITY: 1,
@@ -290,8 +295,6 @@ def rank_by_node_controllability(control_configurations, stems, node_controllabi
         weighted_control_configurations[id] = weighted_configuration
 
     sorted_by_value = sorted(weighted_control_configurations.items(), key=operator.itemgetter(1))
-    ranked_control_configurations = dict()
-    ranked_stems = dict()
     for i, (id,_) in enumerate(sorted_by_value):
         ranked_control_configurations[i] = control_configurations[id]
         ranked_stems[i] = stems[id]
