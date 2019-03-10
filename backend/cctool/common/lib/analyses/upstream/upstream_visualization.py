@@ -37,7 +37,7 @@ def generate_node_options(node, analysis):
         node_options['level'] = upstream_nodes_and_levels[node.identifier]
     if node.identifier in root_nodes:
         node_options['color']['border'] = selected_node_mark
-        node_options['color']['background'] = intervention_node
+        node_options['color']['background'] = outcome_node
 
     return node_options 
     
