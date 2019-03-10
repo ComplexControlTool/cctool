@@ -18,6 +18,7 @@
     vm.content = undefined;
     vm.graphForAnalysis = undefined;
     vm.network = undefined;
+    vm.selectedIndex = 0;
     vm.reloadGraph = false;
     vm.progressLinear = {active:true, mode:'', value:'', bufferValue:''};
     var analysisServerRefreshInMs = 1000 //every second
@@ -25,6 +26,7 @@
 
     // Functions
     vm.initAnalysis = initAnalysis;
+    vm.drawGraph = drawGraph;
     
     activate();
 
@@ -88,6 +90,16 @@
     {
       $log.debug(vm.title+'/ clearProgressLinear');
       vm.progressLinear = {active:false, mode:'', value:'', bufferValue:''};
+    }
+
+    function drawGraph(tabIndex)
+    {
+      $log.debug(vm.title+'/ drawGraph: arguments:\nconfTabIndex:',tabIndex);
+      if (!_.isEmpty(vm.content) && vm.selectedIndex === tabIndex)
+      {
+        return true;
+      }
+      return false;
     }
 
   }

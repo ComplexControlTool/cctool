@@ -24,7 +24,7 @@
         'analysis':'=analysis',
         'visualization':'=visualization',
         'stemRoot':'=stemRoot',
-        'confIndex':'=confIndex',
+        'index':'=index',
         'nodeShape':'=nodeShape'
       }
     };
@@ -45,11 +45,11 @@
         {
           if (scope.vm.analysis.data.rankedByNodeControllability)
           {
-            scope.stems = scope.vm.analysis.data.rankedByNodeControllability.stems[scope.vm.confIndex];
+            scope.stems = scope.vm.analysis.data.rankedByNodeControllability.stems[scope.vm.index];
           }
           else if(scope.vm.analysis.data.stems)
           {
-            scope.stems = scope.vm.analysis.data.stems[scope.vm.confIndex];
+            scope.stems = scope.vm.analysis.data.stems[scope.vm.index];
           }
         }
         scope.controlConfiguration = {}
@@ -57,11 +57,11 @@
         {
           if (scope.vm.analysis.data.rankedByNodeControllability)
           {
-            scope.controlConfiguration = scope.vm.analysis.data.rankedByNodeControllability.controlConfigurations[scope.vm.confIndex];
+            scope.controlConfiguration = scope.vm.analysis.data.rankedByNodeControllability.controlConfigurations[scope.vm.index];
           }
           else if(scope.vm.analysis.data.controlConfigurations)
           {
-            scope.controlConfiguration = scope.vm.analysis.data.controlConfigurations[scope.vm.confIndex];
+            scope.controlConfiguration = scope.vm.analysis.data.controlConfigurations[scope.vm.index];
           }
         }
         scope.element = element;
@@ -114,10 +114,10 @@
         true
       );
 
-      scope.$watch('vm.confIndex',
+      scope.$watch('vm.index',
         function(oldVal,newVal)
         {
-          $log.debug('watch: vm.confIndex');
+          $log.debug('watch: vm.index');
           if(isDrawable && oldVal != newVal)
           {
             structureData();

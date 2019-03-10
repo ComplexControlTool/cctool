@@ -25,7 +25,6 @@ def generate_graph_options():
     edges['smooth'] = smooth
 
     layout = dict()
-    layout['randomSeed'] = 2
 
     interaction = dict()
     interaction['hover'] = True

@@ -1,4 +1,4 @@
-from cctool.graphs.models.models import Edge
+from cctool.graphs.models.models import Edge, EdgePlus, NodePlus
 
 
 def get_sources(graph, node, level=0):
@@ -39,6 +39,6 @@ def find_upstream_nodes(graph, root_nodes):
 
 def form_upstream_subgraph(graph, upstream_nodes):
     subgraph = dict()
-    subgraph['nodes'] = upstream_nodes
-    subgraph['edges'] = [edge for node in upstream_nodes for edge in node.sources.all()]
+    subgraph['nodes'] = [NodePlus.objects.get(id=node.id) for node in upstream_nodes]
+    subgraph['edges'] = [EdgePlus.objects.get(id=edge.id) for node in upstream_nodes for edge in node.targets.all()]
     return subgraph

@@ -3,7 +3,11 @@ from cctool.graphs.models.models import NodePlus, EdgePlus
 
 
 def generate_graph_options():
-    return default_visualization.generate_graph_options()
+    graph_options = default_visualization.generate_graph_options()
+    graph_options['layout']['randomSeed'] = 2
+
+    return graph_options
+
 
 def generate_node_options(node, analysis):
     node_options = default_visualization.generate_node_options(node)

@@ -95,42 +95,49 @@ def find_upstream(self, graph_id, analysis_id):
         raise Exception(f'Analysis object with pk: {analysis_id}, does not exist!')
 
     analysis_data = dict()
+    graph_structure = dict()
 
-    root_nodes = NodePlus.objects.filter(graph=graph, custom__contains={'Policy': 'Outcome'})
-    upstream_nodes_and_levels = USA_Analysis.find_upstream_nodes(graph, root_nodes)
-    upstream_nodes = [entry['node'] for entry in upstream_nodes_and_levels.values()]
-    subgraph = USA_Analysis.form_upstream_subgraph(graph, upstream_nodes)
+    root_nodes = NodePlus.objects.filter(graph=graph, tags__contains='Outcome')
     analysis_data['root_nodes'] = [root_node.identifier for root_node in root_nodes]
-    analysis_data['upstream_nodes_and_levels'] = {key:value['level'] for key,value in upstream_nodes_and_levels.items()}
-    analysis_data['upstream_nodes'] = [node.identifier for node in upstream_nodes]
+    analysis_data['root_nodes_labels'] = [root_node.label for root_node in root_nodes]
+
+    for root_node in root_nodes:
+        root_node_analysis_data = dict()
+        upstream_nodes_and_levels = USA_Analysis.find_upstream_nodes(graph, [root_node])
+        upstream_nodes = [entry['node'] for entry in upstream_nodes_and_levels.values()]
+        subgraph = USA_Analysis.form_upstream_subgraph(graph, upstream_nodes)
+        root_node_analysis_data['root_node'] = root_node.identifier
+        root_node_analysis_data['upstream_nodes_and_levels'] = {key:value['level'] for key,value in upstream_nodes_and_levels.items()}
+        root_node_analysis_data['upstream_nodes'] = [node.identifier for node in upstream_nodes]
+        analysis_data[root_node.identifier] = root_node_analysis_data
+
+        root_node_graph_structure = dict()
+        nodes_data = list()
+        for node in subgraph['nodes']:
+            data = node.to_json(use_dict=True)
+            if 'properties' in data:
+                data['cctool'] = data.pop('properties')
+            vis = USA_Visualization.generate_node_options(node, root_node_analysis_data)
+            nodes_data.append(dict(**data, **vis))
+        edges_data = list()
+        for edge in subgraph['edges']:
+            data = edge.to_json(use_dict=True)
+            if 'source' in data:
+                data['from'] = data.pop('source')
+            if 'target' in data:
+                data['to'] = data.pop('target')
+            if 'properties' in data:
+                data['cctool'] = data.pop('properties')
+            vis = USA_Visualization.generate_edge_options(edge, root_node_analysis_data)
+            edges_data.append(dict(**data, **vis))
+        root_node_graph_structure['nodes'] = nodes_data
+        root_node_graph_structure['edges'] = edges_data
+        graph_structure[root_node.identifier] = root_node_graph_structure
+
+    graph_options = USA_Visualization.generate_graph_options()
 
     analysis.data = analysis_data
     analysis.save()
-    
-    graph_options = USA_Visualization.generate_graph_options()
-
-    graph_structure = dict()
-    nodes_data = list()
-    for node in subgraph['nodes']:
-        data = node.to_json(use_dict=True)
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
-        vis = USA_Visualization.generate_node_options(node, analysis)
-        nodes_data.append(dict(**data, **vis))
-    edges_data = list()
-    for edge in subgraph['edges']:
-        data = edge.to_json(use_dict=True)
-        if 'source' in data:
-            data['from'] = data.pop('source')
-        if 'target' in data:
-            data['to'] = data.pop('target')
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
-        vis = USA_Visualization.generate_edge_options(edge, analysis)
-        edges_data.append(dict(**data, **vis))
-    graph_structure['nodes'] = nodes_data
-    graph_structure['edges'] = edges_data
-
     analysis.visualization.options = graph_options
     analysis.visualization.structure = graph_structure
     analysis.visualization.save()
@@ -149,42 +156,49 @@ def find_downstream(self, graph_id, analysis_id):
         raise Exception(f'Analysis object with pk: {analysis_id}, does not exist!')
 
     analysis_data = dict()
+    graph_structure = dict()
 
-    root_nodes = NodePlus.objects.filter(graph=graph, custom__contains={'Policy': 'Intervention'})
-    downstream_nodes_and_levels = DSA_Analysis.find_downstream_nodes(graph, root_nodes)
-    downstream_nodes = [entry['node'] for entry in downstream_nodes_and_levels.values()]
-    subgraph = DSA_Analysis.form_downstream_subgraph(graph, downstream_nodes)
+    root_nodes = NodePlus.objects.filter(graph=graph, tags__contains='Intervention')
     analysis_data['root_nodes'] = [root_node.identifier for root_node in root_nodes]
-    analysis_data['downstream_nodes_and_levels'] = {key:value['level'] for key,value in downstream_nodes_and_levels.items()}
-    analysis_data['downstream_nodes'] = [node.identifier for node in downstream_nodes]
+    analysis_data['root_nodes_labels'] = [root_node.label for root_node in root_nodes]
+
+    for root_node in root_nodes:
+        root_node_analysis_data = dict()
+        downstream_nodes_and_levels = DSA_Analysis.find_downstream_nodes(graph, [root_node])
+        downstream_nodes = [entry['node'] for entry in downstream_nodes_and_levels.values()]
+        subgraph = DSA_Analysis.form_downstream_subgraph(graph, downstream_nodes)
+        root_node_analysis_data['root_node'] = root_node.identifier
+        root_node_analysis_data['downstream_nodes_and_levels'] = {key:value['level'] for key,value in downstream_nodes_and_levels.items()}
+        root_node_analysis_data['downstream_nodes'] = [node.identifier for node in downstream_nodes]
+        analysis_data[root_node.identifier] = root_node_analysis_data
+
+        root_node_graph_structure = dict()
+        nodes_data = list()
+        for node in subgraph['nodes']:
+            data = node.to_json(use_dict=True)
+            if 'properties' in data:
+                data['cctool'] = data.pop('properties')
+            vis = DSA_Visualization.generate_node_options(node, root_node_analysis_data)
+            nodes_data.append(dict(**data, **vis))
+        edges_data = list()
+        for edge in subgraph['edges']:
+            data = edge.to_json(use_dict=True)
+            if 'source' in data:
+                data['from'] = data.pop('source')
+            if 'target' in data:
+                data['to'] = data.pop('target')
+            if 'properties' in data:
+                data['cctool'] = data.pop('properties')
+            vis = DSA_Visualization.generate_edge_options(edge, root_node_analysis_data)
+            edges_data.append(dict(**data, **vis))
+        root_node_graph_structure['nodes'] = nodes_data
+        root_node_graph_structure['edges'] = edges_data
+        graph_structure[root_node.identifier] = root_node_graph_structure
+
+    graph_options = DSA_Visualization.generate_graph_options()
 
     analysis.data = analysis_data
     analysis.save()
-    
-    graph_options = DSA_Visualization.generate_graph_options()
-
-    graph_structure = dict()
-    nodes_data = list()
-    for node in subgraph['nodes']:
-        data = node.to_json(use_dict=True)
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
-        vis = DSA_Visualization.generate_node_options(node, analysis)
-        nodes_data.append(dict(**data, **vis))
-    edges_data = list()
-    for edge in subgraph['edges']:
-        data = edge.to_json(use_dict=True)
-        if 'source' in data:
-            data['from'] = data.pop('source')
-        if 'target' in data:
-            data['to'] = data.pop('target')
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
-        vis = DSA_Visualization.generate_edge_options(edge, analysis)
-        edges_data.append(dict(**data, **vis))
-    graph_structure['nodes'] = nodes_data
-    graph_structure['edges'] = edges_data
-
     analysis.visualization.options = graph_options
     analysis.visualization.structure = graph_structure
     analysis.visualization.save()

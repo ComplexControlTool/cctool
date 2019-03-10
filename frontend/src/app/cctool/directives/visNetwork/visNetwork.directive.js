@@ -24,7 +24,7 @@
         'network':'=network',
         'analysis':'=analysis',
         'visualization':'=visualization',
-        'confIndex':'=confIndex',
+        'index':'=index',
         'nodesToHide' : '=nodesToHide',
         'nodeShape':'=nodeShape',
         'editGraph':'=editGraph',
@@ -65,16 +65,20 @@
         // Set scope variables.
         scope.options = scope.vm.visualization && scope.vm.visualization.options ? Object.assign({}, scope.vm.visualization.options, options) : options
         scope.structure = scope.vm.visualization && scope.vm.visualization.structure ? scope.vm.visualization.structure : {}
+        if (scope.vm.index in scope.structure)
+        {
+          scope.structure = scope.structure[scope.vm.index];
+        }
         scope.controlConfiguration = {}
         if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability' && scope.vm.analysis.data)
         {
           if (scope.vm.analysis.data.rankedByNodeControllability)
           {
-            scope.controlConfiguration = scope.vm.analysis.data.rankedByNodeControllability.controlConfigurations[scope.vm.confIndex];
+            scope.controlConfiguration = scope.vm.analysis.data.rankedByNodeControllability.controlConfigurations[scope.vm.index];
           }
           else if(scope.vm.analysis.data.controlConfigurations)
           {
-            scope.controlConfiguration = scope.vm.analysis.data.controlConfigurations[scope.vm.confIndex];
+            scope.controlConfiguration = scope.vm.analysis.data.controlConfigurations[scope.vm.index];
           }
         }
         scope.element = element[0];
