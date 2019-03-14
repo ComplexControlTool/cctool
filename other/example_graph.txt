@@ -1,0 +1,14 @@
+for i in range(20):
+  G1 = Graph.objects.create(title='Graph '+str(i))  
+
+  n1 = NodePlus.objects.create(label='pete fun times', graph=G1)
+  n2 = NodePlus.objects.create(label='energy', graph=G1)
+  n3 = NodePlus.objects.create(label='beer', graph=G1)
+  n4 = NodePlus.objects.create(label='work', graph=G1)
+  n5 = NodePlus.objects.create(label='weather', graph=G1)
+
+  e1 = EdgePlus.objects.create(graph=G1, source=n3, target=n1)
+  e2 = EdgePlus.objects.create(graph=G1, source=n4, target=n1)
+  e3 = EdgePlus.objects.create(graph=G1, source=n5, target=n1)
+
+  a1 = Analysis.objects.create(graph=G1)

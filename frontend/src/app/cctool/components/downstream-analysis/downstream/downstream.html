@@ -1,0 +1,25 @@
+<!-- downstream.html -->
+<div id="downstream-content" ng-if="!downstreamAnalysisCtrl.content.isAnalysed" flex="">
+  <div style="height:720px" layout="row" layout-align="center center">
+    LOADING...
+  </div>
+</div>
+<div id="downstream-content" ng-if="downstreamAnalysisCtrl.content.isAnalysed" ng-controller="DownstreamController as dscontroller" flex="">
+  <md-tabs md-selected="downstreamAnalysisCtrl.selectedIndex" class="no-radius" md-enable-disconnect="" md-no-ink="" md-dynamic-height="" md-border-bottom="" flex="100">
+    <md-tab ng-repeat="root_node in downstreamAnalysisCtrl.content.analysis.data.root_nodes" label="{{ downstreamAnalysisCtrl.content.analysis.data.root_nodes_labels[$index] }}">
+      <div style="height:650px" layout="row" layout-align="center center" layout-wrap="" layout-padding="">
+        <div 
+         id="dsa-{{downstreamAnalysisCtrl.graphForAnalysis.id}}-{{$index}}"
+         ng-if="downstreamAnalysisCtrl.drawGraph($index)"
+         vis-network=""
+         network="downstreamAnalysisCtrl.network"
+         analysis="downstreamAnalysisCtrl.content.analysis[root_node]"
+         visualization="downstreamAnalysisCtrl.content.visualization"
+         index="root_node"
+         node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+         reload="downstreamAnalysisCtrl.reloadGraph"
+         layout-fill=""></div>
+      </div>
+    </md-tab>
+  </md-tabs>
+</div>

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block meta_title %}{% block head_title %}{% endblock head_title %}{% endblock meta_title %}
+
+{% block extra_css %}
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"> -->
+{% endblock extra_css %}
+
+{% block all_content %}
+  <div class="navbar navbar-fixed-top" data-activeslide="1">
+    <div class="container-fluid">
+      <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="nav-collapse collapse navbar-responsive-collapse">
+        <ul class="nav row">
+          <li class="col-12 col-sm-2"><a id="menu-link-1" href="{% url 'home' %}#slide-1" title="Next Section"><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;<span class="text">HOME</span></a></li>
+          <li class="col-12 col-sm-2"><a id="menu-link-2" href="{% url 'home' %}#slide-2" title="Next Section"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;&nbsp;<span class="text">INTRO</span></a></li>
+          <li class="col-12 col-sm-2"><a id="menu-link-3" href="{% url 'home' %}#slide-3" title="Next Section"><i class="fa fa-info"></i>&nbsp;&nbsp;&nbsp;<span class="text">INFO</span></a></li>
+          <li class="col-12 col-sm-2"><a id="menu-link-4" href="{% url 'home' %}#slide-4" title="Next Section"><i class="fa fa-heart"></i>&nbsp;&nbsp;&nbsp;<span class="text">SPONSORS</span></a></li>
+          <li class="col-12 col-sm-2"><a id="menu-link-5" href="{% url 'home' %}#slide-5" title="Next Section"><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<span class="text">TEAM</span></a></li>
+          <li class="col-12 col-sm-2"><a id="menu-link-6" href="{% url 'home' %}#slide-6" title="Next Section"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;<span class="text">REGISTER</span></a></li>
+        </ul>
+        <div class="row">
+          <div class="col-sm-2 active-menu"></div>
+        </div>
+      </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+  </div><!-- /.navbar -->
+
+  <div class="container">
+    <div class="row"></br></br></br></div>
+    <div class="row">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="row">
+      <div class="col-3"></div>
+      <div class="col-6">
+        {% block inner %}{% endblock %}
+      </div>
+      <div class="col-3"></div>
+    </div>
+  </div>
+
+{% endblock all_content %}

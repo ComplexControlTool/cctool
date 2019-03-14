@@ -48,10 +48,10 @@ gulp.task('watch:django', ['watch'], function () {
   });
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
     .pipe($.rename('index.html'))
-    .pipe($.replace(/href="..\/bower_components\/([^"]{2,})"/g, 'href="{% static "cctool/dashboard/vendor/$1" %}"'))
-    .pipe($.replace(/href="assets\/([^"]{2,})"/g, 'href="{% static "cctool/dashboard/assets/$1" %}"'))
-    .pipe($.replace(/href="app\/([^"]{2,})"/g, 'href="{% static "cctool/dashboard/app/$1" %}"'))
-    .pipe($.replace(/src="..\/bower_components\/([^"]*)"/g, 'src="{% static "cctool/dashboard/vendor/$1" %}"'))
-    .pipe($.replace(/src="app\/([^"]*)"/g, 'src="{% static "cctool/dashboard/app/$1" %}"'))
+    .pipe($.replace(/href="..\/bower_components\/([^"]{2,})"/g, 'href="{% static \'dashboard/vendor/$1\' %}"'))
+    .pipe($.replace(/href="assets\/([^"]{2,})"/g, 'href="{% static \'dashboard/assets/$1\' %}"'))
+    .pipe($.replace(/href="app\/([^"]{2,})"/g, 'href="{% static \'dashboard/app/$1\' %}"'))
+    .pipe($.replace(/src="..\/bower_components\/([^"]*)"/g, 'src="{% static \'dashboard/vendor/$1\' %}"'))
+    .pipe($.replace(/src="app\/([^"]*)"/g, 'src="{% static \'dashboard/app/$1\' %}"'))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')))
 });

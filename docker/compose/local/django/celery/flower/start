@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+
+echo $'\n\t C C T O O L  L O C A L  C E L E R Y  F L O W E R \n'
+sleep 5
+echo $'\n\t>> Running celery flower...\n'
+celery flower \
+    --app=cctool.taskapp \
+    --broker="${CELERY_BROKER_URL}" \
+    --basic_auth="${CELERY_FLOWER_USER}:${CELERY_FLOWER_PASSWORD}"

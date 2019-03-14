@@ -15,15 +15,37 @@ windows:
         - htop
         - ./docker/docker_stats.sh
         - cd "$CCTOOL"
-  - containers:
+  - main-containers:
       layout: even-horizontal
       panes:
-        - docker exec -it cctool-dev-backend bash
-        - docker exec -it cctool-dev-frontend bash
-        - docker exec -it cctool-dev-db bash
-  - logs:
+        - docker exec -it cctool_local_django bash
+        - docker exec -it cctool_local_angularjs bash
+        - docker exec -it cctool_local_postgres bash
+  - celery-containers:
       layout: even-horizontal
       panes:
-        - docker logs -f cctool-dev-backend
-        - docker logs -f cctool-dev-frontend
-        - docker logs -f cctool-dev-db
+        - docker exec -it cctool_local_celeryworker bash
+        - docker exec -it cctool_local_celerybeat bash
+        - docker exec -it cctool_local_flower bash
+  - other-containers:
+      layout: even-horizontal
+      panes:
+        - docker exec -it cctool_local_mailhog bash
+        - docker exec -it cctool_local_redis bash
+  - main-logs:
+      layout: even-horizontal
+      panes:
+        - docker logs -f cctool_local_django
+        - docker logs -f cctool_local_angularjs
+        - docker logs -f cctool_local_postgres
+  - celery-logs:
+      layout: even-horizontal
+      panes:
+        - docker logs -f cctool_local_celeryworker
+        - docker logs -f cctool_local_celerybeat
+        - docker logs -f cctool_local_flower
+  - other-logs:
+      layout: even-horizontal
+      panes:
+        - docker logs -f cctool_local_mailhog
+        - docker logs -f cctool_local_redis

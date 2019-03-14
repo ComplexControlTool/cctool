@@ -1,0 +1,5 @@
+[run]
+include = cctool/*
+omit = *migrations*, *tests*
+plugins =
+    django_coverage_plugin

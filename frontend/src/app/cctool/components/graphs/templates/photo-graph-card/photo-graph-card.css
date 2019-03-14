@@ -1,5 +1,4 @@
 /* photo-graph-card.css */
-
 .photo-graph-card
 {
   min-height: 400px;
@@ -28,4 +27,13 @@ md-card.photo-graph-card[md-ink-ripple] {
   color: rgba(0, 0, 0, 0.54);
   padding-top: 0;
   font-size: 14px;
+}
+
+/* Tags */
+.photo-graph-card .tag
+{
+  font-size: 10px;
+  border: 1px solid #C0C0C0;
+  padding: 2px;
+  color: #af111c;
 }

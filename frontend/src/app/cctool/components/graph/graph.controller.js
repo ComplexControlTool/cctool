@@ -16,9 +16,11 @@
     // Data
     vm.title = 'GraphController';
     vm.content = Graph ? Graph : undefined;
-    vm.tabs = ['Overview','Control Nodes Analysis','Node Up/Down Stream Analysis'];
-    vm.tabs_view = ['graph-overview','graph-control-nodes','graph-up-down-stream'];
+    vm.tabs = ['Overview'];
+    vm.tabs_view = ['graph-overview'];
     vm.network = undefined;
+    var graphServerRefreshInMs = 30000 //every .5 minute
+    var serverRefreshInMs = 90000 // every 1.5 minutes
 
     // Functions
     activate();
@@ -28,7 +30,14 @@
       deactivate();
     });
     $scope.$on('graph:hasUpdates', function(event,data) {
-      showCustomToast()
+      if (data == vm.content.updatedAt)
+      {
+        vm.content = graphService.getLatestUpdate();;
+      }
+      else
+      {
+        showCustomToast()
+      }
     });
 
     function activate()
@@ -42,12 +51,20 @@
       else
       {
         $log.debug(vm.title+'/ Graph object initialised: '+JSON.stringify(vm.content));
+        var analyses_tabs = [];
+        for (var i in vm.content.analysers)
+        {
+          var analyser = vm.content.analysers[i]
+          vm.tabs.push(analyser);
+          vm.tabs_view.push('graph-'+analyser.toLowerCase().replace(/\s+/g, '')+'-analysis');
+          console.log(vm.tabs_view)
+        }
       }
 
       if ($state.is('app.cctool_graph'))
       {
         $log.debug(vm.title+'/ Init graph monitor');
-        graphService.initMonitorUpdates(vm.content,10000);
+        graphService.initMonitorUpdates(vm.content, graphServerRefreshInMs, serverRefreshInMs);
       }
     }
 

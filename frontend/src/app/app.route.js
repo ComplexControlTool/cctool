@@ -23,7 +23,7 @@
       });
     }
 
-    $urlRouterProvider.otherwise('/cctool');
+    $urlRouterProvider.otherwise('/dashboard');
 
     // Inject $cookies
     var $cookies;
@@ -53,6 +53,7 @@
         {
           isAdmin: function (apiResolver)
           {
+            return false;
             return apiResolver.resolve('cctool.user@get').then(
               function(data)
               {

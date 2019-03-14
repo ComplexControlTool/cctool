@@ -13,7 +13,7 @@
         $stateProvider
             .state('app.cctool_dashboard',
             {
-                url  : '/cctool',
+                url  : '/dashboard',
                 views:
                 {
                     'content@app':

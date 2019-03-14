@@ -43,7 +43,7 @@
       {
         $log.debug(vm.title+'/ dismissAction: Hiding toast and executing service function');
         graphService.ignoreUpdate();
-        graphService.initMonitorUpdates($scope.graphCtrl.content, 10000);
+        graphService.initMonitorUpdates($scope.graphCtrl.content);
         delete $scope.graphCtrl.graphToastCtrl;
       });
     }
@@ -55,7 +55,7 @@
       {
         $log.debug(vm.title+'/ loadAction: Hiding toast and executing service function');
         $scope.graphCtrl.content = graphService.getLatestUpdate();
-        graphService.initMonitorUpdates($scope.graphCtrl.content, 10000);
+        graphService.initMonitorUpdates($scope.graphCtrl.content);
         delete $scope.graphCtrl.graphToastCtrl;
       });
     }

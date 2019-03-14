@@ -17,6 +17,9 @@
     vm.title = 'graphService';
     var intervalObj = undefined;
     var monitoredGraph = undefined;
+    var monitoredGraphIsProgressed = false;
+    var monitoredGraphTaskInterval = 30000;
+    var monitoredGraphUpdatesInterval = 90000;
     var lastUpdatedDate = undefined;
     var lastUpdatedGraph = undefined;
     var ignoredUpdateDates = [];
@@ -33,26 +36,38 @@
       $log.debug(vm.title+'/ Activated ' + vm.title + ' service!');
     }
 
-    function initMonitorUpdates(graph, interval)
+    function initMonitorUpdates(graph, taskInterval, updatesInterval)
     {
-      $log.debug(vm.title+'/initMonitorUpdates with graph',graph,' and interval',interval);
+      $log.debug(vm.title+'/initMonitorUpdates');
       stopMonitorUpdates();
 
-      if (graph)
+      if (graph && !monitoredGraph)
       {
         monitoredGraph = graph;
       }
 
-      if (!interval)
+      if (taskInterval)
       {
-        interval = 2000;
+        monitoredGraphTaskInterval = taskInterval;
+      }
+
+      if (updatesInterval)
+      {
+        monitoredGraphUpdatesInterval = updatesInterval;
       }
 
       if (monitoredGraph)
       {
-        $log.debug(vm.title+'/initMonitorUpdates using graph: ',monitoredGraph);
-        intervalObj = $interval(function(){requestAndNotify(monitoredGraph.id)},
-                                interval);
+        monitoredGraphIsProgressed = monitoredGraph.isProcessed;
+        var interval = monitoredGraphIsProgressed ? monitoredGraphUpdatesInterval : monitoredGraphTaskInterval;
+        $log.debug(vm.title+'/initMonitorUpdates with graph id: '+monitoredGraph.id+' every '+interval+' milliseconds');
+        intervalObj = $interval(
+          function()
+          {
+            requestAndNotify(monitoredGraph.id)
+          },
+          interval
+         );
       }
     }
 
@@ -64,45 +79,82 @@
         $interval.cancel(intervalObj);
         intervalObj = undefined;
         monitoredGraph = undefined;
+        monitoredGraphIsProgressed = false;
         ignoredUpdateDates = [];
       }
     }
 
     function requestAndNotify(graphId)
     {
-      $log.debug(vm.title+'/requestAndNotify with graphId',graphId);
-      var currentUpdatedDate = monitoredGraph.dateupdated;
+      $log.debug(vm.title+'/requestAndNotify with graph id: '+graphId);
+      var currentUpdatedDate = monitoredGraph.updatedAt;
+
       apiResolver.resolve('cctool.graph.dateupdated@get', {'id': graphId}).then(
         function(data)
         {
           $log.debug(vm.title+'/requestAndNotify api call success with data',data);
-          if (data && data.dateupdated)
+          if (data && data.updatedAt)
           {
-            lastUpdatedDate = data.dateupdated;
-            if (currentUpdatedDate !== lastUpdatedDate && ignoredUpdateDates.indexOf(lastUpdatedDate) == -1)
+            monitoredGraphIsProgressed = data.isProcessed;
+            if (monitoredGraphIsProgressed)
             {
-              apiResolver.resolve('cctool.graph.full@get', {'id': graphId}).then(
+              if (currentUpdatedDate !== lastUpdatedDate && ignoredUpdateDates.indexOf(lastUpdatedDate) == -1)
+              {
+                apiResolver.resolve('cctool.graph.full@get', {'id': graphId}).then(
+                  function(data)
+                  {
+                    $log.debug(vm.title+'/requestAndNotify api call success with data',data);
+                    if (data)
+                    {
+                      $log.debug(vm.title+'/requestAndNotify updates available for graph id: '+graphId);
+                      monitoredGraph = lastUpdatedGraph = data
+                      lastUpdatedDate = data.updatedAt;
+                      $rootScope.$broadcast('graph:hasUpdates',lastUpdatedDate);
+                      $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
+                      initMonitorUpdates(monitoredGraph);
+                    }
+                  },
+                  function(err)
+                  {
+                    $log.debug(vm.title+'/requestAndNotify api call unsuccessful.');
+                    return false; 
+                  });
+              }
+            }
+            else
+            {
+              lastUpdatedDate = undefined;
+
+              apiResolver.resolve('cctool.graph.map@get', {'id': graphId}).then(
                 function(data)
                 {
                   $log.debug(vm.title+'/requestAndNotify api call success with data',data);
-                  if (data)
-                  {
-                    $log.debug(vm.title+'/requestAndNotify updates available for graphId',graphId);
-                    monitoredGraph = lastUpdatedGraph = data
-                    $rootScope.$broadcast('graph:hasUpdates',lastUpdatedDate);
-                  }
+                  $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
+                  initMonitorUpdates(monitoredGraph);
                 },
                 function(err)
                 {
-                  $log.debug(vm.title+'/requestAndNotify api call unsuccessful.');
-                  return false; 
+                  $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
+                  return false;
+                });
+              apiResolver.resolve('cctool.graph.visualize@get', {'id': graphId}).then(
+                function(data)
+                {
+                  $log.debug(vm.title+'/requestAndNotify api call success with data',data);
+                  $log.debug(vm.title+'/requestAndNotify resetting monitoring...');
+                  initMonitorUpdates(monitoredGraph);
+                },
+                function(err)
+                {
+                  $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
+                  return false;
                 });
             }
           }
         },
         function(err)
         {
-          $log.debug(vm.title+'/requestAndNotify api call unsuccessful.');
+          $log.debug(vm.title+'/requestAndNotify api call unsuccessful!');
           return false; 
         });
     }

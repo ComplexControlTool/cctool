@@ -1,0 +1,326 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block meta_title %}
+  CCTool - Home
+{% endblock meta_title %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'fancybox/jquery.fancybox-v=2.1.5.css' %}" media="screen">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/pace.css' %}">
+{% endblock extra_css %}
+
+{% block extra_head_js %}
+  <script src="{% static 'js/pace.js' %}"></script>
+{% endblock extra_head_js %}
+
+{% block loader %}
+  <div class="preloader"></div>
+{% endblock loader %}
+
+{% block all_content %}
+  <div class="navbar navbar-fixed-top" data-activeslide="1">
+    <div class="container-fluid">
+      <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="nav-collapse collapse navbar-responsive-collapse">
+        <ul class="nav row">
+          <li data-slide="1" class="col-12 col-sm-2"><a id="menu-link-1" href="#slide-1" title="Next Section"><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;<span class="text">HOME</span></a></li>
+          <li data-slide="2" class="col-12 col-sm-2"><a id="menu-link-2" href="#slide-2" title="Next Section"><i class="fa fa-list-ul"></i>&nbsp;&nbsp;&nbsp;<span class="text">INTRO</span></a></li>
+          <li data-slide="3" class="col-12 col-sm-2"><a id="menu-link-3" href="#slide-3" title="Next Section"><i class="fa fa-info"></i>&nbsp;&nbsp;&nbsp;<span class="text">INFO</span></a></li>
+          <li data-slide="4" class="col-12 col-sm-2"><a id="menu-link-4" href="#slide-4" title="Next Section"><i class="fa fa-heart"></i>&nbsp;&nbsp;&nbsp;<span class="text">SPONSORS</span></a></li>
+          <li data-slide="5" class="col-12 col-sm-2"><a id="menu-link-5" href="#slide-5" title="Next Section"><i class="fa fa-users"></i>&nbsp;&nbsp;&nbsp;<span class="text">TEAM</span></a></li>
+          <li data-slide="6" class="col-12 col-sm-2"><a id="menu-link-6" href="#slide-6" title="Next Section"><i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;<span class="text">REGISTER</span></a></li>
+        </ul>
+        <div class="row">
+          <div class="col-sm-2 active-menu"></div>
+        </div>
+      </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+  </div><!-- /.navbar -->
+  
+  
+  <!-- === Arrows === -->
+  <div id="arrows">
+    <div id="arrow-up" class="disabled"></div>
+    <div id="arrow-down"></div>
+    <div id="arrow-left" class="disabled visible-lg"></div>
+    <div id="arrow-right" class="disabled visible-lg"></div>
+  </div><!-- /.arrows -->
+  
+  
+  <!-- === HOME === -->
+  <div class="slide story" id="slide-1" data-slide="1">
+    <div class="container-fluid">
+      <div id="home-row-1" class="row clearfix">
+        <div class="col-12">
+          <h1 class="font-medium">Map and Steer <span class="font-thin">Complex Systems</span></h1>
+          <h4 class="font-light">A project powered by ERIE to aid decision making and intervention design in complex contexts.</h4>
+        </div><!-- /col-12 -->
+      </div><!-- /row -->
+    </div><!-- /container -->
+  </div><!-- /slide1 -->
+  
+  <!-- === INTRO === -->
+  <div class="slide story" id="slide-2" data-slide="2">
+    <div class="container">
+      <div class="row title-row">
+        <div class="col-12 font-light">Become an expert analyst</div>
+      </div><!-- /row -->
+      <div class="row line-row">
+        <div class="hr">&nbsp;</div>
+      </div><!-- /row -->
+      <div class="row subtitle-row">
+        <div class="col-12 font-thin">Turn <span class="font-medium">complexity</span> to your <span class="font-medium">advantage</span>.</div>
+      </div><!-- /row -->
+      <div class="row content-row">
+        <div class="col-12 col-lg-4 col-sm-4">
+          <p><i class="fa fa-eye"></i></p>
+          <h2 class="font-light">Decision Making</h2>
+          <h4 class="font-normal justify-text">
+            Do you deal with complexity and require innovative approaches to planning, decision making and management? Is your domain an interconnected system of many diverse components, which may be adapting, learning or changing continuously? Can external changes, management or policy interventions cause unexpected, indirect impacts? Would you like to understand and exploit the structure of your complex system to make more effective decisions?
+            <br><br>
+            <br><span class="font-medium">This tool is right for you</span>
+          </h4>
+        </div><!-- /col12 -->
+        <div class="col-12 col-lg-4 col-sm-4">
+          <p><i class="fa fa-laptop"></i></p>
+          <h2 class="font-light">Easy Configuration</h2>
+          <h4 class="font-normal justify-text">
+            Rapidly create simple causal models of your system: your region; supply chains, industrial network or any complex network. You, your team or stakeholder groups can construct simple network models of a problem domain based on “on the ground” knowledge without the need for quantitative or detailed information. Just pinpoint the important factors and then add connections to represent how they influence each other. Models can include factors from any domain - from economic to social.
+            <br>
+            <br>Try it now, it's as simple as ABC!
+          </h4>
+        </div><!-- /col12 -->
+        <div class="col-12 col-lg-4 col-sm-4">
+          <p><i class="fa fa-clock-o"></i></p>
+          <h2 class="font-light">Instant Results</h2>
+          <h4 class="font-normal justify-text">
+            Instantly calculate the leverage points of your system, with high influence on many other factors. Find starting points to design the most effective “whole system” management interventions.  Discover where the system is vulnerable to external change. Combine this with the controllability of different factors from your perspective to produce bespoke results for your situation. Our tool will find and analyse the sets of influential factors most readily usable by your organisation.
+            <br>
+            <br>Personalized, effective ways to steer your system
+          </h4>
+        </div><!-- /col12 -->
+      </div><!-- /row -->
+    </div><!-- /container -->
+  </div><!-- /slide2 -->
+  
+  <!-- === INFO -->
+  <div class="slide story" id="slide-3" data-slide="3">
+    <div class="row">
+      <div class="col-12 col-lg-3 col-sm-6">
+        <a data-fancybox-group="portfolio" class="fancybox" href="https://docs.google.com/document/d/1sQNFgtxyUTSVER6ut-18raAyeG9RA6iFTfgw0daqp_g/pub"><img class="thumb" src="{% static 'images/portfolio/whentouse.jpg' %}" alt=""></a>
+      </div>
+      <div class="col-12 col-lg-3 col-sm-6">
+        <a data-fancybox-group="portfolio" class="fancybox" href="https://docs.google.com/document/d/1y9IxZT0fbkhVixTNfONKtlOX6q9YtX0hd5JEIGLKgvE/pub"><img class="thumb" src="{% static 'images/portfolio/casestudies.jpg' %}" alt=""></a>
+      </div>
+      <div class="col-12 col-lg-3 col-sm-6">
+        <a data-fancybox-group="portfolio" class="fancybox" href="https://docs.google.com/document/d/1arts5tRG0mZBsvgICb7ihNMSxDHC77euh-SNoCAZJtw/pub"><img class="thumb" src="{% static 'images/portfolio/research.jpg' %}" alt=""></a>
+      </div>
+      <div class="col-12 col-lg-3 col-sm-6">
+        <a data-fancybox-group="portfolio" class="fancybox" href="https://docs.google.com/document/d/1ykL5UbU_MH78i7L_gMUFYasM-K-UoaUe1wm0oRVPT0A/pub"><img class="thumb" src="{% static 'images/portfolio/contactus.jpg' %}" alt=""></a>
+      </div>
+    </div><!-- /row -->
+  </div><!-- /slide3 -->
+  
+  <!-- === SPONSORS === -->
+  <div class="slide story" id="slide-4" data-slide="4">
+    <div class="container">
+      <div class="row title-row">
+        <div class="col-12 font-light">People who <span class="font-medium">believe</span> in what we do</div>
+      </div><!-- /row -->
+      <div class="row line-row">
+        <div class="hr">&nbsp;</div>
+      </div><!-- /row -->
+      <div class="row subtitle-row">
+        <div class="col-sm-1 hidden-sm">&nbsp;</div>
+        <div class="col-12 col-sm-10 font-thin">
+          CCTool has been developed as part of the Complexity Science for the Real World Initiative of the Engineering and Physical Sciences Research Council.
+        </div>
+        <div class="col-sm-1 hidden-sm">&nbsp;</div>
+      </div><!-- /row -->
+      <div class="row line-row">
+        <div>&nbsp;</div>
+      </div><!-- /row -->
+      <div class="row content-row">
+        <div class="col-12 col-lg-3 col-sm-6"><img src="{% static 'images/sponsors/sponsor01.png' %}" alt="" style="max-width: 225px; margin:auto"></div>
+        <div class="col-12 col-lg-3 col-sm-6"><img src="{% static 'images/sponsors/sponsor02.png' %}" alt="" style="max-width: 225px; margin:auto"></div>
+        <div class="col-12 col-lg-3 col-sm-6"><img src="{% static 'images/sponsors/sponsor03.png' %}" alt="" style="max-width: 225px; margin:auto"></div>
+        <div class="col-12 col-lg-3 col-sm-6"><img src="{% static 'images/sponsors/sponsor04.png' %}" alt="" style="max-width: 225px; margin:auto"></div>
+      </div><!-- /row -->
+      <div class="row line-row">
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;</div>
+      </div><!-- /row -->
+      <div class="row line-row">
+        <div class="col-12">
+          <h3 class="font-normal justify-text">
+            This programme brought cutting edge complexity science techniques together with real world expertise to aid decision making in human systems. To create CCTool we worked with local authorities, industrialists and NGOs in industrial ecosystems and regional economies to make tools that work on the ground for complex systems that matter.
+          </h3>
+        </div>
+      </div><!-- /row -->
+    </div><!-- /container -->
+  </div><!-- /slide4 -->
+  
+  <!-- === TEAM === -->
+  <div class="slide story" id="slide-5" data-slide="5">
+    <div class="container">
+      <div class="row title-row">
+        <div class="col-12 font-light">Meet our <span class="font-semibold">awesome</span> team</div>
+      </div><!-- /row -->
+      <div class="row line-row">
+        <div class="hr">&nbsp;</div>
+      </div><!-- /row -->
+      <div class="row content-row">
+        <div class="col-lg-4">
+          <img class="img-circle" src="{% static 'images/team/sotirismoschoyiannis.jpg' %}" width="140" alt="">
+        </div><!--/col-lg-12 -->
+        <div class="col-lg-6 justify-text">
+          <h4>Sotiris Moschoyiannis</h4>
+          <p>
+            <a class="regular-link" target="_blank" href="mailto:s.moschoyiannis@surrey.ac.uk">
+              <i class="fa fa-envelope-o"></i>
+              <span>s.moschoyiannis@surrey.ac.uk</span>
+            </a>
+          </p>
+          <p>
+            <a class="regular-link" target="_blank" href="http://www.surrey.ac.uk/cs/people/sotiris_moschoyiannis/">
+              <i class="fa fa-globe"></i>
+              <span>Personal webpage</span>
+            </a>
+          </p>
+          <p>
+            <a class="regular-link" target="_blank" href="https://uk.linkedin.com/in/sotmos">
+              <i class="fa fa-linkedin-square"></i>
+              <span>Linked In</span>
+            </a>
+          </p>
+        </div>
+      </div><!-- /row -->
+      <div class="row content-row">
+        <div class="col-lg-4">
+          <img class="img-circle" src="{% static 'images/team/alexandrapenn.jpg' %}" width="140" alt="">
+        </div><!--/col-lg-12 -->
+        <div class="col-lg-6 justify-text">
+          <h4>Alexandra Penn</h4>
+          <p>
+            <a class="regular-link" target="_blank" href="mailto:a.penn@surrey.ac.uk">
+              <i class="fa fa-envelope-o"></i>
+              <span>a.penn@surrey.ac.uk</span>
+            </a>
+          </p>
+          <p>
+            <a class="regular-link" target="_blank" href="http://cress.soc.surrey.ac.uk/web/people/apenn">
+              <i class="fa fa-globe"></i>
+              <span>Personal webpage</span>
+            </a>
+          </p>
+          <p>
+            <a class="regular-link" target="_blank" href="https://uk.linkedin.com/in/alexandra-alex-penn-frsa-9157b911">
+              <i class="fa fa-linkedin-square"></i>
+              <span>Linked In</span>
+            </a>
+          </p>
+        </div>
+      </div><!-- /row -->
+      <div class="row content-row">
+        <div class="col-lg-4">
+          <img class="img-circle" src="{% static 'images/team/nicholaselia.jpg' %}" width="140" alt="">
+        </div><!--/col-lg-12 -->
+        <div class="col-lg-6 justify-text">
+          <h4>Nicholas Elia</h4>
+          <p>
+            <a class="regular-link" target="_blank" href="mailto:nich.elia@gmail.com">
+              <i class="fa fa-envelope-o"></i>
+              <span>nich.elia@gmail.com</span>
+            </a>
+          </p>
+          <p>
+            <a class="regular-link" target="_blank" href="http://nichelia.com">
+              <i class="fa fa-globe"></i>
+              <span>Personal webpage</span>
+            </a>
+          </p>
+          <p>
+            <a class="regular-link" target="_blank" href="https://uk.linkedin.com/in/nichelia">
+              <i class="fa fa-linkedin-square"></i>
+              <span>Linked In</span>
+            </a>
+          </p>
+        </div>
+      </div><!-- /row -->
+    </div><!-- /container -->
+  </div><!-- /slide5 -->
+  
+  <!-- === REGISTER === -->
+  <div class="slide story" id="slide-6" data-slide="6">
+    <div class="container">
+      <div class="row title-row">
+        <div class="col-12 font-light">ComplexControlTool.</div>
+      </div><!-- /row -->
+      <div class="row line-row">
+        <div class="hr">&nbsp;</div>
+      </div><!-- /row -->
+      <div class="row content-row">
+        <div class="col-12 col-sm-3 hidden-sm">&nbsp;</div>
+        <div class="col-12 col-sm-6">
+          <div class="login">
+            <a class="regular-link" href="{% url 'account_signup' %}"><h2 class="signup-link font-light">Sign me up!</h2></a>
+            <a class="regular-link" href="{% url 'account_login' %}"><div class="login-link">Already have an account?</div></a>
+          </div><!-- /login -->
+        </div><!-- /col12 -->
+        <div class="col-12 col-sm-3 hidden-sm">&nbsp;</div>
+      </div><!-- /row -->
+      <div id="contact-row-4" class="row">
+        <div class="col-12 col-sm-3 with-hover-text">
+          <p><a target="_blank" href="tel:00441483683622"><i class="fa fa-phone"></i></p>
+          <span class="hover-text">+44 (0) 1483 689130</span></a>
+        </div><!-- /col12 -->
+        <div class="col-12 col-sm-3 with-hover-text">
+          <p><a target="_blank" href="mailto:erie@surrey.ac.uk"><i class="fa fa-envelope-o"></i></p>
+          <span class="hover-text">s.moschoyiannis@surrey.ac.uk</span></a>
+        </div><!-- /col12 -->
+        <div class="col-12 col-sm-3 with-hover-text">
+          <p><a target="_blank" href="http://www.cctool.co.uk"><i class="fa fa-globe"></i></p>
+          <span class="hover-text">http://www.cctool.co.uk</span></a>
+        </div><!-- /col12 -->
+        <div class="col-12 col-sm-3 with-hover-text">
+          <p><a target="_blank" href="https://www.google.com/maps/place/University+of+Surrey/@51.242722,-0.589514,14z/data=!4m2!3m1!1s0x0:0xfc4001c4e62e0b6c?hl=en-US"><i class="fa fa-map-o"></i></p>
+          <span class="hover-text">University of Surrey,<br>Guildford, England</span></a>
+        </div><!-- /col12 -->
+      </div><!-- /row -->
+    </div><!-- /container -->
+  </div><!-- /Slide 6 -->
+{% endblock all_content %}
+
+{% block extra_js %}
+  <script src="{% static 'js/html5shiv.js' %}"></script>
+  <script src="{% static 'fancybox/jquery.fancybox.pack-v=2.1.5.js' %}"></script>
+  <script src="{% static 'js/d3.min.js' %}"></script>
+  <script src="{% static 'js/jsnetworkx.js' %}"></script>
+  <script src="{% static 'js/home.js' %}"></script>
+  <!-- fancybox init -->
+  <script>
+  $(document).ready(function(e) {
+    var lis = $('.nav > li');
+    menu_focus( lis[0], 1 );
+    
+    $(".fancybox").fancybox({
+      padding: 10,
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      },
+      type: 'iframe'
+    });
+  
+  });
+  </script>
+{% endblock extra_js %}

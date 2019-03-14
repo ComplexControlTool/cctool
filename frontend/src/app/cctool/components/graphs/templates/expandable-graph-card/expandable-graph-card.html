@@ -1,11 +1,14 @@
 <!-- expandable-graph-card.html -->
 <md-card class="expandable-graph-card" scroll-reveal flex="100">
   <!-- Card image/video -->
-  <img ng-click="graphsCtrl.goToGraph(graph.id)" src="static/cctool/dashboard/assets/images/graph.png" class="md-card-image no-outline cursor-pointer">
+  <img ng-click="graphsCtrl.goToGraph(graph.id)" src="static/dashboard/assets/images/graph.png" class="md-card-image no-outline cursor-pointer">
   <!-- <img ng-click="graphs.oToGraph(graph.id)" ng-src="{{ graph.imgUrl }}" class="md-card-image cursor-pointer"> -->
 
   <md-card-title>
     <md-card-title-text ng-click="graphsCtrl.goToGraph(graph.id)" class="no-outline cursor-pointer">
+      <div flex="100" ng-if="graph.createdAt|recentDate">
+        <span class="tag">NEW</span>
+      </div>
       <!-- Title -->
       <span ng-if="graph.title" class="md-headline" ng-bind-html="graph.title"></span>
       <!-- Owner -->
@@ -48,22 +51,16 @@
       <p ng-bind-html="graph.description"></p>
       <md-divider></md-divider>
     </div>
-    <!-- More Description -->
-    <div ng-if="graph.moredescription">
-      <p style="font-weight:bold">More Description</p>
-      <p ng-bind-html="graph.moredescription"></p>
-      <md-divider></md-divider>
-    </div>
     <!-- Last Updated -->
-    <div ng-if="graph.dateupdated">
+    <div ng-if="graph.updatedAt">
       <p style="font-weight:bold">Last Updated</p>
-      <p ng-bind-html="graph.dateupdated | dateString"></p>
+      <p ng-bind-html="graph.updatedAt | dateString"></p>
       <md-divider></md-divider>
     </div>
     <!-- Date Created -->
-    <div ng-if="graph.dateadded">
+    <div ng-if="graph.createdAt">
       <p style="font-weight:bold">Date Created</p>
-      <p ng-bind-html="graph.dateadded | dateString"></p>
+      <p ng-bind-html="graph.createdAt | dateString"></p>
     </div>
   </md-card-content>
 

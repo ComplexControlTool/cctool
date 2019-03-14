@@ -63,8 +63,8 @@ gulp.task('html', ['inject', 'partials'], function () {
     //   collapseBooleanAttributes: true,
     //   collapseWhitespace: true
     // }))
-    .pipe($.replace(/href="([^"]{2,})"/g, 'href="{% static "cctool/dashboard/$1" %}"'))
-    .pipe($.replace(/src="([^"]*)"/g, 'src="{% static "cctool/dashboard/$1" %}"'))
+    .pipe($.replace(/href="([^"]{2,})"/g, 'href="{% static \'dashboard/$1\' %}"'))
+    .pipe($.replace(/src="([^"]*)"/g, 'src="{% static \'dashboard/$1\' %}"'))
     .pipe(htmlFilter.restore)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')))
     .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));

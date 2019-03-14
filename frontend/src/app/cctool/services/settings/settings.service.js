@@ -23,10 +23,10 @@
     [
       {id:'sort_by_name_a', label:'Title', text:'Title (Ascending)', icon: 'sort', value:'title', reversed:0, default:1, active:1},
       {id:'sort_by_name_d', label:'Title', text:'Title (Descending)', icon: 'sort', value:'title', reversed:1, default:0, active:0},
-      {id:'sort_by_date_created_a', label:'Date created', text:'Date created (Ascending)', icon: 'sort', value:'dateadded', reversed:0, default:0, active:0},
-      {id:'sort_by_date_created_d', label:'Date created', text:'Date created (Descending)', icon: 'sort', value:'dateadded', reversed:1, default:0, active:0},
-      {id:'sort_by_date_updated_a', label:'Date updated', text:'Date updated (Ascending)', icon: 'sort', value:'dateupdated', reversed:0, default:0, active:0},
-      {id:'sort_by_date_updated_d', label:'Date updated', text:'Date updated (Descending)', icon: 'sort', value:'dateupdated', reversed:1, default:0, active:0}
+      {id:'sort_by_date_created_a', label:'Date created', text:'Date created (Ascending)', icon: 'sort', value:'createdAt', reversed:0, default:0, active:0},
+      {id:'sort_by_date_created_d', label:'Date created', text:'Date created (Descending)', icon: 'sort', value:'createdAt', reversed:1, default:0, active:0},
+      {id:'sort_by_date_updated_a', label:'Date updated', text:'Date updated (Ascending)', icon: 'sort', value:'updatedAt', reversed:0, default:0, active:0},
+      {id:'sort_by_date_updated_d', label:'Date updated', text:'Date updated (Descending)', icon: 'sort', value:'updatedAt', reversed:1, default:0, active:0}
     ];
     var visualSettings =
     [

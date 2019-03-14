@@ -4,13 +4,12 @@ echo $'\n\t>> Retrieving required Docker images...\n'
 
 run_dev()
 {
-  echo $'\n\t>> Running cctool container in development serving mode...\n'
-  cd "${CCTOOL}/docker" && docker-compose up -d cctool-dev
+  echo $'\n\t>> Running cctool as local...\n'
+  docker-compose -f "${CCTOOL}/docker/docker-compose.local.yml" up -d
 }
 
-backendexists=$(docker images -q cctool-backend)
-frontendexists=$(docker images -q cctool-frontend)
-if [ -n "$backendexists" ] && [ -n "$frontendexists" ]; then
+cctool_set=$(docker images -a | awk '{ print $1,$3 }' | grep cctool_local | awk '{ print $2 }' | wc -l)
+if [ "$cctool_set" -eq "6" ]; then
   run_dev
 else
   source "${CCTOOL}/docker/docker_create_custom_images.sh"

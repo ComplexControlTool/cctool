@@ -16,7 +16,7 @@
     // Data
     vm.title = 'GraphManagerController';
     vm.activeSettings = settingsService.activeSettings;
-    vm.content = Graphs.results ? Graphs.results : [];
+    vm.content = Graphs ? Graphs : [];
     vm.hasNoGraphs = true;
 
     // Functions
@@ -102,6 +102,7 @@
 
     function exportCSV(graph)
     {
+      // TODO: Make API request to receive CSV from backend
       $log.debug(vm.title+'/ exportCSV: Exporting CSV of the map with arguments:\ngraph:', graph);
       var csvContent = "data:text/csv;charset=utf-8," + graph.graphgephicsv;
       var encodedUri = encodeURI(csvContent);
@@ -110,9 +111,9 @@
 
     function exportJSON(graph)
     {
-
+      // TODO: Make API request to reveive CSV from backend
       $log.debug(vm.title+'/ exportJSON: Exporting JSON of the map with arguments:\ngraph:', graph);
-      var jsonContent = "data:text/json;charset=utf-8," + JSON.stringify( graph.graphgephijson );
+      var jsonContent = "data:text/json;charset=utf-8," + JSON.stringify( graph.structure );
       var encodedUri = encodeURI(jsonContent);
       $window.open(encodedUri, '_blank');
     }

@@ -1,0 +1,114 @@
+<md-dialog md-theme="graph_panel" aria-label="Graph Panel Help">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Help</h2>
+        <span flex=""></span>
+        <md-button ng-click="cancel()" class="md-icon-button" aria-label="Close help dialogue">
+          <md-tooltip md-direction="bottom">Close help dialogue</md-tooltip>
+          <md-icon>close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content layout-margin="">
+      <table style="margin:auto">
+        <tr><th colspan="2" style="padding:10px; border-bottom: 1px solid #efefef;">Graph Panel</th></tr>
+        <tr><td style="text-align:center" colspan="2">A panel that presents the visualisation of the current graph.</td></tr>
+        <tr><td style="text-align:center" colspan="2">If the graph is analysed and it consists of multiple configurations, those are arranged into tabs. Please note that to interact with the graph you need to click (touch) once within the panel (a blue shaded border will appear). This denotes that page scrolling is temporarily disabled. To reverse this behaviour, just click (touch) once outside of the graph panel.</td></tr>
+        <tr><td><br></td></tr>
+        <tr><th colspan="2" style="padding:10px; border-bottom: 1px solid #efefef;">Instructions</th></tr>
+        <tr><td style="text-align:center" colspan="2">Please also read the KEY information provided.</td></tr>
+        <tr><td style="text-align:center" colspan="2">Every graph consists of nodes (circle, star or oval shapes) and connections (lines with arrows). The visualisation of the nodes can be changed using the Show node shapes / Show node labels option. The first time the graph is loaded, it is in its pre-analysed form. To analyse the graph, please select the 'Analyse Graph' option. To restore graph to its pre-analysed form, please select the 'Reset Graph' option. To interact with the graph, make sure a blue shaded border appears when you click (touch) once within the panel area. This will allow you to temporarily reposition the nodes, zoom in or out of the graph, move the graph in the space provided and also isolate first and second node connections.</td></tr>
+        <tr><td><br></td></tr>
+        <tr><td style="text-align:left" colspan="2">To reposition a node, hold click on (touch) it and drag it to the desired position.</td></tr>
+        <tr><td style="text-align:left" colspan="2">To zoom in/out scroll within the graph area (pinch-to-zoom on touchscreens, mouse scroll on desktop).</td></tr>
+        <tr><td style="text-align:left" colspan="2">To move the graph around the space, hold click on (touch) the white space within the graph area and drag it to the desired position.</td></tr>
+        <tr><td style="text-align:left" colspan="2">To reposition a node, hold click on (touch) it and drag it to the desired position.</td></tr>
+        <tr><td style="text-align:left" colspan="2">To isolate first and second node connections, please click (touch) once the node you are interested in.</td></tr>
+        <tr><td><br></td></tr>
+        <tr><th colspan="2" style="padding:10px; border-bottom: 1px solid #efefef;">Options</th></tr>
+        <tr><td style="text-align:center" colspan="2">You can find panel specific options on the panel's toolbar.</td></tr>
+        <tr><td style="text-align:center" colspan="2">The general graph options can be found on the 'Information' right hand side menu.</td></tr>
+        <tr><td style="text-align:center" colspan="2">The general graph options can be found on the top main toolbar (right hand side).</td></tr>
+        <tr><td><br></td></tr>
+        <tr>
+          <td colspan="2">Available panel options:</td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+          <td><md-icon>KEY</md-icon></td>
+          <td>Opens the graph's visualisation KEY in a dialogue.</td>
+        </tr>
+        <tr>
+          <td><md-icon>fullscreen</md-icon></td>
+          <td>Opens the graph in a dialogue.</td>
+        </tr>
+        <tr>
+          <td><md-icon>camera</md-icon></td>
+          <td>Takes a screenshot of the current graph and saves it as an image.</td>
+        </tr>
+        <tr>
+          <td><md-icon>stars</md-icon> / <md-icon>font_download</md-icon></td>
+          <td>Change visualisation of the graph. Nodes appear as ellipse with text inside / Nodes appear as shapes with text at the bottom.</td>
+        </tr>
+        <tr>
+          <td><md-icon>help</md-icon></td>
+          <td>Opens help dialogue.</td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+          <td colspan="2">Available graph options:</td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Analyse Graph</td>
+          <td>Uses our CCTool algorithmic approach to analyse the graph and return back any control nodes and stems.</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Edit Graph</td>
+          <td>Allows you to make modifications to the current graph. That includes details of the graph, node properties, node connections, etc.</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Duplicate Graph</td>
+          <td>Creates a copy of the current graph.</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Reset Graph</td>
+          <td>Discard any analysis of the current graph..</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Remove Graph</td>
+          <td>Deletes the current graph from the account. Please notice that this action <span style="font-weight:bold;">cannot</span> be reverted.</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Compare Graph</td>
+          <td>Offers the ability to compare the current graph with another existing graph on the logged-in account.</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">New Graph</td>
+          <td>Offers a tool to add a new graph to the account.</td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr><th colspan="2" style="padding:10px; border-bottom: 1px solid #efefef;">Definitions</th></tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Node</td>
+          <td style="text-align:left">Nodes are the “things” that a network connects together. They can be factors, objects, or concepts.</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Edge</td>
+          <td style="text-align:left">An edge is a link between two (2) nodes in a network. Here the edges represent causal influences.</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:bold">Control Node</td>
+          <td style="text-align:left">Control nodes are nodes that because of their network position can be shown mathematically to be able to influence a large proportion of the network through a direct causal chain. A set of control nodes together can exert control over the whole network.</td>
+        </tr>
+      </table>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex=""></span>
+      <md-button ng-click="answer('understood')" style="margin-right:20px;">
+        Understood
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

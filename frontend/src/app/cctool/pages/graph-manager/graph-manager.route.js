@@ -13,7 +13,7 @@
     $stateProvider
       .state('app.cctool_graphs_demo',
       {
-        url: '/cctool/graphs/demo',
+        url: '/dashboard/graphs/demo',
         views:
         {
           'content@app':
@@ -55,7 +55,7 @@
       })
       .state('app.cctool_graph_demo',
       {
-        url: '/cctool/graphs/demo/:id',
+        url: '/dashboard/graphs/demo/:id',
         views:
         {
           'content@app':
@@ -84,17 +84,11 @@
           {
             templateUrl: 'app/cctool/components/graph/templates/graph.overview.html',
           },
-          'graph-control-nodes@app.cctool_graph_demo':
+          'graph-controllability-analysis@app.cctool_graph_demo':
           {
-            templateUrl: 'app/cctool/components/graph/templates/graph.control-nodes.html',
-            controller: 'ControlNodesAnalysisController',
-            controllerAs: 'controlNodesAnalysisCtrl'
-          },
-          'graph-up-down-stream@app.cctool_graph_demo':
-          {
-            templateUrl: 'app/cctool/components/graph/templates/graph.node-updownstream.html',
-            controller: 'NodeAnalysisController',
-            controllerAs: 'nodeAnalysisCtrl'
+            templateUrl: 'app/cctool/components/graph/templates/graph.controllability-analysis.html',
+            controller: 'ControllabilityAnalysisController',
+            controllerAs: 'controllabilityAnalysisCtrl'
           },
           'toolbar@app.cctool_graph_demo':
           {
@@ -117,7 +111,7 @@
       })
       .state('app.cctool_graphs',
       {
-        url: '/cctool/graphs',
+        url: '/dashboard/graphs',
         views:
         {
           'content@app':
@@ -157,13 +151,13 @@
         {
           Graphs: function (apiResolver)
           {
-            return apiResolver.resolve('cctool.graphs.basicoptions@get');
+            return apiResolver.resolve('cctool.graphs.basic@query');
           }
         }
       })
       .state('app.cctool_graph',
       {
-        url: '/cctool/graphs/:id',
+        url: '/dashboard/graphs/:id',
         views:
         {
           'content@app':
@@ -192,17 +186,23 @@
           {
             templateUrl: 'app/cctool/components/graph/templates/graph.overview.html',
           },
-          'graph-control-nodes@app.cctool_graph':
+          'graph-controllability-analysis@app.cctool_graph':
           {
-            templateUrl: 'app/cctool/components/graph/templates/graph.control-nodes.html',
-            controller: 'ControlNodesAnalysisController',
-            controllerAs: 'controlNodesAnalysisCtrl'
+            templateUrl: 'app/cctool/components/graph/templates/graph.controllability-analysis.html',
+            controller: 'ControllabilityAnalysisController',
+            controllerAs: 'controllabilityAnalysisCtrl'
           },
-          'graph-up-down-stream@app.cctool_graph':
+          'graph-downstream-analysis@app.cctool_graph':
           {
-            templateUrl: 'app/cctool/components/graph/templates/graph.node-updownstream.html',
-            controller: 'NodeAnalysisController',
-            controllerAs: 'nodeAnalysisCtrl'
+            templateUrl: 'app/cctool/components/graph/templates/graph.downstream-analysis.html',
+            controller: 'DownstreamAnalysisController',
+            controllerAs: 'downstreamAnalysisCtrl'
+          },
+          'graph-upstream-analysis@app.cctool_graph':
+          {
+            templateUrl: 'app/cctool/components/graph/templates/graph.upstream-analysis.html',
+            controller: 'UpstreamAnalysisController',
+            controllerAs: 'upstreamAnalysisCtrl'
           },
           'actions@app.cctool_graph':
           {
@@ -219,11 +219,11 @@
         {
           Graphs: function (apiResolver)
           {
-            return apiResolver.resolve('cctool.graphs.basic@get');
+            return apiResolver.resolve('cctool.graphs.basic@query');
           },
           Graph: function (apiResolver, $stateParams)
           {
-            return apiResolver.resolve('cctool.graph.full@get', {'id': $stateParams.id});
+            return apiResolver.resolve('cctool.graph.basic@get', {'id': $stateParams.id});
           }
         }
       })

@@ -90,12 +90,12 @@
   <md-subheader class="md-primary">Account</md-subheader>
   <md-list>
     <md-list-item
-    href="/cctool/logout"
+    ng-href="/users/{{appCtrl.cctoolUser}}"
     ng-click="appCtrl.toggleSidenav('menu-sidenav')"
     class="md-2-line">
         <md-icon>perm_identity</md-icon>
         <div class="md-list-item-text">
-          <h3>Logout</h3>
+          <h3>Account Details</h3>
           <p>
             {{appCtrl.cctoolUser}}
           </p>
