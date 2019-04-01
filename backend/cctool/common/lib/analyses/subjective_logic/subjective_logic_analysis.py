@@ -64,7 +64,7 @@ def find_centrality(graph, centrality_measure='degree'):
         elif centrality_measure == 'eigenvector':
             centrality = nx.eigenvector_centrality(G)
         elif centrality_measure == 'closeness':
-            centrality = nx.closeness_centrality(G, distance='distance')
+            centrality = nx.closeness_centrality(G)
         elif centrality_measure == 'betweenness':
             centrality = nx.betweenness_centrality(G)
     except Exception as e:
