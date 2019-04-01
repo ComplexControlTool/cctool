@@ -5,4 +5,10 @@ set -o pipefail
 set -o nounset
 
 
-celery -A cctool.taskapp beat -l INFO
+echo $'\n\t C C T O O L  P R O D  C E L E R Y  B E A T B O X \n'
+sleep 5
+echo $'\n\t>> Running celery flower...\n'
+mkdir -p "${CELERY_CODE_DIR}/logs"
+mkdir -p "${CELERY_CODE_DIR}/celerybeat"
+rm -rf "${CELERY_CODE_DIR}/celerybeat/celerybeat*"
+celery beat -A cctool.taskapp -l INFO --pidfile="${CELERY_CODE_DIR}/celerybeat/celerybeat.pid" --logfile="${CELERY_CODE_DIR}/logs/celerybeat.log"

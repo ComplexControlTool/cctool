@@ -5,5 +5,9 @@ set -o pipefail
 set -o nounset
 
 
-python /app/manage.py collectstatic --noinput
-/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:5000 --chdir=/app
+echo $'\n\t C C T O O L  P R O D  D J A N G O \n'
+sleep 5
+echo $'\n\t>> Collecting static files...\n'
+python manage.py collectstatic --noinput
+echo $'\n\t>> Running django web app...\n'
+/usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:5000 --chdir=.

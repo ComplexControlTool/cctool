@@ -3,6 +3,7 @@ version: '3'
 volumes:
   cctool_prod_db_data: {}
   cctool_prod_db_data_backups: {}
+  cctool_local_frontend: {}
   cctool_prod_caddy: {}
 
 services:
@@ -11,22 +12,25 @@ services:
 
   django: &django
     build:
-      context: .
-      dockerfile: ./compose/production/django/Dockerfile
-    image: cctool_production_django
+      context: "$CCTOOL"
+      dockerfile: ./docker/compose/production/django/Dockerfile
+    image: cctool_prod_django
+    container_name: cctool_prod_django
     depends_on:
       - postgres
       - redis
+      - angularjs
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
-    command: /start
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start"
 
   postgres:
     build:
-      context: .
-      dockerfile: ./compose/production/postgres/Dockerfile
-    image: cctool_production_postgres
+      context: "$CCTOOL"
+      dockerfile: ./docker/compose/production/postgres/Dockerfile
+    image: cctool_prod_postgres
+    container_name: cctool_prod_postgres
     volumes:
       - cctool_prod_db_data:/var/lib/postgresql/data
       - cctool_prod_db_data_backups:/backups
@@ -35,9 +39,10 @@ services:
 
   caddy:
     build:
-      context: .
-      dockerfile: ./compose/production/caddy/Dockerfile
-    image: cctool_production_caddy
+      context: "$CCTOOL"
+      dockerfile: ./docker/compose/production/caddy/Dockerfile
+    image: cctool_prod_caddy
+    container_name: cctool_prod_caddy
     depends_on:
       - django
     volumes:
@@ -50,22 +55,44 @@ services:
 
   redis:
     image: redis:3.2
+    container_name: cctool_prod_redis
 
   celeryworker:
     <<: *django
-    image: cctool_production_celeryworker
-    command: /start-celeryworker
+    image: cctool_prod_celeryworker
+    container_name: cctool_prod_celeryworker
+    depends_on:
+      - redis
+      - postgres
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start-celeryworker"
 
   celerybeat:
     <<: *django
-    image: cctool_production_celerybeat
-    command: /start-celerybeat
+    image: cctool_prod_celerybeat
+    container_name: cctool_prod_celerybeat
+    depends_on:
+      - redis
+      - postgres
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start-celerybeat"
 
   flower:
     <<: *django
-    image: cctool_production_flower
+    image: cctool_prod_flower
+    container_name: cctool_prod_flower
     ports:
       - "5555:5555"
-    command: /start-flower
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start-flower"
 
   # --- Frontend ---
+
+  angularjs:
+    build:
+      context: "$CCTOOL"
+      dockerfile: ./docker/compose/production/angularjs/Dockerfile
+    image: cctool_prod_angularjs
+    container_name: cctool_prod_angularjs
+    volumes:
+      - cctool_local_frontend:/Developer/cctool/frontend/dist
+    env_file:
+      - ./.envs/.local/.angularjs
+    command: /bin/bash -c "/Developer/cctool/scripts/logo && /Developer/cctool/scripts/start"

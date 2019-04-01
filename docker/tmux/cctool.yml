@@ -1,0 +1,51 @@
+name: cctool
+root: <%= ENV["CCTOOL"] %>
+
+on_project_start:
+  - find ./docker/ -name "*.sh" -exec chmod +x {} \;
+  - ./docker/docker_run_production_mode.sh
+on_project_stop:
+  - ./docker/docker_stop_production_mode.sh
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim
+        - htop
+        - ./docker/docker_stats.sh
+        - cd "$CCTOOL"
+  - main-containers:
+      layout: even-horizontal
+      panes:
+        - docker exec -it cctool_prod_django bash
+        - docker exec -it cctool_prod_angularjs bash
+        - docker exec -it cctool_prod_postgres bash
+  - celery-containers:
+      layout: even-horizontal
+      panes:
+        - docker exec -it cctool_prod_celeryworker bash
+        - docker exec -it cctool_prod_celerybeat bash
+        - docker exec -it cctool_prod_flower bash
+  - other-containers:
+      layout: even-horizontal
+      panes:
+        - docker exec -it cctool_prod_caddy bash
+        - docker exec -it cctool_prod_redis bash
+  - main-logs:
+      layout: even-horizontal
+      panes:
+        - docker logs -f cctool_prod_django
+        - docker logs -f cctool_prod_angularjs
+        - docker logs -f cctool_prod_postgres
+  - celery-logs:
+      layout: even-horizontal
+      panes:
+        - docker logs -f cctool_prod_celeryworker
+        - docker logs -f cctool_prod_celerybeat
+        - docker logs -f cctool_prod_flower
+  - other-logs:
+      layout: even-horizontal
+      panes:
+        - docker logs -f cctool_prod_caddy
+        - docker logs -f cctool_prod_redis

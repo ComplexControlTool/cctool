@@ -12,6 +12,6 @@ cctool_set=$(docker images -a | awk '{ print $1,$3 }' | grep cctool_local | awk 
 if [ "$cctool_set" -eq "6" ]; then
   run_dev
 else
-  source "${CCTOOL}/docker/docker_create_custom_images.sh"
+  source "${CCTOOL}/docker/docker_create_custom_local_images.sh"
   run_dev
 fi

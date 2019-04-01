@@ -5,4 +5,10 @@ set -o pipefail
 set -o nounset
 
 
-celery -A cctool.taskapp worker -l INFO
+echo $'\n\t C C T O O L  P R O D  C E L E R Y  W O R K E R \n'
+sleep 5
+echo $'\n\t>> Running celery worker...\n'
+mkdir -p "${CELERY_CODE_DIR}/logs"
+mkdir -p "${CELERY_CODE_DIR}/celeryworker"
+rm -rf "${CELERY_CODE_DIR}/celeryworker/worker*"
+celery worker -A cctool.taskapp -Ofair -l INFO --pidfile="${CELERY_CODE_DIR}/celeryworker/worker%I.pid" --logfile="${CELERY_CODE_DIR}/logs/%n%I.log"
