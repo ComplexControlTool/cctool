@@ -1,3 +1,10 @@
+#dashboard-content md-content
+{
+  background-color: #fdfbfb;
+  background: -webkit-linear-gradient(#fdfbfb, #ebedee 51.26%);
+  background-image: linear-gradient(#fdfbfb, #ebedee 51.26%);
+}
+
 #dashboard-content ul.buckets
 {
   margin: 24px 0 24px -8px;
