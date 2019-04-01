@@ -120,6 +120,7 @@ for i,graph in enumerate(data['results']):
   analysis_obj = addAnalysis(graph_obj, 'CA')
   analysis_obj = addAnalysis(graph_obj, 'USA')
   analysis_obj = addAnalysis(graph_obj, 'DSA')
+  analysis_obj = addAnalysis(graph_obj, 'SLA')
 
   print('Executing tasks on graphs...')
   graph_helper.map_graph(graph_obj)

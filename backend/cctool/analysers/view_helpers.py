@@ -1,4 +1,4 @@
-from .tasks import find_graph_controllability, find_downstream, find_upstream
+from .tasks import find_graph_controllability, find_downstream, find_upstream, find_subjective_logic
 from cctool.graphs.models.models import Analysis
 
 
@@ -20,6 +20,10 @@ class AnalyserHelper:
                 ret['task_id'] = res.id
             if analysis.analysis_type == Analysis.UP_STREAM_ANALYSIS:
                 func = find_upstream.s(graph_id=graph.pk, analysis_id=analysis.pk)
+                res = func.apply_async()
+                ret['task_id'] = res.id
+            if analysis.analysis_type == Analysis.SUBJECTIVE_LOGIC_ANALYSIS:
+                func = find_subjective_logic.s(graph_id=graph.pk, analysis_id=analysis.pk)
                 res = func.apply_async()
                 ret['task_id'] = res.id
         return ret

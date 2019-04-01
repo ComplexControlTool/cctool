@@ -1,0 +1,24 @@
+<!-- graph.subjective-logic-analysis.html -->
+<md-progress-linear ng-show="subjectiveLogicAnalysisCtrl.progressLinear.active" md-mode="{{subjectiveLogicAnalysisCtrl.progressLinear.mode}}" value="{{subjectiveLogicAnalysisCtrl.progressLinear.value}}" md-buffer-value="{{subjectiveLogicAnalysisCtrl.progressLinear.bufferValue}}"></md-progress-linear>
+
+<section class="boxed wide-cards">
+
+  <div layout-margin="" layout-padding=""></div>
+
+  <div layout="column" layout-align="center center">
+
+    <!-- Up Stream Map Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Subjective Logic Map</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div ng-include="'app/cctool/components/subjective-logic-analysis/subjective-logic/subjective-logic.html'"></div>
+    </md-card>
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+  </div>
+</section>

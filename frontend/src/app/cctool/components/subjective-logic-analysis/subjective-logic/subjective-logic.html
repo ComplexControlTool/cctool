@@ -1,0 +1,25 @@
+<!-- subjective-logic.html -->
+<div id="subjective-logic-content" ng-if="!subjectiveLogicAnalysisCtrl.content.isAnalysed" flex="">
+  <div style="height:720px" layout="row" layout-align="center center">
+    LOADING...
+  </div>
+</div>
+<div id="subjective-logic-content" ng-if="subjectiveLogicAnalysisCtrl.content.isAnalysed" ng-controller="SubjectiveLogicController as slcontroller" flex="">
+  <md-tabs md-selected="subjectiveLogicAnalysisCtrl.selectedIndex" class="no-radius" md-enable-disconnect="" md-no-ink="" md-dynamic-height="" md-border-bottom="" flex="100">
+    <md-tab ng-repeat="(key, value) in subjectiveLogicAnalysisCtrl.content.analysis.data" label="{{ key }}">
+      <div style="height:650px" layout="row" layout-align="center center" layout-wrap="" layout-padding="">
+        <div 
+         id="sla-{{subjectiveLogicAnalysisCtrl.graphForAnalysis.id}}-{{$index}}"
+         ng-if="subjectiveLogicAnalysisCtrl.drawGraph($index)"
+         vis-network=""
+         network="subjectiveLogicAnalysisCtrl.network"
+         analysis="subjectiveLogicAnalysisCtrl.content.analysis"
+         visualization="subjectiveLogicAnalysisCtrl.content.visualization"
+         index="key"
+         node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+         reload="subjectiveLogicAnalysisCtrl.reloadGraph"
+         layout-fill=""></div>
+      </div>
+    </md-tab>
+  </md-tabs>
+</div>

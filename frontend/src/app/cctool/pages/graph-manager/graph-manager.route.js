@@ -204,6 +204,12 @@
             controller: 'UpstreamAnalysisController',
             controllerAs: 'upstreamAnalysisCtrl'
           },
+          'graph-subjectivelogic-analysis@app.cctool_graph':
+          {
+            templateUrl: 'app/cctool/components/graph/templates/graph.subjective-logic-analysis.html',
+            controller: 'SubjectiveLogicAnalysisController',
+            controllerAs: 'subjectiveLogicAnalysisCtrl'
+          },
           'actions@app.cctool_graph':
           {
             templateUrl: 'app/cctool/components/graph/templates/graph-actions.html'

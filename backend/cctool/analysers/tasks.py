@@ -4,6 +4,8 @@ from cctool.common.lib.analyses.controllability import controllability_analysis 
 from cctool.common.lib.analyses.controllability import controllability_visualization as CA_Visualization
 from cctool.common.lib.analyses.downstream import downstream_analysis as DSA_Analysis
 from cctool.common.lib.analyses.downstream import downstream_visualization as DSA_Visualization
+from cctool.common.lib.analyses.subjective_logic import subjective_logic_analysis as SLA_Analysis
+from cctool.common.lib.analyses.subjective_logic import subjective_logic_visualization as SLA_Visualization
 from cctool.common.lib.analyses.upstream import upstream_analysis as USA_Analysis
 from cctool.common.lib.analyses.upstream import upstream_visualization as USA_Visualization
 from cctool.graphs.models.models import Graph, Analysis, Node, NodePlus
@@ -207,7 +209,53 @@ def find_downstream(self, graph_id, analysis_id):
 
 @cctoolapp.task(bind=True)
 def find_subjective_logic(self, graph_id, analysis_id):
-    graph = Graph.objects.get(pk=graph_id)
+    try:
+        graph = Graph.objects.get(pk=graph_id)
+    except ObjectDoesNotExist:
+        raise Exception(f'Graph object with pk: {graph_id}, does not exist!')
+    try:
+        analysis = Analysis.objects.get(pk=analysis_id)
+    except ObjectDoesNotExist:
+        raise Exception(f'Analysis object with pk: {analysis_id}, does not exist!')
+
+    analysis_data = dict()
+    graph_structure = dict()
+
+    centrality_measures = ['degree', 'in-degree', 'out-degree', 'eigenvector', 'closeness', 'betweenness']
+    for centrality_measure in centrality_measures:
+        analysis_data[centrality_measure] = SLA_Analysis.find_centrality(graph, centrality_measure)
+
+        graph_structure[centrality_measure] = dict()
+        nodes_data = list()
+        for node in graph.nodes.all().select_subclasses():
+            data = node.to_json(use_dict=True)
+            if 'properties' in data:
+                data['cctool'] = data.pop('properties')
+            vis = SLA_Visualization.generate_node_options(node, analysis_data[centrality_measure])
+            nodes_data.append(dict(**data, **vis))
+        edges_data = list()
+        for edge in graph.edges.all().select_subclasses():
+            data = edge.to_json(use_dict=True)
+            if 'source' in data:
+                data['from'] = data.pop('source')
+            if 'target' in data:
+                data['to'] = data.pop('target')
+            if 'properties' in data:
+                data['cctool'] = data.pop('properties')
+            vis = SLA_Visualization.generate_edge_options(edge, analysis_data[centrality_measure])
+            edges_data.append(dict(**data, **vis))
+
+        graph_structure[centrality_measure]['nodes'] = nodes_data
+        graph_structure[centrality_measure]['edges'] = edges_data
+
+    graph_options = SLA_Visualization.generate_graph_options()
+
+    analysis.data = analysis_data
+    analysis.save()
+    analysis.visualization.options = graph_options
+    analysis.visualization.structure = graph_structure
+    analysis.visualization.save()
+
     return
 
 @cctoolapp.task(bind=True)
