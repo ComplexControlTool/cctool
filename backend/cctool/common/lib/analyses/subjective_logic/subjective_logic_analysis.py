@@ -54,17 +54,20 @@ def find_centrality(graph, centrality_measure='degree'):
         distance = 1/weight
         G.add_edge(edge.source.identifier, edge.target.identifier, weight=weight, distance=distance)
 
-    if centrality_measure == 'degree':
-        centrality = nx.degree_centrality(G)
-    elif centrality_measure == 'in-degree':
-        centrality = nx.in_degree_centrality(G)
-    elif centrality_measure == 'out-degree':
-        centrality = nx.out_degree_centrality(G)
-    elif centrality_measure == 'eigenvector':
-        centrality = nx.eigenvector_centrality(G)
-    elif centrality_measure == 'closeness':
-        centrality = nx.closeness_centrality(G, distance='distance')
-    elif centrality_measure == 'betweenness':
-        centrality = nx.betweenness_centrality(G)
+    try:
+        if centrality_measure == 'degree':
+            centrality = nx.degree_centrality(G)
+        elif centrality_measure == 'in-degree':
+            centrality = nx.in_degree_centrality(G)
+        elif centrality_measure == 'out-degree':
+            centrality = nx.out_degree_centrality(G)
+        elif centrality_measure == 'eigenvector':
+            centrality = nx.eigenvector_centrality(G)
+        elif centrality_measure == 'closeness':
+            centrality = nx.closeness_centrality(G, distance='distance')
+        elif centrality_measure == 'betweenness':
+            centrality = nx.betweenness_centrality(G)
+    except Exception as e:
+        pass
 
     return centrality
