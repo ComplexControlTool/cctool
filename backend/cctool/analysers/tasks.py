@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 
-from cctool.common.lib.analyses.controllability import controllability_analysis as CA_Analysis
+from cctool.common.lib.analyses.controllability import control_analysis as CA_Analysis
 from cctool.common.lib.analyses.controllability import controllability_visualization as CA_Visualization
 from cctool.common.lib.analyses.downstream import downstream_analysis as DSA_Analysis
 from cctool.common.lib.analyses.downstream import downstream_visualization as DSA_Visualization
