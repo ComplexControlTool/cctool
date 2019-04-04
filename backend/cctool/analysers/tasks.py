@@ -221,17 +221,17 @@ def find_subjective_logic(self, graph_id, analysis_id):
     analysis_data = dict()
     graph_structure = dict()
 
-    centrality_measures = ['degree', 'in-degree', 'out-degree', 'eigenvector', 'closeness', 'betweenness']
-    for centrality_measure in centrality_measures:
-        analysis_data[centrality_measure] = SLA_Analysis.find_centrality(graph, centrality_measure)
+    measures = ['degree', 'in-degree', 'out-degree', 'eigenvector', 'closeness', 'betweenness', 'vulnerability', 'importance']
+    for measure in measures:
+        analysis_data[measure] = SLA_Analysis.find_measurement(graph, measure)
 
-        graph_structure[centrality_measure] = dict()
+        graph_structure[measure] = dict()
         nodes_data = list()
         for node in graph.nodes.all().select_subclasses():
             data = node.to_json(use_dict=True)
             if 'properties' in data:
                 data['cctool'] = data.pop('properties')
-            vis = SLA_Visualization.generate_node_options(node, analysis_data[centrality_measure])
+            vis = SLA_Visualization.generate_node_options(node, analysis_data[measure])
             nodes_data.append(dict(**data, **vis))
         edges_data = list()
         for edge in graph.edges.all().select_subclasses():
@@ -242,11 +242,11 @@ def find_subjective_logic(self, graph_id, analysis_id):
                 data['to'] = data.pop('target')
             if 'properties' in data:
                 data['cctool'] = data.pop('properties')
-            vis = SLA_Visualization.generate_edge_options(edge, analysis_data[centrality_measure])
+            vis = SLA_Visualization.generate_edge_options(edge, analysis_data[measure])
             edges_data.append(dict(**data, **vis))
 
-        graph_structure[centrality_measure]['nodes'] = nodes_data
-        graph_structure[centrality_measure]['edges'] = edges_data
+        graph_structure[measure]['nodes'] = nodes_data
+        graph_structure[measure]['edges'] = edges_data
 
     graph_options = SLA_Visualization.generate_graph_options()
 

@@ -3,8 +3,10 @@ from cctool.graphs.models.models import NodePlus, EdgePlus
 import networkx as nx
 
 
-def find_centrality(graph, centrality_measure='degree'):
+def find_measurement(graph, measure='degree'):
     centrality = dict()
+    vulnerability = dict()
+    importance = dict()
 
     nodes = graph.nodes.all().select_subclasses()
     edges = graph.edges.all().select_subclasses()
@@ -17,16 +19,16 @@ def find_centrality(graph, centrality_measure='degree'):
     }
 
     vulnerability_weights = {
-        NodePlus.NO_VULNERABILITY: 3,
-        NodePlus.LOW_VULNERABILITY: 3,
-        NodePlus.MEDIUM_VULNERABILITY: 2,
-        NodePlus.HIGH_VULNERABILITY: 1
+        NodePlus.NO_VULNERABILITY: 0,
+        NodePlus.LOW_VULNERABILITY: -1,
+        NodePlus.MEDIUM_VULNERABILITY: -2,
+        NodePlus.HIGH_VULNERABILITY: -3
     }
 
     importance_weights = {
-        NodePlus.NO_IMPORTANCE: 1,
-        NodePlus.LOW_IMPORTANCE: 2,
-        NodePlus.HIGH_IMPORTANCE: 3
+        NodePlus.NO_IMPORTANCE: 0,
+        NodePlus.LOW_IMPORTANCE: 1,
+        NodePlus.HIGH_IMPORTANCE: 2
     }
 
     connection_weights = {
@@ -42,6 +44,10 @@ def find_centrality(graph, centrality_measure='degree'):
     G = nx.DiGraph()
 
     for node in nodes:
+        if measure == 'vulnerability':
+            vulnerability[node.identifier] = vulnerability_weights[node.vulnerability]
+        if measure == 'importance':
+            importance[node.identifier] = importance_weights[node.importance]
         G.add_node(node.identifier)
 
     for edge in edges:
@@ -51,23 +57,27 @@ def find_centrality(graph, centrality_measure='degree'):
         importance_weight = importance_weights[target_node.importance]
         connection_weight = connection_weights[edge.weight]
         weight = controllability_weight + vulnerability_weight + importance_weight + connection_weight
-        distance = 1/weight
+        distance = 1/weight if weight != 0 else 1
         G.add_edge(edge.source.identifier, edge.target.identifier, weight=weight, distance=distance)
 
     try:
-        if centrality_measure == 'degree':
-            centrality = nx.degree_centrality(G)
-        elif centrality_measure == 'in-degree':
-            centrality = nx.in_degree_centrality(G)
-        elif centrality_measure == 'out-degree':
-            centrality = nx.out_degree_centrality(G)
-        elif centrality_measure == 'eigenvector':
-            centrality = nx.eigenvector_centrality(G)
-        elif centrality_measure == 'closeness':
-            centrality = nx.closeness_centrality(G)
-        elif centrality_measure == 'betweenness':
-            centrality = nx.betweenness_centrality(G)
+        if measure == 'degree':
+            return nx.degree_centrality(G)
+        elif measure == 'in-degree':
+            return nx.in_degree_centrality(G)
+        elif measure == 'out-degree':
+            return nx.out_degree_centrality(G)
+        elif measure == 'eigenvector':
+            return nx.eigenvector_centrality(G)
+        elif measure == 'closeness':
+            return nx.closeness_centrality(G)
+        elif measure == 'betweenness':
+            return nx.betweenness_centrality(G)
+        elif measure == 'vulnerability':
+            return vulnerability
+        elif measure == 'importance':
+            return importance
     except Exception as e:
         pass
 
-    return centrality
+    return dict()
