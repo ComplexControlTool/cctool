@@ -3,6 +3,7 @@ from cctool.common.lib import default_visualization
 
 def generate_graph_options():
     graph_options = default_visualization.generate_graph_options()
+    graph_options['layout'].pop('randomSeed')
 
     graph_options['edges']['smooth']['type'] = 'cubicBezier'
     graph_options['edges']['smooth']['forceDirection'] = 'vertical'
@@ -39,8 +40,7 @@ def generate_node_options(node, analysis):
         node_options['color']['border'] = selected_node_mark
         node_options['color']['background'] = intervention_node
 
-    return node_options 
-    
+    return node_options     
 
 def generate_edge_options(edge, analysis):
     return default_visualization.generate_edge_options(edge)

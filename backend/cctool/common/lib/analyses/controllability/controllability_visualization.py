@@ -1,28 +1,30 @@
 from cctool.common.lib import default_visualization
 from cctool.graphs.models.models import NodePlus, EdgePlus
-
+from cctool.common.enums import (
+    ControllabilityShortcode,
+    ImportanceShortcode,
+    ConnectionShortcode,
+)
 
 def generate_graph_options():
     graph_options = default_visualization.generate_graph_options()
-    graph_options['layout']['randomSeed'] = 2
 
     return graph_options
-
 
 def generate_node_options(node, analysis):
     node_options = default_visualization.generate_node_options(node)
 
     # Override for Controllability
     try:
-        if node.controllability == NodePlus.EASY_CONTROLLABILITY:
+        if node.controllability == ControllabilityShortcode.EASY_CONTROLLABILITY.value:
             node_options['color']['highlight']['background'] = '#74c476'
             node_options['color']['border'] = '#238b45'
             node_options['color']['background'] = '#74c476'
-        elif node.controllability == NodePlus.MEDIUM_CONTROLLABILITY:
+        elif node.controllability == ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value:
             node_options['color']['highlight']['background'] = '#fdae6b'
             node_options['color']['border'] = '#fd8d3c'
             node_options['color']['background'] = '#fdae6b'
-        elif node.controllability == NodePlus.HARD_CONTROLLABILITY:
+        elif node.controllability == ControllabilityShortcode.HARD_CONTROLLABILITY.value:
             node_options['color']['highlight']['background'] = '#fb6a4a'
             node_options['color']['border'] = '#cb181d'
             node_options['color']['background'] = '#fb6a4a'
@@ -31,9 +33,9 @@ def generate_node_options(node, analysis):
 
     # Override for Importance
     try:
-        if node.importance == NodePlus.LOW_IMPORTANCE:
+        if node.importance == ImportanceShortcode.LOW_IMPORTANCE.value:
             node_options['shapeProperties']['borderDashes'] = [2,4]
-        elif node.importance == NodePlus.HIGH_IMPORTANCE:
+        elif node.importance == ImportanceShortcode.HIGH_IMPORTANCE.value:
             node_options['borderWidth'] = 3
             node_options['shapeProperties']['borderDashes'] = [15,10]
     except AttributeError:
@@ -54,22 +56,22 @@ def generate_edge_options(edge, analysis):
     edge_options = default_visualization.generate_edge_options(edge)
 
     try:
-        if edge.weight == EdgePlus.POSITIVE_WEAK_WEIGHT:
+        if edge.weight == ConnectionShortcode.POSITIVE_WEAK_WEIGHT.value:
             edge_options['color']['color'] = '#c7e9c0'
             edge_options['color']['highlight'] = '#c7e9c0'
-        elif edge.weight == EdgePlus.POSITIVE_MEDIUM_WEIGHT:
+        elif edge.weight == ConnectionShortcode.POSITIVE_MEDIUM_WEIGHT.value:
             edge_options['color']['color'] = '#41ab5d'
             edge_options['color']['highlight'] = '#41ab5d'
-        elif edge.weight == EdgePlus.POSITIVE_STRONG_WEIGHT:
+        elif edge.weight == ConnectionShortcode.POSITIVE_STRONG_WEIGHT.value:
             edge_options['color']['color'] = '#00441b'
             edge_options['color']['highlight'] = '#00441b'
-        elif edge.weight == EdgePlus.NEGATIVE_WEAK_WEIGHT:
+        elif edge.weight == ConnectionShortcode.NEGATIVE_WEAK_WEIGHT.value:
             edge_options['color']['color'] = '#fcbba1'
             edge_options['color']['highlight'] = '#fcbba1'
-        elif edge.weight == EdgePlus.NEGATIVE_MEDIUM_WEIGHT:
+        elif edge.weight == ConnectionShortcode.NEGATIVE_MEDIUM_WEIGHT.value:
             edge_options['color']['color'] = '#fb6a4a'
             edge_options['color']['highlight'] = '#fb6a4a'
-        elif edge.weight == EdgePlus.NEGATIVE_STRONG_WEIGHT:
+        elif edge.weight == ConnectionShortcode.NEGATIVE_STRONG_WEIGHT.value:
             edge_options['color']['color'] = '#cb181d'
             edge_options['color']['highlight'] = '#cb181d'
     except AttributeError:

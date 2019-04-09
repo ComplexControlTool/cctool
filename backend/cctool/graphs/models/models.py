@@ -1,5 +1,4 @@
 import json
-from collections import OrderedDict
 from django.db.models import CharField
 from django.contrib.postgres.fields import JSONField
 from model_utils.managers import InheritanceManager
@@ -10,6 +9,18 @@ from .edge import AbstractEdge
 from .structure import AbstractStructure
 from .analysis import AbstractAnalysis
 from .visualization import AbstractVisualization
+from cctool.common.enums import (
+    FunctionOption,
+    FunctionShortcode,
+    ControllabilityOption,
+    ControllabilityShortcode,
+    VulnerabilityOption,
+    VulnerabilityShortcode,
+    ImportanceOption,
+    ImportanceShortcode,
+    ConnectionOption,
+    ConnectionShortcode,
+)
 
 
 class Graph(AbstractGraph):
@@ -63,70 +74,34 @@ class Visualization(AbstractVisualization):
 
 
 class NodePlus(Node):
-    LINEAR_FUNCTION = 'L'
-    FUNCTION_SET = (
-        (LINEAR_FUNCTION, 'Linear'),
-    )
-
-    NEUTRAL_CONTROLLABILITY = 'N'
-    EASY_CONTROLLABILITY = 'E'
-    MEDIUM_CONTROLLABILITY = 'M'
-    HARD_CONTROLLABILITY = 'H'    
-    CONTROLLABILITY_SET = (
-        (NEUTRAL_CONTROLLABILITY, 'Neutral'),
-        (EASY_CONTROLLABILITY, 'Easy'),
-        (MEDIUM_CONTROLLABILITY, 'Medium'),
-        (HARD_CONTROLLABILITY, 'Hard'),
-    )
-
-    NO_VULNERABILITY = 'N'
-    LOW_VULNERABILITY = 'E'
-    MEDIUM_VULNERABILITY = 'M'
-    HIGH_VULNERABILITY = 'H'    
-    VULNERABILITY_SET = (
-        (NO_VULNERABILITY, 'None'),
-        (LOW_VULNERABILITY, 'Low'),
-        (MEDIUM_VULNERABILITY, 'Medium'),
-        (HIGH_VULNERABILITY, 'High'),
-    )
-
-    NO_IMPORTANCE = 'N'
-    LOW_IMPORTANCE = 'L'
-    HIGH_IMPORTANCE = 'H'
-    IMPORTANCE_SET = (
-        (NO_IMPORTANCE, 'None'),
-        (LOW_IMPORTANCE, 'Low'),
-        (HIGH_IMPORTANCE, 'High'),
-    )
-
     function = CharField(
-        choices=FUNCTION_SET,
+        choices=list(zip(FunctionShortcode.__values__, FunctionOption.__values__)),
         blank=False,
-        default=LINEAR_FUNCTION,
+        default=FunctionShortcode.LINEAR_FUNCTION.value,
         max_length=1,
         verbose_name='node function'
     )
 
     controllability = CharField(
-        choices=CONTROLLABILITY_SET,
+        choices=list(zip(ControllabilityShortcode.__values__, ControllabilityOption.__values__)),
         blank=False,
-        default=NEUTRAL_CONTROLLABILITY,
+        default=ControllabilityShortcode.NEUTRAL_CONTROLLABILITY.value,
         max_length=1,
         verbose_name='node controllability'
     )
 
     vulnerability = CharField(
-        choices=VULNERABILITY_SET,
+        choices=list(zip(VulnerabilityShortcode.__values__, VulnerabilityOption.__values__)),
         blank=False,
-        default=NO_VULNERABILITY,
+        default=VulnerabilityShortcode.NO_VULNERABILITY.value,
         max_length=1,
         verbose_name='node vulnerability'
     )
 
     importance = CharField(
-        choices=IMPORTANCE_SET,
+        choices=list(zip(ImportanceShortcode.__values__, ImportanceOption.__values__)),
         blank=False,
-        default=NO_IMPORTANCE,
+        default=ImportanceShortcode.NO_IMPORTANCE.value,
         max_length=1,
         verbose_name='node importance'
     )
@@ -168,27 +143,10 @@ class NodePlus(Node):
 
 
 class EdgePlus(Edge):
-    NEUTRAL_WEIGHT = 'N'
-    POSITIVE_WEAK_WEIGHT = '+W'
-    POSITIVE_MEDIUM_WEIGHT = '+M'
-    POSITIVE_STRONG_WEIGHT = '+S'
-    NEGATIVE_WEAK_WEIGHT = '-W'
-    NEGATIVE_MEDIUM_WEIGHT = '-M'
-    NEGATIVE_STRONG_WEIGHT = '-S'
-    WEIGHT_SET = (
-        (NEUTRAL_WEIGHT, 'Neutral'),
-        (POSITIVE_WEAK_WEIGHT, 'Positive Weak'),
-        (POSITIVE_MEDIUM_WEIGHT, 'Positive Medium'),
-        (POSITIVE_STRONG_WEIGHT, 'Positive Strong'),
-        (NEGATIVE_WEAK_WEIGHT, 'Negative Weak'),
-        (NEGATIVE_MEDIUM_WEIGHT, 'Negative Medium'),
-        (NEGATIVE_STRONG_WEIGHT, 'Negative Strong')
-    )
-
     weight = CharField(
-        choices=WEIGHT_SET,
+        choices=list(zip(ConnectionShortcode.__values__, ConnectionOption.__values__)),
         blank=False,
-        default='N',
+        default=ConnectionShortcode.NEUTRAL_CONNECTION.value,
         max_length=2,
         verbose_name='edge weight'
     )

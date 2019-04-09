@@ -3,7 +3,6 @@ from cctool.common.lib import default_visualization
 
 def generate_graph_options():
     graph_options = default_visualization.generate_graph_options()
-    graph_options['layout']['randomSeed'] = 2
 
     return graph_options
 
@@ -26,7 +25,6 @@ def generate_node_options(node, analysis):
         node_options['color']['background'] = matched_color
 
     return node_options
-    
 
 def generate_edge_options(edge, analysis):
     edge_options = default_visualization.generate_edge_options(edge)

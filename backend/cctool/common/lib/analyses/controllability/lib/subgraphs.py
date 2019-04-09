@@ -1,7 +1,6 @@
 import itertools
 import operator
 from collections import Counter
-from cctool.graphs.models.models import NodePlus
 
 
 def createSubGraph(graphSet, possibleSet, nodesInConf):

@@ -1,4 +1,14 @@
 from cctool.graphs.models.models import NodePlus, EdgePlus
+from cctool.common.enums import (
+    ControllabilityShortcode,
+    ControllabilityWeight,
+    VulnerabilityShortcode,
+    VulnerabilityWeight,
+    ImportanceShortcode,
+    ImportanceWeight,
+    ConnectionShortcode,
+    ConnectionWeight,
+)
 
 import networkx as nx
 
@@ -11,35 +21,10 @@ def find_measurement(graph, measure='degree'):
     nodes = graph.nodes.all().select_subclasses()
     edges = graph.edges.all().select_subclasses()
 
-    controllability_weights = {
-        NodePlus.NEUTRAL_CONTROLLABILITY: 0,
-        NodePlus.EASY_CONTROLLABILITY: 1,
-        NodePlus.MEDIUM_CONTROLLABILITY: 2,
-        NodePlus.HARD_CONTROLLABILITY: 3
-    }
-
-    vulnerability_weights = {
-        NodePlus.NO_VULNERABILITY: 0,
-        NodePlus.LOW_VULNERABILITY: -1,
-        NodePlus.MEDIUM_VULNERABILITY: -2,
-        NodePlus.HIGH_VULNERABILITY: -3
-    }
-
-    importance_weights = {
-        NodePlus.NO_IMPORTANCE: 0,
-        NodePlus.LOW_IMPORTANCE: 1,
-        NodePlus.HIGH_IMPORTANCE: 2
-    }
-
-    connection_weights = {
-        EdgePlus.NEUTRAL_WEIGHT: 0,
-        EdgePlus.POSITIVE_WEAK_WEIGHT: 1,
-        EdgePlus.POSITIVE_MEDIUM_WEIGHT: 2,
-        EdgePlus.POSITIVE_STRONG_WEIGHT: 3,
-        EdgePlus.NEGATIVE_WEAK_WEIGHT: -1,
-        EdgePlus.NEGATIVE_MEDIUM_WEIGHT: -2,
-        EdgePlus.NEGATIVE_STRONG_WEIGHT: -3
-    }
+    controllability_weights = dict(zip(ControllabilityShortcode.__values__, ControllabilityWeight.__values__))
+    vulnerability_weights = dict(zip(VulnerabilityShortcode.__values__, VulnerabilityWeight.__values__))
+    importance_weights = dict(zip(ImportanceShortcode.__values__, ImportanceWeight.__values__))
+    connection_weights = dict(zip(ConnectionShortcode.__values__, ConnectionWeight.__values__))
 
     G = nx.DiGraph()
 

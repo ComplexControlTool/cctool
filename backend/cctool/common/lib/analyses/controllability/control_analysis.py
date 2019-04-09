@@ -6,6 +6,10 @@ from .lib.configs import computeControlConf, computeAproxControlConf
 from .lib.hk import bipartiteMatch
 from .lib.subgraphs import createSubGraph, createNotInConfSubGraph, createInConfSubGraph
 from .lib.sets import createNotInConfSet, createInConfSet
+from cctool.common.enums import (
+    ControllabilityShortcode,
+    ControllabilityWeight,
+)
 
 MIN_NODES_FOR_APPROXIMATION = 100;
 
@@ -25,14 +29,9 @@ def rank_by_node_controllability(control_configurations, stems, node_controllabi
     if not control_configurations and not stems:
         return (ranked_control_configurations, ranked_stems)
 
-    weight_values = {
-        NodePlus.NEUTRAL_CONTROLLABILITY: 0,
-        NodePlus.EASY_CONTROLLABILITY: 1,
-        NodePlus.MEDIUM_CONTROLLABILITY: 2,
-        NodePlus.HARD_CONTROLLABILITY: 3
-    }
+    controllability_weights = dict(zip(ControllabilityShortcode.__values__, ControllabilityWeight.__values__))
 
-    weighted_nodes = {nodeId:weight_values[controllability] for (nodeId, controllability) in node_controllabilities.items()}
+    weighted_nodes = {nodeId:controllability_weights[controllability] for (nodeId, controllability) in node_controllabilities.items()}
     weighted_control_configurations = dict()
     for (id, configuration) in control_configurations.items():
         weighted_configuration = sum([weighted_nodes[nodeId] for nodeId in configuration])

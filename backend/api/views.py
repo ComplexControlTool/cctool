@@ -7,6 +7,10 @@ from cctool.graphs.models.models import Graph, Analysis
 from cctool.analysers.view_helpers import AnalyserHelper
 from cctool.graphs.view_helpers import GraphHelper
 from . import serializers
+from cctool.common.enums import (
+    AnalysisOption,
+    AnalysisShortcode,
+)
 
 
 class GraphViewSet(viewsets.ModelViewSet):
@@ -44,7 +48,7 @@ class GraphViewSet(viewsets.ModelViewSet):
         analysis_type_code = None
         if analysis_type:
             try:
-                reverse_search = {v.lower(): k for k, v in Analysis.ANALYSIS_SET}
+                reverse_search = {k.lower(): v for k, v in zip(AnalysisOption.__values__, AnalysisShortcode.__values__)}
                 analysis_type_code = reverse_search[analysis_type.lower()]
             except KeyError:
                 pass
@@ -60,7 +64,7 @@ class GraphAnalysisList(generics.ListAPIView):
         if graph_pk == None or analysis_type == None:
             return {}
         try:
-            reverse_search = {v.lower(): k for k, v in Analysis.ANALYSIS_SET}
+            reverse_search = {k.lower(): v for k, v in zip(AnalysisOption.__values__, AnalysisShortcode.__values__)}
             analysis_type_code = reverse_search[analysis_type.lower()]
             return Analysis.objects.filter(graph__id=graph_pk, analysis_type=analysis_type_code)
         except KeyError:
