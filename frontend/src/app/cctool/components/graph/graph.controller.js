@@ -52,12 +52,10 @@
       {
         $log.debug(vm.title+'/ Graph object initialised: '+JSON.stringify(vm.content));
         var analyses_tabs = [];
-        for (var i in vm.content.analysers)
+        for (var analyser in vm.content.analysers)
         {
-          var analyser = vm.content.analysers[i]
           vm.tabs.push(analyser);
           vm.tabs_view.push('graph-'+analyser.toLowerCase().replace(/\s+/g, '')+'-analysis');
-          console.log(vm.tabs_view)
         }
       }
 

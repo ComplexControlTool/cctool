@@ -1,6 +1,6 @@
 <!-- graph.html -->
 <div id="graph-content" flex="">
-  <md-tabs md-no-ink="" md-dynamic-height="" flex="">
+  <md-tabs md-selected="graphCtrl.selectedIndex" md-no-ink="" md-dynamic-height="" flex="">
     <md-tab ng-repeat="tab in graphCtrl.tabs" label="{{ tab }}">
         <div flex="">
           <div ui-view="{{graphCtrl.tabs_view[$index]}}"></div>

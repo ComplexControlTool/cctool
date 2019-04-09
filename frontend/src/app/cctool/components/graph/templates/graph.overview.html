@@ -84,6 +84,31 @@
       </md-card-content>
     </md-card>
 
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+    <!-- Analyses Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Analyses</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content layout-margin="">
+        <!-- Title -->
+        <div ng-if="graphCtrl.content.analysers" ng-repeat="(key,value) in graphCtrl.content.analysers">
+          <p style="font-weight:bold" ng-bind="key"></p>
+          <p ng-bind-html="value"></p>
+          <md-button ng-click="graphCtrl.selectedIndex=$index+1" target="_blank">
+            <span>Explore</span>
+          </md-button>
+          <md-divider></md-divider>
+        </div>
+        <div ng-if="!graphCtrl.content.analysers">
+          <p style="font-weight:bold">No Analyses available for this graph!</p>
+        </div>
+      </md-card-content>
+    </md-card>
 
     <div layout-margin="" layout-padding=""></div>
     <div layout-margin="" layout-padding=""></div>

@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from cctool.graphs.models import models
-
+from cctool.common.enums import (
+    AnalysisOption,
+    AnalysisDescription,
+)
 
 class DynamicFieldsModelSerializer(serializers.ModelSerializer):
     """
@@ -74,7 +77,16 @@ class GraphSerializer(DynamicFieldsModelSerializer):
         return obj.visualization.to_json(use_dict=True)
 
     def get_analysers(self, obj):
-        return [analysis.get_analysis_type_display() for analysis in obj.analyses.all()]
+        default_description = 'No description available yet!'
+        analyses_descriptions = dict(zip(AnalysisOption.__values__, AnalysisDescription.__values__))
+        available_analysis = obj.analyses.all()
+
+        ret = dict()
+        for analysis in available_analysis:
+            name = analysis.get_analysis_type_display()
+            ret[name] = analyses_descriptions.get(name, default_description)
+
+        return ret
 
     def get_analyses(self, obj):
         return [analysis.to_json(use_dict=True) for analysis in obj.analyses.all()]
