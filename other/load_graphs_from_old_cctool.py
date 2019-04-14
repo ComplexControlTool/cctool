@@ -68,29 +68,29 @@ for i,graph in enumerate(data['results']):
   for node in graph['graphvisdatasets']['nodes']:
     label = node['label']
     vulnerability = random.choice(VulnerabilityShortcode.__values__)
-    function = FunctionShortcode.LINEAR_FUNCTION
+    function = FunctionShortcode.LINEAR_FUNCTION.value
 
     controllability = node['cctool']['controllability']
     if controllability == 0:
-      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY
+      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY.value
     elif controllability.lower() == 'e':
-      controllability = ControllabilityShortcode.EASY_CONTROLLABILITY
+      controllability = ControllabilityShortcode.EASY_CONTROLLABILITY.value
     elif controllability.lower() == 'm':
-      controllability = ControllabilityShortcode.MEDIUM_CONTROLLABILITY
+      controllability = ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value
     elif controllability.lower() == 'h':
-      controllability = ControllabilityShortcode.HARD_CONTROLLABILITY
+      controllability = ControllabilityShortcode.HARD_CONTROLLABILITY.value
     else:
-      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY
+      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY.value
 
     importance = node['cctool']['importance']
     if importance == 0:
-      importance = ImportanceShortcode.NO_IMPORTANCE
+      importance = ImportanceShortcode.NO_IMPORTANCE.value
     elif importance.lower() == 'l':
-      importance = ImportanceShortcode.LOW_IMPORTANCE
+      importance = ImportanceShortcode.LOW_IMPORTANCE.value
     elif importance.lower() == 'h':
-      importance = ImportanceShortcode.HIGH_IMPORTANCE
+      importance = ImportanceShortcode.HIGH_IMPORTANCE.value
     else:
-      importance = ImportanceShortcode.NO_IMPORTANCE
+      importance = ImportanceShortcode.NO_IMPORTANCE.value
 
     node_obj = addNode(graph_obj, label, function, controllability, vulnerability, importance)
     print(node_obj)
@@ -101,21 +101,21 @@ for i,graph in enumerate(data['results']):
     target = node_objs[edge['to']]
     weight = edge['cctool']['weight']
     if weight == 1:
-      weight = ConnectionShortcode.NEUTRAL_WEIGHT
+      weight = ConnectionShortcode.NEUTRAL_CONNECTION.value
     elif weight.lower() == '+w':
-      weight = ConnectionShortcode.POSITIVE_WEAK_WEIGHT
+      weight = ConnectionShortcode.POSITIVE_WEAK_CONNECTION.value
     elif weight.lower() == '+m':
-      weight = ConnectionShortcode.POSITIVE_MEDIUM_WEIGHT
+      weight = ConnectionShortcode.POSITIVE_MEDIUM_CONNECTION.value
     elif weight.lower() == '+s':
-      weight = ConnectionShortcode.POSITIVE_STRONG_WEIGHT
+      weight = ConnectionShortcode.POSITIVE_STRONG_CONNECTION.value
     elif weight.lower() == '-w':
-      weight = ConnectionShortcode.NEGATIVE_WEAK_WEIGHT
+      weight = ConnectionShortcode.NEGATIVE_WEAK_CONNECTION.value
     elif weight.lower() == '-m':
-      weight = ConnectionShortcode.NEGATIVE_MEDIUM_WEIGHT
+      weight = ConnectionShortcode.NEGATIVE_MEDIUM_CONNECTION.value
     elif weight.lower() == '-s':
-      weight = ConnectionShortcode.NEGATIVE_STRONG_WEIGHT
+      weight = ConnectionShortcode.NEGATIVE_STRONG_CONNECTION.value
     else:
-      weight = ConnectionShortcode.NEUTRAL_WEIGHT
+      weight = ConnectionShortcode.NEUTRAL_CONNECTION.value
 
     edge_obj = addEdge(graph_obj, source, target, weight)
     print(edge_obj)
