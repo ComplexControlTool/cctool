@@ -14,9 +14,14 @@ def generate_graph_options():
 
     hierarchical = dict()
     hierarchical['enabled'] = True
+    hierarchical['nodeSpacing'] = 150
     hierarchical['direction'] = 'UD'
-    hierarchical['nodeSpacing'] = 200
+    hierarchical['sortMethod'] = 'directed'
     graph_options['layout']['hierarchical'] = hierarchical
+
+    physics = dict()
+    physics['enabled'] = True
+    graph_options['physics'] = physics
 
     return graph_options
 
