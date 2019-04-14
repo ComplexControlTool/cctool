@@ -1,4 +1,7 @@
 from cctool.common.lib import default_visualization
+from cctool.common.enums import (
+    MapColours,
+)
 
 
 def generate_graph_options():
@@ -23,22 +26,15 @@ def generate_node_options(node, analysis):
     root_nodes = [analysis.get('root_node', None)]
     downstream_nodes_and_levels = analysis.get('downstream_nodes_and_levels', {})
 
-    selected_node_mark = '#03A9F4'
-    outcome_node = '#FF9800' 
-    intervention_node = '#CDDC39'
-
     if node.tags:
         if 'Outcome' in node.tags:
-            node_options['color']['border'] = outcome_node
-            node_options['color']['background'] = outcome_node
+            node_options['color']['background'] = MapColours.NODE_BACKGROUND_OUTCOME.value
         if 'Intervention' in node.tags:
-            node_options['color']['border'] = intervention_node
-            node_options['color']['background'] = intervention_node 
+            node_options['color']['background'] = MapColours.NODE_BACKGROUND_INTERVENTION.value 
     if node.identifier in downstream_nodes_and_levels:
         node_options['level'] = downstream_nodes_and_levels[node.identifier]
     if node.identifier in root_nodes:
-        node_options['color']['border'] = selected_node_mark
-        node_options['color']['background'] = intervention_node
+        node_options['color']['background'] = MapColours.NODE_BACKGROUND_INTERVENTION.value
 
     return node_options     
 

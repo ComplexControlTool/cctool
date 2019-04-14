@@ -14,7 +14,6 @@ import networkx as nx
 
 
 def find_measurement(graph, measure='degree'):
-    centrality = dict()
     vulnerability = dict()
     importance = dict()
 
@@ -47,21 +46,25 @@ def find_measurement(graph, measure='degree'):
 
     try:
         if measure == 'degree':
-            return nx.degree_centrality(G)
+            centrality = nx.degree_centrality(G)
         elif measure == 'in-degree':
-            return nx.in_degree_centrality(G)
+            centrality = nx.in_degree_centrality(G)
         elif measure == 'out-degree':
-            return nx.out_degree_centrality(G)
+            centrality = nx.out_degree_centrality(G)
         elif measure == 'eigenvector':
-            return nx.eigenvector_centrality(G)
+            centrality = nx.eigenvector_centrality(G)
         elif measure == 'closeness':
-            return nx.closeness_centrality(G)
+            centrality = nx.closeness_centrality(G)
         elif measure == 'betweenness':
-            return nx.betweenness_centrality(G)
+            centrality = nx.betweenness_centrality(G)
         elif measure == 'vulnerability':
-            return vulnerability
+            centrality = vulnerability
         elif measure == 'importance':
-            return importance
+            centrality = importance
+
+        sorted_by_value = sorted(centrality, key=centrality.get, reverse=True)
+        centrality['ranked'] = sorted_by_value
+        return centrality
     except Exception as e:
         pass
 

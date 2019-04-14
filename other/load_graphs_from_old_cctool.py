@@ -3,6 +3,13 @@ import random
 
 from cctool.graphs.view_helpers import GraphHelper
 from cctool.analysers.view_helpers import AnalyserHelper
+from cctool.common.enums import (
+    FunctionShortcode,
+    ControllabilityShortcode,
+    VulnerabilityShortcode,
+    ImportanceShortcode,
+    ConnectionShortcode,
+)
 
 
 def addGraph(title, description):
@@ -14,7 +21,7 @@ def addNode(graph, label, function=None, controllability=None, vulnerability=Non
   return node_obj
 
 def addEdge(graph, source, target, weight=None):
-  edge_obj = EdgePlus.objects.create(graph=graph, source=source, target=target)
+  edge_obj = EdgePlus.objects.create(graph=graph, source=source, target=target, weight=weight)
   return edge_obj
 
 def addAnalysis(graph, analysis_type):
@@ -60,30 +67,30 @@ for i,graph in enumerate(data['results']):
   node_objs = []
   for node in graph['graphvisdatasets']['nodes']:
     label = node['label']
-    vulnerability = 'N'
-    function = NodePlus.LINEAR_FUNCTION
+    vulnerability = random.choice(VulnerabilityShortcode.__values__)
+    function = FunctionShortcode.LINEAR_FUNCTION
 
     controllability = node['cctool']['controllability']
     if controllability == 0:
-      controllability = NodePlus.NEUTRAL_CONTROLLABILITY
+      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY
     elif controllability.lower() == 'e':
-      controllability = NodePlus.EASY_CONTROLLABILITY
+      controllability = ControllabilityShortcode.EASY_CONTROLLABILITY
     elif controllability.lower() == 'm':
-      controllability = NodePlus.MEDIUM_CONTROLLABILITY
+      controllability = ControllabilityShortcode.MEDIUM_CONTROLLABILITY
     elif controllability.lower() == 'h':
-      controllability = NodePlus.HARD_CONTROLLABILITY
+      controllability = ControllabilityShortcode.HARD_CONTROLLABILITY
     else:
-      controllability = NodePlus.NEUTRAL_CONTROLLABILITY
+      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY
 
     importance = node['cctool']['importance']
     if importance == 0:
-      importance = NodePlus.NO_IMPORTANCE
+      importance = ImportanceShortcode.NO_IMPORTANCE
     elif importance.lower() == 'l':
-      importance = NodePlus.LOW_IMPORTANCE
+      importance = ImportanceShortcode.LOW_IMPORTANCE
     elif importance.lower() == 'h':
-      importance = NodePlus.HIGH_IMPORTANCE
+      importance = ImportanceShortcode.HIGH_IMPORTANCE
     else:
-      importance = NodePlus.NO_IMPORTANCE
+      importance = ImportanceShortcode.NO_IMPORTANCE
 
     node_obj = addNode(graph_obj, label, function, controllability, vulnerability, importance)
     print(node_obj)
@@ -94,21 +101,21 @@ for i,graph in enumerate(data['results']):
     target = node_objs[edge['to']]
     weight = edge['cctool']['weight']
     if weight == 1:
-      weight = EdgePlus.NEUTRAL_WEIGHT
+      weight = ConnectionShortcode.NEUTRAL_WEIGHT
     elif weight.lower() == '+w':
-      weight = EdgePlus.POSITIVE_WEAK_WEIGHT
+      weight = ConnectionShortcode.POSITIVE_WEAK_WEIGHT
     elif weight.lower() == '+m':
-      weight = EdgePlus.POSITIVE_MEDIUM_WEIGHT
+      weight = ConnectionShortcode.POSITIVE_MEDIUM_WEIGHT
     elif weight.lower() == '+s':
-      weight = EdgePlus.POSITIVE_STRONG_WEIGHT
+      weight = ConnectionShortcode.POSITIVE_STRONG_WEIGHT
     elif weight.lower() == '-w':
-      weight = EdgePlus.NEGATIVE_WEAK_WEIGHT
+      weight = ConnectionShortcode.NEGATIVE_WEAK_WEIGHT
     elif weight.lower() == '-m':
-      weight = EdgePlus.NEGATIVE_MEDIUM_WEIGHT
+      weight = ConnectionShortcode.NEGATIVE_MEDIUM_WEIGHT
     elif weight.lower() == '-s':
-      weight = EdgePlus.NEGATIVE_STRONG_WEIGHT
+      weight = ConnectionShortcode.NEGATIVE_STRONG_WEIGHT
     else:
-      weight = EdgePlus.NEUTRAL_WEIGHT
+      weight = ConnectionShortcode.NEUTRAL_WEIGHT
 
     edge_obj = addEdge(graph_obj, source, target, weight)
     print(edge_obj)

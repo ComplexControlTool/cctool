@@ -34,6 +34,9 @@ def find_graph_visualization(self, graph_id):
     edges_data = list()
     for edge in edges:
         data = edge.to_json(use_dict=True)
+        if 'label' in data:
+            if not data.get('label'):
+                data.pop('label')
         if 'source' in data:
             data['from'] = data.pop('source')
         if 'target' in data:

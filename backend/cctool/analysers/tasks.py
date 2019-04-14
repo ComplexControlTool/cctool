@@ -36,7 +36,6 @@ def find_graph_controllability(self, graph_id, analysis_id):
         for edge in sources:
             connections.setdefault(node.identifier, set()).add(edge.target.identifier)
 
-    # TODO: Need to calculate frequencies + best configurations - ordered
     analysis_data = dict()
     ranked_by_node_controllability = dict()
     
@@ -68,6 +67,9 @@ def find_graph_controllability(self, graph_id, analysis_id):
     edges_data = list()
     for edge in edges:
         data = edge.to_json(use_dict=True)
+        if 'label' in data:
+            if not data.get('label'):
+                data.pop('label')
         if 'source' in data:
             data['from'] = data.pop('source')
         if 'target' in data:
@@ -124,6 +126,9 @@ def find_upstream(self, graph_id, analysis_id):
         edges_data = list()
         for edge in subgraph['edges']:
             data = edge.to_json(use_dict=True)
+            if 'label' in data:
+                if not data.get('label'):
+                    data.pop('label')
             if 'source' in data:
                 data['from'] = data.pop('source')
             if 'target' in data:
@@ -185,6 +190,9 @@ def find_downstream(self, graph_id, analysis_id):
         edges_data = list()
         for edge in subgraph['edges']:
             data = edge.to_json(use_dict=True)
+            if 'label' in data:
+                if not data.get('label'):
+                    data.pop('label')
             if 'source' in data:
                 data['from'] = data.pop('source')
             if 'target' in data:
@@ -221,7 +229,7 @@ def find_subjective_logic(self, graph_id, analysis_id):
     analysis_data = dict()
     graph_structure = dict()
 
-    measures = ['degree', 'in-degree', 'out-degree', 'eigenvector', 'closeness', 'betweenness', 'vulnerability', 'importance']
+    measures = ['in-degree', 'out-degree', 'closeness', 'betweenness']
     for measure in measures:
         analysis_data[measure] = SLA_Analysis.find_measurement(graph, measure)
 
@@ -236,6 +244,9 @@ def find_subjective_logic(self, graph_id, analysis_id):
         edges_data = list()
         for edge in graph.edges.all().select_subclasses():
             data = edge.to_json(use_dict=True)
+            if 'label' in data:
+                if not data.get('label'):
+                    data.pop('label')
             if 'source' in data:
                 data['from'] = data.pop('source')
             if 'target' in data:

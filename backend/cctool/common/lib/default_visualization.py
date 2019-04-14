@@ -1,3 +1,12 @@
+from cctool.common.enums import (
+    ControllabilityShortcode,
+    VulnerabilityShortcode,
+    ImportanceShortcode,
+    ConnectionShortcode,
+    MapColours,
+)
+
+
 def generate_graph_options():
     graph_options = dict()
 
@@ -10,7 +19,7 @@ def generate_graph_options():
     arrows['to'] = arrows_to
     
     color = dict()
-    color['hover'] = '#2B7CE9'
+    color['hover'] = MapColours.HOVER_DEFAULT.value
     color['opacity'] = 1.0
 
     smooth = dict()
@@ -54,18 +63,23 @@ def generate_node_options(node):
     borderWidthSelected = 2
 
     highlight = dict()
-    highlight['border'] = '#FF3399'
-    highlight['background'] = '#f1f1f1'
+    highlight['border'] = MapColours.NODE_HIGHLIGHT_BORDER_DEFAULT.value
+    highlight['background'] = MapColours.NODE_HIGHLIGHT_BACKGROUND_DEFAULT.value
 
     hover = dict()
-    hover['border'] = '#2B7CE9'
-    hover['background'] = '#D2E5FF'
+    hover['border'] = MapColours.NODE_HOVER_BORDER_DEFAULT.value
+    hover['background'] = MapColours.NODE_HOVER_BACKGROUND_DEFAULT.value
 
     color = dict()
-    color['border'] = '#333'
-    color['background'] = '#f1f1f1'
+    color['border'] = MapColours.NODE_BORDER_DEFAULT.value
+    color['background'] = MapColours.NODE_BACKGROUND_DEFAULT.value
     color['highlight'] = highlight
     color['hover'] = hover
+
+    font = dict()
+    font['size'] = 14
+
+    labelHighlightBold = True
 
     shape = "ellipse"
 
@@ -112,6 +126,8 @@ def generate_node_options(node):
     node_options['borderWidth'] = borderWidth
     node_options['borderWidthSelected'] = borderWidthSelected
     node_options['color'] = color
+    node_options['font'] = font
+    node_options['labelHighlightBold'] = labelHighlightBold
     node_options['shape'] = shape
     node_options['shapeProperties'] = shape_properties
     node_options['size'] = size
@@ -128,14 +144,56 @@ def generate_node_options(node):
     except AttributeError:
         pass
 
+    # Define specifics for attributes: Controllability, Vulnerability, Importance
+    shadow = dict()
+    shadow['enabled'] = True
+
+    # Controllability
+    try:
+        if node.controllability == ControllabilityShortcode.EASY_CONTROLLABILITY.value:
+            node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_EASY_CONTROLLABILITY.value
+            node_options['color']['border'] = MapColours.NODE_BORDER_EASY_CONTROLLABILITY.value
+        elif node.controllability == ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value:
+            node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_MEDIUM_CONTROLLABILITY.value
+            node_options['color']['border'] = MapColours.NODE_BORDER_MEDIUM_CONTROLLABILITY.value
+        elif node.controllability == ControllabilityShortcode.HARD_CONTROLLABILITY.value:
+            node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_HARD_CONTROLLABILITY.value
+            node_options['color']['border'] = MapColours.NODE_BORDER_HARD_CONTROLLABILITY.value
+    except AttributeError:
+        pass
+
+    # Vulnerability
+    try:
+        if node.vulnerability == VulnerabilityShortcode.LOW_VULNERABILITY.value:
+            node_options['shapeProperties']['borderDashes'] = [2,3]
+        elif node.vulnerability == VulnerabilityShortcode.MEDIUM_VULNERABILITY.value:
+            node_options['shapeProperties']['borderDashes'] = [4,6]
+        elif node.vulnerability == VulnerabilityShortcode.HIGH_VULNERABILITY.value:
+            node_options['shapeProperties']['borderDashes'] = [8,12]
+    except AttributeError:
+        pass
+
+    # Importance
+    try:
+        if node.importance == ImportanceShortcode.LOW_IMPORTANCE.value:
+            node_options['color']['background'] = MapColours.NODE_BACKGROUND_LOW_IMPORTANCE.value
+            node_options['shadow'] = shadow
+        elif node.importance == ImportanceShortcode.HIGH_IMPORTANCE.value:
+            node_options['color']['background'] = MapColours.NODE_BACKGROUND_HIGH_IMPORTANCE.value
+            node_options['shadow'] = shadow
+    except AttributeError:
+        pass
+
     return node_options
 
 def generate_edge_options(edge):
     edge_options = dict()
 
     color = dict()
-    color['color'] = '#737373'
-    color['highlight'] = '#737373'
+    color['color'] = MapColours.EDGE_COLOR_DEFAULT.value
+    color['highlight'] = MapColours.EDGE_HIGHLIGHT_DEFAULT.value
+
+    labelHighlightBold = True
 
     title = list()
     try:
@@ -147,8 +205,55 @@ def generate_edge_options(edge):
     except AttributeError:
         pass
 
+    width = 1
+
     edge_options['color'] = color
+    edge_options['labelHighlightBold'] = labelHighlightBold
     edge_options['title'] = ''.join(title)
+    edge_options['width'] = width
+
+    # Define specifics for attributes: Weight
+    font = dict()
+    font['size'] = 16
+    font['align'] = 'bottom'
+
+    # Weight
+    try:
+        sign = ''
+        if edge.weight == ConnectionShortcode.POSITIVE_WEAK_CONNECTION.value:
+            edge_options['color']['color'] = MapColours.EDGE_COLOR_POSITIVE_WEAK_CONNECTION.value
+            edge_options['color']['highlight'] = MapColours.EDGE_HIGHLIGHT_POSITIVE_WEAK_CONNECTION.value
+            sign = '+'
+        elif edge.weight == ConnectionShortcode.POSITIVE_MEDIUM_CONNECTION.value:
+            edge_options['color']['color'] = MapColours.EDGE_COLOR_POSITIVE_MEDIUM_CONNECTION.value
+            edge_options['color']['highlight'] = MapColours.EDGE_HIGHLIGHT_POSITIVE_MEDIUM_CONNECTION.value
+            edge_options['width'] = 2
+            sign = '+'
+        elif edge.weight == ConnectionShortcode.POSITIVE_STRONG_CONNECTION.value:
+            edge_options['color']['color'] = MapColours.EDGE_COLOR_POSITIVE_STRONG_CONNECTION.value
+            edge_options['color']['highlight'] = MapColours.EDGE_HIGHLIGHT_POSITIVE_STRONG_CONNECTION.value
+            edge_options['width'] = 4
+            sign = '+'
+        elif edge.weight == ConnectionShortcode.NEGATIVE_WEAK_CONNECTION.value:
+            edge_options['color']['color'] = MapColours.EDGE_COLOR_NEGATIVE_WEAK_CONNECTION.value
+            edge_options['color']['highlight'] = MapColours.EDGE_HIGHLIGHT_NEGATIVE_WEAK_CONNECTION.value
+            sign = '-'
+        elif edge.weight == ConnectionShortcode.NEGATIVE_MEDIUM_CONNECTION.value:
+            edge_options['color']['color'] = MapColours.EDGE_COLOR_NEGATIVE_MEDIUM_CONNECTION.value
+            edge_options['color']['highlight'] = MapColours.EDGE_HIGHLIGHT_NEGATIVE_MEDIUM_CONNECTION.value
+            edge_options['width'] = 2
+            sign = '-'
+        elif edge.weight == ConnectionShortcode.NEGATIVE_STRONG_CONNECTION.value:
+            edge_options['color']['color'] = MapColours.EDGE_COLOR_NEGATIVE_STRONG_CONNECTION.value
+            edge_options['color']['highlight'] = MapColours.EDGE_HIGHLIGHT_NEGATIVE_STRONG_CONNECTION.value
+            edge_options['width'] = 4
+            sign = '-'
+
+        if not edge.label:
+            edge_options['label'] = sign
+            edge_options['font'] = font
+    except AttributeError:
+        pass
 
     return edge_options
 
