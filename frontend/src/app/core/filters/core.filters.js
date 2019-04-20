@@ -9,13 +9,13 @@
         .filter('toTrustAsUrl', toTrustAsUrlFilter)
         .filter('toTrustAsResourceUrl', toTrustAsResourceUrlFilter)
         .filter('toTrustAsJs', toTrustAsJsFilter)
-        .filter('dateString', dateString);
+        .filter('isEmpty', isEmpty);
 
     toTrustAsHtmlFilter.$inject = ['$sce'];
     toTrustAsUrlFilter.$inject = ['$sce'];
     toTrustAsResourceUrlFilter.$inject = ['$sce'];
     toTrustAsJsFilter.$inject = ['$sce'];
-    dateString.$inject = ['moment'];
+    isEmpty.$inject = [];
 
     /** @ngInject */
     function toTrustAsHtmlFilter($sce)
@@ -70,15 +70,15 @@
     }
 
     /** @ngInject */
-    function dateString(moment)
+    function isEmpty()
     {
         return filterFilter;
 
         ////////////////
 
-        function filterFilter(date)
+        function filterFilter(obj)
         {
-            return moment(date).toString();
+            return _.isEmpty(obj);
         }
     }
 

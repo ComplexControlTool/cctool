@@ -6,15 +6,21 @@ from cctool.common.models import TimeStampedModel
 
 class AbstractVisualization(TimeStampedModel):
     options = JSONField(
-      default=dict,
-      null=True,
-      blank=True
+        default=dict,
+        null=True,
+        blank=True
     )
 
     structure = JSONField(
-      default=dict,
-      null=True,
-      blank=True
+        default=dict,
+        null=True,
+        blank=True
+    )
+
+    legend = JSONField(
+        default=dict,
+        null=True,
+        blank=True
     )
 
     class Meta:
@@ -29,6 +35,7 @@ class AbstractVisualization(TimeStampedModel):
         output = dict()
         output['options'] = self.options
         output['structure'] = self.structure
+        output['legend'] = self.legend
 
         if use_dict:
             return output

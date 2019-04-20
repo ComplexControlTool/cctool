@@ -38,6 +38,24 @@
             layout-fill="">
           </div>
         </div>
+        <div ng-if="!(graphCtrl.content.visualization.legend | isEmpty)">
+          <div layout-padding=""></div>
+          <div layout-padding=""></div>
+          <md-divider></md-divider>
+          <div layout-padding=""></div>
+          <div layout-padding=""></div>
+          <div ng-if="graphCtrl.content.isProcessed" style="height:400px">
+            <div class="md-title">Legend</div>
+            <div
+              id="graph-legend"
+              vis-network=""
+              network="graphCtrl.legend"
+              visualization="graphCtrl.content.visualization.legend"
+              node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+              layout-fill="">
+            </div>
+          </div>
+        </div>
       </md-card-content>
     </md-card>
 

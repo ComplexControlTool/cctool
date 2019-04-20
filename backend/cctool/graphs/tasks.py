@@ -23,6 +23,7 @@ def find_graph_visualization(self, graph_id):
 
     # Visualization
     graph_options = Visualization.generate_graph_options()
+
     graph_structure = dict()
     nodes_data = list()
     for node in nodes:
@@ -47,8 +48,12 @@ def find_graph_visualization(self, graph_id):
         edges_data.append(dict(**data, **vis))
     graph_structure['nodes'] = nodes_data
     graph_structure['edges'] = edges_data
+
+    graph_legend = Visualization.generate_legend()
+
     graph.visualization.options = graph_options
     graph.visualization.structure = graph_structure
+    graph.visualization.legend = graph_legend
     graph.visualization.save()
 
     return

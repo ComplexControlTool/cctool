@@ -81,8 +81,11 @@ def find_graph_controllability(self, graph_id, analysis_id):
     graph_structure['nodes'] = nodes_data
     graph_structure['edges'] = edges_data
 
+    graph_legend = CA_Visualization.generate_legend()
+
     analysis.visualization.options = graph_options
     analysis.visualization.structure = graph_structure
+    analysis.visualization.legend = graph_legend
     analysis.visualization.save()
 
     return
@@ -142,11 +145,13 @@ def find_upstream(self, graph_id, analysis_id):
         graph_structure[root_node.identifier] = root_node_graph_structure
 
     graph_options = USA_Visualization.generate_graph_options()
+    graph_legend = USA_Visualization.generate_legend()
 
     analysis.data = analysis_data
     analysis.save()
     analysis.visualization.options = graph_options
     analysis.visualization.structure = graph_structure
+    analysis.visualization.legend = graph_legend
     analysis.visualization.save()
 
     return
@@ -206,11 +211,13 @@ def find_downstream(self, graph_id, analysis_id):
         graph_structure[root_node.identifier] = root_node_graph_structure
 
     graph_options = DSA_Visualization.generate_graph_options()
+    graph_legend = DSA_Visualization.generate_legend()
 
     analysis.data = analysis_data
     analysis.save()
     analysis.visualization.options = graph_options
     analysis.visualization.structure = graph_structure
+    analysis.visualization.legend = graph_legend
     analysis.visualization.save()
 
     return
@@ -260,11 +267,13 @@ def find_subjective_logic(self, graph_id, analysis_id):
         graph_structure[measure]['edges'] = edges_data
 
     graph_options = SLA_Visualization.generate_graph_options()
+    graph_legend = SLA_Visualization.generate_legend()
 
     analysis.data = analysis_data
     analysis.save()
     analysis.visualization.options = graph_options
     analysis.visualization.structure = graph_structure
+    analysis.visualization.legend = graph_legend
     analysis.visualization.save()
 
     return

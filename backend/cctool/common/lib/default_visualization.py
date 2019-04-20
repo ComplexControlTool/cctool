@@ -5,6 +5,9 @@ from cctool.common.enums import (
     ConnectionShortcode,
     MapColours,
 )
+from cctool.graphs.models import (
+    NodePlus
+)
 
 
 def generate_graph_options():
@@ -33,12 +36,12 @@ def generate_graph_options():
     edges['selectionWidth'] = 2
     edges['smooth'] = smooth
 
-    layout = dict()
-    layout['randomSeed'] = 2
-
     interaction = dict()
     interaction['hover'] = True
     interaction['navigationButtons'] = True
+
+    layout = dict()
+    layout['randomSeed'] = 2
 
     physics = dict()
     physics['enabled'] = False
@@ -49,8 +52,8 @@ def generate_graph_options():
     graph_options['locale'] = 'en'
     graph_options['clickToUse'] = True
     graph_options['edges'] = edges
-    graph_options['layout'] = layout
     graph_options['interaction'] = interaction
+    graph_options['layout'] = layout
     graph_options['physics'] = physics
 
     return graph_options
@@ -134,13 +137,13 @@ def generate_node_options(node):
     node_options['title'] = ''.join(title)
 
     try:
-        if node.position_x:
-            node_options['x'] = position_x
+        if not node.position_x in [None, '']:
+            node_options['x'] = node.position_x
     except AttributeError:
         pass
     try:
-        if node.position_y:
-            node_options['y'] = position_y
+        if not node.position_y in [None, '']:
+            node_options['y'] = node.position_y
     except AttributeError:
         pass
 
@@ -257,3 +260,58 @@ def generate_edge_options(edge):
 
     return edge_options
 
+def generate_legend():
+    # options
+    options = dict()
+
+    interaction = dict()
+    interaction['dragNodes'] = False
+    interaction['dragView'] = False
+    interaction['selectable'] = False
+    interaction['selectConnectedEdges'] = False
+    interaction['zoomView'] = False
+
+    nodes = dict()
+    nodes['fixed'] = True
+    nodes['physics'] = False
+
+    options['clickToUse'] = False
+    options['interaction'] = interaction
+    options['nodes'] = nodes
+
+    # data
+    data = dict()
+    nodes = list()
+    x = 0
+    y = 0
+    step_x = 185
+    step_y = 85
+
+    all_nodes = [
+        NodePlus(identifier=1, label='Node', position_x=x + (0*step_x), position_y=y),
+        NodePlus(identifier=2, label='Selected Node', position_x=x + (1*step_x), position_y=y),
+        NodePlus(identifier=3, label='Hovered Node', position_x=x + (2*step_x), position_y=y),
+        NodePlus(identifier=4, label='Easy Controllability', position_x=x + (0*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.EASY_CONTROLLABILITY.value),
+        NodePlus(identifier=5, label='Medium Controllability', position_x=x + (1*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value),
+        NodePlus(identifier=6, label='Hard Controllability', position_x=x + (2*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.HARD_CONTROLLABILITY.value),
+        NodePlus(identifier=7, label='Low Vulnerability', position_x=x + (0*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.LOW_VULNERABILITY.value),
+        NodePlus(identifier=8, label='Medium Vulnerability', position_x=x + (1*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.MEDIUM_VULNERABILITY.value),
+        NodePlus(identifier=9, label='High Vulnerability', position_x=x + (2*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.HIGH_VULNERABILITY.value),
+        NodePlus(identifier=10, label='Low Importance', position_x=x + (0*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.LOW_IMPORTANCE.value),
+        NodePlus(identifier=11, label='High Importance', position_x=x + (1*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.HIGH_IMPORTANCE.value)
+    ]
+
+    for i, node in enumerate(all_nodes):
+        visualization = generate_node_options(node)
+        if 'Selected' in node.label:
+            visualization['color']['border'] = visualization['color']['highlight']['border']
+            visualization['color']['background'] = visualization['color']['highlight']['background']
+        if 'Hovered' in node.label:
+            visualization['color']['border'] = visualization['color']['hover']['border']
+            visualization['color']['background'] = visualization['color']['hover']['background']            
+        nodes.append(dict(**node.to_json(use_dict=True), **visualization))
+    
+    data['nodes'] = nodes
+    data['edges'] = list()
+
+    return {'options': options, 'structure': data}

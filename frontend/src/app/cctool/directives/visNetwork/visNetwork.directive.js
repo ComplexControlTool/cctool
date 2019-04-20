@@ -398,6 +398,7 @@
   {
     $log.debug('Init Network Called');
     var network = new vis.Network(container, data, options);
+    network.fit();
     return network;
   }
 
