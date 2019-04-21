@@ -120,12 +120,25 @@
           <md-button ng-click="graphCtrl.selectedIndex=$index+1" target="_blank">
             <span>Explore</span>
           </md-button>
-          <md-divider></md-divider>
+          <md-divider ng-if="!$last"></md-divider>
         </div>
         <div ng-if="!graphCtrl.content.analysers">
           <p style="font-weight:bold">No Analyses available for this graph!</p>
         </div>
       </md-card-content>
+    </md-card>
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+    <!-- Explore Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Explore Map Connections</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div ui-view="graph-explore"></div>
     </md-card>
 
     <div layout-margin="" layout-padding=""></div>

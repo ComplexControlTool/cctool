@@ -1,0 +1,75 @@
+<!-- explore.html -->
+<div id="explore-content" ng-if="!exploreCtrl.data" flex="">
+  <div style="height:988px" layout="row" layout-align="center center">
+    LOADING...
+  </div>
+</div>
+<div id="explore-content" ng-if="exploreCtrl.data" layout="row" flex="">
+  <div layout="column" layout-padding="" flex="">
+    <div>
+      <md-input-container>
+        <label>Select Node to Explore</label>
+        <md-select
+         ng-model="exploreCtrl.data.leftGraph.selectedNodeLabel"
+         ng-change="exploreCtrl.data.leftGraph.nodesToRemove = exploreCtrl.computeStream(exploreCtrl.data.leftGraph.selectedNodeLabel, exploreCtrl.data.leftGraph.streamMode)">
+          <md-option ng-repeat="node in exploreCtrl.nodeLabels track by $index" value="{{ node }}">
+            {{ node }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-radio-group
+       ng-disabled="!exploreCtrl.data.leftGraph.selectedNodeLabel"
+       ng-model="exploreCtrl.data.leftGraph.streamMode"
+       ng-change="exploreCtrl.data.leftGraph.nodesToRemove = exploreCtrl.computeStream(exploreCtrl.data.leftGraph.selectedNodeLabel, exploreCtrl.data.leftGraph.streamMode)">
+        <md-radio-button value="UpStream">Incoming Connections</md-radio-button>
+        <md-radio-button value="DownStream">Outgoing Connections</md-radio-button>
+      </md-radio-group>
+    </div>
+    <div style="height:800px">
+      <div
+        id="left-tab-{{exploreCtrl.graphForAnalysis.id}}"
+        vis-network=""
+        network="exploreCtrl.data.leftGraph.network"
+        visualization="graphCtrl.content.visualization"
+        nodes-to-hide="exploreCtrl.data.leftGraph.nodesToRemove"
+        node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+        layout-fill="">
+      </div>
+    </div>
+  </div>
+
+  <md-divider style="height:988px" hide-sm="" hide-xs=""></md-divider>
+
+  <div layout="column" layout-padding="" flex="" hide-sm="" hide-xs="">
+    <div>
+      <md-input-container>
+        <label>Select Node to Explore</label>
+        <md-select
+         ng-model="exploreCtrl.data.rightGraph.selectedNodeLabel"
+         ng-change="exploreCtrl.data.rightGraph.nodesToRemove = exploreCtrl.computeStream(exploreCtrl.data.rightGraph.selectedNodeLabel, exploreCtrl.data.rightGraph.streamMode)">
+          <md-option ng-repeat="node in exploreCtrl.nodeLabels track by $index" value="{{ node }}">
+            {{ node }}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-radio-group
+       ng-disabled="!exploreCtrl.data.rightGraph.selectedNodeLabel"
+       ng-model="exploreCtrl.data.rightGraph.streamMode"
+       ng-change="exploreCtrl.data.rightGraph.nodesToRemove = exploreCtrl.computeStream(exploreCtrl.data.rightGraph.selectedNodeLabel, exploreCtrl.data.rightGraph.streamMode)">
+        <md-radio-button value="UpStream">Incoming Connections</md-radio-button>
+        <md-radio-button value="DownStream">Outgoing Connections</md-radio-button>
+      </md-radio-group>
+    </div>
+    <div style="height:800px">
+      <div
+        id="right-tab-{{exploreCtrl.graphForAnalysis.id}}"
+        vis-network=""
+        network="exploreCtrl.data.rightGraph.network"
+        visualization="graphCtrl.content.visualization"
+        nodes-to-hide="exploreCtrl.data.rightGraph.nodesToRemove"
+        node-shape="graphManagerCtrl.activeSettings.graphVisualisation.value"
+        layout-fill="">
+      </div>
+    </div>
+  </div>
+</div>

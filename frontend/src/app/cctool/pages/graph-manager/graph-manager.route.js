@@ -186,6 +186,12 @@
           {
             templateUrl: 'app/cctool/components/graph/templates/graph.overview.html',
           },
+          'graph-explore@app.cctool_graph':
+          {
+            templateUrl: 'app/cctool/components/explore/explore.html',
+            controller: 'ExploreController',
+            controllerAs: 'exploreCtrl'
+          },
           'graph-controllability-analysis@app.cctool_graph':
           {
             templateUrl: 'app/cctool/components/graph/templates/graph.controllability-analysis.html',
