@@ -19,10 +19,12 @@
     vm.activeSettings = settingsService.activeSettings;
     vm.sortItems = settingsService.getSortSettings();
     vm.visualItems = settingsService.getVisualSettings();
+    vm.legendItems = settingsService.getLegendSettings();
 
     // Functions
     vm.setActiveSortingSetting = setActiveSortingSetting;
     vm.setActiveVisualisationSetting = setActiveVisualisationSetting;
+    vm.setActiveLegendSetting = setActiveLegendSetting;
 
     // Watchers / Listeners
     $scope.$on('$destroy', function() {
@@ -36,6 +38,7 @@
       $log.debug(vm.title+'/ Activated ' + vm.title + ' controller!');
       getActiveSortingSetting();
       getActiveVisualisationSetting();
+      getActiveLegendSetting();
       prepareNavigation();
     }
 
@@ -68,9 +71,9 @@
       settingsService.getActiveSortSetting();
     }
 
-    function setActiveSortingSetting(sortItem)
+    function setActiveSortingSetting(item)
     {
-      settingsService.setActiveSortSetting(sortItem.id);
+      settingsService.setActiveSortSetting(item.id);
     }
 
     function getActiveVisualisationSetting()
@@ -78,9 +81,24 @@
       settingsService.getActiveVisualSetting();
     }
 
-    function setActiveVisualisationSetting(visualItem)
+    function setActiveVisualisationSetting(item)
     {
-      settingsService.setActiveVisualSetting(visualItem.id);
+      settingsService.setActiveVisualSetting(item.id);
+    }
+
+    function getActiveLegendSetting()
+    {
+      settingsService.getActiveLegendSetting();
+    }
+
+    function setActiveLegendSetting(value)
+    {
+      var item = vm.legendItems[0];
+      if (!value)
+      {
+        item = vm.legendItems[1];
+      }
+      settingsService.setActiveLegendSetting(item.id);
     }
 
   }

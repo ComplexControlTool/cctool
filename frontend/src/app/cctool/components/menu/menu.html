@@ -39,7 +39,7 @@
             ng-repeat="sortItem in menuCtrl.sortItems"
             ng-if="!sortItem.reversed">
               <md-button
-              ng-class="{'md-primary' : sortItem.active}"
+              ng-class="{'md-accent' : sortItem.active}"
               ng-click="menuCtrl.setActiveSortingSetting(sortItem); appCtrl.toggleSidenav('menu-sidenav');"
               aria-label="Change sorting to">
                 <md-icon style="transform:scaleY(-1)">{{sortItem.icon}}</md-icon>
@@ -51,7 +51,7 @@
             ng-repeat="sortItem in menuCtrl.sortItems"
             ng-if="sortItem.reversed">
               <md-button
-              ng-class="{'md-primary' : sortItem.active}"
+              ng-class="{'md-accent' : sortItem.active}"
               ng-click="menuCtrl.setActiveSortingSetting(sortItem); appCtrl.toggleSidenav('menu-sidenav');"
               aria-label="Change sorting to">
                 <md-icon>{{sortItem.icon}}</md-icon>
@@ -64,25 +64,26 @@
     </md-list-item>
     <md-subheader class="md-no-sticky">Visualisation</md-subheader>
     <md-list-item>
-      <div class="md-no-style">
-        <p>Display nodes as</p>
-        <md-menu class="md-secondary">
-          <md-button ng-click="$mdMenu.open($event)" aria-label="Sort by Options">
-            {{menuCtrl.activeSettings.graphVisualisation.label}}
-          </md-button>
-          <md-menu-content>
-            <md-menu-item
-            ng-repeat="visualItem in menuCtrl.visualItems">
-              <md-button
-              ng-class="{'md-primary' : visualItem.active}"
-              ng-click="menuCtrl.setActiveVisualisationSetting(visualItem); appCtrl.toggleSidenav('menu-sidenav');"
-              aria-label="Change node shape to">
-                {{visualItem.text}}
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </div>
+      <div>
+      <p>Node Visualization: <b>{{ menuCtrl.activeSettings.graphVisualisation.text }}</b></p>
+      <md-radio-group ng-model="menuCtrl.activeSettings.graphVisualisation">
+        <md-radio-button
+        class="no-outline cursor-pointer"
+        ng-repeat="visualItem in menuCtrl.visualItems"
+        ng-value="visualItem"
+        ng-click="menuCtrl.setActiveVisualisationSetting(visualItem); appCtrl.toggleSidenav('menu-sidenav');">
+        {{ visualItem.text }}
+        </md-radio-button>
+      </md-radio-group>
+    </div>
+    </md-list-item>
+    <md-list-item>
+      <p>{{ menuCtrl.activeSettings.graphLegend.text }}</p>
+      <md-switch
+      class="md-secondary"
+      ng-model="menuCtrl.activeSettings.graphLegend.value"
+      ng-change="menuCtrl.setActiveLegendSetting(menuCtrl.activeSettings.graphLegend.value); appCtrl.toggleSidenav('menu-sidenav');">
+      </md-switch>
     </md-list-item>
   </md-list>
 </section>

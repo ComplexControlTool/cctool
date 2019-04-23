@@ -38,7 +38,7 @@
             layout-fill="">
           </div>
         </div>
-        <div ng-if="!(graphCtrl.content.visualization.legend | isEmpty)">
+        <div ng-if="!(graphCtrl.content.visualization.legend | isEmpty) && graphManagerCtrl.activeSettings.graphLegend.value">
           <div layout-padding=""></div>
           <div layout-padding=""></div>
           <md-divider></md-divider>
