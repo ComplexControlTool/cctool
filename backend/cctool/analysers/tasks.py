@@ -60,22 +60,11 @@ def find_graph_controllability(self, graph_id, analysis_id):
     nodes_data = list()
     for node in nodes:
         data = node.to_json(use_dict=True)
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
         vis = CA_Visualization.generate_node_options(node, analysis)
         nodes_data.append(dict(**data, **vis))
     edges_data = list()
     for edge in edges:
         data = edge.to_json(use_dict=True)
-        if 'label' in data:
-            if not data.get('label'):
-                data.pop('label')
-        if 'source' in data:
-            data['from'] = data.pop('source')
-        if 'target' in data:
-            data['to'] = data.pop('target')
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
         vis = CA_Visualization.generate_edge_options(edge, analysis)
         edges_data.append(dict(**data, **vis))
     graph_structure['nodes'] = nodes_data
@@ -122,22 +111,11 @@ def find_upstream(self, graph_id, analysis_id):
         nodes_data = list()
         for node in subgraph['nodes']:
             data = node.to_json(use_dict=True)
-            if 'properties' in data:
-                data['cctool'] = data.pop('properties')
             vis = USA_Visualization.generate_node_options(node, root_node_analysis_data)
             nodes_data.append(dict(**data, **vis))
         edges_data = list()
         for edge in subgraph['edges']:
             data = edge.to_json(use_dict=True)
-            if 'label' in data:
-                if not data.get('label'):
-                    data.pop('label')
-            if 'source' in data:
-                data['from'] = data.pop('source')
-            if 'target' in data:
-                data['to'] = data.pop('target')
-            if 'properties' in data:
-                data['cctool'] = data.pop('properties')
             vis = USA_Visualization.generate_edge_options(edge, root_node_analysis_data)
             edges_data.append(dict(**data, **vis))
         root_node_graph_structure['nodes'] = nodes_data
@@ -188,22 +166,11 @@ def find_downstream(self, graph_id, analysis_id):
         nodes_data = list()
         for node in subgraph['nodes']:
             data = node.to_json(use_dict=True)
-            if 'properties' in data:
-                data['cctool'] = data.pop('properties')
             vis = DSA_Visualization.generate_node_options(node, root_node_analysis_data)
             nodes_data.append(dict(**data, **vis))
         edges_data = list()
         for edge in subgraph['edges']:
             data = edge.to_json(use_dict=True)
-            if 'label' in data:
-                if not data.get('label'):
-                    data.pop('label')
-            if 'source' in data:
-                data['from'] = data.pop('source')
-            if 'target' in data:
-                data['to'] = data.pop('target')
-            if 'properties' in data:
-                data['cctool'] = data.pop('properties')
             vis = DSA_Visualization.generate_edge_options(edge, root_node_analysis_data)
             edges_data.append(dict(**data, **vis))
         root_node_graph_structure['nodes'] = nodes_data
@@ -244,22 +211,11 @@ def find_subjective_logic(self, graph_id, analysis_id):
         nodes_data = list()
         for node in graph.nodes.all().select_subclasses():
             data = node.to_json(use_dict=True)
-            if 'properties' in data:
-                data['cctool'] = data.pop('properties')
             vis = SLA_Visualization.generate_node_options(node, analysis_data[measure])
             nodes_data.append(dict(**data, **vis))
         edges_data = list()
         for edge in graph.edges.all().select_subclasses():
             data = edge.to_json(use_dict=True)
-            if 'label' in data:
-                if not data.get('label'):
-                    data.pop('label')
-            if 'source' in data:
-                data['from'] = data.pop('source')
-            if 'target' in data:
-                data['to'] = data.pop('target')
-            if 'properties' in data:
-                data['cctool'] = data.pop('properties')
             vis = SLA_Visualization.generate_edge_options(edge, analysis_data[measure])
             edges_data.append(dict(**data, **vis))
 

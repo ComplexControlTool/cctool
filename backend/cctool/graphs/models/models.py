@@ -134,7 +134,7 @@ class NodePlus(Node):
             properties['custom'] = self.custom
 
         output = super(Node, self).to_json(use_dict=True, **kwargs)
-        output['properties'] = properties
+        output['cctool'] = properties
 
         if use_dict:
             return output
@@ -176,7 +176,7 @@ class EdgePlus(Edge):
             properties['custom'] = self.custom
         
         output = super(Edge, self).to_json(use_dict=True, **kwargs)
-        output['properties'] = properties
+        output['cctool'] = properties
 
         if use_dict:
             return output

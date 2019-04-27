@@ -56,14 +56,25 @@ def generate_legend():
     y = legend['structure']['nodes'][-1].get('y',0) + step_y
     id = legend['structure']['nodes'][-1].get('id',0) + 1
 
+    # Find the intersection of nodes and edges (key: label=Neutral for first edge)
+    edge_index = len(legend['structure']['nodes']) - 1
+    for i, node in enumerate(legend['structure']['nodes']):
+        # get new y value
+        if node.get('label') == 'Neutral':
+            edge_index = i
+            y = node['y']
+        if i >= edge_index:
+            node['y'] += step_y
+
     more_nodes = [
         NodePlus(identifier=id, label='Focused', position_x=x, position_y=y)
     ]
 
-    for i, node in enumerate(more_nodes):
-        visualization = generate_node_options(node, {})
+    for node in more_nodes:
+        data = node.to_json(use_dict=True)
+        vis = generate_node_options(node, {})
         if 'Focused' in node.label:
-            visualization['color']['background'] = MapColours.NODE_BACKGROUND_FOCUSED.value
-        legend['structure']['nodes'].append(dict(**node.to_json(use_dict=True), **visualization))
+            vis['color']['background'] = MapColours.NODE_BACKGROUND_FOCUSED.value
+        legend['structure']['nodes'].append(dict(**data, **vis))
 
     return legend

@@ -59,9 +59,10 @@ class AbstractEdge(TimeStampedModel):
         """
         output = dict()
         output['id'] = self.identifier
-        output['label'] = self.label
-        output['source'] = self.source.identifier
-        output['target'] = self.target.identifier
+        if self.label:
+            output['label'] = self.label
+        output['from'] = self.source.identifier
+        output['to'] = self.target.identifier
 
         if use_dict:
             return output

@@ -60,7 +60,8 @@ class AbstractNode(TimeStampedModel):
         """
         output = dict()
         output['id'] = self.identifier
-        output['label'] = self.label
+        if self.label:
+            output['label'] = self.label
 
         if use_dict:
             return output

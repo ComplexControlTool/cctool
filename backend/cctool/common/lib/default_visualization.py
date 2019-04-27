@@ -6,7 +6,8 @@ from cctool.common.enums import (
     MapColours,
 )
 from cctool.graphs.models import (
-    NodePlus
+    NodePlus,
+    EdgePlus
 )
 
 
@@ -264,6 +265,27 @@ def generate_legend():
     # options
     options = dict()
 
+    arrows_to = dict()
+    arrows_to['enabled'] = True
+    arrows_to['scaleFactor'] = 1
+    arrows_to['type'] = 'arrow'
+
+    arrows = dict()
+    arrows['to'] = arrows_to
+    
+    color = dict()
+    color['opacity'] = 1.0
+
+    smooth = dict()
+    smooth['enabled'] = True
+    smooth['type'] = 'continuous'
+    smooth['roundness'] = 0.5
+
+    edges = dict()
+    edges['arrows'] = arrows
+    edges['color'] = color
+    edges['smooth'] = smooth
+
     interaction = dict()
     interaction['dragNodes'] = False
     interaction['dragView'] = False
@@ -278,10 +300,12 @@ def generate_legend():
     options['clickToUse'] = False
     options['interaction'] = interaction
     options['nodes'] = nodes
+    options['edges'] = edges
 
     # data
-    data = dict()
-    nodes = list()
+    legend_structure = dict()
+    nodes_data = list()
+    edges_data = list()
     x = 0
     y = 0
     step_x = 185
@@ -298,20 +322,50 @@ def generate_legend():
         NodePlus(identifier=8, label='Medium Vulnerability', position_x=x + (1*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.MEDIUM_VULNERABILITY.value),
         NodePlus(identifier=9, label='High Vulnerability', position_x=x + (2*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.HIGH_VULNERABILITY.value),
         NodePlus(identifier=10, label='Low Importance', position_x=x + (0*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.LOW_IMPORTANCE.value),
-        NodePlus(identifier=11, label='High Importance', position_x=x + (1*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.HIGH_IMPORTANCE.value)
+        NodePlus(identifier=11, label='High Importance', position_x=x + (1*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.HIGH_IMPORTANCE.value),
+        NodePlus(identifier=12, label='Neutral', position_x=x + round(0.6*step_x), position_y=y + (4*step_y)),
+        NodePlus(identifier=13, label='Connection', position_x=x + round(1.3*step_x), position_y=y + (4*step_y)),
+        NodePlus(identifier=14, label='Positive', position_x=x + (0*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=15, label='Weak', position_x=x + round(0.75*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=16, label='Positive', position_x=x + (0*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=17, label='Medium', position_x=x + round(0.75*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=18, label='Positive', position_x=x + (0*step_x), position_y=y + (7*step_y)),
+        NodePlus(identifier=19, label='Strong', position_x=x + round(0.75*step_x), position_y=y + (7*step_y)),
+        NodePlus(identifier=20, label='Negative', position_x=x + round(1.25*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=21, label='Weak', position_x=x + (2*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=22, label='Negative', position_x=x + round(1.25*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=23, label='Medium', position_x=x + (2*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=24, label='Negative', position_x=x + round(1.25*step_x), position_y=y + (7*step_y)),
+        NodePlus(identifier=25, label='Strong', position_x=x + (2*step_x), position_y=y + (7*step_y))
     ]
 
-    for i, node in enumerate(all_nodes):
-        visualization = generate_node_options(node)
-        if 'Selected' in node.label:
-            visualization['color']['border'] = visualization['color']['highlight']['border']
-            visualization['color']['background'] = visualization['color']['highlight']['background']
-        if 'Hovered' in node.label:
-            visualization['color']['border'] = visualization['color']['hover']['border']
-            visualization['color']['background'] = visualization['color']['hover']['background']            
-        nodes.append(dict(**node.to_json(use_dict=True), **visualization))
-    
-    data['nodes'] = nodes
-    data['edges'] = list()
+    all_edges =[
+        EdgePlus(identifier='11-12', source=all_nodes[11], target=all_nodes[12], weight=ConnectionShortcode.NEUTRAL_CONNECTION.value),
+        EdgePlus(identifier='13-14', source=all_nodes[13], target=all_nodes[14], weight=ConnectionShortcode.POSITIVE_WEAK_CONNECTION.value),
+        EdgePlus(identifier='15-16', source=all_nodes[15], target=all_nodes[16], weight=ConnectionShortcode.POSITIVE_MEDIUM_CONNECTION.value),
+        EdgePlus(identifier='17-18', source=all_nodes[17], target=all_nodes[18], weight=ConnectionShortcode.POSITIVE_STRONG_CONNECTION.value),
+        EdgePlus(identifier='19-20', source=all_nodes[19], target=all_nodes[20], weight=ConnectionShortcode.NEGATIVE_WEAK_CONNECTION.value),
+        EdgePlus(identifier='21-22', source=all_nodes[21], target=all_nodes[22], weight=ConnectionShortcode.NEGATIVE_MEDIUM_CONNECTION.value),
+        EdgePlus(identifier='23-24', source=all_nodes[23], target=all_nodes[24], weight=ConnectionShortcode.NEGATIVE_STRONG_CONNECTION.value)
+    ]
 
-    return {'options': options, 'structure': data}
+    for node in all_nodes:
+        data = node.to_json(use_dict=True)
+        vis = generate_node_options(node)
+        if 'Selected' in node.label:
+            vis['color']['border'] = vis['color']['highlight']['border']
+            vis['color']['background'] = vis['color']['highlight']['background']
+        if 'Hovered' in node.label:
+            vis['color']['border'] = vis['color']['hover']['border']
+            vis['color']['background'] = vis['color']['hover']['background']
+        nodes_data.append(dict(**data, **vis))
+
+    for edge in all_edges:
+        data = edge.to_json(use_dict=True)
+        vis = generate_edge_options(edge)
+        edges_data.append(dict(**data, **vis))
+    
+    legend_structure['nodes'] = nodes_data
+    legend_structure['edges'] = edges_data
+
+    return {'options': options, 'structure': legend_structure}

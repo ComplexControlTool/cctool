@@ -28,22 +28,11 @@ def find_graph_visualization(self, graph_id):
     nodes_data = list()
     for node in nodes:
         data = node.to_json(use_dict=True)
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
         vis = Visualization.generate_node_options(node)
         nodes_data.append(dict(**data, **vis))
     edges_data = list()
     for edge in edges:
         data = edge.to_json(use_dict=True)
-        if 'label' in data:
-            if not data.get('label'):
-                data.pop('label')
-        if 'source' in data:
-            data['from'] = data.pop('source')
-        if 'target' in data:
-            data['to'] = data.pop('target')
-        if 'properties' in data:
-            data['cctool'] = data.pop('properties')
         vis = Visualization.generate_edge_options(edge)
         edges_data.append(dict(**data, **vis))
     graph_structure['nodes'] = nodes_data
