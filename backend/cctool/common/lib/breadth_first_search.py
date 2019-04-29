@@ -40,7 +40,7 @@ def get_bfs_tree(graph, source, reverse=False, depth_limit=0):
     return connections
 
 def get_bfs_tree_nx(graph, source, reverse=False, depth_limit=0):
-    bfs_tree = dict()
+    connections = dict()
 
     nodes = graph.nodes.all().select_subclasses()
     edges = graph.edges.all().select_subclasses()
@@ -53,9 +53,10 @@ def get_bfs_tree_nx(graph, source, reverse=False, depth_limit=0):
     for edge in edges:
         G.add_edge(edge.source.identifier, edge.target.identifier)
 
-    if reverse:
-        bfs_tree = dict(nx.bfs_predecessors(G, source=source.identifier, depth_limit=depth_limit))
-    else:
-        bfs_tree = dict(nx.bfs_successors(G, source=source.identifier, depth_limit=depth_limit))
+    edges = [t for (s,t) in nx.bfs_edges(G, source=source.identifier, reverse=reverse, depth_limit=depth_limit)]
+    levels = nx.single_source_shortest_path_length(G,source=source.identifier, cutoff=depth_limit)
 
-    return bfs_tree
+    for (node_id,level) in levels.items():
+        connections[node_id] = {'node':nodes.get(identifier=node_id), 'level':level}
+
+    return connections
