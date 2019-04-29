@@ -19,7 +19,7 @@ RUN apk update \
   # Admin tools
   && apk add bash git vim
 
-RUN npm install -g bower@1.8.4 gulp@3.9.1
+RUN npm install -g bower@1.8.8 gulp@3.9.1
 
 # Copy needed files
 COPY ./frontend $FRONTEND_CODE_DIR

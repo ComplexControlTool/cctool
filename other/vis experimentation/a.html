@@ -1,0 +1,614 @@
+<html><head>
+  <title>Network | Playing with Physics</title>
+
+  <style type="text/css">
+    body {
+      font: 10pt sans;
+    }
+    #mynetwork {
+      float:left;
+      width: 600px;
+      height: 600px;
+      margin:5px;
+      border: 1px solid lightgray;
+    }
+    #config {
+      float:left;
+      width: 400px;
+      height: 600px;
+    }
+
+    p {
+      font-size:16px;
+      max-width:700px;
+    }
+  </style>
+
+
+  <script type="text/javascript" src="./exampleUtil.js"></script>
+  <script type="text/javascript" src="./vis.js"></script>
+  <link href="./vis-network.min.css" rel="stylesheet" type="text/css">
+
+  <script type="text/javascript">
+    var nodes = null;
+    var edges = null;
+    var network = null;
+
+    function draw() {
+      // create a network
+      var container = document.getElementById('mynetwork');
+
+      var path="http://localhost:8000/api/v1/analysis/?graphId=181&analysisType=Up%20Stream&format=json";
+      var graph = undefined;
+      loadJSON(
+        path,
+        function(data){
+          graph = data;
+          var structure = {nodes:graph[0]["visualization"]["legend"]["structure"].nodes, edges:graph[0]["visualization"]["legend"]["structure"].edges};
+          var options = graph[0]["visualization"]["legend"]["options"];
+          options["configure"] = true;
+          // var options = {
+          //   physics: {
+          //     stabilization: false
+          //   },
+          //   configure: true
+          // };
+          network = new vis.Network(container, structure, options);
+          
+          network.on("configChange", function() {
+            // this will immediately fix the height of the configuration
+            // wrapper to prevent unecessary scrolls in chrome.
+            // see https://github.com/almende/vis/issues/1568
+            var div = container.getElementsByClassName('vis-configuration-wrapper')[0];
+            div.style["height"] = div.getBoundingClientRect().height + "px";
+          });
+        },
+        function(error){
+          console.log(error);
+        }
+      );
+    }
+  </script>
+  
+</head>
+
+<body onload="draw();">
+
+<p>
+  The configurator can be used to play with the options. In this example, all options that can be configured with this tool are shown.
+  You can also supply a custom filter function or filter string. You can press the generate options button below to have an options object printed. You can then use
+  this in the network.
+</p>
+<p><b>Note:</b> The configurator is recreated in the dom tree on input change. This may cause undesired scrolls in your application. In order to avoid this, explicitly set the height of the configurator (see this example's source code).
+</p>
+<br>
+<div id="mynetwork">
+    <div class="vis-network" tabindex="900" style="position: relative; overflow: hidden; -webkit-user-select: none; -webkit-user-drag: none; width: 100%; height: 100%;">
+        <canvas width="600" height="600" style="position: relative; -webkit-user-select: none; -webkit-user-drag: none; width: 100%; height: 100%;"></canvas>
+    </div>
+    <div class="vis-configuration-wrapper">
+        <div class="vis-configuration vis-config-item vis-config-s0">
+            <div class="vis-configuration vis-config-header">nodes</div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">borderWidth:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="10" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">borderWidthSelected:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="10" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>color:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">border:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(43, 124, 233);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">background:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(151, 194, 252);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3"><i><b>highlight:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">border:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(43, 124, 233);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">background:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(210, 229, 255);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3"><i><b>hover:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">border:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(43, 124, 233);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">background:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(210, 229, 255);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>fixed:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">x:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">y:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>font:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">color:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(52, 52, 52);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">size:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="100" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">face:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="arial">arial</option>
+                <option value="verdana">verdana</option>
+                <option value="tahoma">tahoma</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">background:</div>
+            <div class="vis-configuration vis-config-colorBlock none"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">strokeWidth:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="50" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">strokeColor:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(255, 255, 255);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hidden:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">labelHighlightBold:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">physics:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>scaling:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">min:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="200" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">max:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="200" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">label:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">shadow:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">shape:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="ellipse">ellipse</option>
+                <option value="box">box</option>
+                <option value="circle">circle</option>
+                <option value="database">database</option>
+                <option value="diamond">diamond</option>
+                <option value="dot">dot</option>
+                <option value="square">square</option>
+                <option value="star">star</option>
+                <option value="text">text</option>
+                <option value="triangle">triangle</option>
+                <option value="triangleDown">triangleDown</option>
+                <option value="hexagon">hexagon</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>shapeProperties:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">borderDashes:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">borderRadius:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="20" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">interpolation:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">useImageSize:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">size:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="200" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s0"></div>
+        <div class="vis-configuration vis-config-item vis-config-s0">
+            <div class="vis-configuration vis-config-header">edges</div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>arrows:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">to:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">middle:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">from:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">arrowStrikethrough:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>color:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">color:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(132, 132, 132);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">highlight:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(132, 132, 132);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">hover:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(132, 132, 132);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">inherit:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="from">from</option>
+                <option value="to">to</option>
+                <option value="both">both</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">opacity:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="1" step="0.05">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">dashes:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>font:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">color:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(52, 52, 52);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">size:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="100" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">face:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="arial">arial</option>
+                <option value="verdana">verdana</option>
+                <option value="tahoma">tahoma</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">background:</div>
+            <div class="vis-configuration vis-config-colorBlock none"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">strokeWidth:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="50" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">strokeColor:</div>
+            <div class="vis-configuration vis-config-colorBlock" style="background-color: rgb(255, 255, 255);"></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">align:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="horizontal">horizontal</option>
+                <option value="top">top</option>
+                <option value="middle">middle</option>
+                <option value="bottom">bottom</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hidden:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hoverWidth:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="5" step="0.1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">labelHighlightBold:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">physics:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>scaling:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">min:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="100" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">max:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="100" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3"><i><b>label:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">enabled:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">min:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="200" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">max:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="200" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">maxVisible:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="200" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s4">
+            <div class="vis-configuration vis-config-label vis-config-s4">drawThreshold:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="20" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">selectionWidth:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="5" step="0.1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">selfReferenceSize:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="200" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">shadow:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>smooth:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">enabled:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">type:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="dynamic">dynamic</option>
+                <option value="continuous">continuous</option>
+                <option value="discrete">discrete</option>
+                <option value="diagonalCross">diagonalCross</option>
+                <option value="straightCross">straightCross</option>
+                <option value="horizontal">horizontal</option>
+                <option value="vertical">vertical</option>
+                <option value="curvedCW">curvedCW</option>
+                <option value="curvedCCW">curvedCCW</option>
+                <option value="cubicBezier">cubicBezier</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">forceDirection:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="horizontal">horizontal</option>
+                <option value="vertical">vertical</option>
+                <option value="none">none</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">roundness:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="1" step="0.05">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">width:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="30" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s0"></div>
+        <div class="vis-configuration vis-config-item vis-config-s0">
+            <div class="vis-configuration vis-config-header">layout</div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hierarchical:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s0"></div>
+        <div class="vis-configuration vis-config-item vis-config-s0">
+            <div class="vis-configuration vis-config-header">interaction</div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">dragNodes:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">dragView:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hideEdgesOnDrag:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hideNodesOnDrag:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hover:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">keyboard:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">multiselect:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">navigationButtons:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">selectable:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">selectConnectedEdges:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">hoverConnectedEdges:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">tooltipDelay:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="1000" step="25">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">zoomView:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s0"></div>
+        <div class="vis-configuration vis-config-item vis-config-s0">
+            <div class="vis-configuration vis-config-header">manipulation</div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">enabled:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">initiallyActive:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s0"></div>
+        <div class="vis-configuration vis-config-item vis-config-s0">
+            <div class="vis-configuration vis-config-header">physics</div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">enabled:</div>
+            <input type="checkbox" class="vis-configuration vis-config-checkbox">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2"><i><b>barnesHut:</b></i></div>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">gravitationalConstant:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="-30000" max="0" step="50">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">centralGravity:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="10" step="0.05">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">springLength:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="500" step="5">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">springConstant:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="1.2" step="0.005">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">damping:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="1" step="0.01">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s3">
+            <div class="vis-configuration vis-config-label vis-config-s3">avoidOverlap:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="1" step="0.01">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">maxVelocity:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0" max="150" step="1">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">minVelocity:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0.01" max="1" step="0.01">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">solver:</div>
+            <select class="vis-configuration vis-config-select">
+                <option value="barnesHut">barnesHut</option>
+                <option value="forceAtlas2Based">forceAtlas2Based</option>
+                <option value="repulsion">repulsion</option>
+                <option value="hierarchicalRepulsion">hierarchicalRepulsion</option>
+            </select>
+        </div>
+        <div class="vis-configuration vis-config-item vis-config-s2">
+            <div class="vis-configuration vis-config-label vis-config-s2">timestep:</div>
+            <input class="vis-configuration vis-config-range" type="range" min="0.01" max="1" step="0.01">
+            <input class="vis-configuration vis-config-rangeinput">
+        </div>
+        <div class="vis-configuration vis-config-option-container"></div>
+        <div class="vis-configuration vis-config-button">generate options</div>
+    </div>
+</div>
+<p id="selection"></p>
+
+
+</body></html>

@@ -22,10 +22,6 @@ def generate_graph_options():
     hierarchical['sortMethod'] = 'directed'
     graph_options['layout']['hierarchical'] = hierarchical
 
-    physics = dict()
-    physics['enabled'] = True
-    graph_options['physics'] = physics
-
     return graph_options
 
 def generate_node_options(node, analysis):
