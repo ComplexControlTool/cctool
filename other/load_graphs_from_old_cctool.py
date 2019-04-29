@@ -11,6 +11,8 @@ from cctool.common.enums import (
     ConnectionShortcode,
 )
 
+# reference: http://cctool.co.uk/api-root/graphs/?format=json
+
 
 def addGraph(title, description):
   graph_obj = Graph.objects.create(title=title, description=description)
