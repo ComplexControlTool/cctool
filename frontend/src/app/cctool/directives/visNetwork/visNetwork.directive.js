@@ -28,7 +28,7 @@
         'nodesToHide' : '=nodesToHide',
         'nodeShape':'=nodeShape',
         'editGraph':'=editGraph',
-        'reload':'=reload'
+        'reload':'=reload',
       }
     };
     return directive;
@@ -81,7 +81,7 @@
             scope.controlConfiguration = scope.vm.analysis.data.controlConfigurations[scope.vm.index];
           }
         }
-        scope.element = element[0];
+        scope.element = element;
       }
 
       // Re-draw on data change.
@@ -394,11 +394,39 @@
   }
 
   // Function to render the network's structure.
-  function initNetwork($log, container, data, options)
+  function initNetwork($log, element, data, options)
   {
     $log.debug('Init Network Called');
+    var container = element[0];
     var network = new vis.Network(container, data, options);
     network.fit();
+
+    network.once('stabilizationProgress',
+      function()
+      {
+        element.css({'pointer-events': 'none'});
+        var overlay = element.find('div.vis-overlay');
+        if (overlay)
+        {
+          overlay.css({'background-color': 'rgb(255,255,255)'});
+          var styles = 'position:relative; float:left; top:50%; left:50%; transform:translate(-50%, -50%);';
+          overlay.html('<div style="'+styles+'">LOADING...</div>');
+        }
+      }
+    );
+    network.once('stabilized',
+      function()
+      {
+        element.css({'pointer-events': 'auto'});
+        var overlay = element.find('div.vis-overlay');
+        if (overlay)
+        {
+          overlay.css({'background-color': 'transparent'});
+          overlay.html('');
+        }
+        network.fit();
+      }
+    );
     return network;
   }
 
