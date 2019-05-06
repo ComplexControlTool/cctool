@@ -1,5 +1,5 @@
 from cctool.graphs.models.models import Edge, EdgePlus, NodePlus
-from common.lib.breadth_first_search import get_bfs_tree
+from cctool.common.lib.breadth_first_search import get_bfs_tree
 
 
 def find_downstream_nodes(graph, root_nodes):

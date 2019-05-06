@@ -9,13 +9,24 @@ from cctool.common.enums import (
     ConnectionShortcode,
     ConnectionWeight,
 )
+from cctool.common.lib.breadth_first_search import get_bfs_tree_nx
+from cctool.common.lib.centralities import get_centrality_measurement_nx
 
 import networkx as nx
 
 
+def normalize(d, target=1.0):
+    raw = sum(d.values())
+    factor = target/raw
+    for k in d:
+        d[k] = d[k]*factor
+
+def rank(d):
+    sorted_by_value = sorted(d, key=d.get, reverse=True)
+    d['ranked'] = sorted_by_value
+
 def find_measurement(graph, measure='degree'):
-    vulnerability = dict()
-    importance = dict()
+    measurement = dict()
 
     nodes = graph.nodes.all().select_subclasses()
     edges = graph.edges.all().select_subclasses()
@@ -28,44 +39,28 @@ def find_measurement(graph, measure='degree'):
     G = nx.DiGraph()
 
     for node in nodes:
-        if measure == 'vulnerability':
-            vulnerability[node.identifier] = vulnerability_weights[node.vulnerability]
-        if measure == 'importance':
-            importance[node.identifier] = importance_weights[node.importance]
-        G.add_node(node.identifier)
+        weight = (controllability_weights[node.controllability] +
+            vulnerability_weights[node.vulnerability] +
+            importance_weights[node.importance])
+        G.add_node(node.identifier, weight=weight)
 
     for edge in edges:
-        target_node = NodePlus.objects.get(id=edge.target.id)
-        controllability_weight = controllability_weights[target_node.controllability]
-        vulnerability_weight = vulnerability_weights[target_node.vulnerability]
-        importance_weight = importance_weights[target_node.importance]
-        connection_weight = connection_weights[edge.weight]
-        weight = controllability_weight + vulnerability_weight + importance_weight + connection_weight
-        distance = 1/weight if weight != 0 else 1
-        G.add_edge(edge.source.identifier, edge.target.identifier, weight=weight, distance=distance)
+        weight = connection_weights[edge.weight]
+        G.add_edge(edge.source.identifier, edge.target.identifier, weight=weight)
 
-    try:
-        if measure == 'degree':
-            centrality = nx.degree_centrality(G)
-        elif measure == 'in-degree':
-            centrality = nx.in_degree_centrality(G)
-        elif measure == 'out-degree':
-            centrality = nx.out_degree_centrality(G)
-        elif measure == 'eigenvector':
-            centrality = nx.eigenvector_centrality(G)
-        elif measure == 'closeness':
-            centrality = nx.closeness_centrality(G)
-        elif measure == 'betweenness':
-            centrality = nx.betweenness_centrality(G)
-        elif measure == 'vulnerability':
-            centrality = vulnerability
-        elif measure == 'importance':
-            centrality = importance
+    centrality = get_centrality_measurement_nx(G, measure)
+    for node_id in G.nodes:
+        bfs = get_bfs_tree_nx(G, node_id, depth_limit=4)
+        centrality_value = centrality.get(node_id,0)
+        extra_weight = 0 
+        for traversal_node_id, level in bfs.items():
+            if level == 0:
+                extra_weight = G.nodes.get(traversal_node_id)['weight']
+                continue
+            extra_weight += G.nodes.get(traversal_node_id)['weight'] / level
+        measurement[node_id] = centrality_value + extra_weight
 
-        sorted_by_value = sorted(centrality, key=centrality.get, reverse=True)
-        centrality['ranked'] = sorted_by_value
-        return centrality
-    except Exception as e:
-        pass
+    normalize(measurement, target=10.0)
+    rank(measurement)
 
-    return dict()
+    return measurement
