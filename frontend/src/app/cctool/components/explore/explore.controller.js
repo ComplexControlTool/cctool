@@ -84,18 +84,18 @@
           var edge = edges[i];
           if (mode === "UpStream")
           {          
-            if (keys.has(edge.target))
+            if (keys.has(edge.to))
             {
-              keys.add(edge.source);
+              keys.add(edge.from);
               edges.splice(i, 1);
               subtracted++;
             }
           }
           else if (mode === "DownStream")
           {
-            if (keys.has(edge.source))
+            if (keys.has(edge.from))
             {
-              keys.add(edge.target);
+              keys.add(edge.to);
               edges.splice(i, 1);
               subtracted++;
             }
