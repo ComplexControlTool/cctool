@@ -193,6 +193,7 @@
             $log.debug('inside watch: vm.nodeShape');
             try
             {
+              updateData($log, nodeData, edgeData, scope.structure, scope.vm.nodeShape, scope.controlConfiguration);
               changeNodeShape(nodeData, edgeData, scope.vm.nodeShape);
               if (!scope.vm.editGraph)
               {
@@ -584,7 +585,7 @@
         else
         {
           nodeArr[i].color = colorLevel2;
-          nodeArr[i].label = '';
+          nodeArr[i].label = '    ';
         }
       }
 
