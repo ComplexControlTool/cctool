@@ -1,7 +1,11 @@
 from cctool.common.enums import (
+    ControllabilityOption,
     ControllabilityShortcode,
+    VulnerabilityOption,
     VulnerabilityShortcode,
+    ImportanceOption,
     ImportanceShortcode,
+    ConnectionOption,
     ConnectionShortcode,
     MapColours,
 )
@@ -154,15 +158,15 @@ def generate_node_options(node):
 
     # Controllability
     try:
-        if node.controllability == ControllabilityShortcode.EASY_CONTROLLABILITY.value:
-            node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_EASY_CONTROLLABILITY.value
-            node_options['color']['border'] = MapColours.NODE_BORDER_EASY_CONTROLLABILITY.value
+        if node.controllability == ControllabilityShortcode.HIGH_CONTROLLABILITY.value:
+            node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_HIGH_CONTROLLABILITY.value
+            node_options['color']['border'] = MapColours.NODE_BORDER_HIGH_CONTROLLABILITY.value
         elif node.controllability == ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value:
             node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_MEDIUM_CONTROLLABILITY.value
             node_options['color']['border'] = MapColours.NODE_BORDER_MEDIUM_CONTROLLABILITY.value
-        elif node.controllability == ControllabilityShortcode.HARD_CONTROLLABILITY.value:
-            node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_HARD_CONTROLLABILITY.value
-            node_options['color']['border'] = MapColours.NODE_BORDER_HARD_CONTROLLABILITY.value
+        elif node.controllability == ControllabilityShortcode.LOW_CONTROLLABILITY.value:
+            node_options['color']['highlight']['border'] = MapColours.NODE_HIGHLIGHT_BORDER_LOW_CONTROLLABILITY.value
+            node_options['color']['border'] = MapColours.NODE_BORDER_LOW_CONTROLLABILITY.value
     except AttributeError:
         pass
 
@@ -314,32 +318,32 @@ def generate_legend():
         NodePlus(identifier=0, label='Node', position_x=x + (0*step_x), position_y=y),
         NodePlus(identifier=1, label='Selected Node', position_x=x + (1*step_x), position_y=y),
         NodePlus(identifier=2, label='Hovered Node', position_x=x + (2*step_x), position_y=y),
-        NodePlus(identifier=3, label='Easy Controllability', position_x=x + (0*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.EASY_CONTROLLABILITY.value),
-        NodePlus(identifier=4, label='Medium Controllability', position_x=x + (1*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value),
-        NodePlus(identifier=5, label='Hard Controllability', position_x=x + (2*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.HARD_CONTROLLABILITY.value),
-        NodePlus(identifier=6, label='Low Vulnerability', position_x=x + (0*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.LOW_VULNERABILITY.value),
-        NodePlus(identifier=7, label='Medium Vulnerability', position_x=x + (1*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.MEDIUM_VULNERABILITY.value),
-        NodePlus(identifier=8, label='High Vulnerability', position_x=x + (2*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.HIGH_VULNERABILITY.value),
-        NodePlus(identifier=9, label='Low Importance', position_x=x + (0*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.LOW_IMPORTANCE.value),
-        NodePlus(identifier=10, label='High Importance', position_x=x + (1*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.HIGH_IMPORTANCE.value),
-        NodePlus(identifier=11, label='Neutral', position_x=x + round(0.6*step_x), position_y=y + (4*step_y)),
+        NodePlus(identifier=3, label=' '.join(ControllabilityOption.HIGH_CONTROLLABILITY, 'Controllability'), position_x=x + (0*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.HIGH_CONTROLLABILITY.value),
+        NodePlus(identifier=4, label=' '.join(ControllabilityOption.MEDIUM_CONTROLLABILITY, 'Controllability'), position_x=x + (1*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value),
+        NodePlus(identifier=5, label=' '.join(ControllabilityOption.LOW_CONTROLLABILITY, 'Controllability'), position_x=x + (2*step_x), position_y=y + (1*step_y), controllability=ControllabilityShortcode.LOW_CONTROLLABILITY.value),
+        NodePlus(identifier=6, label=' '.join(VulnerabilityOption.LOW_VULNERABILITY, 'Vulnerability'), position_x=x + (0*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.LOW_VULNERABILITY.value),
+        NodePlus(identifier=7, label=' '.join(VulnerabilityOption.MEDIUM_VULNERABILITY, 'Vulnerability'), position_x=x + (1*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.MEDIUM_VULNERABILITY.value),
+        NodePlus(identifier=8, label=' '.join(VulnerabilityOption.HIGH_VULNERABILITY, 'Vulnerability'), position_x=x + (2*step_x), position_y=y + (2*step_y), vulnerability=VulnerabilityShortcode.HIGH_VULNERABILITY.value),
+        NodePlus(identifier=9, label=' '.join(ImportanceOption.LOW_IMPORTANCE, 'Importance'), position_x=x + (0*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.LOW_IMPORTANCE.value),
+        NodePlus(identifier=10, label=' '.join(ImportanceOption.HIGH_IMPORTANCE, 'Importance'), position_x=x + (1*step_x), position_y=y + (3*step_y), importance=ImportanceShortcode.HIGH_IMPORTANCE.value),
+        NodePlus(identifier=11, label=ConnectionOption.COMPLEX_CONNECTION, position_x=x + round(0.6*step_x), position_y=y + (4*step_y)),
         NodePlus(identifier=12, label='Connection', position_x=x + round(1.3*step_x), position_y=y + (4*step_y)),
-        NodePlus(identifier=13, label='Positive', position_x=x + (0*step_x), position_y=y + (5*step_y)),
-        NodePlus(identifier=14, label='Weak', position_x=x + round(0.75*step_x), position_y=y + (5*step_y)),
-        NodePlus(identifier=15, label='Positive', position_x=x + (0*step_x), position_y=y + (6*step_y)),
-        NodePlus(identifier=16, label='Medium', position_x=x + round(0.75*step_x), position_y=y + (6*step_y)),
-        NodePlus(identifier=17, label='Positive', position_x=x + (0*step_x), position_y=y + (7*step_y)),
-        NodePlus(identifier=18, label='Strong', position_x=x + round(0.75*step_x), position_y=y + (7*step_y)),
-        NodePlus(identifier=19, label='Negative', position_x=x + round(1.25*step_x), position_y=y + (5*step_y)),
-        NodePlus(identifier=20, label='Weak', position_x=x + (2*step_x), position_y=y + (5*step_y)),
-        NodePlus(identifier=21, label='Negative', position_x=x + round(1.25*step_x), position_y=y + (6*step_y)),
-        NodePlus(identifier=22, label='Medium', position_x=x + (2*step_x), position_y=y + (6*step_y)),
-        NodePlus(identifier=23, label='Negative', position_x=x + round(1.25*step_x), position_y=y + (7*step_y)),
-        NodePlus(identifier=24, label='Strong', position_x=x + (2*step_x), position_y=y + (7*step_y))
+        NodePlus(identifier=13, label=ConnectionOption.POSITIVE_WEAK_CONNECTION.split()[0], position_x=x + (0*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=14, label=ConnectionOption.POSITIVE_WEAK_CONNECTION.split()[1], position_x=x + round(0.75*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=15, label=ConnectionOption.POSITIVE_MEDIUM_CONNECTION.split()[0], position_x=x + (0*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=16, label=ConnectionOption.POSITIVE_MEDIUM_CONNECTION.split()[1], position_x=x + round(0.75*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=17, label=ConnectionOption.POSITIVE_STRONG_CONNECTION.split()[0], position_x=x + (0*step_x), position_y=y + (7*step_y)),
+        NodePlus(identifier=18, label=ConnectionOption.POSITIVE_STRONG_CONNECTION.split()[1], position_x=x + round(0.75*step_x), position_y=y + (7*step_y)),
+        NodePlus(identifier=19, label=ConnectionOption.NEGATIVE_WEAK_CONNECTION.split()[0], position_x=x + round(1.25*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=20, label=ConnectionOption.NEGATIVE_WEAK_CONNECTION.split()[1], position_x=x + (2*step_x), position_y=y + (5*step_y)),
+        NodePlus(identifier=21, label=ConnectionOption.NEGATIVE_MEDIUM_CONNECTION.split()[0], position_x=x + round(1.25*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=22, label=ConnectionOption.NEGATIVE_MEDIUM_CONNECTION.split()[1], position_x=x + (2*step_x), position_y=y + (6*step_y)),
+        NodePlus(identifier=23, label=ConnectionOption.NEGATIVE_STRONG_CONNECTION.split()[0], position_x=x + round(1.25*step_x), position_y=y + (7*step_y)),
+        NodePlus(identifier=24, label=ConnectionOption.NEGATIVE_STRONG_CONNECTION.split()[1], position_x=x + (2*step_x), position_y=y + (7*step_y))
     ]
 
     all_edges =[
-        EdgePlus(identifier='11-12', source=all_nodes[11], target=all_nodes[12], weight=ConnectionShortcode.NEUTRAL_CONNECTION.value),
+        EdgePlus(identifier='11-12', source=all_nodes[11], target=all_nodes[12], weight=ConnectionShortcode.COMPLEX_CONNECTION.value),
         EdgePlus(identifier='13-14', source=all_nodes[13], target=all_nodes[14], weight=ConnectionShortcode.POSITIVE_WEAK_CONNECTION.value),
         EdgePlus(identifier='15-16', source=all_nodes[15], target=all_nodes[16], weight=ConnectionShortcode.POSITIVE_MEDIUM_CONNECTION.value),
         EdgePlus(identifier='17-18', source=all_nodes[17], target=all_nodes[18], weight=ConnectionShortcode.POSITIVE_STRONG_CONNECTION.value),

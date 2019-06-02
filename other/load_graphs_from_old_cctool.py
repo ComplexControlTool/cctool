@@ -74,15 +74,15 @@ for i,graph in enumerate(data['results']):
 
     controllability = node['cctool']['controllability']
     if controllability == 0:
-      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY.value
-    elif controllability.lower() == 'e':
-      controllability = ControllabilityShortcode.EASY_CONTROLLABILITY.value
+      controllability = ControllabilityShortcode.NO_CONTROLLABILITY.value
+    elif controllability.lower() == 'l':
+      controllability = ControllabilityShortcode.LOW_CONTROLLABILITY.value
     elif controllability.lower() == 'm':
       controllability = ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value
     elif controllability.lower() == 'h':
-      controllability = ControllabilityShortcode.HARD_CONTROLLABILITY.value
+      controllability = ControllabilityShortcode.HIGH_CONTROLLABILITY.value
     else:
-      controllability = ControllabilityShortcode.NEUTRAL_CONTROLLABILITY.value
+      controllability = ControllabilityShortcode.NO_CONTROLLABILITY.value
 
     importance = node['cctool']['importance']
     if importance == 0:
@@ -103,7 +103,7 @@ for i,graph in enumerate(data['results']):
     target = node_objs[edge['to']]
     weight = edge['cctool']['weight']
     if weight == 1:
-      weight = ConnectionShortcode.NEUTRAL_CONNECTION.value
+      weight = ConnectionShortcode.COMPLEX_CONNECTION.value
     elif weight.lower() == '+w':
       weight = ConnectionShortcode.POSITIVE_WEAK_CONNECTION.value
     elif weight.lower() == '+m':
@@ -117,7 +117,7 @@ for i,graph in enumerate(data['results']):
     elif weight.lower() == '-s':
       weight = ConnectionShortcode.NEGATIVE_STRONG_CONNECTION.value
     else:
-      weight = ConnectionShortcode.NEUTRAL_CONNECTION.value
+      weight = ConnectionShortcode.COMPLEX_CONNECTION.value
 
     edge_obj = addEdge(graph_obj, source, target, weight)
     print(edge_obj)

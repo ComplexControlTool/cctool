@@ -85,7 +85,7 @@ class NodePlus(Node):
     controllability = CharField(
         choices=list(zip(ControllabilityShortcode.__values__, ControllabilityOption.__values__)),
         blank=False,
-        default=ControllabilityShortcode.NEUTRAL_CONTROLLABILITY.value,
+        default=ControllabilityShortcode.NO_CONTROLLABILITY.value,
         max_length=1,
         verbose_name='node controllability'
     )
@@ -146,7 +146,7 @@ class EdgePlus(Edge):
     weight = CharField(
         choices=list(zip(ConnectionShortcode.__values__, ConnectionOption.__values__)),
         blank=False,
-        default=ConnectionShortcode.NEUTRAL_CONNECTION.value,
+        default=ConnectionShortcode.COMPLEX_CONNECTION.value,
         max_length=2,
         verbose_name='edge weight'
     )
