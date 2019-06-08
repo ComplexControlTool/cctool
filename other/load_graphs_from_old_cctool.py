@@ -75,7 +75,7 @@ for i,graph in enumerate(data['results']):
     controllability = node['cctool']['controllability']
     if controllability == 0:
       controllability = ControllabilityShortcode.NO_CONTROLLABILITY.value
-    elif controllability.lower() == 'l':
+    elif controllability.lower() == 'e':
       controllability = ControllabilityShortcode.LOW_CONTROLLABILITY.value
     elif controllability.lower() == 'm':
       controllability = ControllabilityShortcode.MEDIUM_CONTROLLABILITY.value
