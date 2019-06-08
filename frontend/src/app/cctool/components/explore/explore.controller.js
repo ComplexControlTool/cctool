@@ -8,7 +8,7 @@
     .controller('ExploreController', ExploreController);
 
   /** @ngInject */
-  function ExploreController(Graph, $scope, $log)
+  function ExploreController(Graph, $scope, $filter, $log)
   {
     /* jshint validthis: true */
     var vm = this;

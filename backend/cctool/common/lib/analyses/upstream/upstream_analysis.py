@@ -6,7 +6,7 @@ def find_upstream_nodes(graph, root_nodes):
     all_upstreams = dict()
 
     for root_node in root_nodes:
-        all_upstreams = {**all_upstreams, **get_bfs_tree(graph, root_node, reverse=True, depth_limit=4)}
+        all_upstreams = {**all_upstreams, **get_bfs_tree(graph, root_node, reverse=True, depth_limit=3)}
 
     return all_upstreams
 

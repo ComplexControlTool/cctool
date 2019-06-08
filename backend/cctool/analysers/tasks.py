@@ -203,7 +203,7 @@ def find_subjective_logic(self, graph_id, analysis_id):
     analysis_data = dict()
     graph_structure = dict()
 
-    measures = ['in-degree', 'out-degree', 'closeness', 'betweenness']
+    measures = ['degree', 'in-degree', 'out-degree', 'closeness', 'betweenness']
     for measure in measures:
         analysis_data[measure] = SLA_Analysis.find_measurement(graph, measure)
 

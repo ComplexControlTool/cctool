@@ -1,5 +1,5 @@
-<!-- graph.overview.html -->
-<section class="boxed normal-cards">
+<!-- graph.explore.html -->
+<section class="boxed wide-cards">
 
   <div layout-margin="" layout-padding=""></div>
 
@@ -126,6 +126,19 @@
           <p style="font-weight:bold">No Analyses available for this graph!</p>
         </div>
       </md-card-content>
+    </md-card>
+
+    <div layout-margin="" layout-padding=""></div>
+    <div layout-margin="" layout-padding=""></div>
+
+    <!-- Explore Card -->
+    <md-card>
+      <md-card-title layout-margin="">
+        <md-card-title-text>
+          <span class="md-headline">Explore Map Connections</span>
+        </md-card-title-text>
+      </md-card-title>
+      <div ui-view="graph-explore"></div>
     </md-card>
 
     <div layout-margin="" layout-padding=""></div>
