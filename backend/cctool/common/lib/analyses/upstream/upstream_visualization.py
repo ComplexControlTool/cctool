@@ -17,7 +17,7 @@ def generate_graph_options():
 
     hierarchical = dict()
     hierarchical['enabled'] = True
-    hierarchical['nodeSpacing'] = 150
+    hierarchical['nodeSpacing'] = 300
     hierarchical['direction'] = 'DU'
     hierarchical['sortMethod'] = 'directed'
     graph_options['layout']['hierarchical'] = hierarchical
