@@ -172,21 +172,21 @@ def generate_node_options(node):
 
     # Vulnerability
     try:
-        if node.vulnerability == VulnerabilityShortcode.LOW_VULNERABILITY.value:
-            node_options['shapeProperties']['borderDashes'] = [2,3]
-        elif node.vulnerability == VulnerabilityShortcode.MEDIUM_VULNERABILITY.value:
-            node_options['shapeProperties']['borderDashes'] = [4,6]
-        elif node.vulnerability == VulnerabilityShortcode.HIGH_VULNERABILITY.value:
+        # if node.vulnerability == VulnerabilityShortcode.LOW_VULNERABILITY.value:
+        #     node_options['shapeProperties']['borderDashes'] = [2,3]
+        # elif node.vulnerability == VulnerabilityShortcode.MEDIUM_VULNERABILITY.value:
+        #     node_options['shapeProperties']['borderDashes'] = [4,6]
+        if node.vulnerability == VulnerabilityShortcode.HIGH_VULNERABILITY.value:
             node_options['shapeProperties']['borderDashes'] = [8,12]
     except AttributeError:
         pass
 
     # Importance
     try:
-        if node.importance == ImportanceShortcode.LOW_IMPORTANCE.value:
-            node_options['color']['background'] = MapColours.NODE_BACKGROUND_LOW_IMPORTANCE.value
-            node_options['shadow'] = shadow
-        elif node.importance == ImportanceShortcode.HIGH_IMPORTANCE.value:
+        # if node.importance == ImportanceShortcode.LOW_IMPORTANCE.value:
+        #     node_options['color']['background'] = MapColours.NODE_BACKGROUND_LOW_IMPORTANCE.value
+        #     node_options['shadow'] = shadow
+        if node.importance == ImportanceShortcode.HIGH_IMPORTANCE.value:
             node_options['color']['background'] = MapColours.NODE_BACKGROUND_HIGH_IMPORTANCE.value
             node_options['shadow'] = shadow
     except AttributeError:
@@ -258,7 +258,7 @@ def generate_edge_options(edge):
             sign = '-'
 
         if not edge.label:
-            edge_options['label'] = sign
+            # edge_options['label'] = sign
             edge_options['font'] = font
     except AttributeError:
         pass
