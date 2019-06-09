@@ -53,28 +53,31 @@ def calculate_subjective_measure_stream_weight(G, subjective_measure, stream):
 def find_measurement(G, measure='degree'):
     measurement = get_centrality_measurement_nx(G, measure)
 
-    normalize(measurement, target=10.0)
+    normalize(measurement)
     rank(measurement)
 
     return measurement
 
-def find_subjective_measurement(G, subjective_measure, up_streams, down_streams):
-    measurement = dict()
+def find_subjective_measurements(G, subjective_measure, up_streams, down_streams):
+    measurements = dict()
 
-    measurement['up_stream'] = dict()
-    measurement['down_stream'] = dict()
+    up_stream_measurement = dict()
+    down_stream_measurement = dict()
     
     for node_id in up_streams:
-        measurement['up_stream'][node_id] = calculate_subjective_measure_stream_weight(G, subjective_measure, up_streams[node_id])
+        up_stream_measurement[node_id] = calculate_subjective_measure_stream_weight(G, subjective_measure, up_streams[node_id])
     for node_id in down_streams:
-        measurement['down_stream'][node_id] = calculate_subjective_measure_stream_weight(G, subjective_measure, down_streams[node_id])
+        down_stream_measurement[node_id] = calculate_subjective_measure_stream_weight(G, subjective_measure, down_streams[node_id])
 
-    normalize(measurement['up_stream'], target=10.0)
-    normalize(measurement['down_stream'], target=10.0)
-    rank(measurement['up_stream'])
-    rank(measurement['down_stream'])
+    normalize(up_stream_measurement)
+    normalize(down_stream_measurement)
+    rank(up_stream_measurement)
+    rank(down_stream_measurement)
 
-    return measurement
+    measurements[' '.join(['Up Stream', subjective_measure])] = up_stream_measurement
+    measurements[' '.join(['Down Stream', subjective_measure])] = up_stream_measurement
+
+    return measurements
 
 def find_network_analysis(graph, measures=list(), subjective_measures=list()):
     ret = dict()
@@ -109,6 +112,6 @@ def find_network_analysis(graph, measures=list(), subjective_measures=list()):
         up_streams = calculate_up_streams(G)
         down_streams = calculate_down_streams(G)
     for subjective_measure in subjective_measures:
-        ret[subjective_measure] = find_subjective_measurement(G, subjective_measure, up_streams, down_streams)
+        ret = dict(**ret, **find_subjective_measurements(G, subjective_measure, up_streams, down_streams))
 
     return ret

@@ -1,6 +1,7 @@
 from cctool.common.lib import default_visualization
 from cctool.common.enums import (
     ConnectionOption,
+    HeatmapColours,
     MapColours,
 )
 from cctool.graphs.models import (
@@ -30,19 +31,28 @@ def generate_graph_options():
 
 def generate_node_options(node, analysis):
     node_options = default_visualization.generate_node_options(node)
+    heatmap_colours = HeatmapColours.__values__
 
     value = analysis.get(int(node.identifier), 0)
     node_options['title'] += f'<p>Value: <strong>{str(value*100)}%</strong></p>'
     node_options['value'] = value
 
-    top_n = 5
-    if node.identifier in analysis.get('ranked',[])[:top_n]:
-        node_options['color']['background'] = MapColours.NODE_BACKGROUND_FOCUSED.value
+    colour_index = round(value * (len(heatmap_colours)-1))
+    matched_colour = heatmap_colours[colour_index]
+    if matched_colour:
+        node_options['color']['border'] = matched_colour
+        node_options['color']['background'] = matched_colour
+    
+    node_options['font']['background'] = MapColours.NODE_FONT_BACKGROUND.value
 
     return node_options
 
 def generate_edge_options(edge, analysis):
     edge_options = default_visualization.generate_edge_options(edge)
+
+    edge_options['width'] = 1
+    edge_options['color'] = MapColours.EDGE_COLOR_DEFAULT.value
+    edge_options['highlight'] = MapColours.EDGE_HIGHLIGHT_DEFAULT.value
 
     return edge_options
 

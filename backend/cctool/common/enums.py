@@ -169,6 +169,8 @@ class MapColours(CustomEnum):
 
     NODE_HOVER_BACKGROUND_DEFAULT = '#D2E5FF'
 
+    NODE_FONT_BACKGROUND = 'rgba(255,255,255,0.65)'
+
     EDGE_COLOR_POSITIVE_WEAK_CONNECTION = '#7DCEA0'
     EDGE_COLOR_POSITIVE_MEDIUM_CONNECTION = '#27AE60'
     EDGE_COLOR_POSITIVE_STRONG_CONNECTION = '#1E8449'
@@ -184,3 +186,26 @@ class MapColours(CustomEnum):
     EDGE_HIGHLIGHT_NEGATIVE_MEDIUM_CONNECTION = '#C0392B'
     EDGE_HIGHLIGHT_NEGATIVE_STRONG_CONNECTION = '#922B21'
     EDGE_HIGHLIGHT_DEFAULT = '#737373'
+
+class HeatmapColours(CustomEnum):
+    ONE = '#1d4877'
+    TWO = '#255672'
+    THREE = '#29636c'
+    FOUR = '#287166'
+    FIVE = '#237f5f'
+    SIX = '#358c58'
+    SEVEN = '#6f9650'
+    EIGHT = '#9a9e46'
+    NINE = '#c2a63b'
+    TEN = '#e8ad2c'
+    ELEVEN = '#fbac24'
+    TWELVE = '#faa42a'
+    THIRTEEN = '#f99b2f'
+    FOURTEEN = '#f89333'
+    FIFTEEN = '#f68a37'
+    SIXTEEN = '#f57e37'
+    SEVENTEEN = '#f47036'
+    EIGHTEEN = '#f26135'
+    NINETEEN = '#f05133'
+    TWENTY = '#ee3e32'
+    # http://gka.github.io/palettes/#colors=#1d4877,#1b8a5a,#fbb021,#f68838,#ee3e32|steps=20|bez=0|coL=0
