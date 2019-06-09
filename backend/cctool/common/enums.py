@@ -16,27 +16,27 @@ class CustomEnum(Enum):
 
 # Analysis
 class AnalysisOption(CustomEnum):
-    CONTROLLABILITY_ANALYSIS = 'Controllability'
-    UP_STREAM_ANALYSIS = 'Up stream'
-    DOWN_STREAM_ANALYSIS = 'Down stream'
-    SUBJECTIVE_LOGIC_ANALYSIS = 'Subjective logic'
+    CONTROLLABILITY_ANALYSIS = 'Controllability Analysis'
+    INTERVENTION_ANALYSIS = 'Intervention Analysis'
+    NETWORK_ANALYSIS = 'Network Analysis'
+    OUTCOME_ANALYSIS = 'Outcome Analysis'
     XCS_ANALYSIS = 'XCS classifier'
 
 
 class AnalysisShortcode(CustomEnum):
     CONTROLLABILITY_ANALYSIS = 'CA'
-    UP_STREAM_ANALYSIS = 'USA'
-    DOWN_STREAM_ANALYSIS = 'DSA'
-    SUBJECTIVE_LOGIC_ANALYSIS = 'SLA'
+    INTERVENTION_ANALYSIS = 'IA'
+    NETWORK_ANALYSIS = 'NA'
+    OUTCOME_ANALYSIS = 'OA'
     XCS_ANALYSIS = 'XCS'
 
 
 class AnalysisDescription(CustomEnum):
-    CONTROLLABILITY_ANALYSIS = 'Description here for Controllability Analysis'
-    UP_STREAM_ANALYSIS = 'Description here for Controllability Analysis'
-    DOWN_STREAM_ANALYSIS = 'Description here for Controllability Analysis'
-    SUBJECTIVE_LOGIC_ANALYSIS = 'Description here for Controllability Analysis'
-    XCS_ANALYSIS = 'Description here for Controllability Analysis'
+    CONTROLLABILITY_ANALYSIS = 'Controllability Analysis Description'
+    INTERVENTION_ANALYSIS = 'Intervention Analysis Description'
+    NETWORK_ANALYSIS = 'Network Analysis Description'
+    OUTCOME_ANALYSIS = 'Outcome Analysis Description'
+    XCS_ANALYSIS = 'XCS Analysis Description'
 
 
 # Function
@@ -87,9 +87,9 @@ class VulnerabilityShortcode(CustomEnum):
 
 class VulnerabilityWeight(CustomEnum):
     NO_VULNERABILITY = 0
-    LOW_VULNERABILITY = -1
-    MEDIUM_VULNERABILITY = -2
-    HIGH_VULNERABILITY = -3
+    LOW_VULNERABILITY = 1
+    MEDIUM_VULNERABILITY = 2
+    HIGH_VULNERABILITY = 3
 
 
 # Importance

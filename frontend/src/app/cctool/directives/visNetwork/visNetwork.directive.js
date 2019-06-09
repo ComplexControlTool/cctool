@@ -70,7 +70,7 @@
           scope.structure = scope.structure[scope.vm.index];
         }
         scope.controlConfiguration = {}
-        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability' && scope.vm.analysis.data)
+        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability Analysis' && scope.vm.analysis.data)
         {
           if (scope.vm.analysis.data.rankedByNodeControllability)
           {

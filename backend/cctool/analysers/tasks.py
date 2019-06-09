@@ -4,8 +4,8 @@ from cctool.common.lib.analyses.controllability import control_analysis as CA_An
 from cctool.common.lib.analyses.controllability import controllability_visualization as CA_Visualization
 from cctool.common.lib.analyses.downstream import downstream_analysis as DSA_Analysis
 from cctool.common.lib.analyses.downstream import downstream_visualization as DSA_Visualization
-from cctool.common.lib.analyses.subjective_logic import subjective_logic_analysis as SLA_Analysis
-from cctool.common.lib.analyses.subjective_logic import subjective_logic_visualization as SLA_Visualization
+from cctool.common.lib.analyses.network import network_analysis as NA_Analysis
+from cctool.common.lib.analyses.network import network_visualization as NA_Visualization
 from cctool.common.lib.analyses.upstream import upstream_analysis as USA_Analysis
 from cctool.common.lib.analyses.upstream import upstream_visualization as USA_Visualization
 from cctool.graphs.models.models import Graph, Analysis, Node, NodePlus
@@ -13,7 +13,7 @@ from cctool.taskapp.celery import app as cctoolapp
 
 
 @cctoolapp.task(bind=True)
-def find_graph_controllability(self, graph_id, analysis_id):
+def compute_controllability_analysis(self, graph_id, analysis_id):
     try:
         graph = Graph.objects.get(pk=graph_id)
     except ObjectDoesNotExist:
@@ -80,7 +80,7 @@ def find_graph_controllability(self, graph_id, analysis_id):
     return
 
 @cctoolapp.task(bind=True)
-def find_upstream(self, graph_id, analysis_id):
+def compute_outcome_analysis(self, graph_id, analysis_id):
     try:
         graph = Graph.objects.get(pk=graph_id)
     except ObjectDoesNotExist:
@@ -135,7 +135,7 @@ def find_upstream(self, graph_id, analysis_id):
     return
 
 @cctoolapp.task(bind=True)
-def find_downstream(self, graph_id, analysis_id):
+def compute_intervention_analysis(self, graph_id, analysis_id):
     try:
         graph = Graph.objects.get(pk=graph_id)
     except ObjectDoesNotExist:
@@ -190,7 +190,7 @@ def find_downstream(self, graph_id, analysis_id):
     return
 
 @cctoolapp.task(bind=True)
-def find_subjective_logic(self, graph_id, analysis_id):
+def compute_network_analysis(self, graph_id, analysis_id):
     try:
         graph = Graph.objects.get(pk=graph_id)
     except ObjectDoesNotExist:
@@ -204,26 +204,28 @@ def find_subjective_logic(self, graph_id, analysis_id):
     graph_structure = dict()
 
     measures = ['degree', 'in-degree', 'out-degree', 'closeness', 'betweenness']
-    for measure in measures:
-        analysis_data[measure] = SLA_Analysis.find_measurement(graph, measure)
+    subjective_measures = ['controllability', 'vulnerability', 'importance']
+    analysis_data = NA_Analysis.find_network_analysis(graph, measures, subjective_measures)
 
-        graph_structure[measure] = dict()
-        nodes_data = list()
-        for node in graph.nodes.all().select_subclasses():
-            data = node.to_json(use_dict=True)
-            vis = SLA_Visualization.generate_node_options(node, analysis_data[measure])
-            nodes_data.append(dict(**data, **vis))
-        edges_data = list()
-        for edge in graph.edges.all().select_subclasses():
-            data = edge.to_json(use_dict=True)
-            vis = SLA_Visualization.generate_edge_options(edge, analysis_data[measure])
-            edges_data.append(dict(**data, **vis))
+    for measure in measures:
+        if measure in analysis_data:
+            graph_structure[measure] = dict()
+            nodes_data = list()
+            for node in graph.nodes.all().select_subclasses():
+                data = node.to_json(use_dict=True)
+                vis = NA_Visualization.generate_node_options(node, analysis_data[measure])
+                nodes_data.append(dict(**data, **vis))
+            edges_data = list()
+            for edge in graph.edges.all().select_subclasses():
+                data = edge.to_json(use_dict=True)
+                vis = NA_Visualization.generate_edge_options(edge, analysis_data[measure])
+                edges_data.append(dict(**data, **vis))
 
         graph_structure[measure]['nodes'] = nodes_data
         graph_structure[measure]['edges'] = edges_data
 
-    graph_options = SLA_Visualization.generate_graph_options()
-    graph_legend = SLA_Visualization.generate_legend()
+    graph_options = NA_Visualization.generate_graph_options()
+    graph_legend = NA_Visualization.generate_legend()
 
     analysis.data = analysis_data
     analysis.save()
@@ -235,6 +237,6 @@ def find_subjective_logic(self, graph_id, analysis_id):
     return
 
 @cctoolapp.task(bind=True)
-def find_xcs_classifier(self, graph_id, analysis_id):
+def compute_xcs_analysis(self, graph_id, analysis_id):
     graph = Graph.objects.get(pk=graph_id)
     return

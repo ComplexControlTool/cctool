@@ -90,7 +90,7 @@
     function requestAndNotify(graphId)
     {
       $log.debug(vm.title+'/requestAndNotify with graph id: '+graphId);
-      var analysisType = 'Subjective logic';
+      var analysisType = 'Network Analysis';
       var currentUpdatedDate = monitoredAnalysis ? monitoredAnalysis.updatedAt : '';
 
       apiResolver.resolve('cctool.analysis.analysed@query', {'graphId': graphId, 'analysisType': analysisType}).then(

@@ -55,7 +55,7 @@
         for (var analyser in vm.content.analysers)
         {
           vm.tabs.push(analyser);
-          vm.tabs_view.push('graph-'+analyser.toLowerCase().replace(/\s+/g, '')+'-analysis');
+          vm.tabs_view.push('graph-'+analyser.toLowerCase().replace(/\s+/g, '-'));
         }
       }
 

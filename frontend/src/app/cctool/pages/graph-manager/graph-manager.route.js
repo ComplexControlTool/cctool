@@ -198,19 +198,19 @@
             controller: 'ControllabilityAnalysisController',
             controllerAs: 'controllabilityAnalysisCtrl'
           },
-          'graph-downstream-analysis@app.cctool_graph':
+          'graph-intervention-analysis@app.cctool_graph':
           {
             templateUrl: 'app/cctool/components/graph/templates/graph.downstream-analysis.html',
             controller: 'DownstreamAnalysisController',
             controllerAs: 'downstreamAnalysisCtrl'
           },
-          'graph-upstream-analysis@app.cctool_graph':
+          'graph-outcome-analysis@app.cctool_graph':
           {
             templateUrl: 'app/cctool/components/graph/templates/graph.upstream-analysis.html',
             controller: 'UpstreamAnalysisController',
             controllerAs: 'upstreamAnalysisCtrl'
           },
-          'graph-subjectivelogic-analysis@app.cctool_graph':
+          'graph-network-analysis@app.cctool_graph':
           {
             templateUrl: 'app/cctool/components/graph/templates/graph.subjective-logic-analysis.html',
             controller: 'SubjectiveLogicAnalysisController',

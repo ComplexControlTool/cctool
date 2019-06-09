@@ -1,5 +1,6 @@
 from cctool.common.lib import default_visualization
 from cctool.common.enums import (
+    ConnectionOption,
     MapColours,
 )
 from cctool.graphs.models import (
@@ -54,11 +55,11 @@ def generate_legend():
     y = legend['structure']['nodes'][-1].get('y',0) + step_y
     id = legend['structure']['nodes'][-1].get('id',0) + 1
 
-    # Find the intersection of nodes and edges (key: label=Neutral for first edge)
+    # Find the intersection of nodes and edges (key: label for first edge)
     edge_index = len(legend['structure']['nodes']) - 1
     for i, node in enumerate(legend['structure']['nodes']):
         # get new y value
-        if node.get('label') == 'Neutral':
+        if node.get('label') == ConnectionOption.COMPLEX_CONNECTION.value:
             edge_index = i
             y = node['y']
         if i >= edge_index:

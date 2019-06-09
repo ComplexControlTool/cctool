@@ -1,4 +1,4 @@
-from .tasks import find_graph_controllability, find_downstream, find_upstream, find_subjective_logic
+from .tasks import compute_controllability_analysis, compute_intervention_analysis, compute_outcome_analysis, compute_network_analysis
 from cctool.graphs.models.models import Analysis
 from cctool.common.enums import (
     AnalysisShortcode,
@@ -13,19 +13,19 @@ class AnalyserHelper:
             analyses = graph.analyses.all()
         for analysis in analyses:
             if analysis.analysis_type == AnalysisShortcode.CONTROLLABILITY_ANALYSIS.value:
-                func = find_graph_controllability.s(graph_id=graph.pk, analysis_id=analysis.pk)
+                func = compute_controllability_analysis.s(graph_id=graph.pk, analysis_id=analysis.pk)
                 res = func.apply_async()
                 ret['task_id'] = res.id
-            if analysis.analysis_type == AnalysisShortcode.DOWN_STREAM_ANALYSIS.value:
-                func = find_downstream.s(graph_id=graph.pk, analysis_id=analysis.pk)
+            if analysis.analysis_type == AnalysisShortcode.INTERVENTION_ANALYSIS.value:
+                func = compute_intervention_analysis.s(graph_id=graph.pk, analysis_id=analysis.pk)
                 res = func.apply_async()
                 ret['task_id'] = res.id
-            if analysis.analysis_type == AnalysisShortcode.UP_STREAM_ANALYSIS.value:
-                func = find_upstream.s(graph_id=graph.pk, analysis_id=analysis.pk)
+            if analysis.analysis_type == AnalysisShortcode.NETWORK_ANALYSIS.value:
+                func = compute_network_analysis.s(graph_id=graph.pk, analysis_id=analysis.pk)
                 res = func.apply_async()
                 ret['task_id'] = res.id
-            if analysis.analysis_type == AnalysisShortcode.SUBJECTIVE_LOGIC_ANALYSIS.value:
-                func = find_subjective_logic.s(graph_id=graph.pk, analysis_id=analysis.pk)
+            if analysis.analysis_type == AnalysisShortcode.OUTCOME_ANALYSIS.value:
+                func = compute_outcome_analysis.s(graph_id=graph.pk, analysis_id=analysis.pk)
                 res = func.apply_async()
                 ret['task_id'] = res.id
         return ret

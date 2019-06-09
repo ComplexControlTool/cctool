@@ -127,9 +127,9 @@ for i,graph in enumerate(data['results']):
   mark_nodes_as_intervention(node_objs)
 
   analysis_obj = addAnalysis(graph_obj, 'CA')
-  analysis_obj = addAnalysis(graph_obj, 'USA')
-  analysis_obj = addAnalysis(graph_obj, 'DSA')
-  analysis_obj = addAnalysis(graph_obj, 'SLA')
+  analysis_obj = addAnalysis(graph_obj, 'IA')
+  analysis_obj = addAnalysis(graph_obj, 'NA')
+  analysis_obj = addAnalysis(graph_obj, 'OA')
 
   print('Executing tasks on graphs...')
   graph_helper.map_graph(graph_obj)

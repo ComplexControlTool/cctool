@@ -41,7 +41,7 @@
         // Set the variables.
         scope.structure = scope.vm.visualization && scope.vm.visualization.structure ? scope.vm.visualization.structure : {};
         scope.stems = {}
-        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability' && scope.vm.analysis.data)
+        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability Analysis' && scope.vm.analysis.data)
         {
           if (scope.vm.analysis.data.rankedByNodeControllability)
           {
@@ -53,7 +53,7 @@
           }
         }
         scope.controlConfiguration = {}
-        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability' && scope.vm.analysis.data)
+        if (scope.vm.analysis && scope.vm.analysis.typeOfAnalysis == 'Controllability Analysis' && scope.vm.analysis.data)
         {
           if (scope.vm.analysis.data.rankedByNodeControllability)
           {

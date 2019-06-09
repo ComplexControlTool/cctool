@@ -22,4 +22,3 @@ class Command(BaseCommand):
             graph_helper.visualize_graph(graph)
             analysis_helper.analyse_graph(graph)
             self.stdout.write(f'Send taks for graph {str(i+1)}: {graph.title}...')
-            break
