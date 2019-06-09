@@ -43,7 +43,7 @@
 #graph-editor-content ul.buckets li a:hover md-icon,
 #graph-editor-content ul.buckets li a:focus md-icon
 {
-  color: #106CC8 !important;
+  color: #3F51B5 !important;
   background-color: #e0e0e0 !important;
 }
 #graph-editor-content ul.buckets.info li a:hover,
@@ -51,13 +51,13 @@
 #graph-editor-content ul.buckets.info li a:hover md-icon,
 #graph-editor-content ul.buckets.info li a:focus md-icon
 {
-  color: #FB8C00 !important;
+  color: #3F51B5 !important;
   background-color: #e0e0e0 !important;
 }
 
 #graph-editor-content md-icon.block
 {
-  color: #106CC8;
+  color: #3F51B5;
   display: block;
   font-size: 50px !important;
   width: 50px !important;
@@ -66,7 +66,7 @@
 }
 #graph-editor-content md-icon.inline
 {
-  color: #106CC8;
+  color: #3F51B5;
   display: inline-block;
   font-size: 24px !important;
   width: 24px !important;

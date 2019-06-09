@@ -41,6 +41,14 @@
               {{nodeControllability.abbrev}}
             </md-radio-button>
           </md-radio-group>
+          <p>Vulnerability</p>
+          <md-radio-group ng-model="nodeData.nodeVulnerability">
+            <md-radio-button 
+             ng-repeat="nodeVulnerability in nodeVulnerabilityList" 
+             value="{{nodeVulnerability.abbrev | vulnerabilityValue}}">
+              {{nodeVulnerability.abbrev}}
+            </md-radio-button>
+          </md-radio-group>
           <p>Importance</p>
           <md-radio-group ng-model="nodeData.nodeImportance">
             <md-radio-button

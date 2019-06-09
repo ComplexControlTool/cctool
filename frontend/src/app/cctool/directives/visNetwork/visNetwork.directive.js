@@ -774,11 +774,12 @@
     $scope.nodeData = {
       nodeLabel : data.nodeData.label ? data.nodeData.label : '',
       nodeFunction : data.nodeData.cctool ? data.nodeData.cctool.function : 'L',
-      nodeControllability : data.nodeData.cctool ? data.nodeData.cctool.controllability : '0',
-      nodeImportance : data.nodeData.cctool ? data.nodeData.cctool.importance : '0',
+      nodeControllability : data.nodeData.cctool ? data.nodeData.cctool.controllability : 'N',
+      nodeVulnerability : data.nodeData.cctool ? data.nodeData.cctool.vulnerability : 'N',
+      nodeImportance : data.nodeData.cctool ? data.nodeData.cctool.importance : 'N',
     };
     $scope.edgeData = {
-      edgeWeight : data.edgeData.weight ? data.edgeData.weight : '1'
+      edgeWeight : data.edgeData.weight ? data.edgeData.weight : 'N'
     };
 
     data = { nodeData: $scope.nodeData, edgeData: $scope.edgeData};
@@ -787,15 +788,19 @@
     {
         return {abbrev: nodeFunction};
     });
-    $scope.nodeControllabilityList = ('Neutral Easy Medium Hard').split(' ').map(function (nodeControllability)
+    $scope.nodeControllabilityList = ('None Low Medium High').split(' ').map(function (nodeControllability)
     {
         return {abbrev: nodeControllability};
+    });
+    $scope.nodeVulnerabilityList = ('None Low Medium High').split(' ').map(function (nodeVulnerability)
+    {
+        return {abbrev: nodeVulnerability};
     });
     $scope.nodeImportanceList = ('None Low High').split(' ').map(function (nodeImportance)
     {
         return {abbrev: nodeImportance};
     });
-    $scope.edgeWeightList = ('Neutral,Positive Weak,Positive Medium,Positive Strong,Negative Weak,Negative Medium,Negative Strong').split(',').map(function (edgeWeight)
+    $scope.edgeWeightList = ('Complex,Positive Weak,Positive Medium,Positive Strong,Negative Weak,Negative Medium,Negative Strong').split(',').map(function (edgeWeight)
     {
         return {abbrev: edgeWeight};
     });

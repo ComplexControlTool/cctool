@@ -146,7 +146,7 @@
             $log.debug(vm.title+'/querySearch with', query);
 
             var results;
-            var promise = apiResolver.resolve('cctool.graphs.simple@get');
+            var promise = apiResolver.resolve('cctool.graphs.compact@query');
 
             if (query)
             {
@@ -165,15 +165,15 @@
         function cleanUpData(data)
         {
             $log.debug(vm.title+'/cleanUpData with', data);
-            if (data && data.results)
+            if (data)
             {
                 $log.debug(vm.title+'/cleanUpData data have graphs, mapping to appropriate output for autocomplete');
-                return data.results.map(
+                return data.map(
                     function(graph)
                     {
                         return {
                             id: graph.id,
-                            value: graph.title,
+                            value: angular.lowercase(graph.title),
                             display: graph.title
                         }
                     });

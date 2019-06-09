@@ -44,38 +44,19 @@
                                       </md-input-container>
                                       <md-input-container class="md-block">
                                         <label>Description</label>
-                                        <input
-                                         type="text"
-                                         name="description"
-                                         ng-model="updateGraphCtrl.stepData[0].data.description"
-                                         md-maxlength="500"
-                                         required>
-                                        <div ng-messages="step1.description.$error"
-                                             ng-show="step1.description.$touched"
-                                             role="alert" multiple>
-                                            <div ng-message="required">
-                                                <span>Description field is required.</span>
-                                            </div>
-                                            <div ng-message="md-maxlength">
-                                                <span>Description can't be longer than 500 characters.</span>
-                                            </div>
-                                        </div>
-                                      </md-input-container>
-                                      <md-input-container class="md-block">
-                                        <label>More Description</label>
                                         <textarea
-                                         ng-model="updateGraphCtrl.stepData[0].data.moredescription"
+                                         ng-model="updateGraphCtrl.stepData[0].data.description"
                                          columns="1"
                                          md-maxlength="1500"
                                          rows="10"></textarea>
-                                        <div ng-messages="step1.moredescription.$error"
-                                             ng-show="step1.moredescription.$touched"
+                                        <div ng-messages="step1.description.$error"
+                                             ng-show="step1.description.$touched"
                                              role="alert">
                                             <div ng-message="md-maxlength">
-                                                <span>More Description can't be longer than 1500 characters.</span>
+                                                <span>Description can't be longer than 1500 characters.</span>
                                             </div>
                                         </div>
-                                    </md-input-container>
+                                      </md-input-container>
                                   </div>
                               </div>
                           </md-content>
@@ -93,7 +74,15 @@
                       <form name="step2" ng-submit="updateGraphCtrl.submitGraph(1)">
                           <md-content class="md-padding">
                               <div style="height: 800px">
-                                <div vis-network="" ng-model="updateGraphCtrl.stepData[1].data.graph" network="updateGraphCtrl.stepData[1].data.network" edit-graph="true" node-shape="updateGraphCtrl.activeSettings.graphVisualisation.value" layout-fill=""></div>
+                                <div
+                                  id="graph-map"
+                                  vis-network=""
+                                  network="updateGraphCtrl.stepData[1].data.network"
+                                  visualization="updateGraphCtrl.stepData[1].data.graph.visualization"
+                                  edit-graph="true"
+                                  node-shape="updateGraphCtrl.activeSettings.graphVisualisation.value"
+                                  layout-fill="">
+                                </div>
                               </div>
                           </md-content>
                           <md-step-actions layout="row">

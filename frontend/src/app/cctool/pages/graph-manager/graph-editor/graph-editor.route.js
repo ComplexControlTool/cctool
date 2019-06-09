@@ -141,7 +141,7 @@
                 {
                   Graph: function (apiResolver, $stateParams)
                   {
-                    return apiResolver.resolve('cctool.graph.update@get', {'id': $stateParams.id});
+                    return apiResolver.resolve('cctool.graph.full@get', {'id': $stateParams.id});
                   }
                 }
             });

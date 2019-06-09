@@ -99,7 +99,6 @@
           // Retrieve graph's details.
           dataSets.details['title'] = vm.stepData[0].data.title ? vm.stepData[0].data.title : 'Untitled';
           dataSets.details['description'] = vm.stepData[0].data.description ? vm.stepData[0].data.description : 'No description provided!';
-          dataSets.details['moredescription'] = vm.stepData[0].data.moredescription ? vm.stepData[0].data.moredescription : '';
 
           // Retrieve graph's nodes and edges.
           if (vm.stepData[1].data.network)

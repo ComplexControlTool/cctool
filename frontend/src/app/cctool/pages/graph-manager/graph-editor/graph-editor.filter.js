@@ -7,6 +7,7 @@
         .module('app.cctool.pages.graph-editor')
         .filter('functionValue', functionValueFilter)
         .filter('controllabilityValue', controllabilityValueFilter)
+        .filter('vulnerabilityValue', vulnerabilityValueFilter)
         .filter('importanceValue', importanceValueFilter)
         .filter('weightValue', weightValueFilter);
 
@@ -20,9 +21,8 @@
                 case 'Linear':
                     retValue = 'L'; 
                     break;
-                case 'Sigmoid':
-                    retValue = 'S'; 
-                    break;
+                default:
+                    retValue = 'L';
             }
             return retValue;
         };
@@ -35,18 +35,46 @@
         {
             var retValue = '';
             switch(controllability) {
-                case 'Neutral':
-                    retValue = '0';
+                case 'None':
+                    retValue = 'N';
                     break;
-                case 'Easy':
-                    retValue = 'E'; 
+                case 'Low':
+                    retValue = 'L'; 
                     break;
                 case 'Medium':
                     retValue = 'M'; 
                     break;
-                case 'Hard':
+                case 'High':
                     retValue = 'H';
                     break;
+                default:
+                    retValue = 'N';
+            }
+            return retValue;
+        };
+    }
+
+    /** @ngInject */
+    function vulnerabilityValueFilter()
+    {
+        return function (controllability)
+        {
+            var retValue = '';
+            switch(controllability) {
+                case 'None':
+                    retValue = 'N';
+                    break;
+                case 'Low':
+                    retValue = 'L'; 
+                    break;
+                case 'Medium':
+                    retValue = 'M'; 
+                    break;
+                case 'High':
+                    retValue = 'H';
+                    break;
+                default:
+                    retValue = 'N';
             }
             return retValue;
         };
@@ -60,7 +88,7 @@
             var retValue = '';
             switch(controllability) {
                 case 'None':
-                    retValue = '0'; 
+                    retValue = 'N'; 
                     break;
                 case 'Low':
                     retValue = 'L'; 
@@ -68,6 +96,8 @@
                 case 'High':
                     retValue = 'H';
                     break;
+                default:
+                    retValue = 'N';
             }
             return retValue;
         };
@@ -80,8 +110,8 @@
         {
             var retValue = '';
             switch(weight) {
-                case 'Neutral':
-                    retValue = '1'; 
+                case 'Complex':
+                    retValue = 'N'; 
                     break;                    
                 case 'Positive Weak':
                     retValue = '+W'; 
@@ -102,7 +132,7 @@
                     retValue = '-S';
                     break;
                 default:
-                    retValue = '1';
+                    retValue = 'N';
             }
             return retValue;
         };

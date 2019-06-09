@@ -7,8 +7,6 @@
         .module('app.cctool.pages.graph-editor')
         .controller('ImportGraphController', ImportGraphController);
 
-    ImportGraphController.$inject = ['$rootScope', '$scope', '$q', '$timeout', '$state', '$stateParams', '$mdToast', '$mdMedia', '$mdDialog', '$cookies', 'api', 'settingsService'];
-
     /** @ngInject */
     function ImportGraphController($rootScope, $scope, $q, $timeout, $state, $stateParams, $mdToast, $mdMedia, $mdDialog, $cookies, api, settingsService)
     {
@@ -140,7 +138,6 @@
           // Retrieve graph's details.
           dataSets.details['title'] = vm.stepData[0].data.title ? vm.stepData[0].data.title : 'Untitled';
           dataSets.details['description'] = vm.stepData[0].data.description ? vm.stepData[0].data.description : 'No description provided!';
-          dataSets.details['moredescription'] = vm.stepData[0].data.moredescription ? vm.stepData[0].data.moredescription : '';
 
           // Retrieve graph's nodes and edges.
           if (vm.stepData[2].data.network)
