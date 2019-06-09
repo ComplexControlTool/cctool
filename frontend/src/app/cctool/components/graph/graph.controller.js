@@ -16,8 +16,8 @@
     // Data
     vm.title = 'GraphController';
     vm.content = Graph ? Graph : undefined;
-    vm.tabs = ['Overview', 'Explore'];
-    vm.tabs_view = ['graph-overview', 'graph-explore'];
+    vm.tabs = ['Overview'];//, 'Explore'];
+    vm.tabs_view = ['graph-overview'];//, 'graph-explore'];
     vm.network = undefined;
     var graphServerRefreshInMs = 30000 //every .5 minute
     var serverRefreshInMs = 90000 // every 1.5 minutes

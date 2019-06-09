@@ -58,32 +58,40 @@ def generate_edge_options(edge, analysis):
 
 def generate_legend():
     legend = default_visualization.generate_legend()
+    heatmap_colours = HeatmapColours.__values__
 
-    step_x = 185
+    size = 16
+    step_x = size*2
     step_y = 85
-    x = 0
+    x = 185 - (size*2*(len(heatmap_colours)/2)) + size
     y = legend['structure']['nodes'][-1].get('y',0) + step_y
     id = legend['structure']['nodes'][-1].get('id',0) + 1
 
     # Find the intersection of nodes and edges (key: label for first edge)
     edge_index = len(legend['structure']['nodes']) - 1
     for i, node in enumerate(legend['structure']['nodes']):
-        # get new y value
         if node.get('label') == ConnectionOption.COMPLEX_CONNECTION.value:
+            node['label'] = 'Default'
             edge_index = i
-            y = node['y']
-        if i >= edge_index:
-            node['y'] += step_y
+            y = node['y'] + step_y
+    legend['structure']['nodes'] = legend['structure']['nodes'][0:edge_index+2]
+    legend['structure']['edges'] = legend['structure']['edges'][0:1]
 
-    more_nodes = [
-        NodePlus(identifier=id, label='Focused', position_x=x, position_y=y)
-    ]
-
-    for node in more_nodes:
+    for i, colour in enumerate(heatmap_colours):
+        label = ''
+        if i%4 == 0:
+            label = f"{i*5}%"
+        node = NodePlus(identifier=id, label=label, position_x=x, position_y=y)
         data = node.to_json(use_dict=True)
         vis = generate_node_options(node, {})
-        if 'Focused' in node.label:
-            vis['color']['background'] = MapColours.NODE_BACKGROUND_FOCUSED.value
+        vis.pop('value')
+        vis['color']['border'] = colour
+        vis['color']['background'] = colour
+        vis['shape'] = 'square'
+        vis['shapeProperties']['static'] = True
+        vis['size'] = size
         legend['structure']['nodes'].append(dict(**data, **vis))
+        id = id+1
+        x = x+step_x
 
     return legend

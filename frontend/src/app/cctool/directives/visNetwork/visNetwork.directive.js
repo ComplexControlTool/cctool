@@ -360,6 +360,13 @@
 
     for(var i in data)
     {
+      if (data[i].hasOwnProperty('shapeProperties'))
+      {
+        if (data[i]['shapeProperties']['static'])
+        {
+          continue
+        }
+      }
       data[i]['shape'] = nodeShape;
     }
     
