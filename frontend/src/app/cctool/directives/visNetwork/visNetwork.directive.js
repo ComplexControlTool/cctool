@@ -116,7 +116,7 @@
         function()
         {
           $log.debug('watch: vm.visualization');
-          if(!_.isEmpty(scope.vm.visualization))
+          if(!_.isEmpty(scope.vm.visualization) || scope.vm.editGraph)
           {
             $log.debug('inside watch: vm.visualization / init');
             isDrawable = true;

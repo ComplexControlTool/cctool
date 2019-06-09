@@ -8,7 +8,7 @@
         .controller('CreateGraphController', CreateGraphController);
 
     /** @ngInject */
-    function CreateGraphController($rootScope, $scope, $q, $timeout, $state, $stateParams, $mdToast, $mdMedia, $mdDialog, $cookies, $log, api, settingsService)
+    function CreateGraphController($rootScope, $scope, $q, $timeout, $state, $stateParams, $mdToast, $mdMedia, $mdDialog, $cookies, $log, api, settingsService, graphDefaultVisualization)
     {
         var vm = this;
 
@@ -37,7 +37,7 @@
           vm.maxStep = 3;
           vm.stepData = [
             { step: 1, completed: false, optional: false, data: {} },
-            { step: 2, completed: false, optional: false, data: {graph:{id:''}} },
+            { step: 2, completed: false, optional: false, data: {graph:{id:'',visualization:graphDefaultVisualization}} },
             { step: 3, completed: false, optional: false, data: {} },
           ];
         }
