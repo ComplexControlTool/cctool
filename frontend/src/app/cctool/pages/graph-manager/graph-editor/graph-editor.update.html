@@ -6,7 +6,6 @@
   <md-content id="graph-editor-content" layout="column" flex="">
     <div ng-class="{ 'boxed':appCtrl.$mdMedia('gt-md'), 'boxed-md':appCtrl.$mdMedia('md'), 'boxed-sm':appCtrl.$mdMedia('sm')}" layout-padding="" layout="column" layout-fill="" flex="">
       <h1 class="md-headline">Search and select below the graph you want to edit</h1>
-      <!-- <div layout="row" layout-align="center start" flex=""> -->
       <form ng-submit="$event.preventDefault(); graphEditorCtrl.submitForm();" layout="row" layout-align="center start" flex="">
         <md-autocomplete
           md-selected-item="graphEditorCtrl.selectedItem"

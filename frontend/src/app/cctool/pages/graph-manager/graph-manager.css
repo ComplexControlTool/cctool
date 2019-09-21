@@ -1,1 +1,7 @@
 /* graph-manager.css */
+#graph-manager-content md-content
+{
+  background-color: #fdfbfb;
+  background: -webkit-linear-gradient(#fdfbfb, #ebedee 51.26%);
+  background-image: linear-gradient(#fdfbfb, #ebedee 51.26%);
+}

@@ -1,4 +1,4 @@
-// graph-editor.create.controller.js
+// graph-editor.update.controller.js
 (function ()
 {
     'use strict';
