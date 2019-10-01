@@ -55,7 +55,7 @@ def generate_legend():
     step_y = 85
     x = 0
     y = legend['structure']['nodes'][-1].get('y',0) + step_y
-    id = legend['structure']['nodes'][-1].get('id',0) + 1
+    id = int(legend['structure']['nodes'][-1].get('id',0)) + 1
 
     # Find the intersection of nodes and edges (key: label for first edge)
     edge_index = len(legend['structure']['nodes']) - 1
@@ -68,7 +68,7 @@ def generate_legend():
             node['y'] += step_y
 
     more_nodes = [
-        NodePlus(identifier=id, label='Focused', position_x=x, position_y=y)
+        NodePlus(identifier=str(id), label='Focused', position_x=x, position_y=y)
     ]
 
     for node in more_nodes:

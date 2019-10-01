@@ -190,7 +190,7 @@
         'demo': $resource(api.baseUrl + 'demo/demo.json')
     },
     graph: {
-        'full': $resource('/api/v1/graph/:id/',{id: '@id', 'format': 'json'}),
+        'full': $resource('/api/v1/graph/:id/',{id: '@id', 'format': 'json'},{'update': {method: 'PUT', params: {format: 'json'}}}),
         'dateupdated': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,updatedAt,isProcessed', 'format': 'json'}),
         'compact': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,title', 'format': 'json'}),
         'basic': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,title,description,createdAt,updatedAt,isProcessed,structure,visualization,analysers', 'format': 'json'}),

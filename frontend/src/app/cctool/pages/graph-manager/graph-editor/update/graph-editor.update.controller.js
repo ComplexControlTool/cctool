@@ -100,27 +100,32 @@
         function generateDataSets()
         {
           var dataSets = {};
-          dataSets = {'details':{}, 'nodes':[], 'edges':[]};
 
           // Retrieve graph's details.
-          dataSets.details['title'] = vm.stepData[0].data.title ? vm.stepData[0].data.title : 'Untitled';
-          dataSets.details['description'] = vm.stepData[0].data.description ? vm.stepData[0].data.description : 'No description provided!';
+          dataSets['title'] = vm.stepData[0].data.title ? vm.stepData[0].data.title : 'Untitled';
+          dataSets['description'] = vm.stepData[0].data.description ? vm.stepData[0].data.description : '';
 
           // Retrieve graph's nodes and edges.
+          var structure = {'nodes':[], 'edges':[]};
           if (vm.stepData[1].data.network)
           {
             var network = vm.stepData[1].data.network;
-            dataSets.nodes = network.body.data.nodes.get();
-            dataSets.edges = network.body.data.edges.get();
-          }
+            var nodeDataset = network.body.data.nodes
+            var edgeDataset = network.body.data.edges
 
-          dataSets['title'] = 'dummy';
-          dataSets['description'] = 'dummy';
-          dataSets['structure'] = 'dummy';
-          dataSets['labels'] = 'dummy';
-          dataSets['functions'] = 'dummy';
-          dataSets['controllability'] = 'dummy';
-          dataSets['importance'] = 'dummy';
+            // Make sure we update node location
+            for (var node_id in network.body.nodes)
+            {
+              var positionX = network.body.nodes[node_id]['x'];
+              var positionY = network.body.nodes[node_id]['y'];
+              nodeDataset.update({id:node_id, x:positionX, y:positionY})
+            }
+          }
+          structure.nodes = nodeDataset.get();
+          structure.edges = edgeDataset.get();
+
+          dataSets['structure'] = structure;
+          dataSets['analysis_types'] = [];
 
           return dataSets;
         }

@@ -8,8 +8,8 @@ from cctool.common.models import TimeStampedModel
 class AbstractEdge(TimeStampedModel):
     identifier = CharField(
         blank=False,
-        default='0-0',
-        max_length=21,
+        default='-1',
+        max_length=100,
         verbose_name='identifier of edge'
     )
 
@@ -50,7 +50,8 @@ class AbstractEdge(TimeStampedModel):
         return ' '.join([self.label, connection_string])
 
     def save(self, *args, **kwargs):
-        self.identifier = ''.join([str(self.source.identifier), '-', str(self.target.identifier)])
+        if self.identifier == '-1':
+            self.identifier = ''.join([str(self.source.identifier), '-', str(self.target.identifier)])
         super(AbstractEdge, self).save(*args, **kwargs)
 
     def to_json(self, use_dict=False, **kwargs):

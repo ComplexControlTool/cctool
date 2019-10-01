@@ -273,6 +273,7 @@
         data.cctool = {};
         data.cctool['function'] = inputData.nodeData.nodeFunction;
         data.cctool['controllability'] = inputData.nodeData.nodeControllability;
+        data.cctool['vulnerability'] = inputData.nodeData.nodeVulnerability;
         data.cctool['importance'] = inputData.nodeData.nodeImportance;
         callback(data);
       },
@@ -291,6 +292,7 @@
         data.label = inputData.nodeData.nodeLabel;
         data.cctool['function'] = inputData.nodeData.nodeFunction;
         data.cctool['controllability'] = inputData.nodeData.nodeControllability;
+        data.cctool['vulnerability'] = inputData.nodeData.nodeVulnerability;
         data.cctool['importance'] = inputData.nodeData.nodeImportance;
         callback(data);
       },

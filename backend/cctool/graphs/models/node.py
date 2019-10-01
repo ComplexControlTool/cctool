@@ -6,9 +6,10 @@ from cctool.common.models import TimeStampedModel
 
 
 class AbstractNode(TimeStampedModel):
-    identifier = IntegerField(
+    identifier = CharField(
         blank=False,
-        default=-1,
+        default='-1',
+        max_length=40,
         verbose_name='identifier of node'
     )
 
@@ -49,9 +50,9 @@ class AbstractNode(TimeStampedModel):
         return self.label
 
     def save(self, *args, **kwargs):
-        if self.identifier == -1:
+        if self.identifier == '-1':
             number_of_existing_nodes = self.graph.nodes.all().count()
-            self.identifier = number_of_existing_nodes
+            self.identifier = str(number_of_existing_nodes)
         super(AbstractNode, self).save(*args, **kwargs)
 
     def to_json(self, use_dict=False, **kwargs):

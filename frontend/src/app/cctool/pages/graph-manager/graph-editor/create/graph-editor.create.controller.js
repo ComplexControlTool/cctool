@@ -94,27 +94,22 @@
         function generateDataSets()
         {
           var dataSets = {};
-          dataSets = {'details':{}, 'nodes':[], 'edges':[]};
 
           // Retrieve graph's details.
-          dataSets.details['title'] = vm.stepData[0].data.title ? vm.stepData[0].data.title : 'Untitled';
-          dataSets.details['description'] = vm.stepData[0].data.description ? vm.stepData[0].data.description : 'No description provided!';
+          dataSets['title'] = vm.stepData[0].data.title ? vm.stepData[0].data.title : 'Untitled';
+          dataSets['description'] = vm.stepData[0].data.description ? vm.stepData[0].data.description : '';
 
           // Retrieve graph's nodes and edges.
+          var structure = {'nodes':[], 'edges':[]};
           if (vm.stepData[1].data.network)
           {
             var network = vm.stepData[1].data.network;
-            dataSets.nodes = network.body.data.nodes.get();
-            dataSets.edges = network.body.data.edges.get();
+            structure.nodes = network.body.data.nodes.get();
+            structure.edges = network.body.data.edges.get();
           }
 
-          dataSets['title'] = 'dummy';
-          dataSets['description'] = 'dummy';
-          dataSets['structure'] = 'dummy';
-          dataSets['labels'] = 'dummy';
-          dataSets['functions'] = 'dummy';
-          dataSets['controllability'] = 'dummy';
-          dataSets['importance'] = 'dummy';
+          dataSets['structure'] = structure;
+          dataSets['analysis_types'] = [];
 
           return dataSets;
         }

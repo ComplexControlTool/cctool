@@ -10,11 +10,13 @@ class TimeStampedModel(Model):
     # )
     
     created_at = DateTimeField(
-        auto_now_add=True
+        auto_now_add=True,
+        verbose_name='Created datetime stamp'
     )
     
     updated_at = DateTimeField(
-        auto_now=True
+        auto_now=True,
+        verbose_name='Last updated datetime stamp'
     )
 
     class Meta:

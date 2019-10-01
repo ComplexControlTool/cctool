@@ -33,7 +33,7 @@ def generate_node_options(node, analysis):
     node_options = default_visualization.generate_node_options(node)
     heatmap_colours = HeatmapColours.__values__
 
-    value = analysis.get(int(node.identifier), 0)
+    value = analysis.get(node.identifier, 0)
     node_options['title'] += f'<p>Value: <strong>{str(value*100)}%</strong></p>'
     node_options['value'] = value
 
@@ -65,7 +65,7 @@ def generate_legend():
     step_y = 85
     x = 185 - (size*2*(len(heatmap_colours)/2)) + size
     y = legend['structure']['nodes'][-1].get('y',0) + step_y
-    id = legend['structure']['nodes'][-1].get('id',0) + 1
+    id = int(legend['structure']['nodes'][-1].get('id',0)) + 1
 
     # Find the intersection of nodes and edges (key: label for first edge)
     edge_index = len(legend['structure']['nodes']) - 1
@@ -81,7 +81,7 @@ def generate_legend():
         label = ''
         if i%4 == 0:
             label = f"{i*5}%"
-        node = NodePlus(identifier=id, label=label, position_x=x, position_y=y)
+        node = NodePlus(identifier=str(id), label=label, position_x=x, position_y=y)
         data = node.to_json(use_dict=True)
         vis = generate_node_options(node, {})
         vis.pop('value')
