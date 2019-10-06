@@ -91,6 +91,13 @@
   background-color: white;
 }
 
+#graph-create-content .analyses-select-all-checkboxes,
+#graph-import-content .analyses-select-all-checkboxes,
+#graph-update-content .analyses-select-all-checkboxes
+{
+  padding-left: 30px;
+}
+
 .ms-form-wizard md-tabs md-tabs-wrapper
 {
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),

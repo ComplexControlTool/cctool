@@ -203,11 +203,28 @@ def generate_edge_options(edge):
 
     title = list()
     try:
+        title.append(f'<p><strong>{edge.label}</strong></p>')
+    except AttributeError:
+        pass
+    try:
         title.append(f'<p>From:</p><p><strong>{edge.source.label}</strong></p><p>To:</p><p><strong>{edge.target.label}</strong></p>')
     except AttributeError:
         pass
     try:
         title.append(f'<p>Connection Weight: <strong>{edge.get_weight_display()}</strong></p>')
+    except AttributeError:
+        pass
+
+    try:
+        if edge.custom:
+            for label,value in edge.custom.items():
+                title.append(f'<p>{label}: <strong>{value}</strong></p>')
+    except AttributeError:
+        pass
+    try:
+        if edge.tags:
+            tags = ' | '.join(edge.tags)
+            title.append(f'<p>Tags: <strong>{tags}</strong></p>')
     except AttributeError:
         pass
 

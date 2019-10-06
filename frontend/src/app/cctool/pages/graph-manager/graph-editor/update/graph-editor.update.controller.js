@@ -8,18 +8,24 @@
         .controller('UpdateGraphController', UpdateGraphController);
 
     /** @ngInject */
-    function UpdateGraphController(Graph, $rootScope, $scope, $q, $timeout, $state, $stateParams, $mdToast, $mdMedia, $mdDialog, $cookies, $log, api, settingsService)
+    function UpdateGraphController(Graph, $rootScope, $scope, $q, $timeout, $state, $stateParams, $mdToast, $mdMedia, $mdDialog, $cookies, $log, api, settingsService, availableGraphAnalyses)
     {
         var vm = this;
 
         vm.title = 'UpdateGraphController';
         vm.activeSettings = settingsService.activeSettings;
         vm.content = Graph ? Graph : undefined;
+        vm.availableGraphAnalyses = availableGraphAnalyses;
 
         var toastPosition = 'bottom left';
         
         init();
 
+        vm.toggleAllAnalysis = toggleAllAnalysis;
+        vm.isAllSelectedAnalysis = isAllSelectedAnalysis;
+        vm.isSomeSelectedAnalysis = isSomeSelectedAnalysis;
+        vm.toggleAnalysis = toggleAnalysis;
+        vm.isSelectedAnalysis = isSelectedAnalysis;
         vm.enableNextStep = enableNextStep;
         vm.moveToPreviousStep = moveToPreviousStep;
         vm.processStep = processStep;
@@ -46,6 +52,62 @@
             { step: 2, completed: false, optional: false, data: {graph:vm.content} },
             { step: 3, completed: false, optional: false, data: {graph:vm.content} },
           ];
+        }
+
+        function toggleAllAnalysis()
+        {
+          if (vm.stepData[0].data['analysisTypes'] == undefined)
+          {
+            return
+          }
+          if (vm.stepData[0].data['analysisTypes'].length === Object.keys(availableGraphAnalyses).length) {
+            vm.stepData[0].data['analysisTypes'] = [];
+          } else if (vm.stepData[0].data['analysisTypes'].length === 0 || vm.stepData[0].data['analysisTypes'].length > 0) {
+            vm.stepData[0].data['analysisTypes'] = _.values(availableGraphAnalyses);
+          }
+        }
+
+        function isAllSelectedAnalysis()
+        {
+          if (vm.stepData[0].data['analysisTypes'] == undefined)
+          {
+            return
+          }
+          return vm.stepData[0].data['analysisTypes'].length === Object.keys(availableGraphAnalyses).length;
+        }
+
+        function isSomeSelectedAnalysis()
+        {
+          if (vm.stepData[0].data['analysisTypes'] == undefined)
+          {
+            return
+          }
+          return (vm.stepData[0].data['analysisTypes'].length !== 0 &&
+            vm.stepData[0].data['analysisTypes'].length !== Object.keys(availableGraphAnalyses).length);
+        }
+
+        function toggleAnalysis(value, list)
+        {
+          if (list == undefined)
+          {
+            return
+          }
+          var idx = list.indexOf(value);
+          if (idx > -1) {
+            list.splice(idx, 1);
+          }
+          else {
+            list.push(value);
+          }
+        }
+
+        function isSelectedAnalysis(value, list)
+        {
+          if (list == undefined)
+          {
+            return
+          }
+          return list.indexOf(value) > -1;
         }
 
         function enableNextStep()
@@ -125,7 +187,7 @@
           structure.edges = edgeDataset.get();
 
           dataSets['structure'] = structure;
-          dataSets['analysis_types'] = [];
+          dataSets['analysisTypes'] = vm.stepData[0].data['analysisTypes'] || [];
 
           return dataSets;
         }

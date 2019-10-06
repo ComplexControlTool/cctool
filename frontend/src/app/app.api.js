@@ -193,7 +193,7 @@
         'full': $resource('/api/v1/graph/:id/',{id: '@id', 'format': 'json'},{'update': {method: 'PUT', params: {format: 'json'}}}),
         'dateupdated': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,updatedAt,isProcessed', 'format': 'json'}),
         'compact': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,title', 'format': 'json'}),
-        'basic': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,title,description,createdAt,updatedAt,isProcessed,structure,visualization,analysers', 'format': 'json'}),
+        'basic': $resource('/api/v1/graph/:id/',{id: '@id', 'fields':'id,title,description,createdAt,updatedAt,isProcessed,structure,visualization,analysers,analysisTypes', 'format': 'json'}),
         'map': $resource('/api/v1/graph/:id/map/',{id: '@id', 'format': 'json'}),
         'visualize': $resource('/api/v1/graph/:id/visualize/',{id: '@id', 'format': 'json'}),
         'analyse': $resource('/api/v1/graph/:id/analyse/?analysisType=:analysisType',{id: '@id', analysisType: '@analysisType', 'format': 'json'}),

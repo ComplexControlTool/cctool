@@ -1,10 +1,25 @@
 <md-dialog md-theme="graph_panel" aria-label="Graph Panel Compare">
-  <form name="nodeForm" novalidate ng-submit="nodeForm.$valid && submit()">
+  <form name="edgeForm" novalidate ng-submit="edgeForm.$valid && submit()">
     <md-dialog-content>
       <div class="md-dialog-content">
         <h2 class="md-title">Add Edge</h2>
         <div layout="column" layout-align="center top" flex="nogrow" style="width: 400px">
           <p>Please enter some details about the edge</p>
+          <md-input-container class="md-block">
+            <label>Label</label>
+            <input
+             type="text"
+             name="label"
+             ng-model="edgeData.edgeLabel"
+             md-maxlength="250">
+            <div ng-messages="edgeForm.label.$error"
+                 ng-show="edgeForm.$submitted || edgeForm.label.$touched"
+                 role="alert">
+                <div ng-message="md-maxlength">
+                    <span>Edge label can't be longer than 250 characters.</span>
+                </div>
+            </div>
+          </md-input-container>
           <p>Connection Weight</p>
           <md-radio-group ng-model="edgeData.edgeWeight">
             <md-radio-button
@@ -14,6 +29,8 @@
               {{edgeWeight.abbrev}}
             </md-radio-button>
           </md-radio-group>
+          <p>Tags</p>
+          <md-chips ng-model="edgeData.edgeTags" md-removable="true" md-enable-chip-edit="true" input-aria-label="Edge Tags"></md-chips>
         </div>
       </div>
     </md-dialog-content>

@@ -275,6 +275,7 @@
         data.cctool['controllability'] = inputData.nodeData.nodeControllability;
         data.cctool['vulnerability'] = inputData.nodeData.nodeVulnerability;
         data.cctool['importance'] = inputData.nodeData.nodeImportance;
+        data.cctool['tags'] = inputData.nodeData.nodeTags;
         callback(data);
       },
       function() {
@@ -294,6 +295,7 @@
         data.cctool['controllability'] = inputData.nodeData.nodeControllability;
         data.cctool['vulnerability'] = inputData.nodeData.nodeVulnerability;
         data.cctool['importance'] = inputData.nodeData.nodeImportance;
+        data.cctool['tags'] = inputData.nodeData.nodeTags;
         callback(data);
       },
       function() {
@@ -308,8 +310,10 @@
 
     scope.showPopUp(dialogData).then(
       function(inputData) {
+        data.label = inputData.edgeData.edgeLabel;
         data.cctool = {};
         data.cctool['weight'] = inputData.edgeData.edgeWeight;
+        data.cctool['tags'] = inputData.edgeData.edgeTags;
         callback(data);
       },
       function() {
@@ -324,7 +328,9 @@
 
     scope.showPopUp(dialogData).then(
       function(inputData) {
+        data.label = inputData.edgeData.edgeLabel;
         data.cctool['weight'] = inputData.edgeData.edgeWeight;
+        data.cctool['tags'] = inputData.edgeData.edgeTags;
         callback(data);
       },
       function() {
@@ -774,14 +780,17 @@
   function DialogController($scope, $mdDialog, data)
   {
     $scope.nodeData = {
-      nodeLabel : data.nodeData.label ? data.nodeData.label : '',
-      nodeFunction : data.nodeData.cctool ? data.nodeData.cctool.function : 'L',
-      nodeControllability : data.nodeData.cctool ? data.nodeData.cctool.controllability : 'N',
-      nodeVulnerability : data.nodeData.cctool ? data.nodeData.cctool.vulnerability : 'N',
-      nodeImportance : data.nodeData.cctool ? data.nodeData.cctool.importance : 'N',
+      nodeLabel: data.nodeData.label ? data.nodeData.label : '',
+      nodeFunction: data.nodeData.cctool ? data.nodeData.cctool['function'] : 'L',
+      nodeControllability: data.nodeData.cctool ? data.nodeData.cctool.controllability : 'N',
+      nodeVulnerability: data.nodeData.cctool ? data.nodeData.cctool.vulnerability : 'N',
+      nodeImportance: data.nodeData.cctool ? data.nodeData.cctool.importance : 'N',
+      nodeTags: data.nodeData.cctool && data.nodeData.cctool.tags ? data.nodeData.cctool.tags : [],
     };
     $scope.edgeData = {
-      edgeWeight : data.edgeData.weight ? data.edgeData.weight : 'N'
+      edgeLabel: data.edgeData.label ? data.edgeData.label : '',
+      edgeWeight : data.edgeData.weight ? data.edgeData.weight : 'N',
+      edgeTags: data.edgeData.cctool && data.edgeData.cctool.tags ? data.edgeData.cctool.tags : [],
     };
 
     data = { nodeData: $scope.nodeData, edgeData: $scope.edgeData};

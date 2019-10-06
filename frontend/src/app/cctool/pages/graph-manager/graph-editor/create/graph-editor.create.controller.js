@@ -8,17 +8,23 @@
         .controller('CreateGraphController', CreateGraphController);
 
     /** @ngInject */
-    function CreateGraphController($rootScope, $scope, $q, $timeout, $state, $stateParams, $mdToast, $mdMedia, $mdDialog, $cookies, $log, api, settingsService, graphDefaultVisualization)
+    function CreateGraphController($rootScope, $scope, $q, $timeout, $state, $stateParams, $mdToast, $mdMedia, $mdDialog, $cookies, $log, api, settingsService, graphDefaultVisualization, availableGraphAnalyses)
     {
         var vm = this;
 
         vm.title = 'CreateGraphController';
         vm.activeSettings = settingsService.activeSettings;
+        vm.availableGraphAnalyses = availableGraphAnalyses;
 
         var toastPosition = 'bottom left';
         
         init();
 
+        vm.toggleAllAnalysis = toggleAllAnalysis;
+        vm.isAllSelectedAnalysis = isAllSelectedAnalysis;
+        vm.isSomeSelectedAnalysis = isSomeSelectedAnalysis;
+        vm.toggleAnalysis = toggleAnalysis;
+        vm.isSelectedAnalysis = isSelectedAnalysis;
         vm.enableNextStep = enableNextStep;
         vm.moveToPreviousStep = moveToPreviousStep;
         vm.processStep = processStep;
@@ -36,10 +42,66 @@
           vm.processing = false;
           vm.maxStep = 3;
           vm.stepData = [
-            { step: 1, completed: false, optional: false, data: {} },
+            { step: 1, completed: false, optional: false, data: {'analysisTypes':[]} },
             { step: 2, completed: false, optional: false, data: {graph:{id:'',visualization:graphDefaultVisualization}} },
             { step: 3, completed: false, optional: false, data: {} },
           ];
+        }
+
+        function toggleAllAnalysis()
+        {
+          if (vm.stepData[0].data['analysisTypes'] == undefined)
+          {
+            return
+          }
+          if (vm.stepData[0].data['analysisTypes'].length === Object.keys(availableGraphAnalyses).length) {
+            vm.stepData[0].data['analysisTypes'] = [];
+          } else if (vm.stepData[0].data['analysisTypes'].length === 0 || vm.stepData[0].data['analysisTypes'].length > 0) {
+            vm.stepData[0].data['analysisTypes'] = _.values(availableGraphAnalyses);
+          }
+        }
+
+        function isAllSelectedAnalysis()
+        {
+          if (vm.stepData[0].data['analysisTypes'] == undefined)
+          {
+            return
+          }
+          return vm.stepData[0].data['analysisTypes'].length === Object.keys(availableGraphAnalyses).length;
+        }
+
+        function isSomeSelectedAnalysis()
+        {
+          if (vm.stepData[0].data['analysisTypes'] == undefined)
+          {
+            return
+          }
+          return (vm.stepData[0].data['analysisTypes'].length !== 0 &&
+            vm.stepData[0].data['analysisTypes'].length !== Object.keys(availableGraphAnalyses).length);
+        }
+
+        function toggleAnalysis(value, list)
+        {
+          if (list == undefined)
+          {
+            return
+          }
+          var idx = list.indexOf(value);
+          if (idx > -1) {
+            list.splice(idx, 1);
+          }
+          else {
+            list.push(value);
+          }
+        }
+
+        function isSelectedAnalysis(value, list)
+        {
+          if (list == undefined)
+          {
+            return
+          }
+          return list.indexOf(value) > -1;
         }
 
         function enableNextStep()
@@ -104,12 +166,22 @@
           if (vm.stepData[1].data.network)
           {
             var network = vm.stepData[1].data.network;
-            structure.nodes = network.body.data.nodes.get();
-            structure.edges = network.body.data.edges.get();
+            var nodeDataset = network.body.data.nodes
+            var edgeDataset = network.body.data.edges
+
+            // Make sure we update node location
+            for (var node_id in network.body.nodes)
+            {
+              var positionX = network.body.nodes[node_id]['x'];
+              var positionY = network.body.nodes[node_id]['y'];
+              nodeDataset.update({id:node_id, x:positionX, y:positionY})
+            }
           }
+          structure.nodes = nodeDataset.get();
+          structure.edges = edgeDataset.get();
 
           dataSets['structure'] = structure;
-          dataSets['analysis_types'] = [];
+          dataSets['analysisTypes'] = vm.stepData[0].data['analysisTypes'] || [];
 
           return dataSets;
         }

@@ -316,12 +316,15 @@ class GraphSerializer(serializers.BaseSerializer):
     def get_analyses(self, obj):
         return [analysis.to_json(use_dict=True) for analysis in obj.analyses.all()]
 
+    def get_analysisTypes(self, obj):
+        return [analysis.analysis_type for analysis in obj.analyses.all()]
+
     def to_internal_value(self, data):
         ret = dict()
         title = data.get('title', None)
         description = data.get('description', '')
         structure = data.get('structure', dict())
-        analysis_types = data.get('analysis_types', list())
+        analysis_types = data.get('analysisTypes', list())
         validated_structure = dict()
         validated_analysis_types = list()
 
@@ -356,7 +359,7 @@ class GraphSerializer(serializers.BaseSerializer):
             analysis_serializer = AnalysisSerializer(many=True, data=analysis_types)
             if not analysis_serializer.is_valid():
                 raise serializers.ValidationError({
-                    'analysis_types': 'Analysis Types are not valid.'
+                    'analysisTypes': 'Analysis Types are not valid.'
                 })
             validated_analysis_types = analysis_serializer.validated_data
 
@@ -364,7 +367,7 @@ class GraphSerializer(serializers.BaseSerializer):
             'title': title,
             'description': description,
             'structure': validated_structure,
-            'analysis_types': validated_analysis_types 
+            'analysisTypes': validated_analysis_types 
         }
 
     def to_representation(self, obj):
@@ -381,6 +384,7 @@ class GraphSerializer(serializers.BaseSerializer):
             'visualization',
             'analysers',
             'analyses',
+            'analysisTypes',
         )
         fields = self.context['request'].query_params.get('fields', ','.join(allowed_fields)).split(',')
         for field_name in fields:
@@ -391,7 +395,7 @@ class GraphSerializer(serializers.BaseSerializer):
 
     def create(self, validated_data):
         structure = validated_data.pop('structure')
-        analysis_types = validated_data.pop('analysis_types')
+        analysis_types = validated_data.pop('analysisTypes')
         graph = models.Graph.objects.create(**validated_data)
         self.set_structure(graph, structure)
         self.set_analyses(graph, analysis_types)
@@ -403,7 +407,7 @@ class GraphSerializer(serializers.BaseSerializer):
         self.clear_structure_and_analysis(instance)
         instance.save()
         self.set_structure(instance, validated_data.get('structure', dict()))
-        self.set_analyses(instance, validated_data.get('analysis_types', list()))
+        self.set_analyses(instance, validated_data.get('analysisTypes', list()))
         return instance
 
 

@@ -11,7 +11,7 @@
              type="text"
              name="label"
              ng-model="nodeData.nodeLabel"
-             md-maxlength="100"
+             md-maxlength="250"
              md-autofocus=""
              required>
             <div ng-messages="nodeForm.label.$error"
@@ -21,7 +21,7 @@
                     <span>Node label is required.</span>
                 </div>
                 <div ng-message="md-maxlength">
-                    <span>Node label can't be longer than 100 characters.</span>
+                    <span>Node label can't be longer than 250 characters.</span>
                 </div>
             </div>
           </md-input-container>
@@ -57,6 +57,8 @@
               {{nodeImportance.abbrev}}
             </md-radio-button>
           </md-radio-group>
+          <p>Tags</p>
+          <md-chips ng-model="nodeData.nodeTags" md-removable="true" md-enable-chip-edit="true" input-aria-label="Node Tags"></md-chips>
         </div>
       </div>
     </md-dialog-content>
