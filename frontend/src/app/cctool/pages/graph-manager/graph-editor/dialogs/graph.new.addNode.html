@@ -35,16 +35,16 @@
           </md-radio-group>
           <p>Controllability</p>
           <md-radio-group ng-model="nodeData.nodeControllability">
-            <md-radio-button 
-             ng-repeat="nodeControllability in nodeControllabilityList" 
+            <md-radio-button
+             ng-repeat="nodeControllability in nodeControllabilityList"
              value="{{nodeControllability.abbrev | controllabilityValue}}">
               {{nodeControllability.abbrev}}
             </md-radio-button>
           </md-radio-group>
           <p>Vulnerability</p>
           <md-radio-group ng-model="nodeData.nodeVulnerability">
-            <md-radio-button 
-             ng-repeat="nodeVulnerability in nodeVulnerabilityList" 
+            <md-radio-button
+             ng-repeat="nodeVulnerability in nodeVulnerabilityList"
              value="{{nodeVulnerability.abbrev | vulnerabilityValue}}">
               {{nodeVulnerability.abbrev}}
             </md-radio-button>
@@ -57,7 +57,7 @@
               {{nodeImportance.abbrev}}
             </md-radio-button>
           </md-radio-group>
-          <p>Tags</p>
+          <p>Tags<br><i>'Intervention'/'Outcome' tags are reserved for Intervention/Outcome analyses.</i></p>
           <md-chips ng-model="nodeData.nodeTags" md-removable="true" md-enable-chip-edit="true" input-aria-label="Node Tags"></md-chips>
         </div>
       </div>
