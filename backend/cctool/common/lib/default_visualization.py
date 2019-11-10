@@ -25,7 +25,7 @@ def generate_graph_options():
 
     arrows = dict()
     arrows['to'] = arrows_to
-    
+
     color = dict()
     color['hover'] = MapColours.HOVER_DEFAULT.value
     color['opacity'] = 1.0
@@ -140,17 +140,6 @@ def generate_node_options(node):
     node_options['shapeProperties'] = shape_properties
     node_options['size'] = size
     node_options['title'] = ''.join(title)
-
-    try:
-        if not node.position_x in [None, '']:
-            node_options['x'] = node.position_x
-    except AttributeError:
-        pass
-    try:
-        if not node.position_y in [None, '']:
-            node_options['y'] = node.position_y
-    except AttributeError:
-        pass
 
     # Define specifics for attributes: Controllability, Vulnerability, Importance
     shadow = dict()
@@ -291,7 +280,7 @@ def generate_legend():
 
     arrows = dict()
     arrows['to'] = arrows_to
-    
+
     color = dict()
     color['opacity'] = 1.0
 
@@ -382,7 +371,7 @@ def generate_legend():
         data = edge.to_json(use_dict=True)
         vis = generate_edge_options(edge)
         edges_data.append(dict(**data, **vis))
-    
+
     legend_structure['nodes'] = nodes_data
     legend_structure['edges'] = edges_data
 

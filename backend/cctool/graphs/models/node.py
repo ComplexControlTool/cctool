@@ -63,6 +63,10 @@ class AbstractNode(TimeStampedModel):
         output['id'] = self.identifier
         if self.label:
             output['label'] = self.label
+        if self.position_x:
+            output['x'] = self.position_x
+        if self.position_y:
+            output['y'] = self.position_y
 
         if use_dict:
             return output
