@@ -118,6 +118,14 @@ class NodePlus(Node):
         blank=True
     )
 
+    def save(self, *args, **kwargs):
+        if self.tags:
+            if 'intervention' in self.tags:
+                self.tags = list(map(lambda x:'Intervention' if x == 'intervention' else x, self.tags))
+            if 'outcome' in self.tags:
+                self.tags =list(map(lambda x:'Outcome' if x == 'outcome' else x, self.tags))
+        super(NodePlus, self).save(*args, **kwargs)
+
     def to_json(self, use_dict=False, **kwargs):
         """
             Representation of Node object in Json format
@@ -169,12 +177,12 @@ class EdgePlus(Edge):
         """
         properties = dict()
         properties['weight'] = self.weight
-        
+
         if self.tags:
             properties['tags'] = self.tags
         if self.custom:
             properties['custom'] = self.custom
-        
+
         output = super(Edge, self).to_json(use_dict=True, **kwargs)
         output['cctool'] = properties
 
